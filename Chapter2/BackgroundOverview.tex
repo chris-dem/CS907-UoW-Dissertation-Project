@@ -11,65 +11,8 @@ three-value domain \(\mathbb{T} \triangleq \{0, 1, \bot\}\).
 
 \subsection{Background overview}
 
-
-\subsubsection{Counting Complexity and Combinatorial Interpretations}
-
-The general idea of combinatorial interpretations is, given a function \(f: \mathbb{B}^n \to \mathbb{N}\),
-for every word \(w\), we want to find a set \(A_w\) such that \(f(w) = |A_w|\).
-To ground that notion, researchers looked into counting complexity.
-In the current project we will focus specifically on the \(\textsc{\#P}\) class.
-\(\textsc{\#P}\) was introduced by Valiant\cite{valiant_ComplexityComputingPermanent_1979},
-to demonstrate the difficulty of counting the number of solutions to a problem,
-where each solution can be verified in polynomial time, or more formally:
-
-\begin{definitionbox}{\(\scn{\#P}\) Complexity Clas \cite{valiant_ComplexityComputingPermanent_1979}}{sharpp-class}
-    A function \(f: \mathbb{B}^* \to \mathbb{N} \in \textsc{\#P}\), if there exists a
-    poly-function \(p : \mathbb{N} \to \mathbb{N}\) and a poly-time TM \(M\) such that:
-    \[
-        f(w) = \Big|\Big\{v \in \mathbb{B}^{p(|w|)} \mid M(w, v) =1 \Big\}\Big|
-    \]
-\end{definitionbox}
-
-Given the above definition, Pak et al. \cite{pak_WhatCombinatorialInterpretation_2022, ikenmeyer_PositivitySymmetricGroup_2024}
-used $\textsc{\#P}$ to interpret $A_w$ as the set of solutions to a problem given input $w$.
-Moreover, they argue that the usage of $\textsc{\#P}$ has several benefits:
-
-\begin{enumerate}
-    \item By polynomially bounding words, we avoid cases such as: $f(w) = |\{1, \hdots, f(w)\}|$.
-    \item We can work with $f(\cdot)$, even if its direct computation is hard.
-    \item $\textsc{\#P}$ is a formal system that is highly flexible.
-\end{enumerate}
-
-The current framework was used in several papers such as
-\cite{ikenmeyer_WhatWhatNot_2022} and \cite{ikenmeyer_PositivitySymmetricGroup_2024}
-to demonstrate the existence of combinatorial interpretations.
-Lastly, we introduce the idea of correlating two counting problems with the help of
-\textit{parsimonious reductions} \ref{def:pars-reduction}.
-
-
-\begin{definitionbox}{Parsimonious reductions}{pars-reduction}
-    Let $R, R'$ be search problems, and let $f$ be a reduction of
-    $S_R = \{x \mid R(x) \neq \emptyset \}$ to $S_{R'} = \{x \mid R'(x) \neq \emptyset \}$.
-    We say $f$ is \textbf{parsimonious} if:
-    $$
-        \forall x \in S_R : |R(x)| = |R'(f(x))|
-    $$
-\end{definitionbox}
-
-The definition below introduces a variant of parsimonious reductions that allows
-for one-to-many reductions.
-\begin{definitionbox}{Poly-Function Bounded Parsimonious Reductions}{func-pars}
-    Given two counting problems $A, B : \mathbb{B}^* \to \mathbb{N}$
-    and a poly-function $f : \mathbb{N} \to \mathbb{N}$, we
-    say that:
-    $$
-        A \subseteq^f B \iff \forall x \in \mathbb{B}^n:  A(x) \leq B(x) \leq f(|x|) \cdot A(x)
-    $$
-    If $\forall x : f(x) = c$ for $c \in \mathbb{N}$, we use the abbreviation:
-    $$
-        A \subseteq^c B
-    $$
-\end{definitionbox}
+Our work lies in the intersection of the three core fields:
+counting complexity, total search problems and Kleene logic.
 
 \subsubsection{Total Search Problems and PPAD}
 We give a brief overview of total search problems and their relevancy with the project.
@@ -104,6 +47,7 @@ We give a brief overview of total search problems and their relevancy with the p
     $S(P(0^n)) \neq 0 \wedge P(S(0^n)) = 0^n$.
     A node $v \in V$ is a solution \textit{iff} $\textit{in-deg}(v) \neq \textit{out-deg}(v)$.
 \end{definitionbox}
+
 % \begin{minipage}{0.45\linewidth}
 %     \centering
 %     \includegraphics[width=0.7\linewidth]{assets/eol-subgraphs.png}
@@ -357,6 +301,68 @@ We estimate the counting difficulty of the aforementioned problems based on thei
 %     \includegraphics[width=0.75\textwidth]{assets/chart-plot.pdf}
 %     \caption{Counting hierarchy graph between \textsc{\#PPAD-complete} problems. Figure obtained from \cite{ikenmeyer_WhatWhatNot_2022}.}\label{fig:ppad-count-hier}
 % \end{figure}
+
+
+
+
+\subsubsection{Counting Complexity and Combinatorial Interpretations}
+
+The general idea of combinatorial interpretations is, given a function \(f: \mathbb{B}^n \to \mathbb{N}\),
+for every word \(w\), we want to find a set \(A_w\) such that \(f(w) = |A_w|\).
+To ground that notion, researchers looked into counting complexity.
+In the current project we will focus specifically on the \(\textsc{\#P}\) class.
+\(\textsc{\#P}\) was introduced by Valiant\cite{valiant_ComplexityComputingPermanent_1979},
+to demonstrate the difficulty of counting the number of solutions to a problem,
+where each solution can be verified in polynomial time, or more formally:
+
+\begin{definitionbox}{\(\scn{\#P}\) Complexity Clas \cite{valiant_ComplexityComputingPermanent_1979}}{sharpp-class}
+    A function \(f: \mathbb{B}^* \to \mathbb{N} \in \textsc{\#P}\), if there exists a
+    poly-function \(p : \mathbb{N} \to \mathbb{N}\) and a poly-time TM \(M\) such that:
+    \[
+        f(w) = \Big|\Big\{v \in \mathbb{B}^{p(|w|)} \mid M(w, v) =1 \Big\}\Big|
+    \]
+\end{definitionbox}
+
+Given the above definition, Pak et al. \cite{pak_WhatCombinatorialInterpretation_2022, ikenmeyer_PositivitySymmetricGroup_2024}
+used $\textsc{\#P}$ to interpret $A_w$ as the set of solutions to a problem given input $w$.
+Moreover, they argue that the usage of $\textsc{\#P}$ has several benefits:
+
+\begin{enumerate}
+    \item By polynomially bounding words, we avoid cases such as: $f(w) = |\{1, \hdots, f(w)\}|$.
+    \item We can work with $f(\cdot)$, even if its direct computation is hard.
+    \item $\textsc{\#P}$ is a formal system that is highly flexible.
+\end{enumerate}
+
+The current framework was used in several papers such as
+\cite{ikenmeyer_WhatWhatNot_2022} and \cite{ikenmeyer_PositivitySymmetricGroup_2024}
+to demonstrate the existence of combinatorial interpretations.
+Lastly, we introduce the idea of correlating two counting problems with the help of
+\textit{parsimonious reductions} \ref{def:pars-reduction}.
+
+
+\begin{definitionbox}{Parsimonious reductions}{pars-reduction}
+    Let $R, R'$ be search problems, and let $f$ be a reduction of
+    $S_R = \{x \mid R(x) \neq \emptyset \}$ to $S_{R'} = \{x \mid R'(x) \neq \emptyset \}$.
+    We say $f$ is \textbf{parsimonious} if:
+    $$
+        \forall x \in S_R : |R(x)| = |R'(f(x))|
+    $$
+\end{definitionbox}
+
+The definition below introduces a variant of parsimonious reductions that allows
+for one-to-many reductions.
+\begin{definitionbox}{Poly-Function Bounded Parsimonious Reductions}{func-pars}
+    Given two counting problems $A, B : \mathbb{B}^* \to \mathbb{N}$
+    and a poly-function $f : \mathbb{N} \to \mathbb{N}$, we
+    say that:
+    $$
+        A \subseteq^f B \iff \forall x \in \mathbb{B}^n:  A(x) \leq B(x) \leq f(|x|) \cdot A(x)
+    $$
+    If $\forall x : f(x) = c$ for $c \in \mathbb{N}$, we use the abbreviation:
+    $$
+        A \subseteq^c B
+    $$
+\end{definitionbox}
 
 
 \subsubsection{Kleene Logic and Hazard-Free Circuits}
