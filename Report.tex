@@ -34,6 +34,160 @@
 \usepackage{xcolor} %Great if you want coloured text
 \usepackage{tabularx}
 \usepackage{appendix} %Take a wild guess slick
+\usepackage{hhline}
+\usepackage[most]{tcolorbox}
+\usepackage{lineno}
+\usepackage{amsmath,amssymb,amsfonts, amsthm}
+\usepackage{float}
+\usepackage{enumitem}
+\usepackage{placeins}
+\usepackage{algorithmic}
+\usepackage{xltabular}
+\usepackage{graphicx}
+\usepackage{lipsum}
+\usepackage{textcomp}
+\usepackage{xcolor}
+\usepackage{tikz}
+\usepackage{subcaption}
+
+
+\tcbuselibrary{theorems}
+\newtcbtheorem[auto counter, number within=section]{definitionbox}{Definition}{
+  colback=gray!5!white,
+  colframe=black!60,
+  coltitle=black,
+  fonttitle=\bfseries,
+  boxrule=0.3mm,
+  arc=1mm,
+  left=1mm,
+  right=1mm,
+  top=1mm,
+  bottom=1mm,
+  enhanced,
+  sharp corners=south,
+  attach boxed title to top left={xshift=0.5cm, yshift=-2mm},
+  boxed title style={colback=white, boxrule=0pt},
+}{def}
+
+\newtcbtheorem[auto counter, number within=section]{theorembox}{Theorem}{
+  colback=gray!5!white,
+  colframe=black!60,
+  coltitle=black,
+  fonttitle=\bfseries,
+  boxrule=0.3mm,
+  arc=1mm,
+  left=1mm,
+  right=1mm,
+  top=1mm,
+  bottom=1mm,
+  enhanced,
+  sharp corners=south,
+  attach boxed title to top left={xshift=0.5cm, yshift=-2mm},
+  boxed title style={colback=white, boxrule=0pt},
+}{thm}
+
+\newtcbtheorem[auto counter, number within=section]{conjecturebox}{Conjecture}{
+  colback=gray!5!white,
+  colframe=black!60,
+  coltitle=black,
+  fonttitle=\bfseries,
+  boxrule=0.3mm,
+  arc=1mm,
+  left=1mm,
+  right=1mm,
+  top=1mm,
+  bottom=1mm,
+  enhanced,
+  sharp corners=south,
+  attach boxed title to top left={xshift=0.5cm, yshift=-2mm},
+  boxed title style={colback=white, boxrule=0pt},
+}{conj}
+
+
+\newtcbtheorem[auto counter, number within=section]{propositionbox}{Proposition}{
+  colback=gray!5!white,
+  colframe=black!60,
+  coltitle=black,
+  fonttitle=\bfseries,
+  boxrule=0.3mm,
+  arc=1mm,
+  left=1mm,
+  right=1mm,
+  top=1mm,
+  bottom=1mm,
+  enhanced,
+  sharp corners=south,
+  attach boxed title to top left={xshift=0.5cm, yshift=-2mm},
+  boxed title style={colback=white, boxrule=0pt},
+}{prop}
+
+\newtcbtheorem[auto counter, number within=section]{corollarybox}{Corollary}{
+  colback=gray!5!white,
+  colframe=black!60,
+  coltitle=black,
+  fonttitle=\bfseries,
+  boxrule=0.3mm,
+  arc=1mm,
+  left=1mm,
+  right=1mm,
+  top=1mm,
+  bottom=1mm,
+  enhanced,
+  sharp corners=south,
+  attach boxed title to top left={xshift=0.5cm, yshift=-2mm},
+  boxed title style={colback=white, boxrule=0pt},
+}{cor}
+
+
+
+\newtcbtheorem[auto counter, number within=section]{lemmabox}{Lemma}{
+  colback=gray!5!white,
+  colframe=black!60,
+  coltitle=black,
+  fonttitle=\bfseries,
+  boxrule=0.3mm,
+  arc=1mm,
+  left=1mm,
+  right=1mm,
+  top=1mm,
+  bottom=1mm,
+  enhanced,
+  sharp corners=south,
+  attach boxed title to top left={xshift=0.5cm, yshift=-2mm},
+  boxed title style={colback=white, boxrule=0pt},
+}{lem}
+
+\newtcbtheorem[auto counter, number within=section]{claimbox}{Claim}{
+  colback=gray!5!white,
+  colframe=black!60,
+  coltitle=black,
+  fonttitle=\bfseries,
+  boxrule=0.3mm,
+  arc=1mm,
+  left=1mm,
+  right=1mm,
+  top=1mm,
+  bottom=1mm,
+  enhanced,
+  sharp corners=south,
+  attach boxed title to top left={xshift=0.5cm, yshift=-2mm},
+  boxed title style={colback=white, boxrule=0pt},
+}{clm}
+
+
+% \newtheorem{theorem}{Theorem}[section]
+% \newtheorem{conjecture}[theorem]{Conjecture}
+% \newtheorem{proposition}[theorem]{Proposition}
+% \newtheorem{lemma}[theorem]{Lemma}
+% \newtheorem{claim}[theorem]{Claim}
+% \newtheorem{corollary}{Corollary}[theorem]
+% \newtheorem{definition}{Definition}[section]
+
+\newcommand{\scn}[1]{\textnormal{\textsc{#1}}}
+\newcolumntype{Z}[1]{>{\centering\arraybackslash}p{#1}}
+\newcolumntype{Y}{>{\centering\arraybackslash}X}
+
+
 
 
 
@@ -64,8 +218,8 @@
 \include{Preamble/ChapterMods}
 
 
-\include{Chapter1/Chapter1}
-\include{Chapter2/Chapter2}
+\include{Chapter1/Introduction}
+\include{Chapter2/BackgroundOverview}
 \include{Chapter3/Chapter3}
 \include{Chapter4/Chapter4}
 \include{Chapter5/Chapter5}
