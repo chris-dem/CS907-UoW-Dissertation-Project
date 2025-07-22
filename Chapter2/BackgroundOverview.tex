@@ -24,8 +24,14 @@ We give a brief overview of total search problems and their relevancy with the p
     \textbf{Total Search problems} are search problems such that for each input, there must exist at least one solution.
 \end{definitionbox}
 
+Like decision problems, we can define their search analogues
+using the definitions in \ref{def:fnp-tfnp}.
+Moreover, we use the \textit{Karp reductions} \ref{def:karp-reductions} to associate
+two problems.
+
 
 \begin{definitionbox}{$\scn{FNP}$ and $\scn{TFNP}$}{fnp-tfnp}
+    \label{def:fnp-tfnp}
     \textbf{FNP} are \textit{search problems} such that there exists poly-time TM $M: \mathbb{B}^* \to \mathbb{B}$
     and a poly function $p : \mathbb{N} \to \mathbb{N}$ such that:
     $$
@@ -34,6 +40,19 @@ We give a brief overview of total search problems and their relevancy with the p
     Lastly $\textbf{TFNP} = \{L \in \textbf{FNP} \mid L \text{ is total}\}$
 \end{definitionbox}
 
+
+\begin{definitionbox}{Levin Reductions}{levin-reductions}
+    \label{def:levin-reductions}
+    Given two search problems $R,R'$, 
+    a pair of poly-time computable functions \(f,g\) where \(f,g: \{0,1\}^* \to \{0,1\}^*\), is
+    called a \textit{Levin reduction}, if
+    \begin{gather*}
+        S_R \triangleq \{x \mid \exists y : xRy\} \\
+        R(x) \triangleq \{y \in \{0,1\}^* \mid xRy\} \\
+        \forall x \in \{0,1\}^*: x \in  S_R \implies f(x) \in S_{R'}\\
+        \forall x \in S_R, y' \in R'(f(x)): (x,g(x,y)) \in R
+    \end{gather*}
+\end{definitionbox}
 
 \begin{definitionbox}{\textit{EndOfLine} problem \cite{papadimitriou_ComplexityParityArgument_1994}}{eol-ppad}
     Given poly-sized circuits $S, P \in \mathbb{B}^n \to \mathbb{B}^n$,
@@ -48,11 +67,12 @@ We give a brief overview of total search problems and their relevancy with the p
     A node $v \in V$ is a solution \textit{iff} $\textit{in-deg}(v) \neq \textit{out-deg}(v)$.
 \end{definitionbox}
 
-% \begin{minipage}{0.45\linewidth}
-%     \centering
-%     \includegraphics[width=0.7\linewidth]{assets/eol-subgraphs.png}
-%     \captionof{figure}{Types of subgraphs in \textsc{EndOfLine}}\label{fig:eol-subgraphs}
-% \end{minipage}
+\begin{figure}
+    \centering
+    \includegraphics[width=0.7\linewidth]{assets/eol-subgraphs.png}
+    \caption{Types of subgraphs in \textsc{EndOfLine}}
+    \label{fig:eol-subgraphs}
+\end{figure}
 
 \vspace{0.2cm}
 
