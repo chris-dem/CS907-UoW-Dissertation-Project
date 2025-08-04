@@ -1,1 +1,7 @@
-\contentsline {figure}{\numberline {2.1}{\ignorespaces Types of subgraphs in \textsc {EndOfLine}}}{3}{figure.caption.8}%
+\contentsline {figure}{\numberline {2.1}{\ignorespaces Types of subgraphs in \textsc {EndOfLine}}}{3}{figure.caption.10}%
+\contentsline {figure}{\numberline {2.2}{\ignorespaces Figure redrawn from \cite {chen_Complexity2DDiscrete_2009}}}{5}{figure.caption.12}%
+\contentsline {figure}{\numberline {2.3}{\ignorespaces Edge between points $i,j$ of the original graph. Main observation is the fact that each point comes with a pair of exponentially long lines, which we refer to as the input output lines.}}{5}{figure.caption.13}%
+\contentsline {figure}{\numberline {2.4}{\ignorespaces $K_3$ graph construction. Combinations of colours indicate an edge between the two nodes. Solid dots indicate edges from $0$, crossed lines indicate edges from $1$ and stripped lines indicate edges from $2$. We Add two coloured stripped circles on the 4 degree nodes to indicate the $E^2_n$ edges.}}{6}{figure.caption.14}%
+\contentsline {figure}{\numberline {2.5}{\ignorespaces Depiction of the edge removal. Main idea is that this we keep the number of sources or sinks as well as invertible (we can trace the source or sink from the original instance), despite losing a lot of graph information.}}{7}{figure.caption.17}%
+\contentsline {figure}{\numberline {2.6}{\ignorespaces Example on an $8 \times 8$ chessboard with a missing square. As we can observe, there will always be one square we cannot tile }}{9}{figure.caption.20}%
+\contentsline {figure}{\numberline {2.7}{\ignorespaces Example of reducing a 6x6 sudoku puzzle, into a graph colouring problem}}{11}{figure.caption.22}%

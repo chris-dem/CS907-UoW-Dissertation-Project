@@ -1,0 +1,136 @@
+
+
+\tcbuselibrary{theorems}
+\newtcbtheorem[auto counter, number within=section]{definitionbox}{Definition}{
+  colback=gray!5!white,
+  colframe=black!60,
+  coltitle=black,
+  fonttitle=\bfseries,
+  boxrule=0.3mm,
+  arc=1mm,
+  left=1mm,
+  right=1mm,
+  top=1mm,
+  bottom=1mm,
+  enhanced,
+  sharp corners=south,
+  attach boxed title to top left={xshift=0.5cm, yshift=-2mm},
+  boxed title style={colback=white, boxrule=0pt},
+}{def}
+
+\newtcbtheorem[auto counter, number within=section]{theorembox}{Theorem}{
+  colback=gray!5!white,
+  colframe=black!60,
+  coltitle=black,
+  fonttitle=\bfseries,
+  boxrule=0.3mm,
+  arc=1mm,
+  left=1mm,
+  right=1mm,
+  top=1mm,
+  bottom=1mm,
+  enhanced,
+  sharp corners=south,
+  attach boxed title to top left={xshift=0.5cm, yshift=-2mm},
+  boxed title style={colback=white, boxrule=0pt},
+}{thm}
+
+\newtcbtheorem[auto counter, number within=section]{conjecturebox}{Conjecture}{
+  colback=gray!5!white,
+  colframe=black!60,
+  coltitle=black,
+  fonttitle=\bfseries,
+  boxrule=0.3mm,
+  arc=1mm,
+  left=1mm,
+  right=1mm,
+  top=1mm,
+  bottom=1mm,
+  enhanced,
+  sharp corners=south,
+  attach boxed title to top left={xshift=0.5cm, yshift=-2mm},
+  boxed title style={colback=white, boxrule=0pt},
+}{conj}
+
+
+\newtcbtheorem[auto counter, number within=section]{propositionbox}{Proposition}{
+  colback=gray!5!white,
+  colframe=black!60,
+  coltitle=black,
+  fonttitle=\bfseries,
+  boxrule=0.3mm,
+  arc=1mm,
+  left=1mm,
+  right=1mm,
+  top=1mm,
+  bottom=1mm,
+  enhanced,
+  sharp corners=south,
+  attach boxed title to top left={xshift=0.5cm, yshift=-2mm},
+  boxed title style={colback=white, boxrule=0pt},
+}{prop}
+
+\newtcbtheorem[auto counter, number within=section]{corollarybox}{Corollary}{
+  colback=gray!5!white,
+  colframe=black!60,
+  coltitle=black,
+  fonttitle=\bfseries,
+  boxrule=0.3mm,
+  arc=1mm,
+  left=1mm,
+  right=1mm,
+  top=1mm,
+  bottom=1mm,
+  enhanced,
+  sharp corners=south,
+  attach boxed title to top left={xshift=0.5cm, yshift=-2mm},
+  boxed title style={colback=white, boxrule=0pt},
+}{cor}
+
+
+
+\newtcbtheorem[auto counter, number within=section]{lemmabox}{Lemma}{
+  colback=gray!5!white,
+  colframe=black!60,
+  coltitle=black,
+  fonttitle=\bfseries,
+  boxrule=0.3mm,
+  arc=1mm,
+  left=1mm,
+  right=1mm,
+  top=1mm,
+  bottom=1mm,
+  enhanced,
+  sharp corners=south,
+  attach boxed title to top left={xshift=0.5cm, yshift=-2mm},
+  boxed title style={colback=white, boxrule=0pt},
+}{lem}
+
+\newtcbtheorem[auto counter, number within=section]{claimbox}{Claim}{
+  colback=gray!5!white,
+  colframe=black!60,
+  coltitle=black,
+  fonttitle=\bfseries,
+  boxrule=0.3mm,
+  arc=1mm,
+  left=1mm,
+  right=1mm,
+  top=1mm,
+  bottom=1mm,
+  enhanced,
+  sharp corners=south,
+  attach boxed title to top left={xshift=0.5cm, yshift=-2mm},
+  boxed title style={colback=white, boxrule=0pt},
+}{clm}
+
+
+% Custom style based on symbols style but conditional page numbers
+% \newglossarystyle{symbolsNumbersOnlyIfReferenced}{%
+%   \setglossarystyle{symbols}% base on symbols style
+%   \renewcommand*{\glossentrynumbers}[1]{%
+%     \ifglshasfield{numberlist}{##1}{%
+%       \glsnumberformat{##1}%
+%       \glsentrynumbers{##1}%
+%     }{}%
+%   }%
+% }

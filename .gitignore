@@ -47,7 +47,6 @@
 .mtc
 *.fdb_latexmk
 *.xml
-*.pdf
 *.fls
 *.bcf
 *.pyg

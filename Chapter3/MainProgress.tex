@@ -3,7 +3,123 @@
 \section{Current findings}                               
 \label{sec:findings}
 We will present several attempts and efforts we made across several problems and their
-parsimonious reductions.
+parsimonious reductions. First we want to introduce combine Kleene Logic with $\textbf{PPAD}$. 
+We define the following series of Problems
 
-\subsection{Attempt correlating parsimoniously PureCircuit with the EndOfLine}
+
+\begin{definitionbox}{Kleene Unary Numbers}{kleene-unary}
+    \label{def:kleene-unary}
+    Given a number $p \in M$, its unary representation can be depicted as a binary number $\{0,1\}^M$ such that: $k \in M \to 1^k \in \bar{M}$.
+    Under Kleene algebra, we mainly refer to notations $M_k^n$ where $k,n,M \in \mathbb{N}_0$  such that:
+    $$
+    M^k_n \triangleq \{1^j\bot^k \mid \forall j \in \mathbb{N}_0 : j + k \leq n\}
+    $$
+\end{definitionbox}
+
+
+
+\begin{definitionbox}{\scn{HF-StrongSperner} problem}{hf-strong-sperner}
+    \textbf{Input}: A hazard-free circuit $\lambda: [M]^n \to \{-1, +1\}^n$, where $M \in n^{O(1)}$, that describes a \textit{StrongSperner} labelling,
+    as explained in \ref{def:strong-sperner}, where the inputs are represented using Kleene Unary numbers \ref{def:kleene-unary}
+    and $\#1(p) = \bar{p}$.\\
+    \textbf{Output}: A point $p \in \bigtimes_{i \in [n]} M^1_n \cup M^0_n$ if and only if: $\lambda(p) =  \bot^n$. 
+\end{definitionbox}
+
+We will maily refer to a specific subset of these problems, which we will refer to as \scn{HF-DiscreteStrongSperner}. 
+The general idea is that we exploit the hazard-free property of the Strong Sperner function 
+In the original problem %% TODO
+one can observe that, we only need two points to create a panchromatic solution, where $\lambda(p) = \overline{\lambda(p')}$. These can create a lot of duplicate
+solutions and therefore can behave unpredictably. We will mainly focus on subproblems of the \scn{HF-StrongSperner} where two cubes do not overlap.
+More formally we define
+
+
+\begin{definitionbox}{\scn{HF-DiscreteStrongSperner} problem}{hf-strong-sperner}
+    An \scn{HF-StrongSperner} instance $\lambda$ such that $\forall p \in [M^1]^n$, if $\lambda(p)= \bot^n$, then
+    \begin{gather*}
+    \forall j,i \in [n], [\phi^b_i(x)]_j \triangleq \begin{cases} 
+        x_i &\text{if }i \neq j\\
+        b &\text{if }i = j\\
+    \end{cases}\\
+    \forall i \in [n],b \in\{0,1\},\exists j \in [n]: \forall x, x' \in \textbf{Res}(\phi^b_i(x)): [\lambda(x)]_j = [\lambda(x')]_j
+    \end{gather*}
+\end{definitionbox}
+
+Lastly we introduce a specific subset of the above solutions where introduce antipodal panchromatic cubes. 
+In the specific type of solution said we argue that two opposite corners of a cube contain opposite colourings.
+This notion of antipodal cubes is used in the majority of reductions across literature. More formally we say 
+
+
+\begin{definitionbox}{\textbf{MinRes} min and max resolution functions}{min-res-func}
+    We use the \textbf{MinRes}, to denote the smallest resolution of a kleene string. More formally we can use the following equivalent definitions:
+    \begin{align*}
+    \forall x \in \{0,1,\bot\}^*, j \in [|x|]:  [\textbf{MinRes}(x)]_j
+&\triangleq \begin{cases}
+    x_i &\text{if } x_i \in \{0,1\} \\
+    0 & \text{otherwise}
+    \end{cases}
+    \end{align*}
+    For the maximum resolution we will use the $\textbf{MaxRes}$ function where we instead replace all $\bot$ with $1$ instead.
+\end{definitionbox}
+
+
+\begin{definitionbox}{\scn{HF-AntipodalStrongSperner} problem}{hf-strong-sperner}
+    An \scn{HF-DiscreteStrongSperner} instance $\lambda$ such that $\forall p \in [M^1]^n$, if $\lambda(p)= \bot^n$, 
+    and denote $\textbf{MinRes}(x) = \hat{x}$ as the \textit{anchor} of the cube, then:
+    $$
+    \forall b \in \{0,1\}^n, j \in [n]: [\lambda(x + b)]_j = -[\lambda(x + 1^n \oplus b)]_j
+    $$
+\end{definitionbox}
+
+
+\begin{claimbox}{Antipodal discrete squares}{antipodal-discrete-square}
+    Given a panchromatic solution of a \scn{HF-AntipodalStrongSperner} $p$, it must be the case then that:
+    $$
+    \forall j \in \{-1, 1\}^n, \exists! x \in \textbf{Res}(p): \lambda(x) =  j
+    $$
+\end{claimbox}
+
+\begin{proof}
+We proof by induction on $n$. Lets assume base case $n = 2$. We can observe that the only satisfying 
+cube that is both antipodal and discrete, is some rotation of the following matrix
+$$
+\begin{pmatrix}
+    \mp & + \\
+    - & \pm \\
+\end{pmatrix}
+$$
+Where we denote $+ = (+, +), -=(-,-), \pm = (+,-)$ and $\mp = (-,+)$, we can observe indeed that the panchromatic square contains all the colourings.
+For the induction step, we can observe that if we want our colouring function to be both discrete and antipodal, then the following must suffice:
+given $k, k'$ the two resolutions of dimension $k+1$, we know that $[\lambda(p_{-(n+1)}(k))] = (b, \bot^n)$ for some $b \in \{0,1\}^n$. But that implies
+$[\lambda(p_{-(n+1)}(k'))] = (\bar{b}, \bot^n)$, which indicates a discrete antipodal panchromatic solution. Moreover if $p_{-(n+1)}$ cover $2^n$ labels,
+then the whole cube covers all $2^{n+1}$ labels, which by pigeonhole principle means that we must cover all possible combinations of colourings.
+\end{proof}
+
+All the problems above are clearly in \textbf{PPAD} as all of them reduce to the \textit{StrongSperner} problem, under only 
+binary inputs, since we make the assumption that all such circuits are inherently \textit{natural}. For the purposes of our current
+research, we demonstrate a parsimonious reduction from \scn{HF-DiscreteStrongSperner} to \scn{PureCircuit}.
+
+
+\begin{theorembox}{}{hf-discrete-to-pure}
+    $$
+    \textbf{\#PPAD}(\scn{HF-DiscreteStrongSperner}) \subseteq \textbf{\#PPAD}(\scn{PureCircuit})
+    $$
+\end{theorembox}
+
+
+\begin{proof}
+    
+\end{proof}
+
+
+% \begin{definitionbox}{\textbf{PPAD}-complete}{hf-strong-sperner}
+%     \textbf{Input}: A hazard-free circuit $\lambda: [M]^n \to \{-1, +1\}^n$, where $M \in n^{O(1)}$, that describes a \textit{StrongSperner} labelling,
+%     as explained in \ref{def:strong-sperner}. For $p \in M$, we use its unary representation, such that $\bar{p} \in M = p \in \{0,1\}^{\lceil \log_2(M) \rceil}$
+%     and $\#1(p) = \bar{p}$.
+%     \textbf{Output}: We consider a solution a point $p \in \bigtimes_{i \in [n]} M^1$ if and only if:
+%     $\lambda(p) =  \bot^n$. 
+% \end{definitionbox}
+
+
+
+% \subsection{Attempt correlating parsimoniously PureCircuit with the EndOfLine}
 

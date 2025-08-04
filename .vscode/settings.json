@@ -1,4 +1,34 @@
 {
-    "ltex.additionalRules.motherTongue": "en-GB",
-    "ltex.language": "en-GB"
+  "ltex.additionalRules.motherTongue": "en-GB",
+  "ltex.language": "en-GB",
+  "files.exclude": {
+    "**/.git": true,
+    "**/.svn": true,
+    "**/.hg": true,
+    "**/*.aux": true,
+    "**/*.bbl": true,
+    "**/*.blg": true,
+    "**/*.out": true,
+    "**/.DS_Store": true,
+    "**/Thumbs.db": true
+  },
+  "latex-workshop.latex.tools": [
+    {
+      "name": "latexmk (glossaries)",
+      "command": "latexmk",
+      "args": ["-pdf", "-interaction=nonstopmode", "-shell-escape", "-synctex=1", "%DOC%"]
+    },
+    {
+      "name": "makeglossaries",
+      "command": "makeglossaries",
+      "args": ["%DOCFILE%"]
+    }
+  ],
+
+  "latex-workshop.latex.recipes": [
+    {
+      "name": "latexmk with glossaries",
+      "tools": ["latexmk (glossaries)", "makeglossaries", "latexmk (glossaries)"]
+    }
+  ]
 }
