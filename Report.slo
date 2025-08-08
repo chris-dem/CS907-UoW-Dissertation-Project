@@ -4,3 +4,5 @@
 \glossaryentry{"\ensuremath {"\mathbb {N}}?\glossentry{nat_nums}|setentrycounter[]{page}"\glsnumberformat}{1}
 \glossaryentry{"\ensuremath {n^{O(1)}}?\glossentry{poly-sized}|setentrycounter[]{page}"\glsnumberformat}{1}
 \glossaryentry{"\ensuremath {x_{-i}, x_{-i}(a)}?\glossentry{not-replace}|setentrycounter[]{page}"\glsnumberformat}{1}
+\glossaryentry{"\ensuremath {"\mathbb {T}}?\glossentry{kleene-set}|setentrycounter[]{page}"\glsnumberformat}{1}
+\glossaryentry{"\ensuremath {"\mathbb {T}}?\glossentry{kleene-set}|setentrycounter[]{page}"\glsnumberformat}{17}

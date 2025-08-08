@@ -3,5 +3,12 @@
 \contentsline {figure}{\numberline {2.3}{\ignorespaces Edge between points $i,j$ of the original graph. Main observation is the fact that each point comes with a pair of exponentially long lines, which we refer to as the input output lines.}}{5}{figure.caption.13}%
 \contentsline {figure}{\numberline {2.4}{\ignorespaces $K_3$ graph construction. Combinations of colours indicate an edge between the two nodes. Solid dots indicate edges from $0$, crossed lines indicate edges from $1$ and stripped lines indicate edges from $2$. We Add two coloured stripped circles on the 4 degree nodes to indicate the $E^2_n$ edges.}}{6}{figure.caption.14}%
 \contentsline {figure}{\numberline {2.5}{\ignorespaces Depiction of the edge removal. Main idea is that this we keep the number of sources or sinks as well as invertible (we can trace the source or sink from the original instance), despite losing a lot of graph information.}}{7}{figure.caption.17}%
-\contentsline {figure}{\numberline {2.6}{\ignorespaces Example on an $8 \times 8$ chessboard with a missing square. As we can observe, there will always be one square we cannot tile }}{9}{figure.caption.20}%
+\contentsline {figure}{\numberline {2.6}{\ignorespaces Example on an $8 \times 8$ chessboard with a missing square. As we can observe, there will always be one square we cannot tile }}{10}{figure.caption.20}%
 \contentsline {figure}{\numberline {2.7}{\ignorespaces Example of reducing a 6x6 sudoku puzzle, into a graph colouring problem}}{11}{figure.caption.22}%
+\contentsline {figure}{\numberline {4.1}{\ignorespaces \relax }}{15}{figure.caption.23}%
+\contentsline {figure}{\numberline {4.2}{\ignorespaces Pure Circuit construction visualisation}}{17}{figure.caption.24}%
+\contentsline {figure}{\numberline {4.3}{\ignorespaces Purification gadget. The red nodes denote the outputs of the purification gadget.}}{17}{figure.caption.26}%
+\contentsline {figure}{\numberline {4.4}{\ignorespaces Shielding method on 2D-EoL embeddings.}}{19}{figure.caption.29}%
+\contentsline {figure}{\numberline {4.5}{\ignorespaces 2D EndOfLine Bipolar Colouring}}{20}{figure.caption.30}%
+\contentsline {figure}{\numberline {4.6}{\ignorespaces Snake Embedding technique between the folding dimension and the new dimension}}{23}{figure.caption.33}%
+\contentsline {figure}{\numberline {4.7}{\ignorespaces Snake Embedding technique between the folding dimension and the new dimension}}{23}{figure.caption.34}%

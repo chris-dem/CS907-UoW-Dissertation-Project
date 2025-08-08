@@ -9,6 +9,9 @@
 		\setentrycounter[]{page}\glsnumberformat{1}}}%
 \glossentry{nat_nums}{\glossaryentrynumbers{\relax 
 		\setentrycounter[]{page}\glsnumberformat{1}}}%
+\glossentry{kleene-set}{\glossaryentrynumbers{\relax 
+		\setentrycounter[]{page}\glsnumberformat{1}\delimN 
+		\setentrycounter[]{page}\glsnumberformat{17}}}%
 \glossentry{poly-sized}{\glossaryentrynumbers{\relax 
 		\setentrycounter[]{page}\glsnumberformat{1}}}%
 \glossentry{not-replace}{\glossaryentrynumbers{\relax 

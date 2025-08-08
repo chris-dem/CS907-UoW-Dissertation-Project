@@ -386,7 +386,7 @@ the colouring condition.
     \end{itemize}
 \end{definitionbox}
 
- 
+
 The above is a generalised variant of the traditional Sperner problem to
 a grid of dimensions $N$ with width of $M$.
 Throughout literature the same variants of the problem or specifications
@@ -414,7 +414,7 @@ assume we have a $2n \times 2n$ chessboard. If we are provided with $1 \times 2$
 pieces. The idea is when we remove the bottom left corner, the board becomes impossible to tile. The argument
 can be thought of as such: each tile piece covers a bright square and an odd square, which implies that it has to be the case that one of the squares
 has to remain untilled. An example can be seen in the figure \ref{fig:chap-2:1-mc-example}. More formally we use the following definition \ref{def:1-mc-definition},
-and Hollender et al. \cite{hollender_ComplexityMultisourceVariants_2018} demonstrated that this problem 
+and Hollender et al. \cite{hollender_ComplexityMultisourceVariants_2018} demonstrated that this problem
 
 
 
@@ -600,7 +600,7 @@ it can be difficult to obs
 
 Kleene logic uses the boolean system with an additional \textit{unstable} value \cite{kleene_IntroductionMetamathematics_2009}.
 The study of Kleene logic assisted in
-the development of robust physical systems \cite{friedrichs_MetastabilityContainingCircuits_2018}, in addition to defining frameworks like \textit{Alternative Turing machines} \cite{kozen_TheoryComputation_2006}, and
+the development of robust physical systems \cite{friedrichs_MetastabilityContainingCircuits_2018} and
 aiding in the development of lower bounds for monotone circuits
 \cite{eichelberger_HazardDetectionCombinational_1965, ikenmeyer_ComplexityHazardfreeCircuits_2019,ikenmeyer_KarchmerWigdersonGamesHazardfree_2022,  bund_SmallHazardFreeTransducers_2025}.
 The current section offers a brief summary to relevant notions and concepts in Kleene logic.
@@ -626,7 +626,7 @@ they can be represented by circuits \ref{prop:nat-func-circ}.
 Detecting hazards is a concept that is analysed heavily when talking about Kleene logic.
 The idea is ensuring robustness in our circuits, meaning if all resolutions of $x \in \mathbb{T}^n$
 give the same value, then we should expect the circuit to behave the same way \ref{def:hf-def}.
-An example of hazard values can be seen in the figure \ref{fig:hazard-example}.
+An example of hazard values can be seen in the figure \ref{fig:hazard-example}. %% TODO
 
 
 \begin{definitionbox}{Natural functions \cite{ikenmeyer_ComplexityHazardfreeCircuits_2019}}{nat-func}
@@ -648,17 +648,77 @@ An example of hazard values can be seen in the figure \ref{fig:hazard-example}.
     then we say that $C$ is hazard-free.
 \end{definitionbox}
 
-% \begin{figure}[h!]
-%     \centering
-%     \subfloat[Multiplexer with hazard at $(1,1,\bot)$]{\includegraphics[width=0.3\textwidth]{assets/hazard_circuit.png}}
-%     \subfloat[Hazard free multiplexer]{\includegraphics[width=0.3\textwidth]{assets/hazard-free-circuit.png}}
-%     \caption{Hazard circuit and hazard-free circuit. Figure by \cite{ikenmeyer_ComplexityHazardfreeCircuits_2019}}\label{fig:hazard-example}
-% \end{figure}
 
 \begin{definitionbox}{K-bit Hazard \cite{ikenmeyer_ComplexityHazardfreeCircuits_2019}}{k-bit-haz}
     For $k \in \mathbb{N}$ a circuit $C: \mathbb{T}^n \to \mathbb{T}$ has a \textit{k-bit hazard} at $x \in \mathbb{T}^n$
     $\iff$ $C$ has a hazard at $x$ and $\bot$ appears at most $k$ times.
 \end{definitionbox}
-%
-%
-%
+
+We also wish to introduce the following corollary by
+Ikenmeyer et al. \cite{ikenmeyer_ComplexityHazardfreeCircuits_2019} which allows us
+to construct $k$-bit hazard free circuits
+
+\begin{corollarybox}{K-bit Hazard Construction \cite{ikenmeyer_ComplexityHazardfreeCircuits_2019}}{k-bit-haz}
+    Given circuit $C: \mathbb{T}^n \to \mathbb{T}$, one can construct a $k$-bit hazard free circuit of $C$ denoted as $C'$
+    such that:
+    \begin{align*}
+        \text{size}(C')\, & = (\frac{ne}{k})^k (\text{size}(C) + a6) + O(n^{2.71k}) \\
+        \text{depth}(C') & = \text{depth}(C) + 8k + O(k \log n)
+    \end{align*}
+    Where $\text{size}(P)$ denotes the number of gates of $P$ and $\text{depth}(P)$ denotes the longest path from
+    the input bit to the output bit
+\end{corollarybox}
+
+
+\subsubsection{Kleene logic and Complexity Theory}
+Lastly we want to introduce the notion of \textit{Alternating Turing Machines}, which are meant to represent
+a generalisation of non-deterministic Turing machines.
+These have been introduced by Chandra et al. and the idea is that we introduce universal and existential quantifiers
+to alternate the course of computation. The informal presentation can be thought as follows:
+In a non-deterministic TM, given a single state $q$ or configuration $c$, we execute
+$\beta_1, ..., \beta_k$ separate processes. We say that $q$ will accept if at least one of the processes
+$\{\beta_i\}_{i \in [k]}$ accepts. Alternating Turing machines introduce additional conditions where
+one accepts all $\{\beta_i\}_{i \in [k]}$ to accept or in case of a negation state, if $\beta_1$ accepts, then 
+$q$ rejects or vice versa. More formally, we offer the definition in \ref{def:alt-tm}.
+
+\begin{definitionbox}{Alteranting Turing Machines(ATM) \cite{kozen_TheoryComputation_2006, chandra1981alternation}}{alt-tm}
+    \label{def:alt-tm}
+    An alternating TM is a seven tuple
+    $$
+    M = (k , Q, \Sigma, \Gamma, \delta, q_0, g)
+    $$
+    Where each term denotes:
+    \begin{enumerate}
+        \item $K$: The number of work tapes
+        \item $Q$: Finite set of states
+        \item $\Sigma$: \textit{Finite} input alphabet. Moreover, $\star \not\in \Sigma$ denotes the end of the input
+        \item $\Gamma$: \textit{Finite} work tape alphabet. Moreover $\# \in \Gamma$ to denote blank symbol.
+        \item $\delta$ transition function or next move relation which has type of:
+        $$
+        \delta :Q \times \Gamma^k \times (\Sigma \cup \{\star\}) \to 
+        Q \times (\Gamma \smallsetminus \{\#\})^k \times \{L, R\}^{k+1}
+        $$
+        \item $q_0 \in Q$: Is the initial state
+        \item $g : Q \to \{\vee, \wedge, \neg , \textbf{1}, \textbf{0}\}$: Where $g$ denotes the type of state
+        and $\mathbf{1}, \mathbf{0}$  denote whether it is accepting or not.
+
+    \end{enumerate}
+
+\end{definitionbox}
+
+The machine essentially contains a read-only input tape with endmarkers and $k$ work tapes which are
+initially blank. A \textit{step} of $m$ consists of reading a symbol from the input tape,
+writing a symbol to each work tape, moving the writing head in each head left or right
+while transitioning into a new state.
+
+\begin{definitionbox}{ATM configurations \cite{kozen_TheoryComputation_2006, chandra1981alternation}}{alt-conf}
+    \label{def:alt-conf}
+    A configuration $\mathcal{C}$ of an ATM $M$ is a element of the set $\mathcal{C}_M$
+    $$
+    \mathcal{C}_M \triangleq Q \times \Sigma^* \times (\Gamma \smallsetminus \{\#\})^k \times \mathbb{N}^{k+1}
+    $$
+    Which represent, the current state, the input, the current contents of each work tape, and the $k+1$ head positions.
+\end{definitionbox}
+
+
+\section{Project Motivation and Objectives}
