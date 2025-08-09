@@ -1,3 +1,7 @@
 Kleene
 Sperner
 superpolynomial
+inapproximability
+EndOfLine
+RLeafD
+PPAD

@@ -11,7 +11,7 @@
 		\setentrycounter[]{page}\glsnumberformat{1}}}%
 \glossentry{kleene-set}{\glossaryentrynumbers{\relax 
 		\setentrycounter[]{page}\glsnumberformat{1}\delimN 
-		\setentrycounter[]{page}\glsnumberformat{17}}}%
+		\setentrycounter[]{page}\glsnumberformat{21}}}%
 \glossentry{poly-sized}{\glossaryentrynumbers{\relax 
 		\setentrycounter[]{page}\glsnumberformat{1}}}%
 \glossentry{not-replace}{\glossaryentrynumbers{\relax 
