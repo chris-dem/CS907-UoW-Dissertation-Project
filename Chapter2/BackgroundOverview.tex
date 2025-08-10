@@ -86,7 +86,8 @@ From this problem, we define the \textsc{PPAD} complexity class \ref{def:ppad-co
 \end{definitionbox}
 
 \subsubsection{EndOfLine variants and extensions}
-%% TODO: ADD MISSING REFERENCES and CLEANUP
+%TODO: ADD MISSING REFERENCES and CLEANUP
+
 We want introduce a small number of the several key variants of the \textit{EndOfLine} that have been created in the past.
 Alexandros et al. in the paper {} was able to demonstrate that for several modifications of the original problem such as adding
 $k$ known sources, where $k$ can be a polynomial function with respect to the number of sources. Moreover, people
@@ -97,6 +98,7 @@ Alexandros et al. {} were able to demonstrate that in the more general case of s
 if we bound the in-degree and out-degree of each node to some polynomial of the input size, then problem remains \textbf{PPAD}.
 We will give the main definitions to the most relevant problems in the upcoming sections.
 
+%TODO: work `SourceOrExcess`. You probably want to define its full thing in the main findings section -3
 \begin{definitionbox}{\scn{SourceOrExcess} problem \cite{ikenmeyer_WhatWhatNot_2022}}{source-or-excess}
     We define as $\textit{SourceOrExcess}(k,1)$ for $k \in \mathbb{N}_{\geq 2}$
     the search problem as such: Given a poly-sized successor circuit $S : \mathbb{B}^n$
@@ -113,12 +115,11 @@ We will give the main definitions to the most relevant problems in the upcoming 
 %% TODO REFERENCE
 In addition to the aforementioned adjustments, researchers were able to give a topological interpretation
 to the \scn{EndOfLine} \ref{def:eol-ppad} problem, by creating embeddings of the graph
-into 2D or 3D spaces as demonstrated by several researchers {deligkas, chen, Alexandros}.
+into 2D or 3D spaces as demonstrated by several researchers \cite{chen_Complexity2DDiscrete_2009, hollender_ComplexityMultisourceVariants_2018,daskalakis_ComplexityComputingNash_2006}.
 We will mainly look at two of these problems, known as \textsc{RLeafD} and \textsc{2D-EOL}
 created by Chen et al. and Alexandros respectively.
 
-%% TODO REFERENCE
-\begin{definitionbox}{\scn{2D-EOL} problem {}}{2d-eol}
+\begin{definitionbox}{\scn{2D-EOL} problem \cite{chen_Complexity2DDiscrete_2009,hollender_ComplexityMultisourceVariants_2018}}{2d-eol}
     \label{2d-eol}
     \textbf{Input}: Two poly-sized circuits $P,S: \{0,1\}^{2n} \to \{0,1\}^{2n}$ where $P(0^{n}, 0^{n}) = (0^{n},0^{n}) \neq S(0^{n}, 0^{n})$.
     \textbf{Output}: A point $x \in \{0,1\}^{2n}$ such that one of the following conditions are satisfied:
@@ -719,7 +720,7 @@ to construct $k$-bit hazard free circuits
     such that:
     \begin{align*}
         \text{size}(C')\quad & = (\frac{ne}{k})^k (\text{size}(C) + a6) + O(n^{2.71k}) \\
-        \text{depth}(C')\, & = \text{depth}(C) + 8k + O(k \log n)
+        \text{depth}(C')\quad & = \text{depth}(C) + 8k + O(k \log n)
     \end{align*}
     Where $\text{size}(P)$ denotes the number of gates of $P$ and $\text{depth}(P)$ denotes the longest path from
     the input bit to the output bit
@@ -874,16 +875,16 @@ this framework as one of the main motivations of the project.
 Our work is primarily focused around the paper by Ikenmeyer et al. \cite{ikenmeyer_WhatWhatNot_2022} and the
 parsimonious reductions discovered across various \textbf{PPAD} problems.
 We introduce the notation $\textbf{\#PPAD}(L)$, where this indicates
-the class of problems which are parsimoniously reducible to $L$. 
+the class of problems which are parsimoniously reducible to $L$.
 In fact, we extend this notation with $f(\textbf{\#PPAD}(L))$  to indicate reductions of the form,
-given $L'$, we say that $L' \in f(\textbf{\#PPAD}(L))$ if 
+given $L'$, we say that $L' \in f(\textbf{\#PPAD}(L))$ if
 $$
-\forall x \in S_{L'}: |R_{L'}(x)| = f(|R_L(g(x))|)
+    \forall x \in S_{L'}: |R_{L'}(x)| = f(|R_L(g(x))|)
 $$
 
 We demonstrate an example of the above notation using a finding from the paper
 by Ikenmeyer et al. \cite{ikenmeyer_WhatWhatNot_2022}: $\textbf{PPAD}(\textit{EndOfLine} -1) /2 = \textbf{\#P}$.
-To show inclusion it is easy to see that one can accept all the non-zero sources, since each source is paired with a sink, 
+To show inclusion it is easy to see that one can accept all the non-zero sources, since each source is paired with a sink,
 and we are able to ignore the sink paired with the $0^n$ source. To show the other direction, they demonstrate an example
 where they reduce $\textit{CircuitSAT} \leq_C (\textit{\#EndOfLine} -1) /2$ by creating a graph, where
 for each input $x$, we create a source and sink pair $(0x, 1x)$.
@@ -900,7 +901,7 @@ $\textbf{\#PPAD}(\textit{SourceOrExcess}(2,1)) -1$ is a harder problem than $\te
 
 But one can ask, how does $\textbf{\#PPAD}(\textit{SourceOrExcess}(k,1)) -1$ behave for some $k \in \mathbb{N}_{\geq 3}$
 and in general we will demonstrate that there are many other problems that have interesting counting properties.
-This leads us directly to the question of, can we somehow quantify each problem in \textbf{PPAD}, or more 
+This leads us directly to the question of, can we somehow quantify each problem in \textbf{PPAD}, or more
 specifically, is there a problem that can ``everything'' else?
 
 

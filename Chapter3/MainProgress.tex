@@ -4,9 +4,47 @@
 \label{sec:findings}
 
 \subsection{PureCircuit and EndOfLine}
-We will present several attempts and efforts we made across several problems and their
-parsimonious reductions. First we want to introduce combine Kleene Logic with $\textbf{PPAD}$.
-We define the following series of Problems
+The core idea of our this current section comes from following set of observations:
+when working with \textit{PureCircuit}, one cannot fully work with binary logic.
+We therefore make use of topological problems with the idea that resolutions of our input
+corresponds to some set nearby points in a space. If all points follows abide some property
+then we can use that to detect solutions. We start with looking at the \textit{StrongSperner}
+problem under the lens of \textit{Kleene logic}.
+First we begin with the idea that solutions of \textit{StrongSperner} problems
+revolve around the notion of panchromatic hypercubes. We can use the idea and make the following
+definitions
+
+\begin{definitionbox}{\textit{StrongSperner} anchor points}{ss-anchor}
+    \label{def:ss-anchor}
+    Given a hypercube $H \subset \mathbb{Z}^n$ of side lengths $1$, we denote
+    the $\textbf{Anc}(H)$ as
+    $$
+        \textbf{Anc}(H) = \min_{p \in H} \|p\|_{\infty}
+    $$
+    Alternatively, we will refer to these hypercubes using the notation $\textbf{Cube}(\cdot)$ such that
+    $$
+        \textbf{Cube}(p) \triangleq \big\{(p + b) \mid b \in \{0,1\}^n \big\}
+    $$
+\end{definitionbox}
+
+Ideally, we would like to express a cube as a coordinate of Kleene numbers, implying
+the resolutions of the point will result in a hypercube, where each point is within
+$\|\cdot\|_{\infty} \leq 1$ of each other.
+An example of that can be seen in figure \ref{fig:chap-3:res-hyper}.
+This leads to a natural interpretation of the \textit{StrongSperner} problem in \textit{Kleene logic}.
+We will start with two definitions, one for \textit{nD-StrongSperner} and the other for
+\textit{StrongSperner}. We remind that the main difference of the two problems is the former
+has fixed dimensions $n$ of exponentially large cubes, whereas the other can have varying
+dimensions of polynomially large widths.
+
+\begin{figure}[h!]
+    \centering
+    \includegraphics[width=0.3\textwidth]{Chapter3/1753903956-dissertation-drawing-assets.pdf}
+    \caption{}
+    \label{fig:chap-3:res-hyper}
+\end{figure}
+
+
 
 
 \begin{definitionbox}{Kleene Unary Numbers}{kleene-unary}
@@ -14,11 +52,72 @@ We define the following series of Problems
     Given a number $p \in M$, its unary representation can be depicted as a binary number $\{0,1\}^M$ such that: $k \in M \to 1^k \in \bar{M}$.
     Under Kleene algebra, we mainly refer to notations $M_k^n$ where $k,n,M \in \mathbb{N}_0$  such that:
     $$
-        M^k_n \triangleq \{1^j\bot^k \mid \forall j \in \mathbb{N}_0 : j + k \leq n\}
+        M^k_n \triangleq \bigtimes_{i \in [n]} \{1^j\bot^k \mid \forall j \in \mathbb{N}_0 : j + k \leq M\}
     $$
 \end{definitionbox}
 
+% \begin{definitionbox}{Kleene Binary Numbers}{kleene-binary}
+%     \label{def:kleene-binary}
+%     Given a number $p \in M$, we refer to its binary representation 
+%     $$
+%         M^k_n \triangleq \{1^j\bot^k \mid \forall j \in \mathbb{N}_0 : j + k \leq M\}^n
+%     $$
+% \end{definitionbox}
 
+% As we can observe, we can represent a hypercube $n$-dimensional cube
+% using either $(p_i)_{i \in [n]} \in M^1_n$ such that
+
+
+\begin{definitionbox}{\textit{HF-nD-StrongSperner} problem}{hf-nd-strong-sperner}
+    \textbf{Input}: A circuit $\lambda: (\{0,1\}^k)^n \to \{-1, +1\}^n$, that describes a \textit{nD-StrongSperner} labelling,
+    as explained in \ref{def:strong-sperner}, such that it is hazard free on inputs
+    $(p_i\bot)_{i \in[n]}$ where $p_i \in \{0,1\}^{k-1 }$
+    \textbf{Output}: A point $p \in \bigtimes_{i \in [n]} \left(\{0,1\}^{k-1} \times \{0,1 ,\bot\}\right)$ if and only if: $\lambda(p) =  \bot^n$.
+\end{definitionbox}
+
+We argue that the above problem is \textit{PPAD}-complete for all \textit{HF-nD-StrongSperner} problems. First we
+can observe that all \textit{HF-nD-SS} are reducible to their \textit{nD-SS} counterparts since
+hazard-free transformations have no effect on binary inputs and therefore our circuits acts like any other boolean circuit.
+To show the hardness, we claim that
+$$
+    \textbf{PPAD}(\textit{nD-SS}) \subseteq \textbf{PPAD}(\textit{HF-nD-SS})
+$$
+
+\begin{proof}
+    Given circuit $\lambda: (\{0,1\}^k)^n \to \{-1,+1\}^n$ from \textit{nD-SS}, we create
+    $\Lambda: (\{0,1\}^{k+1})^n \to \{-1,+1\}^n$ such that:
+    $$
+        \Lambda((x_{i})_{i \in [n]}) = \lambda\left( \left( { \left\lfloor \frac{x_{i}+1}{2}  \right\rfloor } \right)_{i \in [n]} \right)
+    $$
+    We prove the following claim
+
+    \begin{claimbox}{Transformation claim}{trans-main}
+        \label{clm:main-proof:trans-claim}
+        Given $S_{\text{even}}$ the set of even solutions of the transformed space or more formally:
+        $$
+            S_{\text{even}} \triangleq
+            \Big\{(i0,j0,k0) \in (\mathbb{B}^{(m+1)})^3 \mid (i0,j0,k0) \text{ covers all labels by \ref{def:bipolar-colouring}} \Big\}
+        $$
+        We claim $|S| = |S_{\text{even}}|$
+    \end{claimbox}
+
+    \begin{proof}
+        We argue that we can bijectively map between $S \leftrightarrow S_{\text{even}}$.
+        To show the left to right direction, assume $(i,j,k) \in S$.
+        Using equation \ref{eq:trans-eq}, only the point $(2\bar{i}, 2\bar{j}, 2\bar{k}) = (i0, j0,k0)$ will be mapped to all even coordinates.
+        Additionally, we can observe its neighbourhood set:
+        $$
+            N = \Big\{\Lambda(2\bar{i} + x_1, 2\bar{j} + x_2, 2\bar{k} + x_3) \mid x \in \mathbb{B}^3 \Big\}
+        $$
+        We can observe that WLOG $\Lambda(2\bar{i} + 1, \cdot, \cdot) = \lambda(\bar{i} + 1, \cdot, \cdot)$ and
+        $\Lambda(2\bar{i}, \cdot, \cdot) = \lambda(\bar{i}, \cdot, \cdot)$, which implies:
+        $$
+            N = \Big\{\lambda(\bar{i} + x_i, \bar{j} + x_j, \bar{k} + x_k) \mid x \in \mathbb{B}^3 \Big\}
+        $$
+        Therefore the point $(i0, j0,k0)$ is also a solution. We can use the previous neighbourhood argument to prove the converse direction.
+    \end{proof}
+
+\end{proof}
 
 \begin{definitionbox}{\scn{HF-StrongSperner} problem}{hf-strong-sperner}
     \textbf{Input}: A hazard-free circuit $\lambda: [M]^n \to \{-1, +1\}^n$, where $M \in n^{O(1)}$, that describes a \textit{StrongSperner} labelling,
@@ -27,23 +126,20 @@ We define the following series of Problems
     \textbf{Output}: A point $p \in \bigtimes_{i \in [n]} M^1_n \cup M^0_n$ if and only if: $\lambda(p) =  \bot^n$.
 \end{definitionbox}
 
-We will mainly refer to a specific subset of these problems, which we will refer to as \scn{HF-DiscreteStrongSperner}.
-The general idea is that we exploit the hazard-free property of the Strong Sperner function
-In the original problem, we request for $d+1$ points as a solution to the problem. Due
-to the assumption that $\forall p, p' \in S: \|p-p'\|_{\infty} \leq 1$, we can assume
-they are all part of some high-dimensional cube. We abuse this notation by making the observation
-that given $p \in [M^1]^n$, all the resolutions of $p$, resolve in a hypercube, as seen in the figure
-one can observe that, we only need two points to create a panchromatic solution, where $\lambda(p) = \overline{\lambda(p')}$. These can create a lot of duplicate
-solutions and therefore can behave unpredictably. We will mainly focus on subproblems of the \scn{HF-StrongSperner} where two cubes do not overlap.
+% We will mainly refer to a specific subset of these problems, which we will refer to as \scn{HF-DiscreteStrongSperner}.
+% The general idea is that we exploit the hazard-free property of the Strong Sperner function
+% In the original problem, we request for $d+1$ points as a solution to the problem. Due
+% to the assumption that $\forall p, p' \in S: \|p-p'\|_{\infty} \leq 1$, we can assume
+% they are all part of some high-dimensional cube. We abuse this notation by making the observation
+% that given $p \in [M^1]^n$, all the resolutions of $p$, resolve in a hypercube, as seen in the figure
+% one can observe that, we only need two points to create a panchromatic solution, where $\lambda(p) = \overline{\lambda(p')}$. These can create a lot of duplicate
+% solutions and therefore can behave unpredictably. 
+
+We will mainly focus on subproblems of the \scn{HF-StrongSperner} where two cubes do not overlap.
 More formally we define
 
 
-\begin{figure}[h!]
-    \centering
-    \includegraphics[width=0.3\textwidth]{Chapter3/1753903956-dissertation-drawing-assets.pdf}
-    \caption{}
-    \label{fig:chap-3:res-hyper}
-\end{figure}
+
 
 
 \begin{definitionbox}{\scn{HF-DiscreteStrongSperner} problem}{hf-strong-sperner}
@@ -521,7 +617,7 @@ such reduction will to \textit{AntipodalStrongSperner} instansces.
         \ref{fig:chap-3:snake-embedding-visualisation-basic}), otherwise the third dimension will not be covered.
         Moreover one can observe can never be anchored in any of the turning points since we have a copy of
         the point and therefore $x,y$ dims will not be covered. We define $\bot^n(\cdot)$ as
-        $$ %% TODO
+        $$ %TODO: Finish proof
             \forall \bar{p} \in [M]: \bot^n(p) \triangleq \begin{cases}
                 1^p\bot & \text{if } \bar{p} < M \\
                 1^M     & \text{otherwise} < M   \\
@@ -618,4 +714,12 @@ such reduction will to \textit{AntipodalStrongSperner} instansces.
 
 
 % \subsection{Attempt correlating parsimoniously PureCircuit with the EndOfLine}
+
+\subsection{SourceOrExcess analysis}
+
+\subsection{PPAD Counting Hierarchies}
+\input{Chapter3/ppad-hierarchies.tex}
+
+\subsection{Supplementary Findings}
+\input{Chapter3/supplementary-findings.tex}
 
