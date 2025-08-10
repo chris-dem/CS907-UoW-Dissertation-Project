@@ -84,11 +84,13 @@ $$
 $$
 
 \begin{proof}
-    Given circuit $\lambda: (\{0,1\}^k)^n \to \{-1,+1\}^n$ from \textit{nD-SS}, we create
+    Given circuit $\lambda: (\{0,1\}^k)^n \to \{-1,+1\}^n$ from \textit{nD-SS},
+    assume that $S$ is the set of anchors points of a panchromatic cube. We create
     $\Lambda: (\{0,1\}^{k+1})^n \to \{-1,+1\}^n$ such that:
-    $$
-        \Lambda((x_{i})_{i \in [n]}) = \lambda\left( \left( { \left\lfloor \frac{x_{i}+1}{2}  \right\rfloor } \right)_{i \in [n]} \right)
-    $$
+
+    \begin{equation}
+        \Lambda((x_{i})_{i \in [n]}) = \lambda\left( \left( { \left\lceil \frac{x_{i}+1}{2}  \right\rceil } \right)_{i \in [n]} \right) \label{eq:chap-3:trans-double}
+    \end{equation}
     We prove the following claim
 
     \begin{claimbox}{Transformation claim}{trans-main}
@@ -96,27 +98,37 @@ $$
         Given $S_{\text{even}}$ the set of even solutions of the transformed space or more formally:
         $$
             S_{\text{even}} \triangleq
-            \Big\{(i0,j0,k0) \in (\mathbb{B}^{(m+1)})^3 \mid (i0,j0,k0) \text{ covers all labels by \ref{def:bipolar-colouring}} \Big\}
+            \Big\{(p_i 0)_{i \in [n]}  \mid  p \in (\mathbb{B}^{(k)})^n:  (p_i 0)_{i \in [n]} \text{ is an anchor of a panchromatic cube} \Big\}
         $$
         We claim $|S| = |S_{\text{even}}|$
     \end{claimbox}
 
     \begin{proof}
         We argue that we can bijectively map between $S \leftrightarrow S_{\text{even}}$.
-        To show the left to right direction, assume $(i,j,k) \in S$.
-        Using equation \ref{eq:trans-eq}, only the point $(2\bar{i}, 2\bar{j}, 2\bar{k}) = (i0, j0,k0)$ will be mapped to all even coordinates.
-        Additionally, we can observe its neighbourhood set:
-        $$
-            N = \Big\{\Lambda(2\bar{i} + x_1, 2\bar{j} + x_2, 2\bar{k} + x_3) \mid x \in \mathbb{B}^3 \Big\}
-        $$
-        We can observe that WLOG $\Lambda(2\bar{i} + 1, \cdot, \cdot) = \lambda(\bar{i} + 1, \cdot, \cdot)$ and
-        $\Lambda(2\bar{i}, \cdot, \cdot) = \lambda(\bar{i}, \cdot, \cdot)$, which implies:
-        $$
-            N = \Big\{\lambda(\bar{i} + x_i, \bar{j} + x_j, \bar{k} + x_k) \mid x \in \mathbb{B}^3 \Big\}
-        $$
-        Therefore the point $(i0, j0,k0)$ is also a solution. We can use the previous neighbourhood argument to prove the converse direction.
-    \end{proof}
+        To show the left to right direction, assume $p \in S$.
+        Using figure \ref{fig:chap-3:dim-double} as reference, we can observe that each point becomes
+        a $2^d$ hypercube. Essentially the hypercube that was anchored at $(p_1, ..., p_n)$ is mapped to
+        the hypercube anchored at $(2p_1, ..., 2p_n)$.
 
+        \begin{figure}[h!]
+            \centering
+            \includegraphics[width=0.7\textwidth]{Chapter3/dim-doubling.pdf}
+            \caption{Dimension doubling. We demonstrate the example in two dimensions.}
+            \label{fig:chap-3:dim-double}
+        \end{figure}
+        Moreover, we can make the following observation:
+        \begin{align*}
+            \forall (2p_i)_{i \in [n]} \in (\{0,1\}^{k+1})^n, b \in \{0,1\}^n & :\Lambda((2p_i + b)_{i \in [n]})\,                                                  \\
+                                                                              & = \lambda\left(\left(\left\lceil\frac{2p_i + b + 1}{2} \right\rceil\right)_{i \in [n]}\right) \\
+                                                                              & = \lambda\left(\left(\left\lceil p_i + \frac{b + 1}{2} \right\rceil\right)_{i \in [n]}\right) \\
+                                                                              & = \lambda\left((p_i + b)_{i \in [n]}\right) \\
+        \end{align*}
+        Which implies that the cube anchored at $p$ must also be panchromatic.
+    \end{proof}
+    To ensure that $\Lambda$ is hazard free we can use the \ref{col:k-bit-haz} where, we can create a
+    $n$-bit hazard free pure circuit. One must observe that even though, the size of the circuit increases exponentially
+    with respect to the dimensions, since the problem scales with $k$ and we assume $k \gg n$, the size will scale
+    up to a constant with respect to the input size. Therefore, we can parsimoniously find all panchromatic cubes. 
 \end{proof}
 
 \begin{definitionbox}{\scn{HF-StrongSperner} problem}{hf-strong-sperner}

@@ -9,12 +9,13 @@
 \contentsline {figure}{\numberline {2.9}{\ignorespaces Example of reducing a 6x6 sudoku puzzle, into a graph colouring problem}}{12}{figure.caption.25}%
 \contentsline {figure}{\numberline {2.10}{\ignorespaces Computation tree of an ATM with labellings}}{17}{figure.caption.27}%
 \contentsline {figure}{\numberline {4.1}{\ignorespaces \relax }}{19}{figure.caption.28}%
-\contentsline {figure}{\numberline {4.2}{\ignorespaces Pure Circuit construction visualisation}}{22}{figure.caption.29}%
-\contentsline {figure}{\numberline {4.3}{\ignorespaces Purification gadget. The red nodes denote the outputs of the purification gadget.}}{22}{figure.caption.31}%
-\contentsline {figure}{\numberline {4.4}{\ignorespaces Shielding method on 2D-EoL embeddings.}}{24}{figure.caption.34}%
-\contentsline {figure}{\numberline {4.5}{\ignorespaces 2D EndOfLine Bipolar Colouring}}{26}{figure.caption.35}%
-\contentsline {figure}{\numberline {4.6}{\ignorespaces Snake Embedding technique between the folding dimension and the new dimension}}{28}{figure.caption.38}%
+\contentsline {figure}{\numberline {4.2}{\ignorespaces Dimension doubling. We demonstrate the example in two dimensions.}}{20}{figure.caption.29}%
+\contentsline {figure}{\numberline {4.3}{\ignorespaces Pure Circuit construction visualisation}}{23}{figure.caption.30}%
+\contentsline {figure}{\numberline {4.4}{\ignorespaces Purification gadget. The red nodes denote the outputs of the purification gadget.}}{23}{figure.caption.32}%
+\contentsline {figure}{\numberline {4.5}{\ignorespaces Shielding method on 2D-EoL embeddings.}}{25}{figure.caption.35}%
+\contentsline {figure}{\numberline {4.6}{\ignorespaces 2D EndOfLine Bipolar Colouring}}{26}{figure.caption.36}%
 \contentsline {figure}{\numberline {4.7}{\ignorespaces Snake Embedding technique between the folding dimension and the new dimension}}{28}{figure.caption.39}%
-\contentsline {figure}{\numberline {4.8}{\ignorespaces \textsc {Tarski} construction}}{31}{figure.caption.40}%
-\contentsline {figure}{\numberline {4.9}{\ignorespaces Equal solution conversion}}{33}{figure.caption.41}%
-\contentsline {figure}{\numberline {4.10}{\ignorespaces Not equal solution}}{33}{figure.caption.42}%
+\contentsline {figure}{\numberline {4.8}{\ignorespaces Snake Embedding technique between the folding dimension and the new dimension}}{29}{figure.caption.40}%
+\contentsline {figure}{\numberline {4.9}{\ignorespaces \textsc {Tarski} construction}}{32}{figure.caption.41}%
+\contentsline {figure}{\numberline {4.10}{\ignorespaces Equal solution conversion}}{33}{figure.caption.42}%
+\contentsline {figure}{\numberline {4.11}{\ignorespaces Not equal solution}}{33}{figure.caption.43}%
