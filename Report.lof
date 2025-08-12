@@ -1,21 +1,27 @@
-\contentsline {figure}{\numberline {2.1}{\ignorespaces Types of subgraphs in \textsc {EndOfLine}}}{3}{figure.caption.10}%
-\contentsline {figure}{\numberline {2.2}{\ignorespaces Figure redrawn from \cite {chen_Complexity2DDiscrete_2009}}}{5}{figure.caption.12}%
-\contentsline {figure}{\numberline {2.3}{\ignorespaces Edge between points $i,j$ of the original graph. Main observation is the fact that each point comes with a pair of exponentially long lines, which we refer to as the input output lines.}}{5}{figure.caption.13}%
-\contentsline {figure}{\numberline {2.4}{\ignorespaces $K_3$ graph construction. Combinations of colours indicate an edge between the two nodes. Solid dots indicate edges from $0$, crossed lines indicate edges from $1$ and stripped lines indicate edges from $2$. We Add two coloured stripped circles on the 4 degree nodes to indicate the $E^2_n$ edges.}}{6}{figure.caption.14}%
-\contentsline {figure}{\numberline {2.5}{\ignorespaces Depiction of the edge removal. Main idea is that this we keep the number of sources or sinks as well as invertible (we can trace the source or sink from the original instance), despite losing a lot of graph information.}}{7}{figure.caption.17}%
-\contentsline {figure}{\numberline {2.6}{\ignorespaces A colouring example of a subdivided simplex. As we can observe, no matter how we modify colourings, there will always be a small simplex that contains all colours}}{8}{figure.caption.21}%
-\contentsline {figure}{\numberline {2.7}{\ignorespaces Visual interpretation of the \textit {StrongSperner} problem. Figure from paper \cite {daskalakis_ComplexityConstrainedMinMax_2020}}}{9}{figure.caption.22}%
-\contentsline {figure}{\numberline {2.8}{\ignorespaces Example on an $8 \times 8$ chessboard with a missing square. As we can observe, there will always be one square we cannot tile }}{11}{figure.caption.23}%
-\contentsline {figure}{\numberline {2.9}{\ignorespaces Example of reducing a 6x6 sudoku puzzle, into a graph colouring problem}}{12}{figure.caption.25}%
-\contentsline {figure}{\numberline {2.10}{\ignorespaces Computation tree of an ATM with labellings}}{17}{figure.caption.27}%
-\contentsline {figure}{\numberline {4.1}{\ignorespaces \relax }}{19}{figure.caption.28}%
-\contentsline {figure}{\numberline {4.2}{\ignorespaces Dimension doubling. We demonstrate the example in two dimensions.}}{20}{figure.caption.29}%
-\contentsline {figure}{\numberline {4.3}{\ignorespaces Pure Circuit construction visualisation}}{23}{figure.caption.30}%
-\contentsline {figure}{\numberline {4.4}{\ignorespaces Purification gadget. The red nodes denote the outputs of the purification gadget.}}{23}{figure.caption.32}%
-\contentsline {figure}{\numberline {4.5}{\ignorespaces Shielding method on 2D-EoL embeddings.}}{25}{figure.caption.35}%
-\contentsline {figure}{\numberline {4.6}{\ignorespaces 2D EndOfLine Bipolar Colouring}}{26}{figure.caption.36}%
-\contentsline {figure}{\numberline {4.7}{\ignorespaces Snake Embedding technique between the folding dimension and the new dimension}}{28}{figure.caption.39}%
-\contentsline {figure}{\numberline {4.8}{\ignorespaces Snake Embedding technique between the folding dimension and the new dimension}}{29}{figure.caption.40}%
-\contentsline {figure}{\numberline {4.9}{\ignorespaces \textsc {Tarski} construction}}{32}{figure.caption.41}%
-\contentsline {figure}{\numberline {4.10}{\ignorespaces Equal solution conversion}}{33}{figure.caption.42}%
-\contentsline {figure}{\numberline {4.11}{\ignorespaces Not equal solution}}{33}{figure.caption.43}%
+\babel@toc {UKenglish}{}\relax 
+\babel@toc {UKenglish}{}\relax 
+\contentsline {figure}{\numberline {2.1}{\ignorespaces Types of subgraphs in \textsc {EndOfLine}}}{3}{figure.caption.2}%
+\contentsline {figure}{\numberline {2.2}{\ignorespaces Figure redrawn from \cite {chen_Complexity2DDiscrete_2009}}}{5}{figure.caption.3}%
+\contentsline {figure}{\numberline {2.3}{\ignorespaces Edge between points $i,j$ of the original graph. Main observation is the fact that each point comes with a pair of exponentially long lines, which we refer to as the input output lines.}}{6}{figure.caption.4}%
+\contentsline {figure}{\numberline {2.4}{\ignorespaces $K_3$ graph construction. Combinations of colours indicate an edge between the two nodes. Solid dots indicate edges from $0$, crossed lines indicate edges from $1$ and stripped lines indicate edges from $2$. We Add two coloured stripped circles on the 4 degree nodes to indicate the $E^2_n$ edges.}}{6}{figure.caption.5}%
+\contentsline {figure}{\numberline {2.5}{\ignorespaces Depiction of the edge removal. Main idea is that this we keep the number of sources or sinks as well as invertible (we can trace the source or sink from the original instance), despite losing a lot of graph information.}}{7}{figure.caption.6}%
+\contentsline {figure}{\numberline {2.6}{\ignorespaces A colouring example of a subdivided simplex. As we can observe, no matter how we modify colourings, there will always be a small simplex that contains all colours}}{9}{figure.caption.8}%
+\contentsline {figure}{\numberline {2.7}{\ignorespaces Visual interpretation of the \textit {StrongSperner} problem. Figure from paper \cite {daskalakis_ComplexityConstrainedMinMax_2020}}}{10}{figure.caption.9}%
+\contentsline {figure}{\numberline {2.8}{\ignorespaces Example on an $8 \times 8$ chessboard with a missing square. As we can observe, there will always be one square we cannot tile }}{12}{figure.caption.10}%
+\contentsline {figure}{\numberline {2.9}{\ignorespaces Example of reducing a 6x6 sudoku puzzle, into a graph colouring problem}}{14}{figure.caption.11}%
+\contentsline {figure}{\numberline {2.10}{\ignorespaces Computation tree of an ATM with labellings}}{18}{figure.caption.12}%
+\contentsline {figure}{\numberline {4.1}{\ignorespaces \relax }}{20}{figure.caption.13}%
+\contentsline {figure}{\numberline {4.2}{\ignorespaces Dimension doubling. We demonstrate the example in two dimensions.}}{21}{figure.caption.14}%
+\contentsline {figure}{\numberline {4.3}{\ignorespaces Overlapping Sperner Solutions}}{23}{figure.caption.16}%
+\contentsline {figure}{\numberline {4.4}{\ignorespaces Pure Circuit construction visualisation}}{25}{figure.caption.17}%
+\contentsline {figure}{\numberline {4.5}{\ignorespaces Purification gadget. The red nodes denote the outputs of the purification gadget.}}{25}{figure.caption.18}%
+\contentsline {figure}{\numberline {4.6}{\ignorespaces Shielding method on 2D-EoL embeddings.}}{27}{figure.caption.19}%
+\contentsline {figure}{\numberline {4.7}{\ignorespaces 2D EndOfLine Bipolar Colouring}}{29}{figure.caption.20}%
+\contentsline {figure}{\numberline {4.8}{\ignorespaces Snake Embedding technique between the folding dimension and the new dimension}}{31}{figure.caption.21}%
+\contentsline {figure}{\numberline {4.9}{\ignorespaces Snake Embedding technique between the folding dimension and the new dimension}}{31}{figure.caption.22}%
+\contentsline {figure}{\numberline {4.10}{\ignorespaces Panchromatic edge for 2 dimensions}}{33}{figure.caption.23}%
+\contentsline {figure}{\numberline {4.11}{\ignorespaces \textsc {Tarski} construction}}{39}{figure.caption.24}%
+\contentsline {figure}{\numberline {4.12}{\ignorespaces Equal solution conversion}}{41}{figure.caption.25}%
+\contentsline {figure}{\numberline {4.13}{\ignorespaces Not equal solution}}{41}{figure.caption.26}%
+\contentsfinish 
+\contentsfinish 

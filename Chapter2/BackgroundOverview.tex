@@ -425,6 +425,7 @@ $\forall A \subseteq S^d: |A| \geq d+1$ and satisfies the colouring, $\exists D 
 the colouring condition.
 
 \begin{definitionbox}{\scn{StrongSperner} problem}{strong-sperner}
+    \ref{def:strong-sperner}
     \textbf{Input}: A boolean circuit that computes a bipolar labelling $\lambda: [M]^N \to \{-1, 1\}^N$ \ref{def:bipolar-colouring}
     satisfying the following boundary conditions for every $i \in [N]$:
     \begin{itemize}
@@ -720,10 +721,10 @@ to construct $k$-bit hazard free circuits
     Given circuit $C: \mathbb{T}^n \to \mathbb{T}$, one can construct a $k$-bit hazard free circuit of $C$ denoted as $C'$
     such that:
     \begin{align*}
-        \text{size}(C')\quad & = (\frac{ne}{k})^k (\text{size}(C) + a6) + O(n^{2.71k}) \\
-        \text{depth}(C')\quad & = \text{depth}(C) + 8k + O(k \log n)
+        \textit{size}(C')\quad & = \left(\frac{ne}{k}\right)^k (\textit{size}(C) + 6) + O(n^{2.71k}) \\
+        \textit{depth}(C')\quad & = \textit{depth}(C) + 8k + O(k \log n)
     \end{align*}
-    Where $\text{size}(P)$ denotes the number of gates of $P$ and $\text{depth}(P)$ denotes the longest path from
+    Where $\textit{size}(P)$ denotes the number of gates of $P$ and $\textit{depth}(P)$ denotes the longest path from
     the input bit to the output bit
 \end{corollarybox}
 
