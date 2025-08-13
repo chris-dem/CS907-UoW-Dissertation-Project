@@ -20,8 +20,12 @@
 \contentsline {figure}{\numberline {4.8}{\ignorespaces Snake Embedding technique between the folding dimension and the new dimension}}{31}{figure.caption.21}%
 \contentsline {figure}{\numberline {4.9}{\ignorespaces Snake Embedding technique between the folding dimension and the new dimension}}{31}{figure.caption.22}%
 \contentsline {figure}{\numberline {4.10}{\ignorespaces Panchromatic edge for 2 dimensions}}{33}{figure.caption.23}%
-\contentsline {figure}{\numberline {4.11}{\ignorespaces \textsc {Tarski} construction}}{39}{figure.caption.24}%
-\contentsline {figure}{\numberline {4.12}{\ignorespaces Equal solution conversion}}{41}{figure.caption.25}%
-\contentsline {figure}{\numberline {4.13}{\ignorespaces Not equal solution}}{41}{figure.caption.26}%
+\contentsline {figure}{\numberline {4.11}{\ignorespaces The current table shows how we deal with excess nodes. All other nodes such as sources, sinks, lines or isolated vertices stay the same.}}{34}{figure.caption.24}%
+\contentsline {figure}{\numberline {4.12}{\ignorespaces Colouring example based on the proposed circuit}}{37}{figure.caption.25}%
+\contentsline {figure}{\numberline {4.13}{\ignorespaces Example colouring where the arrow denotes the direction. In between the red and blue cubes in the bottom corners we have the positive line. The brown cubes around denote the negative labels}}{38}{figure.caption.26}%
+\contentsline {figure}{\numberline {4.14}{\ignorespaces Colouring around the double sink points. The colours correspond to the colour legend of \ref {fig:chap-3:3d-counting-ss-simple-line} }}{39}{figure.caption.27}%
+\contentsline {figure}{\numberline {4.15}{\ignorespaces \textsc {Tarski} construction}}{42}{figure.caption.28}%
+\contentsline {figure}{\numberline {4.16}{\ignorespaces Equal solution conversion}}{43}{figure.caption.29}%
+\contentsline {figure}{\numberline {4.17}{\ignorespaces Not equal solution}}{43}{figure.caption.30}%
 \contentsfinish 
 \contentsfinish 
