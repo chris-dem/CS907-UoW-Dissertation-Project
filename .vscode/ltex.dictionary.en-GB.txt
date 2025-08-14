@@ -5,3 +5,5 @@ inapproximability
 EndOfLine
 RLeafD
 PPAD
+PureCircuit
+antipodality
