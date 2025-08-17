@@ -1,12 +1,302 @@
 % !TEX root =  ../Report.tex
 
-\section{Chapter 4}
-\label{sec: Chapter 4}
-\lipsum[4]
-%Here are some subsections so that they will appear on the contents
+\section{Software Deliverable}
+\label{sec:chap-4}
 
-\subsection{Sub Chapter}
-\label{sec: sub chapter in chapter 4}
-\lipsum[5]
+The current project includes a software element, in order to aid with the gadget development.
+We provide three core requirements as enumerated in the following list:
+\begin{enumerate}
+    \item Visualise and instance of a pure circuit and check for correctness.
+    \item Given a \textit{PureCircuit} graph, find a satisfying assignment.
+    \item Given a \textit{PureCircuit} graph, enumerate through all possible assignments.
+\end{enumerate}
+We split these section into the following components:
+Tooling selection and development architecture, Visualisation tooling,
+Solution Finding and Solution Enumeration.
+
+\subsection{Tooling Selection}
+Using figure {..} as reference, we outline the main choice for our tools
+
+\paragraph*{Rust Programming Language} The development language used for is \texttt{Rust}.
+Rust is a systems-level compiled programming language that can achieve high speeds due to
+its low-level compilation, while maintaining memory safety. The key reasons,
+for the specific language of choice is its speed as well as having an advanced
+algebraic type system.
+
+\paragraph*{Bevy and the ECS architecture} \texttt{Bevy} is a \texttt{Rust} library,
+primarily used for game development. It uses the Entity-Component-System architecture
+where entities with varying components exist in world state. Each \textit{entity}
+interacts with each other based on systems. A visual reference is provided in the
+figure \ref{fig:chap-4:ecs-example}. The core
+
+\begin{figure}[h!]
+    \centering
+    \includegraphics[width=0.3\textwidth]{Chapter4/ECS-visualisatoin.png}
+    \caption{ECS visualisation implementation}
+    \label{fig:chap-4:ecs-example}
+\end{figure}
 
 
+This choice offered several pros and cons. From the one hand,
+the current choice offers flexibility when it comes to drawing
+and interacting with shapes on a screen. We wanted to give our
+tool and editor-like vibe where the user can move the screen and individual
+nodes themselves as well as interact with them. On the other hand,
+this library is still in its early stages, which implies limited documentation
+and features. Moreover, as its prioritizes game development, it has a limitation
+when dealing with UI concepts and state management. Ultimately, we chose the tool as
+the UI is simple enough to not hinder the experience of the tool.
+
+\paragraph*{Software Testing methodology}
+The core philosophy of our testing is Test-Driven-Development. This methodology
+was used to develop and validate our critical parts of our code, such as graph validation
+or solution enumeration. The main idea of this development is to first write the unit test,
+and then develop the code to resolve them. This allows us for the code to be self-documenting
+as well as ensuring that we are acting within the expected scope.
+
+
+Another testing technique that we heavily took advantage of is \textit{Property-based Testing},
+which we implement using the \texttt{Proptest} library \footnote{https://github.com/proptest-rs/proptest}.
+This idea was inspired by the \texttt{Haskell} library \texttt{QuickCheck}  \cite{claessen_QuickCheckLightweightTool_2000},
+where we test the properties of a pure function across a range of inputs. The idea is, the more complex,
+the input of the function, the greater is the input space and therefore harder and cumbersome to check all possible
+combinations or edge-cases. With \texttt{Proptest}, we check whether a property of our function is
+maintained across all possible inputs, such as a sorted output, or a validating assignment.
+It works by testing our function, across a series of possible inputs. If a failed condition
+is raised, then it uses \textit{Shrinking} strategies in order to find the smallest assignment that fails
+the test. %% TODO: Consider adding a figure
+
+
+\subsection{Program Visualisation Summary}
+
+The program is composed of a mini UI legend that captures the state and a drawing board.
+Contains functionalities as to the current state of the program and the controls to navigate
+and operate. Moreover is contains buttons that find solutions
+or enumerate through a set of solutions.
+
+
+%TODO ADD figure
+The controls are summarised as follows. We have two main states, which we denote as node state and operation state.
+The operation state, determines whether we are adding an edge or a node and the node state determines the type of node that we are adding.
+We also provide operations to move nodes around or move the whole canvas around. When in edge mode, we can
+click a node to add an edge between to non-homogeneous nodes, where the order implies the direction of the edge.
+Moreover, every time you click on a node, you modify its value, so for example for value nodes or for gate nodes you can cycle through
+its different types by clicking on them. For each gate, we colour-coded its status, so for example if a gate has an invalid arity,
+then its surrounded by a pink circle or if it has an invalid assignment then its coloured red.
+
+For the main algorithms, we provide two metaheuristic algorithms for finding solutions or approximate solutions, using
+either evolutionary algorithms or hill climbing search. Moreover for solution enumeration,
+we are using a modified backtracking algorithm, which upon execution
+returns a list of solutions. We are limiting the algorithm to at most 20 value nodes
+in order to keep the computational expenses low. Each time we modify the stucture of the circuit, we reset the solution set.
+We emphasize that these buttons are disabled if the circuit contains any invalid arities.
+
+
+
+
+\subsection{Solution Selection}
+
+For the solution selection, with the help of the 
+
+
+\subsection{Solution Enumeration}
+
+To enumerate through solutions, we employed a traditional backtracking algorithm. We
+split our algorithm to two main procedures:
+\textbf{Backtrack Initialisation} and \textbf{Backtrack Solution Enumerator}.
+
+
+
+\begin{breakablealgorithm}[h!]
+    \caption{PureCircuit Backtracking Algorithm Enumerator}
+    \begin{algorithmic}
+        \Function{BacktrackInstatiation}{pc}
+        \State $V \leftarrow \textit{PCExtract}(pc)$
+        \State $S \leftarrow \textit{Map}(V, \texttt{KleeneSet::all}())$
+        \Comment {Create a state vector that contains the \textit{KleeneSet} data-structure.}
+        \State $Q \leftarrow$ \Call{PriorityQueueInit}{()}
+        \For{$\textit{el} \in V$}
+        \State \Call{PushPQ}{Q, \texttt{el.indesx}, \Call{KeyStruct}(3, el)}
+        \EndFor
+        \State \Return $S, Q$
+        \EndFunction
+
+        \Function{BacktrackPureCircuit}{pc \texttt{:PureCircuit}}
+        \State $S, Q \leftarrow$ \Call{BacktrackInstatiation}{pc}
+        \State $A \leftarrow$ \Call{Arr}{$|V|, \emptyset$}
+        \State $r \leftarrow$ \Call{BacktrackIteration}{$\text{pc}, A, S, Q$}
+        \State \Return $r$
+        \EndFunction
+
+        \Function{BacktrackIteration}{$\text{pc}, A, S, Q$}
+        \If{\Call{IsEmpty}{$Q$}}
+        \State \Return $[A]$
+        \EndIf
+        \State $m \leftarrow$ \Call{ExtractMin}{$Q$}
+        \State $r \leftarrow []$
+        \For{$v \in S[m]$}
+        \State $S' \leftarrow$ \Call{Clone}{$S$}
+        \State $Q' \leftarrow$ \Call{Clone}{$Q$}
+        \State $\textit{result} \leftarrow$\Call{UnitPropagate}{$\text{pc}, m, v, A, S', Q'$}
+        \If{$\textit{result} = \bot$}
+        \State \textbf{Continue}
+        \EndIf
+        \State $r' \leftarrow$\Call{BacktrackIteration}{$\text{pc}, A, S', Q'$}
+        \State $r \leftarrow$ \Call{ConcatArray}{$r, r'$}
+        \EndFor
+        \State \Return $r$
+        \EndFunction
+
+        \Function{UnitPropagation}{$\text{pc},m , v, A, S, Q$}
+        \State \Call{AssignNode}{}
+        \State \Call{PropagateNode}{}
+        \While{\texttt{Q.is\_empty()}$\wedge$\texttt{Q.peek().key.value\_len}$=1$}
+        \State $\text{ind} \leftarrow$\Call{Pop}{$Q$}
+        \State $v \leftarrow$\Call{Pop}{$S[\text{ind}]$}
+        \State \Call{AssignNode}{}
+        \State \Call{PropagateNode}{}
+        \EndWhile
+        \If {\texttt{Q.is\_empty}()}
+        \State \Return $\top$
+        \EndIf
+        \If {\texttt{Q.peek.key.value\_len}$=0$}
+        \State \Return $\bot$
+        \EndIf
+        \State \Return $\top$
+        \EndFunction
+
+        \Function{PropagateNode}{\texttt{pc, m , A, S, Q}}
+        \For{$g \in$ \Call{GetAllGateNeighbours}{pc, m}}
+        \State $I \leftarrow$ \Call{GetValueSets}{\texttt{Input}}
+        \State $O \leftarrow$ \Call{GetValueSets}{\texttt{Output}}
+        \State $(I', O') \leftarrow$ \Call{EvaluateSets}{$g, I, O$}
+        \State \Call{PropagateSetValues}{$Q,S, I', I$}
+        \State \Call{PropagateSetValues}{$Q,S, O', O$}
+        \EndFor
+        \EndFunction
+    \end{algorithmic}
+\end{breakablealgorithm}
+
+
+
+
+\paragraph*{Backtrack Initialisation} We initialise two main structures,
+a priority queue $Q$, and a solution map $S$ for each node.
+$S$ is the a set of possible values a node can take.
+The priority queue will essentially dictate
+which nodes to select and evaluate.
+We want to reduce the recursive calls as much as possible and eliminate any partial assignments
+that lead to unsatisfying solutions.
+stores the node references of the value nodes
+and uses as keys the structure \texttt{KeyStruct}$(e)$.
+The \texttt{KeyStruct} is a structrue that orders elements lexicographically
+based on the following order:
+\begin{enumerate}
+    \item \textbf{In descending}: The number of remaining elements
+    \item \textbf{In Ascending}: Whether the node has an \textit{in-degree} of $0$
+    \item \textbf{In Ascending}: The total number of neighbours
+\end{enumerate}
+We argue that the above strategy minimises the recursive calls breadth. Moreover,
+nodes with \textit{in-degree} of $0$ as for each value of their assignment, a solution should exist.
+Lastly, prioritising nodes with the highest neighbour count implies that we
+propagate changes to many gates and therefore prioritise the \textit{Unit Appplication}
+procedure.
+
+\paragraph*{Unit Propagation operation}
+The algorithm
+essentially, assigns the selected value to a node
+by modifying to the solution set and the value set.
+Then for each gate that is incident to the node apply the \textit{Set simplification}
+operation. While the top element of the queue
+has one possible solution, extract the solution and repeart the \textit{unit value propagation operation}
+until the queue is empty or the cardinality of the value set at the head of the priority queue
+is different than $1$. If it's zero then
+current assingment is not valid and we return false, otherwise we return true.
+
+
+\paragraph*{Set simplification operation}
+Given a gate, we have a set of possible values for each of our nodes,
+as determined by our value set. The idea is
+that we want to reduce the set possible values by following the rules of the gate.
+For example, we an \textbf{AND} gate with triplet of values $(\{0,\bot,1\}, \{0,\bot,1\}, \{0,\bot,1\})$.
+If the output value is assigned the value $1$, then we know that the inputs can only take values
+$(1,1)$ and therefore we restrict the values of the input sets to $\{1\}, \{1\}$.
+If the current solution set of a node is $v_t$, then its updated set is
+$v_{t+1} \leftarrow v_t \cap \omega$, where $\omega$ are the set of values denoted
+by the simplification operation. We provide the rules of \textbf{AND} and \textbf{OR}
+work and in the appendix we provide the full table. %TODO Dont forget this
+If a value is not assigned, we denote it as $\cdot$.
+
+
+\begin{table}[h!]
+    \centering
+    \begin{tabular}{|c|c|}
+        \hline
+        \rowcolor[HTML]{EAE1E1}
+        {\color[HTML]{333333} \textbf{AND input}}                  & {\color[HTML]{333333} \textbf{Output sets}}                                                  \\ \hline
+        $\forall v \in \mathbb{T}: (\cdot, \cdot, v)$              & $(\mathbb{T}_{\geq v},\mathbb{T}_{\geq v}, \{v\} )$                                          \\ \hline
+        $\forall v \in \mathbb{T}: (\cdot, v, \cdot)$              & $(\mathbb{T}, \{v\}, \mathbb{T}_{\leq v})$                                                   \\ \hline
+        $\forall a,b \in \mathbb{T}: a < b \implies (\cdot, a, b)$ & Invalid combination                                                                          \\ \hline
+        $\forall v \in \mathbb{T}: (\cdot, v, v)$                  & $(\mathbb{T}_{\geq v}, \{v\}, \{v\})$                                                        \\ \hline
+        $\forall a,b \in \mathbb{T}:a > b \implies (\cdot, a, b)$  & $(\{b\}, \{a\}, \{b\})$                                                                      \\ \hline
+        $\forall a,b \in \mathbb{T}: (a, b, \cdot)$                & $(\{a\}, \{b\}, \{\min(a,b) \})$                                                             \\ \hline
+        $\forall a,b,c \in \mathbb{T}:  (a, b, c)$                 & $(\{a\}, \{b\}, \{c \})$, only if the triplet $(a,b,c)$ is a correct \textbf{AND} assignment \\ \hline
+    \end{tabular}
+    \caption{\textbf{AND} value propagation rules}
+    \label{tab:chap-4:and-propagation}
+\end{table}
+
+\begin{table}[h!]
+    \centering
+    \begin{tabular}{|c|c|}
+        \hline
+        \rowcolor[HTML]{EAE1E1}
+        {\color[HTML]{333333} \textbf{OR input}}          & {\color[HTML]{333333} \textbf{Output sets}}                                                 \\ \hline
+        $\forall v \in \mathbb{T}: (\cdot, \cdot, v)$     & $(\mathbb{T}_{\leq v},\mathbb{T}_{\leq v}, \{v\} )$                                         \\ \hline
+        $\forall v \in \mathbb{T}: (\cdot, v, \cdot)$     & $(\mathbb{T}, \{v\}, \mathbb{T}_{\geq v})$                                                  \\ \hline
+        $\forall a,b \in \mathbb{T}: a < b (\cdot, a, b)$ & $(\{b\}, \{a\}, \{b\})$                                                                     \\ \hline
+        $\forall v \in \mathbb{T}: (\cdot, v, v)$         & $(\mathbb{T}_{\leq v}, \{v\}, \{v\})$                                                       \\ \hline
+        $\forall a,b \in \mathbb{T}:a > b (\cdot, a, b)$  & Invalid combination                                                                         \\ \hline
+        $\forall a,b \in \mathbb{T}:a > b (a, b, \cdot)$  & $(\{a\}, \{b\}, \{\max(a,b) \})$                                                            \\ \hline
+        $\forall a,b,c \in \mathbb{T}:  (a, b, c)$        & $(\{a\}, \{b\}, \{c \})$, only if the triplet $(a,b,c)$ is a correct \textbf{OR} assignment \\ \hline
+    \end{tabular}
+    \caption{\textbf{OR} value propagation rules}
+    \label{tab:chap-4:or-propagation}
+\end{table}
+
+
+
+
+\paragraph*{Backtrack Operation}
+The \textit{backtrack} operation is summarised in 3 key steps.
+If the priority queue is empty then we found a satisfying assignment.
+Otherwise, pick a node from the priority queue. For each value in its set,
+create a copy of the current queue, current solution assingment and value set state
+and apply the \textit{Unit value propagation} operation. After that create a recursive call
+apply the \textit{backtrack opertation} again until the current recursion chain
+terminates with a solution or rejects.
+At the tree of every execution call, merge the solution assignments in each level and return
+the sets.
+
+
+\subsubsection{Correctness and Running Time analysis}
+
+For the running time analysis, we can observe that each time we assign a node,
+the unit propagation operation, resticts the solution set of the value nodes that are incident
+by one gate. Even in the worst case scenario where no reduction occurs, we can clearly
+see that each time, our priority queue will select a node and will recurse through each of each possible values,
+creating a call tree with depth of at most $n$. Therefore we can argue even if the running time of the algorithm
+is $O(3^n)$, we can observe that the unit propagation and set reduction methods reduce the width and depth greately.
+
+
+As for correctness, the algorithm essentially picks nodes in a certain order and selects a
+value that we believe that will give a satisfying assignment. We only have to look
+at what happens at the \textit{unit propagation} stage. We can observe that in each stage, 
+we are essentially limiting the set of solutions to only the ones
+that will give a satisfying assignment. If the value set of a node is zero, it means that no assignment
+will lead to a solutin and therefore we reject the current path.
+If no nodes are left in the queue, that means that all value nodes are assigned and therefore we can return the current assignment.
+This implies that our resulting array of assignments contains only valid solutions. 
+A 
+
+\subsection{Future Extensions}
