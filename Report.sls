@@ -2,24 +2,24 @@
 \begin{theglossary}\glossaryheader
 \glsgroupheading{glsnumbers}\relax \glsresetentrylist %
 \glossentry{n_list}{\glossaryentrynumbers{\relax 
-		\setentrycounter[]{page}\glsnumberformat{ix}}}%
+		\setentrycounter[]{page}\glsnumberformat{xi}}}%
 \glossentry{nz_list}{\glossaryentrynumbers{\relax 
-		\setentrycounter[]{page}\glsnumberformat{ix}}}%
+		\setentrycounter[]{page}\glsnumberformat{xi}}}%
 \glossentry{nat_nums}{\glossaryentrynumbers{\relax 
-		\setentrycounter[]{page}\glsnumberformat{ix}}}%
+		\setentrycounter[]{page}\glsnumberformat{xi}}}%
 \glossentry{natz_nums}{\glossaryentrynumbers{\relax 
-		\setentrycounter[]{page}\glsnumberformat{ix}}}%
+		\setentrycounter[]{page}\glsnumberformat{xi}}}%
 \glossentry{poly-sized}{\glossaryentrynumbers{\relax 
-		\setentrycounter[]{page}\glsnumberformat{ix}}}%
+		\setentrycounter[]{page}\glsnumberformat{xi}}}%
 \glossentry{not-index}{\glossaryentrynumbers{\relax 
-		\setentrycounter[]{page}\glsnumberformat{ix}}}%
+		\setentrycounter[]{page}\glsnumberformat{xi}}}%
 \glossentry{not-replace}{\glossaryentrynumbers{\relax 
-		\setentrycounter[]{page}\glsnumberformat{ix}}}%
+		\setentrycounter[]{page}\glsnumberformat{xi}}}%
 \glossentry{item-selection}{\glossaryentrynumbers{\relax 
-		\setentrycounter[]{page}\glsnumberformat{ix}}}%
+		\setentrycounter[]{page}\glsnumberformat{xi}}}%
 \glossentry{binary-set}{\glossaryentrynumbers{\relax 
-		\setentrycounter[]{page}\glsnumberformat{ix}}}%
+		\setentrycounter[]{page}\glsnumberformat{xi}}}%
 \glossentry{kleene-set}{\glossaryentrynumbers{\relax 
-		\setentrycounter[]{page}\glsnumberformat{ix}\delimN 
+		\setentrycounter[]{page}\glsnumberformat{xi}\delimN 
 		\setentrycounter[]{page}\glsnumberformat{25}}}%
 \end{theglossary}\glossarypostamble

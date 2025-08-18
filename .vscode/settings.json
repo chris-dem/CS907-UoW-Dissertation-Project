@@ -9,26 +9,63 @@
     "**/*.bbl": true,
     "**/*.blg": true,
     "**/*.out": true,
+    "**/*.fls": true,
+    "**/*.fdb_latexmk": true,
+    "**/*.synctex.gz": true,
+    "**/*.log": true,
+    "**/*.toc": true,
+    "**/*.lof": true,
+    "**/*.lot": true,
+    "**/*.gz": true,
     "**/.DS_Store": true,
     "**/Thumbs.db": true
   },
   "latex-workshop.latex.tools": [
     {
-      "name": "latexmk (glossaries)",
+      "name": "latexmk with shell-escape",
       "command": "latexmk",
-      "args": ["-pdf", "-interaction=nonstopmode", "-shell-escape", "-synctex=1", "%DOC%"]
+      "args": ["-pdf", "-interaction=nonstopmode", "-shell-escape", "-synctex=1", "-file-line-error", "-halt-on-error", "%DOC%"]
+    },
+    {
+      "name": "pdflatex",
+      "command": "pdflatex",
+      "args": ["-interaction=nonstopmode", "-file-line-error", "-synctex=1", "%DOC%"]
+    },
+    {
+      "name": "bibtex",
+      "command": "bibtex",
+      "args": ["%DOCFILE%"]
     },
     {
       "name": "makeglossaries",
       "command": "makeglossaries",
       "args": ["%DOCFILE%"]
+    },
+    {
+      "name": "makeindex",
+      "command": "makeindex",
+      "args": ["%DOCFILE%.idx"]
     }
   ],
-
   "latex-workshop.latex.recipes": [
     {
+      "name": "latexmk with shell-escape",
+      "tools": ["latexmk with shell-escape"]
+    },
+    {
+      "name": "pdflatex → bibtex → pdflatex × 2",
+      "tools": ["pdflatex", "bibtex", "pdflatex", "pdflatex"]
+    },
+    {
       "name": "latexmk with glossaries",
-      "tools": ["latexmk (glossaries)", "makeglossaries", "latexmk (glossaries)"]
+      "tools": ["latexmk", "makeglossaries", "latexmk"]
+    },
+    {
+      "name": "Complete build (bib + glossaries)",
+      "tools": ["pdflatex", "bibtex", "makeglossaries", "pdflatex", "pdflatex"]
     }
-  ]
+  ],
+  "latex-workshop.latex.clean.fileTypes": ["*.aux", "*.bbl", "*.blg", "*.idx", "*.ind", "*.lof", "*.lot", "*.out", "*.toc", "*.acn", "*.acr", "*.alg", "*.glg", "*.glo", "*.gls", "*.ist", "*.fls", "*.log", "*.fdb_latexmk", "*.synctex.gz"],
+  "latex-workshop.latex.autoClean.run": "onBuilt",
+  "latex-workshop.view.pdf.viewer": "tab"
 }

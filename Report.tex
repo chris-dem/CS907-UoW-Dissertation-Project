@@ -19,7 +19,7 @@
 
 
 % \documentclass[pdftex,10pt,a4paper,oneside]{article}
-\documentclass[pdftex,10pt,a4paper,oneside]{assignment}
+\documentclass[pdftex,10pt,a4paper]{assignment}
 %Can change the pt, papersize etc.
 
 \usepackage{amsmath} %For both in-line and equation mode
@@ -49,7 +49,7 @@
 \usepackage{textcomp}
 \usepackage[table,xcdraw]{xcolor}
 \usepackage{tikz}
-\usepackage[inner=2.5cm,outer=1.5cm,bottom=2cm]{geometry}
+\usepackage[left=1.5cm,right=1.5cm,bottom=2cm,top=2cm]{geometry}
 \usepackage[symbols]{glossaries}
 \usepackage{subcaption}
 
@@ -130,9 +130,11 @@
 \clearpage
 
 \include{Preamble/ChapterMods}
+\chapter{Introduction}
 \include{Chapter1/Introduction}
 \include{Chapter2/BackgroundOverview}
 
+\chapter{Main findings}
 
 \include{Chapter3/MainProgress}
 \include{Chapter4/Chapter4}

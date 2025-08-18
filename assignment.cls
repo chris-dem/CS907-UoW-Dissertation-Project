@@ -2,7 +2,7 @@
 \NeedsTeXFormat{LaTeX2e}
 \ProvidesClass{assignment}[a latex class for editing your assignment]
 
-\LoadClass[a4paper, fleqn, 10pt]{article}
+\LoadClass[a4paper, fleqn, 10pt, oneside]{book}
 
 \RequirePackage[UKenglish]{babel}
 \RequirePackage[UKenglish]{isodate}
