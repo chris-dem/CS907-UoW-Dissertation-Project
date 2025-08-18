@@ -114,7 +114,6 @@
 \begin{document}
 
 
-\glsaddall
 
 \include{Preamble/Frontpage}
 \include{Preamble/Abstract}
@@ -125,8 +124,9 @@
 \include{Preamble/Contents}
 \include{Preamble/Lists}
 
+\glsaddall
 \MakeLinkTarget*{symbol}%
-\addcontentsline{toc}{section}{List of Symbols}\printglossary[type=symbols, title={List of Symbols}, style=list,nonumberlist]
+\addcontentsline{toc}{section}{List of Notations}\printglossary[type=symbols, title={List of Symbols}, style=list,nonumberlist]
 \clearpage
 
 \include{Preamble/ChapterMods}

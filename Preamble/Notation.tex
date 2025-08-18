@@ -1,45 +1,85 @@
 \newglossaryentry{n_list}{
     name={\ensuremath{[n]}},
     description={List of numbers ${1,..., n}$},
-    type=symbols
+    type=symbols,
+    sort={000}
 }
 
-
-\newglossaryentry{natz_nums}{
-    name={\ensuremath{\mathbb{N}_0}},
-    description={Natural numbers including $0$},
-    type=symbols
-}
 
 \newglossaryentry{nz_list}{
     name={\ensuremath{[n]_0}},
     description={Defined as $[n] \cup \{0\}$},
-    type=symbols
+    type=symbols,
+    sort={001}
+    % sort=01,
 }
 
 \newglossaryentry{nat_nums}{
     name={\ensuremath{\mathbb{N}}},
     description={Set of natural numbers excluding $0$},
-    type=symbols
+    type=symbols,
+    sort={010}
+    % sort=10,
+}
+
+\newglossaryentry{natz_nums}{
+    name={\ensuremath{\mathbb{N}_0}},
+    description={Natural numbers including $0$},
+    type=symbols,
+    sort={011}
+    % sort=11,
 }
 
 \newglossaryentry{poly-sized}{
     name={\ensuremath{n^{O(1)}}},
     description={Set of all functions $f: \mathbb{N} \to \mathbb{N}$, where $f \in O(n^c)$ for some $c \in \mathbb{N}$},
-    type=symbols
+    type=symbols,
+    sort={020}
+}
+
+\newglossaryentry{not-index}{
+    name={\ensuremath{x_{-i}}},
+    description={Given $x \in A^d$, we use $x_{-i}$ to denote all members excluding index $i$},
+    type=symbols,
+    sort={021}
+}
+
+
+
+\newglossaryentry{item-selection}{
+    name={\ensuremath{[x]_j}},
+    description={Given $x \in A^d$ for some $j \in [d]$, we have $[x]_j = x_j$},
+    type=symbols,
+    sort={0220}
 }
 
 \newglossaryentry{not-replace}{
-    name={\ensuremath{x_{-i}, x_{-i}(a)}},
-    description={Given $x \in A^d$, we use $x_{-i}$ to denote all members excluding index $i$. To show that we replace the index $i$ with $y$, we say $x_{-i}(a)$},
-    type=symbols
+name={\ensuremath{x_{-i}(e) \equiv x(x_{-i}, e)}},
+description={Given $x \in A^d$, we denote $x_{-i}(e)$ or $x(x_{-i}, e)$ to indicate $n$ dimensional vector, where
+$$
+    \forall j \in [n]: [x_{-i}(e)]_j =  [x(x_{-i}, e)]_j = \begin{cases}
+        e   & \text{if } j = i \\
+        x_i & \text{otherwise}
+    \end{cases}
+$$
+Will be used to indicate element replacement},
+type=symbols,
+sort={0211}
 }
 
 
+\newglossaryentry{binary-set}{
+    name={\ensuremath{\mathbb{B}}},
+    description={The binary set $\{0,1\}$},
+    type=symbols,
+    sort={0221}
+}
+
 \newglossaryentry{kleene-set}{
     name={\ensuremath{\mathbb{T}}},
-    description={Defines the set $\{0,1, \bot\}$ which depicts the kleene algebra.},
-    type=symbols
+    description={Defines the set $\{0,1, \bot\}$ which depicts the kleene algebra},
+    type=symbols,
+    sort={0222}
 }
 
 

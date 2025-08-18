@@ -1,7 +1,7 @@
 % !TEX root =  ../Report.tex
 
 \section{Introduction}
-\label{sec:Introduction} 
+\label{sec:Introduction}
 
 
 Combinatorics is a field of study in mathematics that primarily focuses on
@@ -9,24 +9,70 @@ the notion of counting objects with certain properties. Over time, this notion
 has shifted, especially in the subfield of algebraic combinatorics, where
 there is no clear notion of the object that we are counting,
 and the numbers express something more abstract \cite{pak_WhatCombinatorialInterpretation_2022}.
+To understand this notion, we provide an example from Igor Pak \cite{pak_WhatCombinatorialInterpretation_2022}:
+Assume that $f(G)$ counts the number of 3-colourings of a graph $G$. Now one can,
+ask the question: does the functon $h(G) \triangleq f(G)/ 6$ also count something?
+The answer is yes as proved by \cite{pak_WhatCombinatorialInterpretation_2022} and the idea is,
+is that for every colouring $\chi$, we can compute $3!$ additional colourings since
+we can permute the colours we assigned.
+We observe that we are able the function to some set of objects that we are able to
+count over.
+
+But not all non-negative functions have such a clear interpretation.
+We use an example by Ikenmeyer et al. \cite{ikenmeyer_WhatWhatNot_2022}.
+We recall a specifica variant \textit{Pigeonhole principle}, where
+given a circuit $C:\{0,1\}^n \to \{0,1\}$, find $x = 0^n$
+or distinct $x,y \in \{0,1\}^n$ such that $C(x)=C(y)$ and $C(C(x)) \neq 0$.
+What the problem essentially counts is that $C$ essentially maps
+$\{0,1\}^n \to \{0,1\}^n \smallsetminus \{0^n\}$.
+Every point that is mapped to $0^n$ is considered a violation.
+The problem counts every pair of points that is mapped to the same bin
+or to a point that is a violation. We add the restriction
+of $C(C(x)) \neq 0$ to avoid double counting. We can clearly observe that, if $e(C)$
+counts the number of solutions, $e(C) \geq 1$  since we either have a violation
+or there exists at least one pair of points that is mapped to the same bin.
+So now we can ask the question: does $e'(C) \doteq e(C) -1$ also 
+have a set of object which we can enumerated over?
+Ikenmeyer et al. \cite{ikenmeyer_WhatWhatNot_2022} demonstrated that
+this problem does not have a combinatorial interpretation.
+But how does determine whether a function has this
+combinatorial interpretation?
+
 In recent years, there has been a revolutionary
-initiative in the field of combinatronics to assign combinatorial interpretations to such numbers.
-Being able to find such definitions or interpretations is crucial,
+initiative in the field of combinatronics to assign combinatorial interpretations to such numbers. 
+In fact, being able find such definitions or interpretations is crucial,
 as it allows us to utilise tools from enumerative combinatorics to understand
-and reveal hidden structures and properties \cite{pak_WhatCombinatorialInterpretation_2022}. 
+and reveal hidden structures and properties \cite{pak_WhatCombinatorialInterpretation_2022,ikenmeyer_WhatWhatNot_2022}.
 Moreover, there are several problems or numbers, such as \textit{Kronecker coefficients} \cite{makar_AnalysisKroneckerProduct_1949},
 whose combinatorial interpretation could lead to groundbreaking breakthroughs, such as a step closer to the resolution of the $\textit{P} \neq \textit{NP}$
 conjecture \cite{ikenmeyer_WhatWhatNot_2022, ikenmeyer_VanishingKroneckerCoefficients_2017}.
 
 
-% To formalise that idea, Pak et al. has argued that if a function $f$
-% belongs to $\textit{\#P}$, it implies that $f$ has a combinatorial interpretation
-% \cite{pak_WhatCombinatorialInterpretation_2022, ikenmeyer_WhatWhatNot_2022}. We invest
 In our current work, we focus on extending the work done by
 Ikenmeyer et al. \cite{ikenmeyer_WhatWhatNot_2022}, where they focused on the creation of frameworks
-that determine whether $f \in^? \textsc{\#P}$, by looking
-at the subclasses of $\textsc{\#TFNP - 1}$ problems.
-In our work we focus specifically on the complexity class of $\textsc{PPAD}$, under the lens of $\text{PureCircuit}$,
-due to its circuit-based nature.
-We aspire to uncover many insights of the $\textsc{\#PureCircuit} -1$ problem 
-and explore the boundaries of $\textsc{\#PPAD} -1$.
+that determine whether $f \in^? \textbf{\#P}$, by looking
+at the subclasses of $\textbf{\#TFNP}-1$ problems, a class of problems
+whose combinatorial nature guarantee the existence of a solution.
+More specifically, we look into the \textbf{PPAD} class which 
+seems to have several problems where under decrementation,
+may or may not have a combinatorial interpretation.
+To accomplish this task,
+we studied \textit{PureCircuit}
+which was created by Deligkas et al. \cite{deligkas_PureCircuitTightInapproximability_2024},
+as we hope its \textbf{PPAD}-completeness and circuit-like nature may give us
+useful insights to the counting complexity of $\textbf{PPAD}-1$.
+
+
+We will now give an extensive introduction to the literature and the related problems 
+and then offer formal and precise objectives that capture our goal.
+We will then go over the main results of our theory research with the conjectures and possible
+directions that we uncovered. Morevover, we will give an overview of the visualisation software
+we developed to verify our theoretical results and give an overview of its capabilities and limitations.
+Lastly we will give brief analysis of our project management, the lessons we learnt
+and a conclusion that summarises our project as a whole.
+
+
+% In our work we focus specifically on the complexity class of $\textsc{PPAD}$, under the lens of $\text{PureCircuit}$,
+% due to its circuit-based nature.
+% We aspire to uncover many insights of the $\textsc{\#PureCircuit} -1$ problem
+% and explore the boundaries of $\textsc{\#PPAD} -1$.
