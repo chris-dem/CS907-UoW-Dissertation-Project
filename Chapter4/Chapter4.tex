@@ -96,7 +96,74 @@ We emphasize that these buttons are disabled if the circuit contains any invalid
 
 \subsection{Solution Selection}
 
-For the solution selection, with the help of the 
+For the solution selection we opted with metaheuristic algorithms. Since these problems are conventionally hard
+to find solutions especially as the number of nodes increase, we focused on the idea of approximation
+algorithms such in order to find mostly satisfying assingments in large graphs or gadgets.
+With the help of the \texttt{genetic\_algorithm}\footnote{https://crates.io/crates/genetic\_algorithm}  library,
+we use he \textit{HillClimbing algorithm} and \textit{Evolutionary algorithm}  in order
+to find solutions. We will give a brief explanation on how they work in the upcoming sections but in general
+we express our graph as a chromosone of \textit{Value} nodes which correspond to nodes in the original graph.
+Moreover we formulate our problem as series of gates with references to the location of their
+incident value nodes and we count the of unsatisfying gates. The goal of either algorithm
+is to minimise the number of errors. Once an assingment is found,
+we pass the solutions back into our graph and display them.
+
+
+\subsubsection{Hill Climbing Algorithm}
+
+The idea of hill climbing algorithms is to start by some base solution
+and repeatedly improve the solution. We allow for $2$ strategies, one
+of them strictly always chooses the best neighobur whereas one
+allows for stochastic choice. Moreover we allow for additional option
+such as multiple re-rurns in order to incaese the odds of finding
+a successful assignment.
+
+
+Overall this algorihtm, although it runs the fastest out of all the others, it
+may significantly struggle against large graphs or instances
+that multiple changes need to occur in order to reach an optimal point.
+Future ideas can adopt \textit{Simulating annealing} which %% TODO add refernce
+which is a metaheuristic algorithm, where at the start of our run,
+we allow for a greater variance in our choices and as we progress, we become
+stricter and stricter with the next neighbour choice.
+
+\subsubsection{Evolutionary Algorithm}
+
+Evolutionary algorithms as the names suggests are based of the
+idea of evolution. 
+%% TODO: Add reference as to how they started
+A simulation step of an evolutionary algorithm can be summarised in figure {..}, 
+where we essentialy have 5 core elements:
+\begin{enumerate}
+    \item \textbf{Chromosones}: Solution assignments of our \textit{PureCircuit} instance
+    \item \textbf{Fitness step}: Evaluation step. We measure how good the assingment is
+    by counting the number of errors it has.
+    \item \textbf{Selection step}: Given a selection strategy, select
+    suitable canditates in order to create the population for the next step.
+    In literature, there are many types that one can use %% TODO add reference please
+    such as \textit{Roulette based} selection, or \textit{Tournament based} selection. 
+    We leave several choices available for the user to choose.
+    \item \textbf{Crossover step}: Given two chromosones from the
+    \textbf{Selection step}, combine the genes from each parent, in order
+    to create a new instance.
+    \item \textbf{Mutation step}: Given the offspring of the
+    \textbf{Crossover step}, stochastially modify each gene in
+    order to introduce diversity.
+\end{enumerate}
+
+The repetition of the steps eventually converges to an assignment that is satisfying.
+The benefits of these methods over our own personal experimentations is that
+it seems to scale significantly well. As we aim for the tool to be usable
+for many sitautions, we allow for the user to tune the parameters and stategies to their needs
+in order to adapt to each solution.
+Moreover, we use speciation techniques were sepearate our chromosones
+to different species in order to maintain diversity and increase
+the odds of finding a solution.
+
+%%TODO: RECORD STUFF
+
+
+
 
 
 \subsection{Solution Enumeration}
@@ -291,12 +358,56 @@ is $O(3^n)$, we can observe that the unit propagation and set reduction methods 
 
 As for correctness, the algorithm essentially picks nodes in a certain order and selects a
 value that we believe that will give a satisfying assignment. We only have to look
-at what happens at the \textit{unit propagation} stage. We can observe that in each stage, 
+at what happens at the \textit{unit propagation} stage. We can observe that in each stage,
 we are essentially limiting the set of solutions to only the ones
 that will give a satisfying assignment. If the value set of a node is zero, it means that no assignment
 will lead to a solutin and therefore we reject the current path.
 If no nodes are left in the queue, that means that all value nodes are assigned and therefore we can return the current assignment.
-This implies that our resulting array of assignments contains only valid solutions. 
-A 
+This implies that our resulting array of assignments contains only valid solutions.
+A
 
 \subsection{Future Extensions}
+
+
+\subsubsection{Algorithmic Extensions}
+Although the aforementioned algorithms work as expected, there are several improvements that can be made.
+For all three of the algoritmic methods we mentioned, the first and most important extension
+is to treat weakly directly connected components individaully. Trivially an assignment in one
+weakly connected component should not affect the solution set of the other one. 
+We can therefore reduce the solution spaces of our problems by finding
+the solution sets in each graph seperately. Moreover for the 
+\textit{backtracking} algorithm, we can extend the above idea by considering
+the cartesian product of the solution sets, meaning: 
+let $G_i$ denote a (weakly) connected component of $G$ and $\textbf{sol}(\cdot)$
+denotes its solution set. Its trivial to observe that
+$$
+\textbf{sol}(G) = \bigtimes_{k \in [k]}  \textbf{sol}(G_k)
+$$
+
+We can also optimise the Backtracking algorithm even further.
+First one can observe that if our graph was acyclic, then
+the permutation of the nodes with no \textit{in-degree} solutions essentially
+dictate the assignments of the downstream nodes (excluding nodes incident
+to purify gates). With this in mind, we can apply the following sequence
+of steps to make the backtracking algorithm simpler:
+\begin{enumerate}
+    \item Identify the strongly connected components of the circuit, using polynomial
+    time algorithms such as Kosaraju's Algorithm or Gabow's Algorithm. %%TODO: ADD citations
+    \item Treating SCCs as an individual node, identify nodes by their distances from 
+    base nodes (nodes with no incoming edges)
+    \item Extend the backtracking algorithm so instead of the using the is start label,
+    use the distance from base instead. 
+\end{enumerate}
+
+We argue that the above heuristic may result in improved average times but of course
+further research can be done in order to determine more suitable selection heuristics.
+Lastly an additional heuristic that we failed to consider is using the notion
+of alternation or varying paths as highlighted in {..}. % TODO add references
+Essetnialy by continuously "propagating" the gate values, 
+one may be able to identify nodes that tent to alternate. This method
+was used to identify nodes that should be assingend with the $\bot$ value.
+It has to be noted that it may not be entirely clear how such construction
+could be applied as the purify gate has a non-deterministic output, meaning
+for the $\bot$ value, the outputs could be multiple. This is the reason
+why we also don't necesserily propagat solution sets and instead only values as
+it may lead to infinite loops.
