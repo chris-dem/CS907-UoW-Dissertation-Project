@@ -1,86 +1,26 @@
 The current section focuses on how we can extend our reductions
 to \textit{SourceOrExcess}. In the previous sections,
 we gave an overview on how we can go from an \textit{EndOfLine} problem
-to a topological problem. In the current section, we show how we can extend the idea
-for the \textit{SourceOrExcess} problem. We hope by parsimoniously reducing the
-\textit{SourceOrExcess} problem to a topological problem, it will lead
-to future reductions to the \textit{PureCircuit}.
+to a topological \textit{StrongSperner} problem.
+Our work on the current objective focused on finding topological representations of the
+\textit{SourceOrExcess} problem since,
+if the reductions from the previous section can be achieved, one could possibly
+use similar techniques to extend them to the excess reduction.
+
+We will first show how we can topologically reduce the \textit{SourceOrExcess}$(2,1)$
+problem to a \textit{2D} space. We will demonstrate some limitations with \textit{2D} topological problems and then we will
+demonstrate how using \textit{3D} counting version of the \textit{StrongSperner} problem
+will allow for a full parsimonious reduction.
 
 
 \subsubsection{Topological representations}
 
-
-\subsubsection{Topological Parsimonious Reduction}
-
-% TODO: Fix references
-In section {}, when talking about the \textit{StrongSperner} problem,
-we observed how coloured subspaces may lead to many duplicated solutions.
-Here, we are slightly modifying the definition of \textit{3D-StrongSperner}
-in order to take advantage of that. We will then show how the above modification
-can lead to parsimonious reductions.
-
-
-\begin{definitionbox}{\textit{3D-CountingSS} problem definition}{3d-counting-ss}
-    \textbf{Input}: A hazard-free colouring circuit $\lambda: (\{0,1\}^k)^3 \to \{-1,+1\}^3$ which
-    follows the boundary conditions of the \textit{StrongSperner} problem as explained in \ref{def:strong-sperner}.
-
-    \textbf{Output}: A coordinate $p= (ib_1, jb_2, kb_3) \in (\{0,1, \bot\}^k)^3$
-    such that $\lambda(p) = \bot^3$ for some $b \in \{0,1, \bot\}^3$. To avoid double counting, accept only solutions such that
-    $$
-        \max \{(ib_1, jb_2, kb_3) \mid b \in \{0,\bot\}^3: \lambda(ib_1, jb_2, kb_3) = \bot^3\}
-    $$
-    Where the $\max$ follows the information ordering of \textit{Kleene logic}.
-\end{definitionbox}
-
-
-
-
-% TODO: Add interpretation with directional values
-The above idea is a natural extension of the \textit{StrongSperner} interpretation, where
-its labelling represents the direction of a continuous function. If a face
-of a cube is panchromatic, then that implies that there has to be a fixed point somewhere,
-as seen in the figure \ref{fig:chap-3:panc-edge}. If an edge were to be panchromatic,
-then that means that a fixed point could lie on the edge. If we were treating this as a
-fixed point problem instead of a colouring one, it would make sense to argue that we have one solution.
-We abuse this notion to count only the smallest possible subspace that contains the solution, for example
-in \textit{2D}, only count the edge that yield the labelling instead of all the cubes that contains the edge.
-
-
-
-\begin{figure}
-    \centering
-    \includegraphics[width=0.7\textwidth]{Chapter3/edge-colouring.pdf}
-    \caption{Panchromatic edge for 2 dimensions}
-    \label{fig:chap-3:panc-edge}
-\end{figure}
-
-To prove \textbf{PPAD}-completeness, we know that the above problem can be reduced to \textit{3D-StrongSperner},
-although the reduction will not be parsimonious. We now show the main result of our section:
-
-\begin{theorembox}{Parsimonious reduction from $\textit{SourceOrExcess}(2,1)$}{}
-    $$
-        \textbf{\#PPAD}(\textit{SourceOrExcess}(2,1)) \subseteq
-        \textbf{\#PPAD}(\textit{3D-CountingSS})
-    $$
-\end{theorembox}
-
-Given a \textit{SourceOrExcess} input, we apply the following series of transformations:
-
-\begin{enumerate}
-    \item \textbf{Circuit Augmentation}: Eliminate all excess nodes such that the graphs only contain sources, sinks, isolated nodes, line nodes
-          and double sinks.
-    \item \textbf{Planar Embedding}: Embed the graph in a 3D coordinate space.
-    \item \textbf{Topological colouring}: Apply colouring rules that follow the \textit{3D-CountingSS} rules such that
-          our panchromatic squares contains \textit{SourceOrExcess} solutions.
-\end{enumerate}
-
-\paragraph*{Circuit Augmentation}
-We attempt to eliminate all excess nodes, meaning nodes with degree $(2,1)$ by separating
+Given a \textit{SourceOrExcess}$(2,1)$ input we
+attempt to eliminate all excess nodes, meaning nodes with degree $(2,1)$ by separating
 one of the lines as shown in the figure \ref{fig:source-or-excess-trans}.
 Moreover for double sinks, we enforce that the MSB value of the bit-string for one of the two values is one.
 We can observe that these modifications can be done in polynomial time since they only require to analyse
 the local neighbouring of nodes, and they preserve the number of solutions.
-We emphasize that if a node is not incident to double sink, then it will act as an isolated node.
 
 \begin{figure}[h!]
     \centering
@@ -95,21 +35,19 @@ We emphasize that if a node is not incident to double sink, then it will act as 
 
 \paragraph*{Planar Transformation}
 
-We will propose a similar transformation to the \ref{par:chap-2:planar-graph-embedding}
-to encode a 2D representation of the above graph.
-Given $n$, we create a 2D space $B_{n}$ such that
-$$
-    V_{n}  \triangleq  \Big\{ p \in \mathbb{Z}^2 \mid 0 \leq p_{1} \leq 6n^2, 0 \leq p_{2} \leq 12n + 6 \Big\}
-$$
-We are essentially increasing the dimensions of our cube so we can increase the distance between points.
-For every $i \in \{ 0,1 \}^{n+1}$, vertex $i$ represents point $(0,12i)$
-Like in the original definition we also create paths between $E_{ij}$
-but we for the double sinks we create a different path.
-More accurately, $\forall i,j \in E_{n}$  such that $i^{n+1} = 0$, create path
+Our transformation \ref{par:chap-2:planar-graph-embedding}
+is identical to the one that done when reducing
+\textit{EndOfLine} to \textit{RLeafD} with a slight change on
+the space and the paths the nodes take. First we double $V_n$ as such:
+\[
+    \forall n \in \mathbb{N}:  V_n \triangleq \Big\{\mathbf{u} \in \mathbb{N}_0^2\mid \mathbf{u}_1 \leq j(n^2 - 1) , \mathbf{u}_2 \leq 12(n - 1) + 6 \Big\}
+\]
+Such that now every node is represented as $(0, 12i)$.
+Morevover for edge in $(i,j) \in E_{n}$ create path and MSB of $i$ is $0$, then we define path:
 \begin{align*}
     \mathbf{p}^1 & = (0, 12i)                                                                          \\
-    \mathbf{p}^2 & = (6n(ni + j), 12i)                                                                 \\
-    \mathbf{p}^3 & = (6n(ni + j), 12j + 6)                                                             \\
+    \mathbf{p}^2 & = (6(ni + j), 12i)                                                                  \\
+    \mathbf{p}^3 & = (6(ni + j), 12j + 6)                                                              \\
     \mathbf{p}^4 & = (0, 12j + 6)                                                                      \\
     \mathbf{p}^5 & = (0, 12j)                                                                          \\
     E_{ij}       & \triangleq E(\mathbf{p}^1\mathbf{p}^2) \cup \dots  \cup E(\mathbf{p}^4\mathbf{p}^5)
@@ -122,15 +60,13 @@ If $j$ is a double sink, attach a small tail:
 If $i^{n+1}=1$, then we create path
 \begin{align*}
     \mathbf{p}^1 & = (0,12i)                                                                                                \\
-    \mathbf{p}^2 & = (6n(ni + j), 12i)                                                                                      \\
-    \mathbf{p}^3 & = (6n(ni + j), 12j)                                                                                      \\
+    \mathbf{p}^2 & = (6(ni + j), 12i)                                                                                       \\
+    \mathbf{p}^3 & = (6(ni + j), 12j)                                                                                       \\
     \mathbf{p}^4 & = (3, 12j)                                                                                               \\
     E_{ij}       & \triangleq E(\mathbf{p}^1\mathbf{p}^2) \cup E(\mathbf{p}^3\mathbf{p}^4) \cup E(\mathbf{p}^3\mathbf{p}^4)
 \end{align*}
 
 In the original problem, we argued that for every node, we have I/O lines that denote the input output nodes.
-If a node has in-degree of $2$, then there must exist a node of in-degree $2$ out-degree $1$ as seen in
-the figure {}. %TODO Add figure for visualisation
 This would make it computationally difficult to differentiate between double sinks
 as a line would be exponentially long and for each double sink node, and we would end up double counting solutions.
 By removing excess nodes, we only have to focus on double sinks. Since there is no output line in a double sink,
@@ -139,86 +75,160 @@ we take advantage of that by sending one input from the traditional input line, 
 We can use similar arguments as in the original proof, to argue that:
 $\forall v \in V: \textit{degree}(v) \in \{(0,1),(1,0), (1,1), (2,2), (2,0)\}$.
 We can observe that, if we do not have any double sinks, our graph follows the original transformation
-where only 4 out of the 5 possible degrees are possible. For the $(2,0)$ case, using
-figure as reference \ref{fig:chap-2:edge-rleaf}, it suffices to observe what happends in the double
-sink case. We can observe that the tail of the $E'_{ij}$ path finishes
-at $(3, 12j )$ . The smallest possible height for a transition line % TODO: define what transmission line is or add a figure
-would be at a height of $(6n(ni+j))$, which means the smallest possible height
-between two nodes is $6$. Meaning all nodes at $(3, 12j)$ do not interect any other path
-other than their double sink counterparts. This concludes our argument.
+where only 4 out of the 5 possible degrees are possible. The only
+difference occurs on double sinks. We can observe that
+if the MSB of a node is $1$, it can only ever be incident to double sink,
+meaning $(3,12i)$ can never have an outwards edge. We know that
+for every node in its path, besides $(3,12i)$, its degrees can only
+ever be one of the 4 cases outlined. Similarly for the
+other node with LSB $0$ its main path stays the same except if its incident
+to a double sink, where we add 3 additional edges.
+Since the lowest path $E(\mathbf{p}^2,\mathbf{p}^3)$ can only
+be at height $6$, we can observe that no path other than
+two incoming edges will ever intersect $(3,12i)$ and therefore our reduction is valid.
 
 We follow the same construction for the $E^2_n$ and apply the same removal transformation.
-The resulting graph is the same as in the traditional \textit{RLeafD} problem but with the addition of double sinks.
+The resulting graph is the same as in the traditional \textit{RLeafD} problem but with the addition of double sinks
+and we call this \textit{RLeafDExcess}$(2,1)$.
+Moreover we can obsreve that \textit{RLeafDExcess}$(2,1)$ is parsimonious to the \textit{EndOfLine} problem as
+sources and sinks are preserved, and any removal of edges can never affect our doubled sinks.
 
 
-\paragraph*{Topological colouring}
+\paragraph{Topological Difficulty}
 
-This section we show how to colour our circuit to on a \textit{3D-CountingSS} instance.
-First we apply the transformation $\mathcal{F}$ to go from a \textit{2D} space into a \textit{3D}, where
-\begin{gather*}
-    B_n \triangleq \big\{ \mathbf{p} \in \mathbb{N}^3 \mid
-    p_1 \leq 36n^2 + 6,
-    p_2 \leq 78n + 42,
-    p_3 \leq 6,
-    \big\} \\
-    \mathcal{F} : V_n \to B_n \\
-    \forall \mathbf{p} \in V_n: \mathcal{F}(\mathbf{p}) \triangleq
+We observe that in the \textit{RLeafD} bipolar colouring, we use the left handed rule to colour the shielding
+of our lines in a specific way, such that we always end up with panchromatic solutions at the ends of a line
+or at the point. The issue is that when we try to extend the same logic to the
+\textit{RLeafDExcess}$(2,1)$ problem, we end up with the problem shown in the figure \ref{fig:chap-3:rleaf-ss}.
+Any permutation of colours we choose will always result in $2+$ solutions. Even
+if we relax the problem to allow squares incident to panchormatic edges to count as a single
+solution, we still get two panchromatic edges and therefore we are still end up with two
+solutions.
+The problem occurs due to the chirality of the colouring since we are connecting a
+left handed line with another left handed line.
+
+\begin{figure}[h!]
+    \centering
+    \includegraphics[width=0.3\textwidth]{Chapter3/2d-excess-strongspernre.pdf}
+    \caption{\textit{2D-StrongSperner} with \textit{RLeafDExcess}$(2,1)$}
+    \label{fig:chap-3:rleaf-ss}
+\end{figure}
+
+The chirality problem extends \textit{StrongSperner} instances.
+Hollender et al. \cite{hollender_ComplexityMultisourceVariants_2018}, demonstrated
+how one can use the \textit{RLeafD} construction to create
+\textit{1-MC} parsimonious reductions from the \textit{EndOfLine}. To avoid
+the heavy details, given an edge between two nodes, we can add
+$3$ domino tiles to represent the edge. When two opposite paths
+meet we always end up with two squares that cannot be covered as seen in the figure
+\ref{fig:chap-3:rleaf-1-mc}. We can observe that again due to chirality,
+we can never find appropriate tiling.
+
+
+\begin{figure}[h!]
+    \centering
+    \includegraphics[width=0.3\textwidth]{Chapter3/1-mc-excess-issuue.pdf}
+    \caption{\textit{1-MC} with \textit{RLeafDExcess}$(2,1)$}
+    \label{fig:chap-3:rleaf-1-mc}
+\end{figure}
+
+
+\subsubsection{Topological colouring}
+
+The key insight of our objective is showing how going to $3$ dimensions
+and allowing panchromatic edges, allows us to achieve parsimonious reductions
+with \textit{StrongSperner}. We first define the problem \textit{3D-CountingSS},
+which is a combinatorial friendly version of the \textit{3D-StrongSperner}.
+
+
+\begin{definitionbox}{\textit{3D-CountingSS} problem definition}{3d-counting-ss}
+    \textbf{Input}: A hazard-free colouring circuit $\lambda: (\{0,1\}^k)^3 \to \{-1,+1\}^3$ which
+    follows the boundary conditions of the \textit{StrongSperner} problem as explained in \ref{def:strong-sperner}.
+
+    \textbf{Output}: A coordinate $p= (ib_1, jb_2, kb_3) \in (\{0,1, \bot\}^k)^3$
+    such that $\lambda(p) = \bot^3$ for some $b \in \{0,1, \bot\}^3$. To avoid double counting, accept only solutions such that
+    $$
+        \max \{(ib_1, jb_2, kb_3) \mid b \in \{0,\bot\}^3: \lambda(ib_1, jb_2, kb_3) = \bot^3\}
+    $$
+    Where the $\max$ follows the information ordering of \textit{Kleene logic}.
+\end{definitionbox}
+The above idea is a natural extension of the \textit{StrongSperner} interpretation, where
+its labelling represents the direction of a continuous function. If a face
+of a cube is panchromatic, then that implies that there has to be a fixed point somewhere,
+as seen in the figure \ref{fig:chap-3:panc-edge}. If an edge were to be panchromatic,
+then that means that a fixed point could lie on the edge. If we were treating this as a
+fixed point problem instead of a colouring one, it would make sense to argue that we have one solution.
+We abuse this notion to count only the smallest possible subspace that contains the solution, for example
+in \textit{2D}, only count the edge that yield the labelling instead of all the cubes that contains the edge.
+
+
+\begin{figure}
+    \centering
+    \includegraphics[width=0.7\textwidth]{Chapter3/edge-colouring.pdf}
+    \caption{Panchromatic edge for 2 dimensions}
+    \label{fig:chap-3:panc-edge}
+\end{figure}
+
+Trivially  \textit{3D-CountingSS} can be reduced to \textit{3D-StrongSperner}
+even if we are overcounting the cubes. To show hardness,
+we make the following theorem:
+
+\begin{theorembox}{}{counting-ss-excess}
+    $$
+        \textbf{\#PPAD}(\textit{RLeafDExcess}(2,1)) \subseteq \textbf{\#PPAD}(\textit{3D-CountingSS})
+    $$
+\end{theorembox}
+
+
+\paragraph{Proof of the theorem}
+
+Our first reduction is transforming our $2D$ grid, into a
+$3D$ with grid points:
+$$
+    B_n^3 = \Big\{\mathbf{p} \in \mathbb{N}_0^3 \mid \mathbf{p}_3 \leq 6, \mathbf{p}_{-3} \in [n]_0 \times [n]_0\Big\}
+$$
+
+We denote the transformation $\mathcal{F}: V_{2^k} \to B^3_{2^{4k+10}}$ such that
+$$
+    \forall \mathbf{p} \in B_n: \mathcal{F}(\begin{pmatrix}
+        \mathbf{p}_1 \\
+        \mathbf{p}_2 \\
+    \end{pmatrix}) \to  \left\{
     \begin{pmatrix}
-        6 \cdot p_1 + 6 \\
-        6 \cdot p_2 + 6 \\
-        0               \\
+        6 \mathbf{p}_1 + 6 \\
+        6 \mathbf{p}_2 + 6 \\
+        0                  \\
+    \end{pmatrix}, \begin{pmatrix}
+        6\mathbf{p}_1 + 6 \\
+        6\mathbf{p}_2 + 6 \\
+        1                 \\
     \end{pmatrix}
-\end{gather*} %TODO: Careful about edges
+    \right\}
+$$
+We can observe that the above essentially is our \textit{RLeafDExcess}$(2,1)$ but copied
+twice in the 3D space.  We note of the terms $P_i^b, I^b(P_i), L^b(P_i), R^b(P_i), \textbf{s}^b_{P_i}, \textbf{e}^b_{P_i}$
+that we defined in the paragraph \ref{par:chap-2:planar-graph-embedding} and say use index ${b}$ to denote
+the first copy and the second copy. Lastly, we introduce $m_{ij}^b$ to denote the ``midpoint'' or
+the point with degree $(2,0)$ that meets path $i$ and path $j$ with $b$ to denote the upper and lower face.
+The ends of the paths are denoted as the points that are collinear to the ``midpoint'' as seen
+in the figure \ref{fig:chap-3:2d-sink}.
 
-% In addition, like in the original transformation, we add
-% edges \(E((0,0,0), (0,6,0)) \cup E((0,6,0), (6,6,0))\).
-This mapping essentially re-creates the
-\textit{RLeafD} problem in a 3D space, since we are neglecting the 3rd dimension for the most part.
-Like in the original transformation, we can decompose our graph into paths, cycles where $(P_i)_{i \in [m]}$.
-By using $\mathcal{F}$, every $P_i$ is mapped to a set $I(P_i) \subset B_{n}$, such that
-\begin{gather*}
-    P = (\mathbf{u}^1, ..., \mathbf{u}^t), \text{if } P \text{ is a cycle } \mathbf{u}^1 = \mathbf{u^t} \\
-    I(P) \triangleq \bigcup_{i \in [t- 1]} I(\mathbf{u}^{t-1}, \mathbf{u}^t)
-\end{gather*}
+\begin{figure}[h!]
+    \centering
+    \includegraphics[width=0.7\textwidth]{Chapter3/2dmeetpoints.pdf}
+    \caption{Double sink depiction from a 2D point of view}
+    \label{fig:chap-3:2d-sink}
+\end{figure}
 
-For double sinks, we can treat them as two paths that lead to a point, we can therefore decompose double sinks
-as $I(P_i) \cup I(P_j) \cup \{\mathbf{m}^{ij}\}$, where $\mathbf{m}^{ij}$ will be denoted as the meet point of the
-two paths.
-
-Our shielding notion for this tranformation will work follows.
-We again define set points around each line $O(P)$ as such that
-\begin{gather*}
-    O(P) \triangleq \Big\{\mathbf{p} \in B_{n}
-    \setminus I(P) \mid  \exists \mathbf{p}' \in I(P): \|p - p'\|_{\infty} = 1\Big\} \\
-    \forall b \{0,1\}: O^b(P) \triangleq \{\mathbf{p} \in O(P) \mid p_3 = b\}
-\end{gather*}
-
-
-If $P$ is a simple path, then we can decompose into $\{\textbf{s}_p, \textbf{e}_p\} \cup L^0(P) \cup R^0(P)$
-such that $\textbf{s}_p = \mathcal{F}(\mathbf{u^1}) + \Delta + \Delta^\perp$ and
-$\textbf{e}_p = \mathcal{F}(\mathbf{u^t}) + \overline{\Delta} + \overline{\Delta}^\perp$
-where: $\Delta = (\mathbf{u}^1 - \mathbf{u}^2), \overline{\Delta} = (\mathbf{u}^{t} - \mathbf{u}^{t-1})$
-and $\mathbf{x}^{\perp}$ denotes the perpendicular vector when rotated by $90^\circ$ anticlockwise across the $xy$ plane.
-For simple paths and cycles, the decomposition into $L$ and $R$ sets works the same, with the core difference being that
-we have two sets of points, one for $z = 0$ and the other for $z = 1$.
-For double sinks, assume that paths $P^1, P_2$  intresect at some pont $\mathbf{m}^{ij}$.
-We apply the following partition starting from $\mathbf{s}_{P^1}$
-\begin{align*}
-    O^0(P_i \oplus P_j) & = \{\mathbf{s}_{P^1},\mathbf{u}^1_1, \mathbf{u}^1_2,..., \mathbf{u}^1_k,\mathbf{e}_{P^1}\} \text{ Left of first path up to interection point} \\
-                        & \cup \{\mathbf{r}^2_1,\mathbf{r}^2_2, ...,\mathbf{r}^2_k ,\mathbf{s}_{P_2}\} \text{ Right of path 2}                                          \\
-                        & \cup \{\mathbf{u}^2_1,\mathbf{u}^2_2, ...,\mathbf{u}^2_k ,\mathbf{e}_{P_2}\} \text{ Left of path 2 up to interection}                         \\
-                        & \cup \{\mathbf{r}^1_1,\mathbf{r}^1_2, ...,\mathbf{r}^1_k ,\mathbf{s}_{P_2}\} \text{ Right of path 1}                                          \\
-\end{align*}
-We ensure that $\mathbf{e}^1, \mathbf{e}^2, \mathbf{m}^{ij}$ are on the same $x$-coord or $y$-coordinate.
-The same sets can be done for $O^1(P_i \oplus P_j)$.
-We now propose our colouring circuit $\mathcal(M)$ such that
+We now propose our colouring circuit $\mathcal{M}$:
 $$
     \mathcal{M}(\mathbf{p}) \triangleq \begin{cases}
-        (+,+, (-1)^{p_3})   & \text{if } \exists i, \mathbf{p} \in I(P_i) \vee  \mathbf{p} \in \{(0,0,0 ), (0,0,1)\} \\
-        (-, +, (-1)^{p_3})  & \text{if } \exists i, \mathbf{p} \in R(P_i)                                            \\
-        (+, -, (-1)^{p_3})  & \text{if } \exists i, \mathbf{p} \in L(P_i)                                            \\
-        (-, -, (-1)^{p_3})  & \text{if } \exists ij, \mathbf{p} = \mathbf{m}^{ij}                                    \\
-        (-, -,  (-1)^{p_3}) & \text{otherwise}
+        (+,+, (-1)^b)                                                                                                  & \text{if } \exists i,b:  \mathbf{p} \in I^b(P_i)                                  \\
+        (-, +, (-1)^{b})                                                                                               & \text{if } \exists i,b: \mathbf{p} \in R^b(P_i)                                   \\
+        (+, -, (-1)^{b})                                                                                               & \text{if } \exists i,b: \mathbf{p} \in L^b(P_i)                                   \\
+        (-, -, (-1)^{b})                                                                                               & \text{if } \exists i,b: \mathbf{p} \in \{\textbf{s}^b_{P_i}, \textbf{e}^b_{P_j}\} \\
+        (-1)^b * (-, -, +)                                                                                             & \text{if } \exists i,j,b: \mathbf{p} = \mathbf{m}_{ij}^b                          \\
+        ((-1)^{\mathbb{1}(\mathbf{p}_1 > 0)},(-1)^{\mathbb{1}(\mathbf{p}_2 > 0)},(-1)^{\mathbb{1}(\mathbf{p}_3 > 0)} ) & \text{otherwise}
     \end{cases}
 $$
 
@@ -229,16 +239,16 @@ An example of how the above colouring for simple lines can be seen in figure \re
     \includegraphics[width=0.7\textwidth]{Chapter3/3d-rlefad-full-example.pdf}
     \caption{Colouring example based on the proposed circuit}
     \label{fig:chap-3:3d-counting-ss-simple-line}
-
 \end{figure}
 
 
 
 \paragraph*{Correctness proof}
 We now prove that our reduction is correct.
-We use figure \ref{fig:chap-3:simple-line-example} and assume that path $\mathbf{p}^t, \mathbf{p}^{t+1}$
-is in the middle of some line. The red cube will not be panchromatic as $y$-coordinate is $+$ on all corners
-and vice versa for the blue cube on the $x$-coordinate. In addition we can observe that the brown cubes surrounding
+We use figure \ref{fig:chap-3:simple-line-example} and assume that we have an edge $\mathbf{p}^t, \mathbf{p}^{t+1}$
+of some path. We use red to represend the points, blue the points on the right, and brown for the surrounding.
+The red cube will not be panchromatic as $x$-coordinate is $+$ on all corners
+and vice versa for the blue cube on the $y$-coordinate. In addition we can observe that the brown cubes surrounding
 each face will also not result in a panchromatic cube as: for the brown cube on the left of red will be $-$ on all $y$
 coordinates, with the same argument for blue. And for the brown cubs on top, we can observe that $z$-coordinate will be $-$
 on all points. Therefore points in between lines or cycles will not result in solutions.
@@ -253,22 +263,23 @@ on all points. Therefore points in between lines or cycles will not result in so
 
 As we can observe from the figure \ref{fig:chap-3:3d-counting-ss-simple-line}, we can see that in the ends of lines,
 we can use the colouring as shown in the figure. We can observe that in our figure, the corner with the max
-coordinates and the one with min coordinate cover all the labels. In addition we can observe that each side of
-the cube will not cover all the labels therefore there are no overlapping panchromatic cubes.
+coordinates and the one with min coordinate cover all the labels. In addition we can observe our colouring
+is discrete and antipodal which implies that no additional cubes are generated.
 
 
 For the double sink case, we use the figure \ref{fig:chap-3:double-sink-point}, to observe what happens around the double
 sink area.
-For points $m^{ij}_{-3}(0), m^{ij}_{-3}(1)$, we can observe that their labellig is antipodal, meaning given our counting
+For points $m^{ij}_{-3}(0), m^{ij}_{-3}(1)$, we can observe that their labelling is antipodal, meaning given our counting
 defintion, all surrounding cubes that contain the side $(m^{ij}_{-3}(0), m^{ij}_{-3}(1))$ count as one solution.
-It suffices to observe that all faces of the current section are not panchromatic, which implies other than the
-$4$ cubes which we account $1$, there are no other additional solutions. Therefore we can observe
+We can manually observe that for each face of the combined panchromatic cube there will 
+always exist a dimension whose colouring is not covered. For example we can see 
+that for all faces on top of the combine cube never cover the $-$ dimension. Therefore we can observe
 that the set of panchromatic solutions correspond to a 1-to-1 mapping with the \textit{SourceOrExcess} problem.
 
 
 \begin{figure}[h!]
     \centering
-    \includegraphics[width=0.7\textwidth]{Chapter3/3d-counting-ss-doubleslink.pdf}
+    \includegraphics[width=0.5\textwidth]{Chapter3/3d-counting-ss-doubleslink.pdf}
     \caption{Colouring around the double sink points. The colours correspond to the colour legend
         of \ref{fig:chap-3:3d-counting-ss-simple-line} }
     \label{fig:chap-3:double-sink-point}
@@ -279,14 +290,14 @@ that the set of panchromatic solutions correspond to a 1-to-1 mapping with the \
 \paragraph{Future Directions}
 From the previous section we observed how to reduce \textit{SourceOrExcess}$(2,1)$ to a topological problem.
 Just like in the \textit{EndOfLine} problem, we found it essential to reduce it to a \textit{StrongSperner} problem
-with polynomial sides and very high dimensionality. We believe that one can abuse the \textit{Snake Embedding} methodology
+with polynomial sides and very high dimensionality. We believe that one could abuse the \textit{Snake Embedding} methodology
 that we proposed earlier. Indeed one can observe that with correct foldings, the $n$-dimensionsal
 space will contain a $n-2$ panchromatic subspace. There are two main questions that need to be resolved:
 \begin{enumerate}
-    \item Will the number of solutions between foldings?
-    \item Is there a natural way to define \textit{Counting-SS}? Like previously, when the
-    number of dimensions can vary between instances, by corollary \ref{col:k-bit-haz}, we observed
-    that the size of the circuit will explode exponentially, by current literature assumptions. 
+    \item Will the number of solutions between foldings stay the same?
+    \item Is there a natural way to define \textit{HF-Counting-SS}? Like previously, when the
+          number of dimensions can vary between instances, by corollary \ref{col:k-bit-haz}, we observed
+          that the size of the circuit will explode exponentially, by current literature assumptions.
 \end{enumerate}
 More interestingly, in later sections we make references of $\alpha-\textit{SUnbalanced}(\Delta_i, \Delta_o)$
 and how they can affect the counting nature of each other. Like we mentioned previously, for
@@ -296,12 +307,12 @@ for a 3D space that was indeed possible. Moreover, Hollender et al.
 of the problem do not affect its \textbf{PPAD}-completeness. We therefore make the following conjecture:
 
 \begin{conjecturebox}{\textit{nD-CountingSS} and \textit{Unbalanced}}{}
-Does there exist some polynomial computable function $f :\mathbb{N}^3 \to \mathbb{N}$, such that
-given $\alpha,\Delta_i, \Delta_o \in \mathbb{N}$ and $m= f(\alpha, \Delta_i, \Delta_o)$
-$$
-\textbf{PPAD}(\alpha\textit{-SUnbalanced}(\Delta_i, \Delta_o)) \subseteq
-\textbf{PPAD}(m\textit{D-CountingSS}) 
-$$
+    There exist some polynomial computable function $f :\mathbb{N}^3 \to \mathbb{N}$, such that
+    given $\alpha,\Delta_i, \Delta_o \in \mathbb{N}$ and $m= f(\alpha, \Delta_i, \Delta_o)$
+    $$
+        \textbf{PPAD}(\alpha\textit{-SUnbalanced}(\Delta_i, \Delta_o)) \subseteq
+        \textbf{PPAD}(m\textit{D-CountingSS})
+    $$
 \end{conjecturebox}
 What the above conjecture essentially describes is, given a number of known sources and the
 maximum number of input/output vertices of graph, can we create some \textit{nD-CountingSS}
