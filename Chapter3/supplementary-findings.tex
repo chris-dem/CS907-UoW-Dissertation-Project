@@ -41,10 +41,10 @@ which implies $\mathbf{x}[o] = F(x) = \mathbf{x}[s]$.
 
 \subsubsection{Reductions to the EndOfLine}
 
-One can also attempt to make some reductions to the \textsc{EndOfLine}. It has to be noted,
-that we assume that there are no parsimonious reductions to the \textsc{EndOfLine},
+One can also attempt to make some reductions to the \textit{EndOfLine}. It has to be noted,
+that we assume that there are no parsimonious reductions to the \textit{EndOfLine},
 but we were able to construct some variants that allows to make there reductions.
-They key insights for this comes from the \textsc{PPAD}-inclusion proof
+They key insights for this comes from the \textbf{PPAD}-inclusion proof
 by Deligkas et al. \cite{deligkas_PureCircuitTightInapproximability_2024}, where they
 showed that we can reduce PureCircuit, to \textit{Brouwer} problem by constructing
 a continuous function $F: [0,1]^n \to [0,1]^n$ as such: For each $v \in V$, we create
@@ -61,7 +61,7 @@ of all the nodes and output the value of the current node
             f_{y_2}(\mathbf{x}) &:= \min\{2 \cdot \mathbf{x}_{z}, 1\}
         \end{align*}
 \end{enumerate}
-If $F(x) = x$, then we also found a solution for \textsc{PureCircuit} by:
+If $F(x) = x$, then we also found a solution for \textit{PureCircuit} by:
 $$
 \forall v \in V: \mathbf{x}[v] = \begin{cases}
     0 & \mathbf{x}[v] = 0 \\
@@ -69,10 +69,10 @@ $$
     1 & \mathbf{x}[v] = 1 \\
 \end{cases}
 $$
-Given that as an assumption we can restrict our \textit{Purify} gate
+Given that as an assumption we can restrict our \textsc{Purify} gate
 to outputs $(0,\bot), (0,1), (\bot, 1)$. Using that we can define two types of variants
-of \textsc{PureCircuit} that are parsimoniously reducible to \textsc{SourceOrPresink}.
-We first define \textsc{SourceOrPresink} as:
+of \textsc{PureCircuit} that are parsimoniously reducible to \textit{SourceOrPresink}.
+We first define \textit{SourceOrPresink} as:
 
 \begin{definitionbox}{$\scn{SourceOrPresink}$ definition}{source-or-presink-def}
     \label{def:source-or-presink-def}

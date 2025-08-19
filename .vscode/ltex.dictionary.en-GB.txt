@@ -7,3 +7,8 @@ RLeafD
 PPAD
 PureCircuit
 antipodality
+Ikenmeyer
+decrementation
+Deligkas
+PPAD-completeness
+Papadimitriou

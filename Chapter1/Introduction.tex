@@ -16,13 +16,13 @@ or more informally, can we associate our sequence of numbers to sets of objects?
 
 To understand this notion, we provide an example from the papers by Ikenmeyer and Pak \cite{pak_WhatCombinatorialInterpretation_2022,ikenmeyer_WhatWhatNot_2022}:
 Assume that $f(G)$ counts the number of 3-colourings of a graph $G$. Now one can,
-ask the question: does the functon $h(G) \triangleq f(G)/ 6$ also count something?
+ask: does the function $h(G) \triangleq f(G)/ 6$ also count something?
 The answer is yes as argued in \cite{pak_WhatCombinatorialInterpretation_2022,ikenmeyer_WhatWhatNot_2022} and the idea is,
 as for every colouring $\chi$, we can compute $3!$ additional colourings since
-we can permute the colours we assigned. Therefore we only need to count
+we can permute the colours we assigned. Therefore, we only need to count
 one of the permutations, or the smallest colouring. We can therefore argue that $h(G)$ 
 counts the smallest possible 3-colourings of a graph $G$.
-We say that this is a ``combinatiorial interpretation of $h(G)$''.
+We say that this is a ``combinatorial interpretation of $h(G)$''.
 
 But not all non-negative functions have such a clear interpretation.
 We use an example by Ikenmeyer et al. \cite{ikenmeyer_WhatWhatNot_2022}.
@@ -37,17 +37,17 @@ or to a point that is a violation. We add the restriction
 of $C(C(x)) \neq 0$ to avoid double counting. We can clearly observe that, if $e(C)$
 counts the number of solutions, under the pigeonhole principle, it must be the case $e(C) \geq 1$ since we either have a violation
 or there exists at least one pair of points that is mapped to the same bin by the pigeonhole principle.
-So now we can ask the question: does the function $e'(C) \doteq e(C) -1$ also
-have a set of object which we can enumerated over?
+So now we can ask: does the function $e'(C) \doteq e(C) -1$ also
+have a set of object which we can enumerate over?
 Ikenmeyer et al. \cite{ikenmeyer_WhatWhatNot_2022} demonstrated that
 this problem does not have a combinatorial interpretation.
 This leads to the questions of how can we formally represent the meaning
-of combinatorial interpretations and what can we do to verify whether
+of combinatorial interpretations, and what can we do to verify whether
 a function has one?
 
 In recent years, there has been a revolutionary initiative to answer the aforementioned questions,
 with the help of counting complexity theory and the complexity class of \textbf{\#P}.
-In fact, being able find such definitions or interpretations is crucial,
+In fact, being able to find such definitions or interpretations is crucial,
 as it allows us to utilise tools from enumerative combinatorics to understand
 and reveal hidden structures and properties of such functions \cite{pak_WhatCombinatorialInterpretation_2022,ikenmeyer_WhatWhatNot_2022}.
 Moreover, there are several problems or numbers, such as \textit{Kronecker coefficients} \cite{makar_AnalysisKroneckerProduct_1949},
@@ -64,7 +64,7 @@ More specifically, we look into the \textbf{PPAD} class which
 seems to have several problems where under decrementation,
 may or may not have a combinatorial interpretation \cite{ikenmeyer_WhatWhatNot_2022}.
 This implies that \textbf{PPAD} acts as some sort of barrier,
-to $\textbf{\#P}$ which modivates the research as to what causes
+to $\textbf{\#P}$ which motivates the research as to what causes
 
 To accomplish this task,
 we studied \textit{PureCircuit}
@@ -76,7 +76,7 @@ useful insights to the counting complexity of $\textbf{PPAD}-1$.
 We will now give an extensive introduction to the literature and the related problems
 and then offer formal and precise objectives that capture our goal.
 We will then go over the main results of our theory research with the conjectures and possible
-directions that we uncovered. Morevover, we will give an overview of the visualisation software
+directions that we uncovered. Moreover, we will give an overview of the visualisation software
 we developed to verify our theoretical results and give an overview of its capabilities and limitations.
 Lastly we will give brief analysis of our project management, the lessons we learnt
 and a conclusion that summarises our project as a whole.
