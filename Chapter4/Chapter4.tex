@@ -2,32 +2,30 @@
 
 \chapter{Software Deliverable}
 \label{sec:chap-4}
+In the current section, we give an extensive overview of the
+software tool we developed to help with the our theory crafting.
+Core idea is to be able to draw \textit{PureCircuit} gadgets,
+verify correctness and find solutions. We split
+this chapter giving an overview on the tooling we used,
+the architecture of the software
+the algorihtms we deployed for solutions finding.
 
-The current project includes a software element, in order to aid with the gadget development.
-We provide three core requirements as enumerated in the following list:
-\begin{enumerate}
-    \item Visualise and instance of a pure circuit and check for correctness.
-    \item Given a \textit{PureCircuit} graph, find a satisfying assignment.
-    \item Given a \textit{PureCircuit} graph, enumerate through all possible assignments.
-\end{enumerate}
-We split these section into the following components:
-Tooling selection and development architecture, Visualisation tooling,
-Solution Finding and Solution Enumeration.
 
 \section{Tooling Selection}
-Using figure {..} as reference, we outline the main choice for our tools
 
-\paragraph*{Rust Programming Language} The development language used for is \texttt{Rust}.
+\subsection{Rust Programming Language} The development language used for is \texttt{Rust} \footnote{https://www.rust-lang.org/}.
 Rust is a systems-level compiled programming language that can achieve high speeds due to
 its low-level compilation, while maintaining memory safety. The key reasons,
 for the specific language of choice is its speed as well as having an advanced
 algebraic type system.
 
-\paragraph*{Bevy and the ECS architecture} \texttt{Bevy} is a \texttt{Rust} library,
+\subsection{Bevy and the ECS architecture} \texttt{Bevy} \footnote{https://bevy.org/} is a \texttt{Rust} library,
 primarily used for game development. It uses the Entity-Component-System architecture
 where entities with varying components exist in world state. Each \textit{entity}
 interacts with each other based on systems. A visual reference is provided in the
-figure \ref{fig:chap-4:ecs-example}. The core
+figure \ref{fig:chap-4:ecs-example}. The idea is that we are able to decouple
+the logic from entities to their individual components and express
+more intricate relations. 
 
 \begin{figure}[h!]
     \centering
@@ -37,17 +35,21 @@ figure \ref{fig:chap-4:ecs-example}. The core
 \end{figure}
 
 
+
 This choice offered several pros and cons. From the one hand,
 the current choice offers flexibility when it comes to drawing
 and interacting with shapes on a screen. We wanted to give our
-tool and editor-like vibe where the user can move the screen and individual
-nodes themselves as well as interact with them. On the other hand,
+tool and editor-like aesthetic where the user can move the screen and individual
+nodes themselves as well as interact with them.
+In addition, it is one of the most used libraries in rust for graphic development
+and its incorporation with rust implies the ability to take advantage of low level programming.
+On the other hand,
 this library is still in its early stages, which implies limited documentation
 and features. Moreover, as its prioritizes game development, it has a limitation
 when dealing with UI concepts and state management. Ultimately, we chose the tool as
 the UI is simple enough to not hinder the experience of the tool.
 
-\paragraph*{Software Testing methodology}
+\subsection{Software Testing methodology}
 The core philosophy of our testing is Test-Driven-Development. This methodology
 was used to develop and validate our critical parts of our code, such as graph validation
 or solution enumeration. The main idea of this development is to first write the unit test,
@@ -62,12 +64,18 @@ where we test the properties of a pure function across a range of inputs. The id
 the input of the function, the greater is the input space and therefore harder and cumbersome to check all possible
 combinations or edge-cases. With \texttt{Proptest}, we check whether a property of our function is
 maintained across all possible inputs, such as a sorted output, or a validating assignment.
-It works by testing our function, across a series of possible inputs. If a failed condition
-is raised, then it uses \textit{Shrinking} strategies in order to find the smallest assignment that fails
-the test. %% TODO: Consider adding a figure
+
+For our purposes, we use value-based property testing in which:
+We define a set of types where in each one we define a \textit{generator} and a \textit{shrinking strategy}.
+The \textit{generator} is responsible for generating random values or significant values
+that represent the specific type. The \textit{shrinking strategy} is responsible 
+for finding the smallest case in which our case fails. We then 
+define test cases that automatically run the generator and shrinker procedures until,
+we have tested that our function passes across all generated inputs, or finds the smallest test case it fails on.
 
 
-\subsection{Program Visualisation Summary}
+
+\section{Program Visualisation Summary}
 
 The program is composed of a mini UI legend that captures the state and a drawing board.
 Contains functionalities as to the current state of the program and the controls to navigate
@@ -87,14 +95,11 @@ then its surrounded by a pink circle or if it has an invalid assignment then its
 For the main algorithms, we provide two metaheuristic algorithms for finding solutions or approximate solutions, using
 either evolutionary algorithms or hill climbing search. Moreover for solution enumeration,
 we are using a modified backtracking algorithm, which upon execution
-returns a list of solutions. We are limiting the algorithm to at most 20 value nodes
-in order to keep the computational expenses low. Each time we modify the stucture of the circuit, we reset the solution set.
-We emphasize that these buttons are disabled if the circuit contains any invalid arities.
+returns a list of solutions. We are limiting the algorithm to at most $20$ value nodes
+in order to keep the computational expense low. Each time we modify the stucture of the circuit, we reset the solution set.
 
 
-
-
-\subsection{Solution Selection}
+\section{Solution Selection}
 
 For the solution selection we opted with metaheuristic algorithms. Since these problems are conventionally hard
 to find solutions especially as the number of nodes increase, we focused on the idea of approximation
@@ -109,7 +114,7 @@ is to minimise the number of errors. Once an assingment is found,
 we pass the solutions back into our graph and display them.
 
 
-\subsubsection{Hill Climbing Algorithm}
+\subsection{Hill Climbing Algorithm}
 
 The idea of hill climbing algorithms is to start by some base solution
 and repeatedly improve the solution. We allow for $2$ strategies, one
@@ -118,38 +123,60 @@ allows for stochastic choice. Moreover we allow for additional option
 such as multiple re-rurns in order to incaese the odds of finding
 a successful assignment.
 
-
-Overall this algorihtm, although it runs the fastest out of all the others, it
-may significantly struggle against large graphs or instances
+Overall this algorihtm, one of the simplest and faster algorithms to run and can work
+well for convex problems as explained in \cite{schwefel_EvolutionOptimumSeeking_1995}.
+It may significantly struggle against large graphs or instances
 that multiple changes need to occur in order to reach an optimal point.
-Future ideas can adopt \textit{Simulating annealing} which %% TODO add refernce
+In fact we can further argue that hill climbing may struggle on the
+\textit{Purify}  gate due to the non-linearity that they present.
+Future ideas can adopt \textit{Simulating annealing} which 
 which is a metaheuristic algorithm, where at the start of our run,
 we allow for a greater variance in our choices and as we progress, we become
-stricter and stricter with the next neighbour choice.
+stricter and stricter with the next neighbour choice \cite{schwefel_EvolutionOptimumSeeking_1995}.
 
-\subsubsection{Evolutionary Algorithm}
+\subsection{Evolutionay Algorithm}
 
 Evolutionary algorithms as the names suggests are based of the
 idea of evolution. 
-%% TODO: Add reference as to how they started
-A simulation step of an evolutionary algorithm can be summarised in figure {..}, 
-where we essentialy have 5 core elements:
+They were introduced by \cite{holland_AdaptationNaturalArtificial_1992}, 
+it is a useful algorithm has found several usages in computer science, particularly
+in optimisation problems such as \textit{TSP} problems \cite{moon_EfficientGeneticAlgorithm_2002}
+or \textit{Neural Networks} \cite{stanley_EvolvingNeuralNetworks_2002,stanley_HypercubeBasedIndirectEncoding_2009}.
+
+Given figure \ref{fig:chap-4:evo-drawing}, 
+we can summarise the 5 core elements of the genetic algorithm:
 \begin{enumerate}
-    \item \textbf{Chromosones}: Solution assignments of our \textit{PureCircuit} instance
+    \item \textbf{Chromosones}: Solution assignments of our \textit{PureCircuit} instance.
+    \item \textbf{Population}: A set of \textbf{chromosones}.
     \item \textbf{Fitness step}: Evaluation step. We measure how good the assingment is
     by counting the number of errors it has.
     \item \textbf{Selection step}: Given a selection strategy, select
     suitable canditates in order to create the population for the next step.
-    In literature, there are many types that one can use %% TODO add reference please
+    In literature, there are many types that one can use \cite{katoch_ReviewGeneticAlgorithm_2021}
     such as \textit{Roulette based} selection, or \textit{Tournament based} selection. 
-    We leave several choices available for the user to choose.
+    We mainly use \textit{Tournament based} selection where randomly select a set of
+    chrosomones and pick the best one. This process is repeated until enough chromosones have been selected.
     \item \textbf{Crossover step}: Given two chromosones from the
     \textbf{Selection step}, combine the genes from each parent, in order
-    to create a new instance.
+    to create a new instance. We allow for two main types of crossover methods:
+    \begin{enumerate}
+        \item \textit{Crossover Uniform}: Each gene of the child is randomly selected from either parent. This allows for 
+        diverse solutions to be explored. Can reduce diversity but performs well on large population sizes \cite{katoch_ReviewGeneticAlgorithm_2021}.
+        \item \textit{Crossover Rejuvenate}: Closely similar to the $(\mu + \lambda)$-evolutionary strategy \cite{baeck_EvolutionaryComputation1_2018}, where
+        we use the best performing parent genes.
+    \end{enumerate}
     \item \textbf{Mutation step}: Given the offspring of the
-    \textbf{Crossover step}, stochastially modify each gene in
-    order to introduce diversity.
+    \textbf{Crossover step}, we stochastically modify each gene in
+    order to introduce diversity, which allows our chromosones to explore
+    the solution space.
 \end{enumerate}
+
+\begin{figure}
+    \centering
+    \includesvg[width=0.7\textwidth]{Chapter4/intro-1.svg}
+    \caption{Image source and description \cite{wychowaniec_2021}}
+    \label{fig:chap-4:evo-drawing}
+\end{figure}
 
 The repetition of the steps eventually converges to an assignment that is satisfying.
 The benefits of these methods over our own personal experimentations is that

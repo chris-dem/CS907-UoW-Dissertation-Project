@@ -2,9 +2,12 @@ As previously mentioned, we want to extend the work done by Ikenmeyer et al. \ci
 in order to analyse the combinatorial nature of \textbf{PPAD} as a whole.  Although the project
 did not manage to achieve the desired theorem, we hope to demonstrate interesting findings that can allow
 us to reveal more intricate properties of $\textbf{\#PPAD}$. Our first step is to extend the hierarchy
-between \textit{EndOfLine} and \textit{SourceOrExcess}$(2,1)$. To start we introduce the following
-fact from Hollender et al. \cite{hollender_ComplexityMultisourceVariants_2018}
-%% TODO ALREADY DEFINED
+between \textit{EndOfLine} and \textit{SourceOrExcess}$(2,1)$. To start we give a formal
+definition of the \textit{Unbalanced} problem, which is
+is essentially the generalisation of the \textit{EndOfLine} problem,
+to graphs with polynomial degree.
+% introduce the following
+% fact from Hollender et al. \cite{hollender_ComplexityMultisourceVariants_2018}
 
 \begin{definitionbox}{\textit{Unbalanced} problem definition}{unbalanced}
     \label{def:unbalanced}
@@ -20,40 +23,37 @@ fact from Hollender et al. \cite{hollender_ComplexityMultisourceVariants_2018}
     If $f(\cdot) = p$ or  $g(\cdot) = k$ for some $p, k \in \mathbb{N}$, we will denote the problem as $\textit{Unbalanced}(p, k)$
 \end{definitionbox}
 
-We give a formal defintion of the \textit{Unbalanced} problem, which is generalisation of the
-\textit{EndOfLine} to graphs with polynomial sized in- and out-degree.
-
 
 \begin{lemmabox}{}{unbalanced-lem-ppad-complete}
     \label{lem:unbalanced-lem-ppad-complete}
-    $\textit{Unbalanced}$ is \textbf{PPAD}-complete
+    $\textit{Unbalanced}$ is \textbf{PPAD}-complete \cite{hollender_ComplexityMultisourceVariants_2018}
 \end{lemmabox}
 
 %% TODO LOOK AT THIS EVENTUALLYHOLLENDER PROOF
-% \begin{proof}
-%     The \textbf{PPAD}-hardness is trivial since every \textit{EndOfLine} problem is an instance
-%     of unbalanced. To show \textbf{PPAD}-completeness we demonstrate reduction to  \textit{PolyS-EoL}.
-%     We are given an unbalanced instance $(\textbf{S}, \textbf{P}, \bar{f}, \bar{g})$.  For each node,
-%     we have a predecessor set  $\{p_i\}_{i \in [d_i]}$ and a successor set $\{s_i\}_{i \in [d_{o}]}$, where $d_i$ and
-%     $d_o$ denote the input and output degrees respectively. 
-%     We assume the  successor-predecessor list is sorted and WLOG and assume
-%     we have node $v \in \{0,1\}^n \smallsetminus \{0^n\}$ such that $d_i = d_o + k$. We create $d_i$ copies
-%     of $v$ such that: For each $j \in [d_o]$, we create edges $s_j \to v_j \to p_j$. Moreover, we create 
-%     additional sinks such that $\forall j \in [k]: s_{d_o + j} \to v_{d_o + j}$. We can make a similar argument
-%     for $d_o > d_i$. We can observe that if $d_i = d_o$, then we create no additional solutions. Lastly for the $0^n$ node,
-%     we observe that our construction can result in at most $g(n)$ additional sources and therefore, 
-%     we can create an instance of \textit{PolyS-EoL}
-% \end{proof}
+\begin{proof}
+    The \textbf{PPAD}-hardness is trivial since every \textit{EndOfLine} problem is an instance
+    of unbalanced. To show \textbf{PPAD}-completeness we demonstrate reduction to  \textit{PolyS-EoL}
+    which we know is \textbf{PPAD}-complete.
+    We are given an unbalanced instance $(\textbf{S}, \textbf{P}, \bar{f}, \bar{g})$.  For each node,
+    we have a predecessor set  $\{p_i\}_{i \in [d_i]}$ and a successor set $\{s_i\}_{i \in [d_{o}]}$, where $d_i$ and
+    $d_o$ denote the input and output degrees respectively.
+    We assume the  successor-predecessor list of nodes is sorted and WLOG and assume
+    we have node $v \in \{0,1\}^n \smallsetminus \{0^n\}$ such that $d_i = d_o + k$. We create $d_i$ copies
+    of $v$ such that: For each $j \in [d_o]$, we create edges $s_j \to v_j \to p_j$. Moreover, we create
+    additional sinks such that $\forall j \in [k]: s_{d_o + j} \to v_{d_o + j}$. We can make a similar argument
+    for $d_o > d_i$. We can observe that if $d_i = d_o$, then we create no additional solutions. Lastly for the $0^n$ node,
+    we observe that our construction can result in at most $g(n)$ additional sources and therefore,
+    we can create an instance of \textit{PolyS-EoL}
+\end{proof}
 
 We can also prove that the number of known sources does not affect the complexity
 of the \textit{Unbalanced} problem
 
 
-
 \begin{lemmabox}{}{unbalanced-lem-ppad-complete-sources}
     \label{lem:unbalanced-lem-ppad-complete-sources}
     $$
-    \textbf{\#PPAD}(\textit{PolyS-Unbalanced}) \subseteq \textbf{\#PPAD}(\textit{Unbalanced}) 
+        \textbf{\#PPAD}(\textit{PolyS-Unbalanced}) \subseteq \textbf{\#PPAD}(\textit{Unbalanced})
     $$
 \end{lemmabox}
 
@@ -62,21 +62,31 @@ of the \textit{Unbalanced} problem
     where have $f(n)$ known sources. Assume that $g(n)$ describes the input
     degree and $h(n)$ the output degree. We create a new \textit{Unbalanced}
     instance with in- and out-degree polynomials $p(n)= (\max\{g(n), h(n)\}) \cdot f(n)$.
-    We will use the figure {..} to illustrate our reduction. Essentially, we are
+    We will use the figure \ref{fig:unbalanced-ms-trans} to illustrate our reduction. Essentially, we are
     creating $f(n)$ groups where each group $i$ contains $\textit{out-degree}(s_i) \leq h(n)$ nodes
-    where $s_i$ is the $i$th known source of the original problem. For each node 
+    where $s_i$ is the $i$th known source of the original problem. For each node
     $k$ of the $i$th group, denoted as $v^i_k$, we are adding edge $v^i_k \to s_i$.
     Since each $s_i$ element has  $\textit{in-degree} = \textit{out-degree}$, we can
     observe that we are not creating any additional solutions. Since this transformation
-    is local, any other unbalanced node will stay the same and, therefore we can map the two solution sets.
+    is local, any other unbalanced node will stay the same and therefore the set of Solutions
+    is preserved.
+
+
+
+    \begin{figure}[h!]
+        \centering
+        \includegraphics[width=0.5\textwidth]{Chapter3/unbalanced-multi-source.pdf}
+        \caption{\textit{PolyS-Unbalanced} transformation to \textit{Unbalanced}}
+        \label{fig:unbalanced-ms-trans}
+    \end{figure}
 \end{proof}
 
 Lastly we can make the observation that we can create a 3D-matrix of problems such  that
 $$
-\forall i, j, k \in \mathbb{N} \cup \{\omega\} : M_{i,j,k} = k\textit{S-Unbalanced(i,j)}
+    \forall i, j, k \in \mathbb{N} \cup \{\textit{Poly}\} : M_{i,j,k} = k\textit{S-Unbalanced(i,j)}
 $$
 Where $\omega$ denotes polynomial values. The reason why we make this observation is for 3 main reasons.
-First, this gives us greater insights as to how problems in \textit{PPAD} relate with each other. 
+First, this gives us greater insights as to how problems in \textit{PPAD} relate with each other.
 For example, \textit{EndOfLine}  and \textit{2S-EoL}, even though they are very similar and
 we can reduce directly from one to another, their reductions between each other are non-parsimonious
 or if there exists one it must be non-trivial. This indicates possibilities for multiple hierarchies
@@ -85,11 +95,12 @@ with oracle separations of another.
 Second reason would be to demonstrate that an important milestone for our conjecture is to establish
 the relation between \textit{Unbalanced} and \textit{PureCircuit}. By our
 lemmas \ref{lem:unbalanced-lem-ppad-complete}, \ref{lem:unbalanced-lem-ppad-complete-sources}, we can observe
-that every possible variant of input,  output degree and known sources can be eventually reduced to \textit{Unbalanced}.
+that every possible variant of input, output degree and known sources can be eventually reduced to \textit{Unbalanced}.
 In addition, the majority of problems in \textit{PPAD} are related with each other by some form of an unbalanced directed graph,
-due to their eventual reductions to the \textit{EndOfLine} problems. We emphasize that this does not imply that every \textbf{PPAD} 
+due to their eventual reductions to the \textit{EndOfLine} problems. We emphasize that this does not imply that every \textbf{PPAD}
 problem can be parsimoniously reduced to the \textit{Unbalanced} problem, but more to indicate some heuristical argument
-as to why this might be an important problem to study.
+as to why this might be an important problem to study. We may even extend our previous conjecture
+to relate \textit{Counting-nSS} with \textit{Unbalanced}.
 
 Third reason, is that these hierarchies seem to reveal some hidden interesting structures in \textbf{PPAD} and in
 \textbf{TFNP} as a whole. As Hollender et al. \cite{hollender_ComplexityMultisourceVariants_2018} also indicated,
