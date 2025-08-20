@@ -334,7 +334,7 @@ research, we demonstrate a parsimonious reduction from\\\textit{HF-DiscreteStron
     $[\Lambda(x_{-i}(0))]_i = 1 \neq \mathbf{x}[o^i]$. We can make a similar argument for $\mathbf{x}[o^i] = 1$.
     Therefore, a satisfying assignment corresponds to some panchromatic solution. Given that
     our instance is in \textit{HF-DiscreteStrongSperner}, it has to be the case that
-    all $u^i \in M^1_n$, otherwise that would imply that there exists a $(n-1)$-subspace that also covers all the labels.
+    all $u^i \in M_1^n$, otherwise that would imply that there exists a $(n-1)$-subspace that also covers all the labels.
     This also shows that there exists a 1-to-1 mapping between a panchromatic cube and a satisfying assignment.
 \end{proof}
 
@@ -350,7 +350,7 @@ In the paper
 they demonstrated how one can apply the \textit{Snake Embedding} technique
 where one can fold the space in higher and higher dimensions
 with the goal of going from a $2^n \times 2^n$ space to  $f(n)^m$  where $m, f(n) \in O(n)$. The original reduction,
-expresses the ability to go from a $2^n \times 2^n$ space, to a $[2^f(n)]^d$ where $d = \lceil \frac{n}{f(n)} \rceil$ space,
+expresses the ability to go from a $2^n \times 2^n$ space, to a $[2^{f(n)}]^d$ where $d = \lceil \frac{n}{f(n)} \rceil$ space,
 where $f(n)$ is some well-defined polynomial function that grows linearly or less.
 We know that \textit{EndOfLine} can parsimoniously reduce to the \textit{2D-StrongSperner} problem using
 planar embedding method by Chen et al. \cite{chen_Complexity2DDiscrete_2009},
@@ -465,7 +465,8 @@ as we can see from the figure \ref{fig:chap-2:rleaf-eol}. We will use these redu
 \end{figure}
 
 Assume that $C_n \subset G_n$ are the sets of all planar graphs such that
-$\forall v\in V_n: \textit{deg}(v) \in \{(1,0), (0,0), (0,1)\}$.
+$\forall v\in V_n: \textit{deg}(v) \in \{(1,0), (0,0), (0,1), (1,1)\}$.
+
 Clearly we can observe that by the above connstruction of edge removal, all \textit{EndOfLine} problems
 parsimoniously reduce to the \textit{2D-EoL} problem.
 

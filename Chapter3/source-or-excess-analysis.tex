@@ -44,17 +44,17 @@ the space and the paths the nodes take. First we double $V_n$ as such:
 Such that now every node is represented as $(0, 12i)$.
 Morevover for edge in $(i,j) \in E_{n}$ create path and MSB of $i$ is $0$, then we define path:
 \begin{align*}
-    \mathbf{p}^1 & = (0, 12i)                                                                          \\
-    \mathbf{p}^2 & = (6(ni + j), 12i)                                                                  \\
-    \mathbf{p}^3 & = (6(ni + j), 12j + 6)                                                              \\
-    \mathbf{p}^4 & = (0, 12j + 6)                                                                      \\
-    \mathbf{p}^5 & = (0, 12j)                                                                          \\
-    E_{ij}       & E(\mathbf{p}^1\mathbf{p}^2) \cup \dots  \cup E(\mathbf{p}^4\mathbf{p}^5)
+    \mathbf{p}^1 & = (0, 12i)                                                                 \\
+    \mathbf{p}^2 & = (6(ni + j), 12i)                                                         \\
+    \mathbf{p}^3 & = (6(ni + j), 12j + 6)                                                     \\
+    \mathbf{p}^4 & = (0, 12j + 6)                                                             \\
+    \mathbf{p}^5 & = (0, 12j)                                                                 \\
+    E_{ij}       & = E(\mathbf{p}^1\mathbf{p}^2) \cup \dots  \cup E(\mathbf{p}^4\mathbf{p}^5)
 \end{align*}
 If $j$ is a double sink, attach a small tail:
 \begin{align*}
-    \mathbf{p}^6 & = (3, 12j)                             \\
-    E_{ij}'      & \triangleq E_{ij} \cup E(\mathbf{p}^5\mathbf{p}^6)
+    \mathbf{p}^6 & = (3, 12j)                                         \\
+    E_{ij}'      & = E_{ij} \cup E(\mathbf{p}^5\mathbf{p}^6)
 \end{align*}
 If $i^{n+1}=1$, then we create path
 \begin{align*}
@@ -62,7 +62,7 @@ If $i^{n+1}=1$, then we create path
     \mathbf{p}^2 & = (6(ni + j), 12i)                                                                                       \\
     \mathbf{p}^3 & = (6(ni + j), 12j)                                                                                       \\
     \mathbf{p}^4 & = (3, 12j)                                                                                               \\
-    E_{ij}       & \triangleq E(\mathbf{p}^1\mathbf{p}^2) \cup E(\mathbf{p}^3\mathbf{p}^4) \cup E(\mathbf{p}^3\mathbf{p}^4)
+    E_{ij}       & = E(\mathbf{p}^1\mathbf{p}^2) \cup E(\mathbf{p}^3\mathbf{p}^4) \cup E(\mathbf{p}^3\mathbf{p}^4)
 \end{align*}
 
 In the original problem, we argued that for every node, we have I/O lines that denote the input output nodes,
@@ -268,10 +268,10 @@ is discrete and antipodal which implies that no additional cubes are generated.
 
 For the double sink case, we use the figure \ref{fig:chap-3:double-sink-point}, to observe what happens around the double
 sink area.
-For points $m^{ij}_{-3}(0), m^{ij}_{-3}(1)$, we can observe that their labelling is antipodal, meaning given our counting
-defintion, all surrounding cubes that contain the side $(m^{ij}_{-3}(0), m^{ij}_{-3}(1))$ count as one solution.
-We can manually observe that for each outer face of the combined panchromatic cube there will 
-always exist a dimension whose colouring is not covered. For example we can see 
+For points $m_{ij}^{0}, m_{ij}^{1}$, we can observe that their labelling is antipodal, meaning given our counting
+defintion, all surrounding cubes that contain the side $(m_{ij}^{0}, m_{ij}^{1})$ count as one solution.
+We can manually observe that for each outer face of the combined panchromatic cube there will
+always exist a dimension whose colouring is not covered. For example we can see
 that for all faces on top of the combine cube never cover the $-$ dimension.
 We can make similar arguments for the left and right outer faces.
 Since the outer faces do not yield a solution, that means we have only one solution and therefore
