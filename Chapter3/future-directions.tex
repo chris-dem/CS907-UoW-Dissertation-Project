@@ -1,0 +1,64 @@
+
+In our research were able to highlight several directions that one could take.
+We mainly highlight to directinos: \textbf{HF-PPAD} in  \textbf{PPAD}
+and topological representations of directed graphs
+
+\subsection{\textbf{HF-PPAD} in  \textbf{PPAD}}
+
+In our sections \ref{sec:pc-plus-eol} and \ref{sec:sc-excess}, made references to
+how Kleene logic can be incroportated with \textbf{PPAD} problems. For
+the \textit{nD-StrongSperner} problems we observed that \textit{Kleene logic}
+provides a natural extension and is equivalent to its non hazard counterpart.
+For other problems such as \textit{StrongSperner}, we observed that this
+is not clear by current complexity assumptions and indeed proving \textbf{PPAD}-hardness
+would be essential for establishing the counting hardness of \textit{PureCircuit}.
+But one could ask further questions such as, could we define
+complexity classes such as \textbf{HF-PPAD} and could we show that
+$\textbf{HF-PPAD} = \textbf{PPAD}$.
+Along similar line, we can also ask the questions as to existence of problems
+\textit{HF-nD-Counting-SS} and if they are parsimonious to their non hazard-free variants.
+We know that the non counting version can be resolved parsimoniously
+but we argue that it is not so simple when we omit panchromatic cubes as by doubling
+the cubes, we may introduce more solutions.
+
+
+Even more naturally, one can also ask further questions such as, how does hazard-freeness
+affect \textbf{TFNP} as a whole. We conjecture that one can make
+similar observations to the \textit{StrongTucker} problem \cite{aisenberg_2DTuckerPPA_2020},
+in order to create similar classes such as \textbf{HF-PPA} as
+it also uses a very similar colouring argument as the \textit{StrongSperner} argument.
+Morevore we were able to observe how we can use \textit{Kleene logic} with
+\textit{PLS} subproblems like \textit{Tarski}. We believe that this shift
+in perspective may also give insights to other areas such as the circuit complexity \textit{Hazard-Free Circuits}.
+
+
+\subsection{Parsimonious Topological Representations of \textbf{PPAD} problems }
+
+
+From the previous sections we observed how to reduce \textit{SourceOrExcess}$(2,1)$ to a topological problem.
+Just like in the \textit{EndOfLine} problem, we found it essential to reduce it to a \textit{StrongSperner} problem
+with polynomial sides and very high dimensionality. We believe that one could abuse the \textit{Snake Embedding} methodology
+that we proposed earlier but there are two main questions that need to be resolved:
+\begin{enumerate}
+    \item Will the number of solutions between foldings stay the same?
+    \item Is there a natural way to define \textit{Counting-SS}?
+\end{enumerate}
+More interestingly, we made references of $\alpha-\textit{SUnbalanced}(\Delta_i, \Delta_o)$
+and how they can affect the counting nature of each other. Like we mentioned previously, for
+\textit{2D-StrongSperner} and \textit{1-MC}, we cannot guarantee parsimonious reductions, but
+when we mapped our instances to a $3D$ space that was indeed possible. We therefore make the following conjecture:
+
+\begin{conjecturebox}{\textit{nD-CountingSS} and \textit{Unbalanced}}{}
+    There exist some polynomial computable function $f :\mathbb{N}^3 \to \mathbb{N}$, such that
+    given $\alpha,\Delta_i, \Delta_o \in \mathbb{N}$ and $m= f(\alpha, \Delta_i, \Delta_o)$
+    $$
+        \textbf{PPAD}(\alpha\textit{-SUnbalanced}(\Delta_i, \Delta_o)) \subseteq
+        \textbf{PPAD}(m\textit{D-CountingSS})
+    $$
+\end{conjecturebox}
+What the above conjecture essentially describes is, given a number of known sources and the
+maximum number of input/output vertices of graph, can we create some \textit{nD-CountingSS}
+that is parsimonious to its graphical representation? Since we know that the problem \textit{Unbalanced}
+can parsimoniously count every variant, can we also reduce \textit{Unbalanced} to a topological
+problem? A reduction like that would be an important milestone for the usage topological \textit{PureCircuit} constructions
+for enumerating solutions.
