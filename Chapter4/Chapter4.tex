@@ -25,7 +25,7 @@ where entities with varying components exist in world state. Each \textit{entity
 interacts with each other based on systems. A visual reference is provided in the
 figure \ref{fig:chap-4:ecs-example}. The idea is that we are able to decouple
 the logic from entities to their individual components and express
-more intricate relations. 
+more intricate relations.
 
 \begin{figure}[h!]
     \centering
@@ -68,8 +68,8 @@ maintained across all possible inputs, such as a sorted output, or a validating 
 For our purposes, we use value-based property testing in which:
 We define a set of types where in each one we define a \textit{generator} and a \textit{shrinking strategy}.
 The \textit{generator} is responsible for generating random values or significant values
-that represent the specific type. The \textit{shrinking strategy} is responsible 
-for finding the smallest case in which our case fails. We then 
+that represent the specific type. The \textit{shrinking strategy} is responsible
+for finding the smallest case in which our case fails. We then
 define test cases that automatically run the generator and shrinker procedures until,
 we have tested that our function passes across all generated inputs, or finds the smallest test case it fails on.
 
@@ -129,7 +129,7 @@ It may significantly struggle against large graphs or instances
 that multiple changes need to occur in order to reach an optimal point.
 In fact we can further argue that hill climbing may struggle on the
 \textit{Purify}  gate due to the non-linearity that they present.
-Future ideas can adopt \textit{Simulating annealing} which 
+Future ideas can adopt \textit{Simulating annealing} which
 which is a metaheuristic algorithm, where at the start of our run,
 we allow for a greater variance in our choices and as we progress, we become
 stricter and stricter with the next neighbour choice \cite{schwefel_EvolutionOptimumSeeking_1995}.
@@ -137,45 +137,55 @@ stricter and stricter with the next neighbour choice \cite{schwefel_EvolutionOpt
 \subsection{Evolutionay Algorithm}
 
 Evolutionary algorithms as the names suggests are based of the
-idea of evolution. 
-They were introduced by \cite{holland_AdaptationNaturalArtificial_1992}, 
+idea of evolution.
+They were introduced by \cite{holland_AdaptationNaturalArtificial_1992},
 it is a useful algorithm has found several usages in computer science, particularly
 in optimisation problems such as \textit{TSP} problems \cite{moon_EfficientGeneticAlgorithm_2002}
 or \textit{Neural Networks} \cite{stanley_EvolvingNeuralNetworks_2002,stanley_HypercubeBasedIndirectEncoding_2009}.
 
-Given figure \ref{fig:chap-4:evo-drawing}, 
+Given figure \ref{fig:chap-4:evo-drawing},
 we can summarise the 5 core elements of the genetic algorithm:
 \begin{enumerate}
     \item \textbf{Chromosones}: Solution assignments of our \textit{PureCircuit} instance.
     \item \textbf{Population}: A set of \textbf{chromosones}.
     \item \textbf{Fitness step}: Evaluation step. We measure how good the assingment is
-    by counting the number of errors it has.
+          by counting the number of errors it has.
     \item \textbf{Selection step}: Given a selection strategy, select
-    suitable canditates in order to create the population for the next step.
-    In literature, there are many types that one can use \cite{katoch_ReviewGeneticAlgorithm_2021}
-    such as \textit{Roulette based} selection, or \textit{Tournament based} selection. 
-    We mainly use \textit{Tournament based} selection where randomly select a set of
-    chrosomones and pick the best one. This process is repeated until enough chromosones have been selected.
+          suitable canditates in order to create the population for the next step.
+          In literature, there are many types that one can use \cite{katoch_ReviewGeneticAlgorithm_2021}
+          such as \textit{Roulette based} selection, or \textit{Tournament based} selection.
+          We mainly use \textit{Tournament based} selection where randomly select a set of
+          chrosomones and pick the best one. This process is repeated until enough chromosones have been selected.
     \item \textbf{Crossover step}: Given two chromosones from the
-    \textbf{Selection step}, combine the genes from each parent, in order
-    to create a new instance. We allow for two main types of crossover methods:
-    \begin{enumerate}
-        \item \textit{Crossover Uniform}: Each gene of the child is randomly selected from either parent. This allows for 
-        diverse solutions to be explored. Can reduce diversity but performs well on large population sizes \cite{katoch_ReviewGeneticAlgorithm_2021}.
-        \item \textit{Crossover Rejuvenate}: Closely similar to the $(\mu + \lambda)$-evolutionary strategy \cite{baeck_EvolutionaryComputation1_2018}, where
-        we use the best performing parent genes.
-    \end{enumerate}
+          \textbf{Selection step}, combine the genes from each parent, in order
+          to create a new instance. We allow for two main types of crossover methods:
+          \begin{enumerate}
+              \item \textit{Crossover Uniform}: Each gene of the child is randomly selected from either parent. This allows for
+                    diverse solutions to be explored. Can reduce diversity but performs well on large population sizes \cite{katoch_ReviewGeneticAlgorithm_2021}.
+              \item \textit{Crossover MultiPoint}: Using figure \ref{fig:chap-4:crossover-cutoff} as reference,
+                    we select crossover points that determine cutoff points
+                    from each parent. For each even sequence we use the sequence of the other parent. This method
+                    can be useful if consecutive pairs of genes are needed to improve the fitness.
+          \end{enumerate}
     \item \textbf{Mutation step}: Given the offspring of the
-    \textbf{Crossover step}, we stochastically modify each gene in
-    order to introduce diversity, which allows our chromosones to explore
-    the solution space.
+          \textbf{Crossover step}, we stochastically modify each gene in
+          order to introduce diversity, which allows our chromosones to explore
+          the solution space and escape local optima \cite{katoch_ReviewGeneticAlgorithm_2021}.
 \end{enumerate}
 
-\begin{figure}
+\begin{figure}[h!]
     \centering
     \includesvg[width=0.7\textwidth]{Chapter4/intro-1.svg}
-    \caption{Image source and description \cite{wychowaniec_2021}}
+    \caption[Visual representation of the genetic algorithm cycle]{Visual representation of the genetic algorithm cycle. Image source \cite{wychowaniec_2021}}
     \label{fig:chap-4:evo-drawing}
+\end{figure}
+
+
+\begin{figure}[h!]
+    \centering
+    \includegraphics[width=0.3\textwidth]{Chapter4/cutoffpoint.png}
+    \caption{Crossover with multiple cutoff points. Image source \cite{katoch_ReviewGeneticAlgorithm_2021}}
+    \label{fig:chap-4:crossover-cutoff}
 \end{figure}
 
 The repetition of the steps eventually converges to an assignment that is satisfying.
@@ -201,70 +211,96 @@ split our algorithm to two main procedures:
 
 
 
-\begin{breakablealgorithm}[h!]
+\begin{breakablealgorithm}
     \caption{PureCircuit Backtracking Algorithm Enumerator}
     \begin{algorithmic}
-        \Function{BacktrackInstatiation}{pc}
-        \State $V \leftarrow \textit{PCExtract}(pc)$
-        \State $S \leftarrow \textit{Map}(V, \texttt{KleeneSet::all}())$
+        \Function{BacktrackInstatiation}{pc \texttt{: PureCircuitInstance}}
+        \State $V \leftarrow$ \Call{PCExtract}{pc}
+        \Comment {Extract value nodes from the \textit{PureCircuit} instance}
+        \State $S \leftarrow$ \Call{Arr}{$|V|$, \Call{KleeneSetInit}{$\{0, \bot, 1\}$}}
         \Comment {Create a state vector that contains the \textit{KleeneSet} data-structure.}
-        \State $Q \leftarrow$ \Call{PriorityQueueInit}{()}
-        \For{$\textit{el} \in V$}
-        \State \Call{PushPQ}{Q, \texttt{el.indesx}, \Call{KeyStruct}(3, el)}
+        \State $Q \leftarrow$ \Call{PriorityQueueInit}{$\emptyset$}
+        \For{$\texttt{el} \in V$}
+        \State \texttt{pq\_key} $\leftarrow$ \Call{KeyStruct}{3,  \texttt{el.is\_source}(), \texttt{el.num\_neigh}()}
+        \State \Call{PushPQ}{$Q$, \texttt{pq\_key}, \texttt{el.index}}
         \EndFor
         \State \Return $S, Q$
         \EndFunction
 
-        \Function{BacktrackPureCircuit}{pc \texttt{:PureCircuit}}
+        \Function{BacktrackPureCircuit}{pc \texttt{:PureCircuitInstance}}
         \State $S, Q \leftarrow$ \Call{BacktrackInstatiation}{pc}
         \State $A \leftarrow$ \Call{Arr}{$|V|, \emptyset$}
-        \State $r \leftarrow$ \Call{BacktrackIteration}{$\text{pc}, A, S, Q$}
+        \State $r \leftarrow$ \Call{BacktrackIteration}{pc, $A$, $S$, $Q$}
         \State \Return $r$
         \EndFunction
 
-        \Function{BacktrackIteration}{$\text{pc}, A, S, Q$}
+        \Function{BacktrackIteration}{
+        \Statex \qquad pc \texttt{:PureCircuitInstance},
+        \Statex \qquad $A$ \texttt{:Arr[Kleene]},
+        \Statex \qquad $S$ \texttt{:Arr[KleeneSet]},
+        \Statex \qquad $Q$ \texttt{:PriorityQueue}
+        \\}
         \If{\Call{IsEmpty}{$Q$}}
         \State \Return $[A]$
         \EndIf
-        \State $m \leftarrow$ \Call{ExtractMin}{$Q$}
+        \State min\_graph\_ind $\leftarrow$ \Call{ExtractMin}{$Q$}
         \State $r \leftarrow []$
         \For{$v \in S[m]$}
         \State $S' \leftarrow$ \Call{Clone}{$S$}
         \State $Q' \leftarrow$ \Call{Clone}{$Q$}
-        \State $\textit{result} \leftarrow$\Call{UnitPropagate}{$\text{pc}, m, v, A, S', Q'$}
+        \State $A' \leftarrow$ \Call{Clone}{$A$}
+        \State $\textit{result} \leftarrow$\Call{UnitPropagate}{\text{pc}, min\_graph\_in, v, $A'$, $S'$, $Q'$}
         \If{$\textit{result} = \bot$}
         \State \textbf{Continue}
         \EndIf
-        \State $r' \leftarrow$\Call{BacktrackIteration}{$\text{pc}, A, S', Q'$}
+        \State $r' \leftarrow$\Call{BacktrackIteration}{$\text{pc}, A', S', Q'$}
         \State $r \leftarrow$ \Call{ConcatArray}{$r, r'$}
         \EndFor
         \State \Return $r$
         \EndFunction
 
-        \Function{UnitPropagation}{$\text{pc},m , v, A, S, Q$}
-        \State \Call{AssignNode}{}
-        \State \Call{PropagateNode}{}
-        \While{\texttt{Q.is\_empty()}$\wedge$\texttt{Q.peek().key.value\_len}$=1$}
-        \State $\text{ind} \leftarrow$\Call{Pop}{$Q$}
-        \State $v \leftarrow$\Call{Pop}{$S[\text{ind}]$}
-        \State \Call{AssignNode}{}
-        \State \Call{PropagateNode}{}
+        \Function{UnitPropagation}{
+        \Statex \qquad pc         \texttt{:PureCircuitInstance},
+        \Statex \qquad nod\_ind   \texttt{:GraphIndex},
+        \Statex \qquad nod\_val   \texttt{:GraphValue},
+        \Statex \qquad $A$        \texttt{:Arr[Kleene]},
+        \Statex \qquad $S$        \texttt{:Arr[KleeneSet]},
+        \Statex \qquad $Q$        \texttt{:PriorityQueue}
+        \\}
+        \State \Call{AssignNode}{nod\_ind, nod\_val, $A$, $S$, $Q$}
+        \State \Call{PropagateNode}{pc, nod\_ind, nod\_val, $A$, $S$, $Q$}
+        \While{$\neg$\Call{IsEmpty}{$Q$}$ \wedge$ \Call{PeekKey}{$Q$}.set\_length $=1$}
+        \Comment{While the queue contains an element whose value can take only one element, assign its value}
+        \State ind $\leftarrow$ \Call{ExtractMin}{$Q$}
+        \State val $\leftarrow S[\text{ind}]$
+        \State \Call{AssignNode}{ind, val, $A$, $S$, $Q$}
+        \State \Call{PropagateNode}{pc, nod\_ind, nod\_val, $A$, $S$, $Q$}
         \EndWhile
-        \If {\texttt{Q.is\_empty}()}
+        \If {\Call{IsEmpty}{$Q$}}
+        \Comment{If every element is assigned, accept}
         \State \Return $\top$
         \EndIf
-        \If {\texttt{Q.peek.key.value\_len}$=0$}
+        \If {\Call{PeekKey}{$Q$}.set\_length $=0$}
+        \Comment{If the queue contains an element which does not have a satisfying assignment, discard the current assignment}
         \State \Return $\bot$
         \EndIf
         \State \Return $\top$
         \EndFunction
 
-        \Function{PropagateNode}{\texttt{pc, m , A, S, Q}}
-        \For{$g \in$ \Call{GetAllGateNeighbours}{pc, m}}
+        \Function{PropagateNode}{
+        \Statex \qquad pc         \texttt{:PureCircuitInstance},
+        \Statex \qquad nod\_ind   \texttt{:GraphIndex},
+        \Statex \qquad $A$        \texttt{:Arr[Kleene]},
+        \Statex \qquad $S$        \texttt{:Arr[KleeneSet]},
+        \Statex \qquad $Q$        \texttt{:PriorityQueue}
+        \\}
+        \For{$g \in$ \Call{GetAllGateNeighbours}{pc, nod\_ind}}
         \State $I \leftarrow$ \Call{GetValueSets}{\texttt{Input}}
         \State $O \leftarrow$ \Call{GetValueSets}{\texttt{Output}}
-        \State $(I', O') \leftarrow$ \Call{EvaluateSets}{$g, I, O$}
+        \State $(I', O') \leftarrow$ \Call{SetSimplification}{$g, I, O$} 
+        \Comment{Determine the available value sets for each input output element given the elements that have been already assigned}
         \State \Call{PropagateSetValues}{$Q,S, I', I$}
+        \Comment{Propagate the changes to their value sets and to their queue keys for both the input and output elements}
         \State \Call{PropagateSetValues}{$Q,S, O', O$}
         \EndFor
         \EndFunction
@@ -282,18 +318,20 @@ which nodes to select and evaluate.
 We want to reduce the recursive calls as much as possible and eliminate any partial assignments
 that lead to unsatisfying solutions.
 stores the node references of the value nodes
-and uses as keys the structure \texttt{KeyStruct}$(e)$.
-The \texttt{KeyStruct} is a structrue that orders elements lexicographically
+and uses as keys the structure \textsc{KeyStruct}$(e)$.
+The \textsc{KeyStruct} is a structrue that orders elements lexicographically
 based on the following order:
 \begin{enumerate}
-    \item \textbf{In descending}: The number of remaining elements
+    \item \textbf{In descending}: The number of possible value elements the current node can take
     \item \textbf{In Ascending}: Whether the node has an \textit{in-degree} of $0$
     \item \textbf{In Ascending}: The total number of neighbours
 \end{enumerate}
-We argue that the above strategy minimises the recursive calls breadth. Moreover,
-nodes with \textit{in-degree} of $0$ as for each value of their assignment, a solution should exist.
+We argue that the above strategy minimises the breadth of the recursive calls. Moreover,
+for each node with \textit{in-degree} of $0$ as for each value of their assignment, a solution should exist.
+The heurestical argument for this can be observed in Deligkas et al. \cite{deligkas_PureCircuitTightInapproximability_2024}, 
+where there construction for finding solutions allows for source nodes to be independent.
 Lastly, prioritising nodes with the highest neighbour count implies that we
-propagate changes to many gates and therefore prioritise the \textit{Unit Appplication}
+propagate changes to a greater number gates and therefore maximise the influence of the \textit{Unit Propagation}
 procedure.
 
 \paragraph*{Unit Propagation operation}
@@ -312,7 +350,7 @@ current assingment is not valid and we return false, otherwise we return true.
 Given a gate, we have a set of possible values for each of our nodes,
 as determined by our value set. The idea is
 that we want to reduce the set possible values by following the rules of the gate.
-For example, we an \textbf{AND} gate with triplet of values $(\{0,\bot,1\}, \{0,\bot,1\}, \{0,\bot,1\})$.
+For example, we given an \textbf{AND} gate.
 If the output value is assigned the value $1$, then we know that the inputs can only take values
 $(1,1)$ and therefore we restrict the values of the input sets to $\{1\}, \{1\}$.
 If the current solution set of a node is $v_t$, then its updated set is
@@ -369,8 +407,8 @@ create a copy of the current queue, current solution assingment and value set st
 and apply the \textit{Unit value propagation} operation. After that create a recursive call
 apply the \textit{backtrack opertation} again until the current recursion chain
 terminates with a solution or rejects.
-At the tree of every execution call, merge the solution assignments in each level and return
-the sets.
+At the root of every execution call, merge the solution assignments in each level and return
+the sets. The root call will return a set of every possible valid assingment set.
 
 
 \subsubsection{Correctness and Running Time analysis}
@@ -378,63 +416,73 @@ the sets.
 For the running time analysis, we can observe that each time we assign a node,
 the unit propagation operation, resticts the solution set of the value nodes that are incident
 by one gate. Even in the worst case scenario where no reduction occurs, we can clearly
-see that each time, our priority queue will select a node and will recurse through each of each possible values,
-creating a call tree with depth of at most $n$. Therefore we can argue even if the running time of the algorithm
-is $O(3^n)$, we can observe that the unit propagation and set reduction methods reduce the width and depth greately.
+see that each time, our priority queue will select a node and will recurse through each of its possible values,
+creating a call tree with depth of at most $n$. Therefore we can argue that the running time of the algorithm
+is $O(3^n)$, we can observe as the unit propagation and set reduction methods attempt to reduce in the average cases.
 
 
 As for correctness, the algorithm essentially picks nodes in a certain order and selects a
 value that we believe that will give a satisfying assignment. We only have to look
 at what happens at the \textit{unit propagation} stage. We can observe that in each stage,
 we are essentially limiting the set of solutions to only the ones
-that will give a satisfying assignment. If the value set of a node is zero, it means that no assignment
-will lead to a solutin and therefore we reject the current path.
+that will give a satisfying assignment. The idea is that we are fast-forwarding the backtracking calls
+by taking advantage of the localised changes of each gate.
+Value that we discard are nodes that are guarnteed to give unsatisfying assingments and therefore
+we are not discrading any solutions.
+If the value set of a node is zero, it means that no assignment
+will lead to a solution and therefore we reject the current path.
 If no nodes are left in the queue, that means that all value nodes are assigned and therefore we can return the current assignment.
-This implies that our resulting array of assignments contains only valid solutions.
-A
+This implies that our resulting array of assignments contains only valid solutions, and this array
+covers the maximal solution set.
+
 
 \subsection{Future Extensions}
-
 
 \subsubsection{Algorithmic Extensions}
 Although the aforementioned algorithms work as expected, there are several improvements that can be made.
 For all three of the algoritmic methods we mentioned, the first and most important extension
-is to treat weakly directly connected components individaully. Trivially an assignment in one
-weakly connected component should not affect the solution set of the other one. 
-We can therefore reduce the solution spaces of our problems by finding
-the solution sets in each graph seperately. Moreover for the 
+is to treat weakly directly connected components individually. Trivially an assignment in one
+weakly connected component should not affect the solution set of the other one.
+We can therefore reduce the search spaces of our problems by finding
+the solution sets in each graph seperately. Moreover for the
 \textit{backtracking} algorithm, we can extend the above idea by considering
-the cartesian product of the solution sets, meaning: 
+the cartesian product of the solution sets, meaning:
 let $G_i$ denote a (weakly) connected component of $G$ and $\textbf{sol}(\cdot)$
 denotes its solution set. Its trivial to observe that
 $$
-\textbf{sol}(G) = \bigtimes_{k \in [k]}  \textbf{sol}(G_k)
+    \textbf{sol}(G) = \bigtimes_{k \in [k]}  \textbf{sol}(G_k)
 $$
 
-We can also optimise the Backtracking algorithm even further.
+We can also optimise the backtracking algorithm even further.
 First one can observe that if our graph was acyclic, then
 the permutation of the nodes with no \textit{in-degree} solutions essentially
 dictate the assignments of the downstream nodes (excluding nodes incident
 to purify gates). With this in mind, we can apply the following sequence
 of steps to make the backtracking algorithm simpler:
 \begin{enumerate}
-    \item Identify the strongly connected components of the circuit, using polynomial
-    time algorithms such as Kosaraju's Algorithm or Gabow's Algorithm. %%TODO: ADD citations
-    \item Treating SCCs as an individual node, identify nodes by their distances from 
-    base nodes (nodes with no incoming edges)
+    \item Identify the strongly connected components (SCCs) of the circuit, using polynomial
+          time algorithms such as Kosaraju's Algorithm \cite{sharir_StrongconnectivityAlgorithmIts_1981} 
+          or Gabow's Algorithm \cite{gabow_PathbasedDepthfirstSearch_2000}. 
+    \item Treating SCCs as an individual node, identify nodes by their distances from
+          base nodes (nodes with no incoming edges)
     \item Extend the backtracking algorithm so instead of the using the is start label,
-    use the distance from base instead. 
+          use the distance from base instead. The greater distance a node has from the
+          base, the less impact it has and therefore should be postponed in later stages of the
+          backtracking calls.
 \end{enumerate}
 
 We argue that the above heuristic may result in improved average times but of course
 further research can be done in order to determine more suitable selection heuristics.
-Lastly an additional heuristic that we failed to consider is using the notion
-of alternation or varying paths as highlighted in {..}. % TODO add references
-Essetnialy by continuously "propagating" the gate values, 
-one may be able to identify nodes that tent to alternate. This method
-was used to identify nodes that should be assingend with the $\bot$ value.
+Furthermore, an additional heuristic that we failed to consider is using the notion
+of alternation or varying path.
+This has been introduced by \cite{eichelberger_HazardDetectionCombinational_1965}
+and the idea is the ``application'' of the gates to propagate values.
+Their algorithm can be summarised as such:
+Start with an initial set of nodes, and apply gates of each circuit enough times.
+For nodes that alternate their values between $0,1$, replace their value with $\bot$
+Repeat until no altrenation occurs. This algorithm is still exponential
+in its running time but one could deduce useful insights as to notion
+of alternating paths.
 It has to be noted that it may not be entirely clear how such construction
 could be applied as the purify gate has a non-deterministic output, meaning
-for the $\bot$ value, the outputs could be multiple. This is the reason
-why we also don't necesserily propagat solution sets and instead only values as
-it may lead to infinite loops.
+for the $\bot$ value, the outputs could be multiple.
