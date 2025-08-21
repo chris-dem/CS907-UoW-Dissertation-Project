@@ -1,0 +1,79 @@
+With regard to the research management, we revolved our work around \texttt{Obsidian}.
+As we can observe in figure \ref{fig:theory:obsidian-usages},
+\texttt{Obsidian} beyond its traditional usage of note-taking, incorporates several handy tools such as note organisation and mind-mapping.
+
+
+
+\begin{figure}[h!]
+    \centering
+    \subfloat[Obsidian Graph]{
+        \includegraphics[width=0.3\linewidth]{assets/obsidian_graph.png}
+        \label{fig:theory:obsidian-graph}
+    }
+    \subfloat[Obsidian Canvas]{
+        \includegraphics[width=0.3\linewidth]{assets/obsidian-canvas.png}
+        \label{fig:theory:obsidian-canvas}
+    }
+    \subfloat[Obsidian mindmap]{
+        \includegraphics[width=0.3\linewidth]{assets/obsidian_mindmap.png}
+        \label{fig:theory:obsidian-mindmap}
+    }
+    \caption{Usages of Obsidian}
+    \label{fig:theory:obsidian-usages}
+\end{figure}
+
+
+
+\subsection{Risk Management}
+
+Due to the limited prior research on the counting complexity of $\textsc{\#TFNP} -1$,
+this project involves significant risks.
+Our justification for the proposed milestones was largely informed by existing knowledge regarding the complexity of circuit constructions.
+However, it remained entirely possible that our proposed reductions could prove to be infeasible.
+Furthermore, working with Kleene logic introduced additional complexity, and it could be the reason why
+establishing fully parsimonious reductions between the target problems may not be achievable.
+This is also the reason why we diverted our attention to bounded parsimonious reductions instead.
+A detailed overview of the associated risks and our proposed mitigation strategies is provided in the table \ref{tab:management:risk-management}.
+
+
+\begin{xltabular}{0.95\linewidth}{|Z{1.2cm}|Z{1.75cm}|Y|Y|Z{1.2cm}|}
+    \hline
+    \textbf{Severity} & \textbf{Probability} & \textbf{Description} & \textbf{Mitigation} & \textbf{Address} \\
+    \hhline{|=|=|=|=|=|}
+    High   & Medium & Software may not be feasible within the remaining time frame. & We focus on the validation and creation of instances.
+    The current project is primatoly research-based, and therefore we are mainly prioritising the theoretical development aspect. & Not yet      \\ \hline
+    Low    & Medium & Software not identifying a correct solution. & Usage of TDD techniques and property testing to ensure correctness.  Comparison with handmade instances. & Not yet      \\ \hline
+    Medium & Low    & Difficulty of showing the parsimonious reduction between  \textsc{PureCircuit} and  \textsc{nD-StrongSperner}. & Consult with the researchers that actively work on these problems. Lower the requirements
+    to polynomially bounded reductions instead. &  Not yet \\ \hline
+    High   & High   & Inability to make significant progress on the \textsc{SourceOrExcess} problems or the generalised statement. &
+    Establish reductions from other problems in order to demonstrate \textsc{\#P} hardness by starting from $\textsc{nD-StrongSperner}$. & Not yet \\ \hline
+    High   & High   & Incorrect proofs or reductions. &
+    Analyse the problem under different constraints.
+    Apply the duck method, where you attempt to explain the solution to a person who is not necessarily an expert. Validate proof with the supervisor or
+    use the tool to investigate sample cases. & On-going  \\ \hline
+    High   & Medium & Develop combinatorial-friendly variants of \textsc{PureCircuit}. & Apply robustness on the gate set of \textsc{PureCircuit}. Develop new gates or variants are easier to work with or focus
+    on a subset of solutions as explained in \ref{par:pure-circ-def}. & $\checkmark$  \\ \hline
+    \caption{Risk management table.} \label{tab:management:risk-management}
+\end{xltabular}
+
+
+\subsection{Timetable and Reflections}
+
+Figure \ref{fig:gantt-new} depicts how the remaining project is expected to progress with regard
+to the milestones we aim to achieve. Overall we modified our timeline to prioritise
+theory crafting, and therefore we hope this adjusted timeline will capture accurately the remaining duration
+of the project.
+
+\begin{figure}[h!]
+    \centering
+    \includegraphics[width=0.85\textwidth]{assets/Interim Gantt 20250708.pdf}
+    \caption{Updated Gantt chart}\label{fig:gantt-new}
+\end{figure}
+
+
+\subsection{Ethical Considerations}
+
+Due to the nature to the theoritical nature of the project, there were no ethical consideration
+that were required. All the data and diagrams that were created were either made by the
+author, redrawn by the author or borrowed from another paper. The libraries
+used to build the software were under the MIT license.
