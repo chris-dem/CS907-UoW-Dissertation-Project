@@ -1,3 +1,5 @@
+We start with looking at the \textit{StrongSperner}
+problem under the lens of \textit{Kleene logic}.
 The first objective of our disseration was to reduce the
 \textit{EndOfLine} problem to the \textit{PureCircuit} problem
 parsimoniously. We emphasize, that a non-parsimonious
@@ -5,24 +7,10 @@ reduction chain was already established by Deligkas et al. \cite{deligkas_PureCi
 Due to the difficulty of achieving such reductions, we tried to tackle the problem from both
 directions. One is by finding related problems from the \textit{EndOfLine}
 and the other is by finding problems that reduce to the \textit{PureCircuit} problem.
-More specifically, we list the following theorems:
-\begin{enumerate}
-    \item $\textit{\#nD-StrongSperner} \subseteq \textit{\#HF-nD-StrongSperner}$ \ref{thm:hf-nd-ss-hard}
-    \item $\textit{\#Hf-DiscreteStrongSperner} \subseteq \textit{\#PureCircuit}$ \ref{thm:hf-discrete-to-pure}
-    \item $\textit{\#EndOfLine} \subseteq \textit{AntipodalStrongSperner}$ \ref{thm:parsimonious-2d-strong-eol-to-antipodalss}
-\end{enumerate}
-We define the above problems and the theorems in the upcoming sections and
-argue that the above results bring us closer to a parsimonious reduction from the \textit{EndOfLine} problem.
+%TODO 
 
 \subsubsection{Hazard Free StrongSperner}
-The core idea of our this current section comes from following set of observations:
-when working with \textit{PureCircuit}, one cannot fully work with binary logic, meaning
-there is no trivial method for detecting $\bot$ values and removing them, as made clear by
-Marino's continuity argument \cite{marino_GeneralTheoryMetastable_1981}.
-We therefore make use of topological problems with the idea that resolutions of our input
-corresponds to some set nearby points in a space. If all points abide some property
-then we can use that to detect solutions. We start with looking at the \textit{StrongSperner}
-problem under the lens of \textit{Kleene logic}.
+
 First we begin with the idea that solutions of \textit{StrongSperner} problems
 revolve around the notion of panchromatic hypercubes. We can use the idea and make the following
 definitions
@@ -74,7 +62,7 @@ is \textbf{PPAD}-complete, and therefore \textit{HF-nD-StrongSperner} is in \tex
 To show the hardness, we claim that
 
 \begin{theorembox}{\textit{HF-nD-SS} hardness}{hf-nd-ss-hard}
-    \label{thm:hf-nd-ss-hard}
+    % \label{thm:hf-nd-ss-hard}
     $$
         \textbf{\#PPAD}(\textit{nD-SS}) \subseteq \textbf{\#PPAD}(\textit{HF-nD-SS})
     $$
@@ -255,7 +243,7 @@ research, we demonstrate a parsimonious reduction from\\\textit{HF-DiscreteStron
 \subsubsection{Hazard Free StrongSperner To PureCircuit}
 
 \begin{theorembox}{}{hf-discrete-to-pure}
-    \label{thm:hf-discrete-to-pure}
+    % \label{thm:hf-discrete-to-pure}
     $$
         \textbf{\#PPAD}(\textit{HF-DiscreteStrongSperner}) \subseteq \textbf{\#PPAD}(\textit{PureCircuit})
     $$
@@ -662,7 +650,7 @@ such reduction will resolve in an \textit{AntipodalStrongSperner} instance.
 
 
 \begin{theorembox}{}{parsimonious-2d-strong-eol-to-antipodalss}
-    \label{thm:parsimonious-2d-strong-eol-to-antipodalss}
+    % \label{thm:parsimonious-2d-strong-eol-to-antipodalss}
     $$
         \textbf{\#PPAD}(\textit{2D-StrongEoL}) \subseteq \textbf{\#PPAD}(\textit{AntipodalStrongSperner})
     $$

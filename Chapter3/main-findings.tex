@@ -1,0 +1,40 @@
+In this section, we explore on the approaches and findings we uncovered while
+tackling each of our theory objectives. More specifically,
+while we have not achieved a complete proof for each objective,
+we highlight several theorems
+that may assist in their full resolution.
+The core idea that we employed comes from following set of observations:
+when working with \textit{PureCircuit}, one cannot fully work with binary logic, meaning
+there is no trivial method for detecting $\bot$ values and removing them, as made clear by
+Marino's continuity argument \cite{marino_GeneralTheoryMetastable_1981}.
+We therefore make use of topological problems with the idea that resolutions of our input
+corresponds to some set nearby points in a space. If all points abide some property
+then we can use that to detect solutions.
+
+
+With respect to the first objective, we provide the following
+list of theorems.
+\begin{enumerate}
+    \item $\textit{\#nD-StrongSperner} \subseteq \textit{\#HF-nD-StrongSperner}$ \ref{thm:hf-nd-ss-hard}
+    \item $\textit{\#Hf-DiscreteStrongSperner} \subseteq \textit{\#PureCircuit}$ \ref{thm:hf-discrete-to-pure}
+    \item $\textit{\#EndOfLine} \subseteq \textit{AntipodalStrongSperner}$ \ref{thm:parsimonious-2d-strong-eol-to-antipodalss}
+\end{enumerate}
+The problems mentioned are defined in the section \ref{sec:pc-plus-eol}, where
+we also discuss their implications with respect to the current objective
+and with \textbf{PPAD} as a whole
+
+Following the same thought process for our second objective, we demonstated how to reduce \textit{SourceOrExcess}
+to a topological problem. Specifically in section \ref{sec:sc-excess} we argue the following result
+$$
+    \textit{\#SourceOrExcess}(2,1) \subseteq \textit{\#3D-CountingStrongSperner} %% TODO
+$$
+Where we define a different combinatorial version of the \textit{3D-StrongSperner} and demonstrate
+how it can be used for parsiomonious reductions between the $\textit{SourceOrExcess}(2,1)$ problem.
+
+
+In the third section, we offer an combinatorial extension to the \textbf{PPAD} class
+with regards to directed graphs and the number of known sources. Specifically
+given Hollender et al.'s work \cite{hollender_ComplexityMultisourceVariants_2018}
+on directed graphs with multiple known sources, we make
+on observations as to the combinatorial nature of the problems that can be created
+as well as important problems to analyse for a full \textit{PureCircuti} Cook-Levin type theorem.

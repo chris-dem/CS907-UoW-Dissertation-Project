@@ -29,22 +29,22 @@ to graphs with polynomial degree.
     $\textit{Unbalanced}$ is \textbf{PPAD}-complete \cite{hollender_ComplexityMultisourceVariants_2018}
 \end{lemmabox}
 
-%% TODO LOOK AT THIS EVENTUALLYHOLLENDER PROOF
-\begin{proof}
-    The \textbf{PPAD}-hardness is trivial since every \textit{EndOfLine} problem is an instance
-    of unbalanced. To show \textbf{PPAD}-completeness we demonstrate reduction to  \textit{PolyS-EoL}
-    which we know is \textbf{PPAD}-complete.
-    We are given an unbalanced instance $(\textbf{S}, \textbf{P}, \bar{f}, \bar{g})$.  For each node,
-    we have a predecessor set  $\{p_i\}_{i \in [d_i]}$ and a successor set $\{s_i\}_{i \in [d_{o}]}$, where $d_i$ and
-    $d_o$ denote the input and output degrees respectively.
-    We assume the  successor-predecessor list of nodes is sorted and WLOG and assume
-    we have node $v \in \{0,1\}^n \smallsetminus \{0^n\}$ such that $d_i = d_o + k$. We create $d_i$ copies
-    of $v$ such that: For each $j \in [d_o]$, we create edges $p_j \to v_j \to s_j$. Moreover, we create
-    additional sinks such that $\forall j \in [k]: p_{d_o + j} \to v_{d_o + j}$. We can make a similar argument
-    for $d_o > d_i$. We can observe that if $d_i = d_o$, then we create no additional solutions. Lastly for the $0^n$ node,
-    we observe that our construction can result in at most $g(n)$ additional sources and therefore,
-    we can create an instance of \textit{PolyS-EoL}
-\end{proof}
+% %% TODO LOOK AT THIS EVENTUALLYHOLLENDER PROOF
+% \begin{proof}
+%     The \textbf{PPAD}-hardness is trivial since every \textit{EndOfLine} problem is an instance
+%     of unbalanced. To show \textbf{PPAD}-completeness we demonstrate reduction to  \textit{PolyS-EoL}
+%     which we know is \textbf{PPAD}-complete.
+%     We are given an unbalanced instance $(\textbf{S}, \textbf{P}, \bar{f}, \bar{g})$.  For each node,
+%     we have a predecessor set  $\{p_i\}_{i \in [d_i]}$ and a successor set $\{s_i\}_{i \in [d_{o}]}$, where $d_i$ and
+%     $d_o$ denote the input and output degrees respectively.
+%     We assume the  successor-predecessor list of nodes is sorted and WLOG and assume
+%     we have node $v \in \{0,1\}^n \smallsetminus \{0^n\}$ such that $d_i = d_o + k$. We create $d_i$ copies
+%     of $v$ such that: For each $j \in [d_o]$, we create edges $p_j \to v_j \to s_j$. Moreover, we create
+%     additional sinks such that $\forall j \in [k]: p_{d_o + j} \to v_{d_o + j}$. We can make a similar argument
+%     for $d_o > d_i$. We can observe that if $d_i = d_o$, then we create no additional solutions. Lastly for the $0^n$ node,
+%     we observe that our construction can result in at most $g(n)$ additional sources and therefore,
+%     we can create an instance of \textit{PolyS-EoL}
+% \end{proof}
 
 We can also prove that the number of known sources does not affect the complexity
 of the \textit{Unbalanced} problem
