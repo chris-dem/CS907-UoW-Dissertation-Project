@@ -134,7 +134,7 @@ which is a metaheuristic algorithm, where at the start of our run,
 we allow for a greater variance in our choices and as we progress, we become
 stricter and stricter with the next neighbour choice \cite{schwefel_EvolutionOptimumSeeking_1995}.
 
-\subsection{Evolutionay Algorithm}
+\subsection{Genetic Algorithm}
 
 Evolutionary algorithms as the names suggests are based of the
 idea of evolution.
@@ -198,7 +198,6 @@ to different species in order to maintain diversity and increase
 the odds of finding a solution.
 
 %%TODO: RECORD STUFF
-
 
 
 
@@ -297,7 +296,7 @@ split our algorithm to two main procedures:
         \For{$g \in$ \Call{GetAllGateNeighbours}{pc, nod\_ind}}
         \State $I \leftarrow$ \Call{GetValueSets}{\texttt{Input}}
         \State $O \leftarrow$ \Call{GetValueSets}{\texttt{Output}}
-        \State $(I', O') \leftarrow$ \Call{SetSimplification}{$g, I, O$} 
+        \State $(I', O') \leftarrow$ \Call{SetSimplification}{$g, I, O$}
         \Comment{Determine the available value sets for each input output element given the elements that have been already assigned}
         \State \Call{PropagateSetValues}{$Q,S, I', I$}
         \Comment{Propagate the changes to their value sets and to their queue keys for both the input and output elements}
@@ -328,7 +327,7 @@ based on the following order:
 \end{enumerate}
 We argue that the above strategy minimises the breadth of the recursive calls. Moreover,
 for each node with \textit{in-degree} of $0$ as for each value of their assignment, a solution should exist.
-The heurestical argument for this can be observed in Deligkas et al. \cite{deligkas_PureCircuitTightInapproximability_2024}, 
+The heurestical argument for this can be observed in Deligkas et al. \cite{deligkas_PureCircuitTightInapproximability_2024},
 where there construction for finding solutions allows for source nodes to be independent.
 Lastly, prioritising nodes with the highest neighbour count implies that we
 propagate changes to a greater number gates and therefore maximise the influence of the \textit{Unit Propagation}
@@ -398,6 +397,92 @@ If a value is not assigned, we denote it as $\cdot$.
 
 
 
+\begin{table}[h!]
+    \centering
+    \begin{tabular}{|c|c|}
+        \hline
+        \rowcolor[HTML]{EAE1E1}
+        {\color[HTML]{333333} \textbf{Purify input}}                                         & {\color[HTML]{333333} \textbf{Output sets}}                                                     \\ \hline
+        $\forall b \in \mathbb{B}: (b, \cdot, \cdot) \vee  (b, \cdot, b) \vee (b, b, \cdot)$ & $(\{b\},\{b\}, \{b\})$                                                                          \\ \hline
+        $(\bot, \cdot, \cdot)$                                                               & $(\{\bot\},\mathbb{T}_{\leq \bot}, \mathbb{T}_{\geq \bot})$                                     \\ \hline
+        $(\cdot, \cdot, 0)$                                                                  & $(\{0\},\{0\}, \{0\} )$                                                                         \\ \hline
+        $(\cdot, \cdot, 1)$                                                                  & $(\mathbb{T}_{\geq \bot}, \mathbb{T}, \{1\})$                                                   \\ \hline
+        $(\cdot, \cdot, \bot)$                                                               & $(\{\bot\}, \{0\}, \{\bot\})$                                                                   \\ \hline
+        $(\cdot, 0, \cdot)$                                                                  & $(\mathbb{T}_{\leq \bot},\{0\}, \mathbb{T} )$                                                   \\ \hline
+        $(\cdot, 1, \cdot)$                                                                  & $(\{1\},\{1\}, \{1\} )$                                                                         \\ \hline
+        $(\cdot, \bot, \cdot)$                                                               & $(\{\bot\}, \{\bot\}, \{1\})$                                                                   \\ \hline
+        $(\bot, 0, \cdot)$                                                                   & $(\{\bot\}, \{0\}, \mathbb{T}_{\geq \bot})$                                                     \\ \hline
+        $(\bot, \cdot, \bot)$                                                                & $(\{\bot\}, \{0\}, \{\bot\})$                                                                   \\ \hline
+        $(\bot, \cdot, 1)$                                                                   & $(\{\bot\}, \mathbb{T}_{\leq \bot}, \{1\})$                                                     \\ \hline
+        $(\bot, \bot, \cdot)$                                                                & $(\{\bot\}, \{\bot\}, \{1\})$                                                                   \\ \hline
+        $\forall a,b,c \in \mathbb{T}:  (a, b, c)$                                           & $(\{a\}, \{b\}, \{c \})$, only if the triplet $(a,b,c)$ is a correct \textbf{PURIFY} assignment \\ \hline
+        $-$                                                                                  & Any unlisted combinations are considered invalid                                                \\\hline
+    \end{tabular}
+    \caption{\textbf{Purify} value propagation rules}
+    \label{tab:chap-4:pur-propagation}
+\end{table}
+
+
+
+\begin{table}[h!]
+    \centering
+    \begin{tabular}{|c|c|}
+        \hline
+        \rowcolor[HTML]{EAE1E1}
+        {\color[HTML]{333333} \textbf{NOR input}}                  & {\color[HTML]{333333} \textbf{Output sets}}                                                  \\ \hline
+        $\forall v \in \mathbb{T}: (\cdot, \cdot, v)$              & $(\mathbb{T}_{\leq \neg v},\mathbb{T}_{\leq \neg v}, \{v\} )$                                \\ \hline
+        $\forall v \in \mathbb{T}: (\cdot, v, \cdot)$              & $(\mathbb{T}, \{v\}, \mathbb{T}_{\leq \neg v})$                                              \\ \hline
+        $\forall a,b \in \mathbb{T}: a > b \implies (\cdot, a, b)$ & $(\{\neg b\}, \{a\}, \{b\})$                                                                      \\ \hline%% TODO
+        $\forall v \in \mathbb{T}: (\cdot, v, \neg v)$             & $(\mathbb{T}_{\leq v}, \{v\}, \{\neg v\})$                                                   \\ \hline
+        $\forall a,b \in \mathbb{T}:a < b \implies (\cdot, a, b)$  & Invalid combination                                                                          \\ \hline
+        $\forall a,b \in \mathbb{T}: (a, b, \cdot)$                & $(\{a\}, \{b\}, \{\neg \max(a,b) \})$                                                        \\ \hline
+        $\forall a,b,c \in \mathbb{T}:  (a, b, c)$                 & $(\{a\}, \{b\}, \{c \})$, only if the triplet $(a,b,c)$ is a correct \textbf{NOR} assignment \\ \hline
+    \end{tabular}
+    \caption{\textbf{NOR} value propagation rules}
+    \label{tab:chap-4:nor-propagation}
+\end{table}
+
+\begin{table}[h!]
+    \centering
+    \begin{tabular}{|c|c|}
+        \hline
+        \rowcolor[HTML]{EAE1E1}
+        {\color[HTML]{333333} \textbf{NAND input}}        & {\color[HTML]{333333} \textbf{Output sets}}                                                   \\ \hline
+        $\forall v \in \mathbb{T}: (\cdot, \cdot, v)$     & $(\mathbb{T}_{\geq \neg v},\mathbb{T}_{\geq \neg v}, \{v\} )$                                 \\ \hline
+        $\forall v \in \mathbb{T}: (\cdot, v, \cdot)$     & $(\mathbb{T}, \{v\}, \mathbb{T}_{\geq \neg v})$                                               \\ \hline
+        $\forall a,b \in \mathbb{T}: a < b (\cdot, a, b)$ & $(\{\neg b\}, \{a\}, \{b\})$                                                                  \\ \hline
+        $\forall v \in \mathbb{T}: (\cdot, v, \neg v)$    & $(\mathbb{T}_{\geq v}, \{v\}, \{\neg v\})$                                                         \\ \hline
+        $\forall a,b \in \mathbb{T}:a > b (\cdot, a, b)$  & Invalid combination                                                                           \\ \hline
+        $\forall a,b \in \mathbb{T}:a > b (a, b, \cdot)$  & $(\{a\}, \{b\}, \{\neg \max(a,b) \})$                                                              \\ \hline
+        $\forall a,b,c \in \mathbb{T}:  (a, b, c)$        & $(\{a\}, \{b\}, \{c \})$, only if the triplet $(a,b,c)$ is a correct \textbf{NAND} assignment \\ \hline
+    \end{tabular}
+    \caption{\textbf{NAND} value propagation rules}
+    \label{tab:chap-4:nand-propagation}
+\end{table}
+
+
+
+% \begin{table}[h!]
+%     \centering
+%     \begin{tabular}{|c|c|}
+%         \hline
+%         \rowcolor[HTML]{EAE1E1}
+%         {\color[HTML]{333333} \textbf{OR input}}          & {\color[HTML]{333333} \textbf{Output sets}}                                                 \\ \hline
+%         $\forall v \in \mathbb{T}: (\cdot, \cdot, v)$     & $(\mathbb{T}_{\leq v},\mathbb{T}_{\leq v}, \{v\} )$                                         \\ \hline
+%         $\forall v \in \mathbb{T}: (\cdot, v, \cdot)$     & $(\mathbb{T}, \{v\}, \mathbb{T}_{\geq v})$                                                  \\ \hline
+%         $\forall a,b \in \mathbb{T}: a < b (\cdot, a, b)$ & $(\{b\}, \{a\}, \{b\})$                                                                     \\ \hline
+%         $\forall v \in \mathbb{T}: (\cdot, v, v)$         & $(\mathbb{T}_{\leq v}, \{v\}, \{v\})$                                                       \\ \hline
+%         $\forall a,b \in \mathbb{T}:a > b (\cdot, a, b)$  & Invalid combination                                                                         \\ \hline
+%         $\forall a,b \in \mathbb{T}:a > b (a, b, \cdot)$  & $(\{a\}, \{b\}, \{\max(a,b) \})$                                                            \\ \hline
+%         $\forall a,b,c \in \mathbb{T}:  (a, b, c)$        & $(\{a\}, \{b\}, \{c \})$, only if the triplet $(a,b,c)$ is a correct \textbf{OR} assignment \\ \hline
+%     \end{tabular}
+%     \caption{\textbf{OR} value propagation rules}
+%     \label{tab:chap-4:purify-propagation}
+% \end{table}
+
+
+
+
 
 \paragraph*{Backtrack Operation}
 The \textit{backtrack} operation is summarised in 3 key steps.
@@ -435,54 +520,3 @@ If no nodes are left in the queue, that means that all value nodes are assigned 
 This implies that our resulting array of assignments contains only valid solutions, and this array
 covers the maximal solution set.
 
-
-\subsection{Future Extensions}
-
-\subsubsection{Algorithmic Extensions}
-Although the aforementioned algorithms work as expected, there are several improvements that can be made.
-For all three of the algoritmic methods we mentioned, the first and most important extension
-is to treat weakly directly connected components individually. Trivially an assignment in one
-weakly connected component should not affect the solution set of the other one.
-We can therefore reduce the search spaces of our problems by finding
-the solution sets in each graph seperately. Moreover for the
-\textit{backtracking} algorithm, we can extend the above idea by considering
-the cartesian product of the solution sets, meaning:
-let $G_i$ denote a (weakly) connected component of $G$ and $\textbf{sol}(\cdot)$
-denotes its solution set. Its trivial to observe that
-$$
-    \textbf{sol}(G) = \bigtimes_{k \in [k]}  \textbf{sol}(G_k)
-$$
-
-We can also optimise the backtracking algorithm even further.
-First one can observe that if our graph was acyclic, then
-the permutation of the nodes with no \textit{in-degree} solutions essentially
-dictate the assignments of the downstream nodes (excluding nodes incident
-to purify gates). With this in mind, we can apply the following sequence
-of steps to make the backtracking algorithm simpler:
-\begin{enumerate}
-    \item Identify the strongly connected components (SCCs) of the circuit, using polynomial
-          time algorithms such as Kosaraju's Algorithm \cite{sharir_StrongconnectivityAlgorithmIts_1981} 
-          or Gabow's Algorithm \cite{gabow_PathbasedDepthfirstSearch_2000}. 
-    \item Treating SCCs as an individual node, identify nodes by their distances from
-          base nodes (nodes with no incoming edges)
-    \item Extend the backtracking algorithm so instead of the using the is start label,
-          use the distance from base instead. The greater distance a node has from the
-          base, the less impact it has and therefore should be postponed in later stages of the
-          backtracking calls.
-\end{enumerate}
-
-We argue that the above heuristic may result in improved average times but of course
-further research can be done in order to determine more suitable selection heuristics.
-Furthermore, an additional heuristic that we failed to consider is using the notion
-of alternation or varying path.
-This has been introduced by \cite{eichelberger_HazardDetectionCombinational_1965}
-and the idea is the ``application'' of the gates to propagate values.
-Their algorithm can be summarised as such:
-Start with an initial set of nodes, and apply gates of each circuit enough times.
-For nodes that alternate their values between $0,1$, replace their value with $\bot$
-Repeat until no altrenation occurs. This algorithm is still exponential
-in its running time but one could deduce useful insights as to notion
-of alternating paths.
-It has to be noted that it may not be entirely clear how such construction
-could be applied as the purify gate has a non-deterministic output, meaning
-for the $\bot$ value, the outputs could be multiple.

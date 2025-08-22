@@ -1,9 +1,10 @@
 
+\subsection{Theory Directions}
 In our research were able to highlight several directions that one could take.
-We mainly highlight to directinos: \textbf{HF-PPAD} in  \textbf{PPAD}
+We mainly highlight to directions: \textbf{HF-PPAD} in  \textbf{PPAD}
 and topological representations of directed graphs
 
-\subsection{\textbf{HF-PPAD} in  \textbf{PPAD}}
+\subsubsection{\textbf{HF-PPAD} in  \textbf{PPAD}}
 
 In our sections \ref{sec:pc-plus-eol} and \ref{sec:sc-excess}, made references to
 how Kleene logic can be incroportated with \textbf{PPAD} problems. For
@@ -32,7 +33,7 @@ Morevore we were able to observe how we can use \textit{Kleene logic} with
 in perspective may also give insights to other areas such as the circuit complexity \textit{Hazard-Free Circuits}.
 
 
-\subsection{Parsimonious Topological Representations of \textbf{PPAD} problems }
+\subsubsection{Parsimonious Topological Representations of \textbf{PPAD} problems }
 
 
 From the previous sections we observed how to reduce \textit{SourceOrExcess}$(2,1)$ to a topological problem.
@@ -62,3 +63,73 @@ that is parsimonious to its graphical representation? Since we know that the pro
 can parsimoniously count every variant, can we also reduce \textit{Unbalanced} to a topological
 problem? A reduction like that would be an important milestone for the usage topological \textit{PureCircuit} constructions
 for enumerating solutions.
+
+
+\subsubsection{PureCircuit Gate Extension} %% TODO 
+The \textit{PureCircuit} instance we defined uses the gate set
+\textit{NOR, Purify}. In fact, Deligkas et al. \cite{deligkas_PureCircuitTightInapproximability_2024}
+demonstrated that if $G$ is our gate set, then for the problem to be \textbf{PPAD}-complete,
+it must be the case that
+\begin{gather*}
+G \supseteq \{\textsc{Purify}, v\} \text{ for } v \in \{\textsc{Nor}, \textsc{Nand}\} \\
+\text{ or }\\
+G \supseteq \{\textsc{Purify}, \textsc{Not}, v\}  \text{ for } \{\textsc{And}, \textsc{Or}\} \\
+\end{gather*}
+The proof for the \textbf{PPAD}-inclusion can be summarised as expressing a \textit{PureCircuit} instances
+as a \textit{Brouwer} function from $[0,1]^n \to [0,1]^n$, given fixed point $x^\star$ then
+we denote the folloiwng assignment: if $x^\star_i \in \{0,1\}$ then $v_i = x^{\star}_i$, otherwise
+$v_i = \bot$. We argue that there may exist gates which exhibit any behaviour of the sort $f \in [0,1]^k \to [0,1]^m$
+such that $f$ is contiuous, where they may make our reductions easier and more straight forward.
+This could raise additional directions as to the behaviour of the additional functions
+and whether they may affect the combinatorial nature of the \textit{PureCircuit} problem.
+
+\subsection{Software future Directions}
+
+\subsubsection{Algorithmic Extensions}
+Although the aforementioned algorithms work as expected, there are several improvements that can be made.
+For all three of the algoritmic methods we mentioned, the first and most important extension
+is to treat weakly directly connected components individually. Trivially an assignment in one
+weakly connected component should not affect the solution set of the other one.
+We can therefore reduce the search spaces of our problems by finding
+the solution sets in each graph seperately. Moreover for the
+\textit{backtracking} algorithm, we can extend the above idea by considering
+the cartesian product of the solution sets, meaning:
+let $G_i$ denote a (weakly) connected component of $G$ and $\textbf{sol}(\cdot)$
+denotes its solution set. Its trivial to observe that
+$$
+    \textbf{sol}(G) = \bigtimes_{k \in [k]}  \textbf{sol}(G_k)
+$$
+
+We can also optimise the backtracking algorithm even further.
+First one can observe that if our graph was acyclic, then
+the permutation of the nodes with no \textit{in-degree} solutions essentially
+dictate the assignments of the downstream nodes (excluding nodes incident
+to purify gates). With this in mind, we can apply the following sequence
+of steps to make the backtracking algorithm simpler:
+\begin{enumerate}
+    \item Identify the strongly connected components (SCCs) of the circuit, using polynomial
+          time algorithms such as Kosaraju's Algorithm \cite{sharir_StrongconnectivityAlgorithmIts_1981} 
+          or Gabow's Algorithm \cite{gabow_PathbasedDepthfirstSearch_2000}. 
+    \item Treating SCCs as an individual node, identify nodes by their distances from
+          base nodes (nodes with no incoming edges)
+    \item Extend the backtracking algorithm so instead of the using the is start label,
+          use the distance from base instead. The greater distance a node has from the
+          base, the less impact it has and therefore should be postponed in later stages of the
+          backtracking calls.
+\end{enumerate}
+
+We argue that the above heuristic may result in improved average times but of course
+further research can be done in order to determine more suitable selection heuristics.
+Furthermore, an additional heuristic that we failed to consider is using the notion
+of alternation or varying path.
+This has been introduced by \cite{eichelberger_HazardDetectionCombinational_1965}
+and the idea is the ``application'' of the gates to propagate values.
+Their algorithm can be summarised as such:
+Start with an initial set of nodes, and apply gates of each circuit enough times.
+For nodes that alternate their values between $0,1$, replace their value with $\bot$
+Repeat until no altrenation occurs. This algorithm is still exponential
+in its running time but one could deduce useful insights as to notion
+of alternating paths.
+It has to be noted that it may not be entirely clear how such construction
+could be applied as the purify gate has a non-deterministic output, meaning
+for the $\bot$ value, the outputs could be multiple.
