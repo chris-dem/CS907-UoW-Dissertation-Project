@@ -290,7 +290,7 @@ research, we demonstrate a parsimonious reduction from\\\textit{HF-DiscreteStron
 
 
     \begin{figure}[h!]
-        \centering %% TODO check the ordering of the graph
+        \centering
         \includegraphics[width=0.5\textwidth]{Chapter3/purification-stage-construction.pdf}
         \caption{Purification gadget. The red nodes denote the outputs of the purification gadget.}
         \label{fig:chap-3:purification-gadget}
@@ -489,7 +489,7 @@ Below we will denote our colouring scheme for clarity:
 \end{align*}
 
 
-First, we define mapping $\mathcal{F}: V_{2^k} \to B_{2^{4k+10}}$ such that %TODO: Careful about edges
+First, we define mapping $\mathcal{F}: V_{2^k} \to B_{2^{4k+10}}$ such that
 $$
     \mathcal{F}(\mathbf{u}) = \begin{pmatrix}
         6 \mathbf{u}_{1} + 6 \\
@@ -503,7 +503,8 @@ We will colour every point  on $I(P_{i})$ with $+$
     P = \mathbf{u}^1,\dots,\mathbf{u}^t \text{, if P is a cycle } \mathbf{u}^1 = \mathbf{u}^t \\
     I(P) \triangleq \bigcup_{i \in [t-1]} I(u^tu^{t-1})
 \end{gather*}
-% A lot of \textit{Line reductions} under colouring use the notion of shielding1. %% TODO add references to all problems
+It is common to use the method of shielding when dealing with line reductions\textit{Line reductions}, as seen in
+\cite{chen_Complexity2DDiscrete_2009,deligkas_ConstantInapproximabilityPPA_2022,aisenberg_2DTuckerPPA_2020,chen_SettlingComplexityComputing_2009,daskalakis_ComplexityComputingNash_2006}
 Essentially we embed our lines and cycles in a grid, everything not a line is denoted as a negative charge $-$.
 All lines are denoted as positive charge $+$. To protect our lines from creating solutions, we cover them
 with $\pm, \mp$ lines. A visualisation can be seen in figure \ref{fig:chap-3:eol-shielding}.

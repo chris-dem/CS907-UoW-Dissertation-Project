@@ -146,17 +146,17 @@ or \textit{Neural Networks} \cite{stanley_EvolvingNeuralNetworks_2002,stanley_Hy
 Given figure \ref{fig:chap-4:evo-drawing},
 we can summarise the 5 core elements of the genetic algorithm:
 \begin{enumerate}
-    \item \textbf{Chromosones}: Solution assignments of our \textit{PureCircuit} instance.
-    \item \textbf{Population}: A set of \textbf{chromosones}.
-    \item \textbf{Fitness step}: Evaluation step. We measure how good the assingment is
+    \item \textbf{Chromosomes}: Solution assignments of our \textit{PureCircuit} instance.
+    \item \textbf{Population}: A set of \textbf{chromosomes}.
+    \item \textbf{Fitness step}: Evaluation step. We measure how good the assignment is
           by counting the number of errors it has.
     \item \textbf{Selection step}: Given a selection strategy, select
-          suitable canditates in order to create the population for the next step.
+          suitable candidates in order to create the population for the next step.
           In literature, there are many types that one can use \cite{katoch_ReviewGeneticAlgorithm_2021}
           such as \textit{Roulette based} selection, or \textit{Tournament based} selection.
           We mainly use \textit{Tournament based} selection where randomly select a set of
-          chrosomones and pick the best one. This process is repeated until enough chromosones have been selected.
-    \item \textbf{Crossover step}: Given two chromosones from the
+          chrosomomes and pick the best one. This process is repeated until enough chromosomes have been selected.
+    \item \textbf{Crossover step}: Given two chromosomes from the
           \textbf{Selection step}, combine the genes from each parent, in order
           to create a new instance. We allow for two main types of crossover methods:
           \begin{enumerate}
@@ -191,9 +191,9 @@ we can summarise the 5 core elements of the genetic algorithm:
 The repetition of the steps eventually converges to an assignment that is satisfying.
 The benefits of these methods over our own personal experimentations is that
 it seems to scale significantly well. As we aim for the tool to be usable
-for many sitautions, we allow for the user to tune the parameters and stategies to their needs
+for many situations, we allow for the user to tune the parameters and strategies to their needs
 in order to adapt to each solution.
-Moreover, we use speciation techniques were sepearate our chromosones
+Moreover, we use speciation techniques were separate our chromosomes
 to different species in order to maintain diversity and increase
 the odds of finding a solution.
 
@@ -339,10 +339,10 @@ essentially, assigns the selected value to a node
 by modifying to the solution set and the value set.
 Then for each gate that is incident to the node apply the \textit{Set simplification}
 operation. While the top element of the queue
-has one possible solution, extract the solution and repeart the \textit{unit value propagation operation}
+has one possible solution, extract the solution and repeat the \textit{unit value propagation operation}
 until the queue is empty or the cardinality of the value set at the head of the priority queue
 is different than $1$. If it's zero then
-current assingment is not valid and we return false, otherwise we return true.
+current assignment is not valid and we return false, otherwise we return true.
 
 
 \paragraph*{Set simplification operation}
@@ -355,10 +355,10 @@ $(1,1)$ and therefore we restrict the values of the input sets to $\{1\}, \{1\}$
 If the current solution set of a node is $v_t$, then its updated set is
 $v_{t+1} \leftarrow v_t \cap \omega$, where $\omega$ are the set of values denoted
 by the simplification operation. We provide the rules of \textbf{AND} and \textbf{OR}
-work and in the appendix we provide the full table. %TODO Dont forget this
+work and in the appendix we provide the full table.
 If a value is not assigned, we denote it as $\cdot$.
 
-
+%TODO Check all tables
 \begin{table}[h!]
     \centering
     \begin{tabular}{|c|c|}
@@ -432,7 +432,7 @@ If a value is not assigned, we denote it as $\cdot$.
         {\color[HTML]{333333} \textbf{NOR input}}                  & {\color[HTML]{333333} \textbf{Output sets}}                                                  \\ \hline
         $\forall v \in \mathbb{T}: (\cdot, \cdot, v)$              & $(\mathbb{T}_{\leq \neg v},\mathbb{T}_{\leq \neg v}, \{v\} )$                                \\ \hline
         $\forall v \in \mathbb{T}: (\cdot, v, \cdot)$              & $(\mathbb{T}, \{v\}, \mathbb{T}_{\leq \neg v})$                                              \\ \hline
-        $\forall a,b \in \mathbb{T}: a > b \implies (\cdot, a, b)$ & $(\{\neg b\}, \{a\}, \{b\})$                                                                      \\ \hline%% TODO
+        $\forall a,b \in \mathbb{T}: a > b \implies (\cdot, a, b)$ & $(\{\neg b\}, \{a\}, \{b\})$                                                                 \\ \hline
         $\forall v \in \mathbb{T}: (\cdot, v, \neg v)$             & $(\mathbb{T}_{\leq v}, \{v\}, \{\neg v\})$                                                   \\ \hline
         $\forall a,b \in \mathbb{T}:a < b \implies (\cdot, a, b)$  & Invalid combination                                                                          \\ \hline
         $\forall a,b \in \mathbb{T}: (a, b, \cdot)$                & $(\{a\}, \{b\}, \{\neg \max(a,b) \})$                                                        \\ \hline
@@ -451,9 +451,9 @@ If a value is not assigned, we denote it as $\cdot$.
         $\forall v \in \mathbb{T}: (\cdot, \cdot, v)$     & $(\mathbb{T}_{\geq \neg v},\mathbb{T}_{\geq \neg v}, \{v\} )$                                 \\ \hline
         $\forall v \in \mathbb{T}: (\cdot, v, \cdot)$     & $(\mathbb{T}, \{v\}, \mathbb{T}_{\geq \neg v})$                                               \\ \hline
         $\forall a,b \in \mathbb{T}: a < b (\cdot, a, b)$ & $(\{\neg b\}, \{a\}, \{b\})$                                                                  \\ \hline
-        $\forall v \in \mathbb{T}: (\cdot, v, \neg v)$    & $(\mathbb{T}_{\geq v}, \{v\}, \{\neg v\})$                                                         \\ \hline
+        $\forall v \in \mathbb{T}: (\cdot, v, \neg v)$    & $(\mathbb{T}_{\geq v}, \{v\}, \{\neg v\})$                                                    \\ \hline
         $\forall a,b \in \mathbb{T}:a > b (\cdot, a, b)$  & Invalid combination                                                                           \\ \hline
-        $\forall a,b \in \mathbb{T}:a > b (a, b, \cdot)$  & $(\{a\}, \{b\}, \{\neg \max(a,b) \})$                                                              \\ \hline
+        $\forall a,b \in \mathbb{T}:a > b (a, b, \cdot)$  & $(\{a\}, \{b\}, \{\neg \max(a,b) \})$                                                         \\ \hline
         $\forall a,b,c \in \mathbb{T}:  (a, b, c)$        & $(\{a\}, \{b\}, \{c \})$, only if the triplet $(a,b,c)$ is a correct \textbf{NAND} assignment \\ \hline
     \end{tabular}
     \caption{\textbf{NAND} value propagation rules}
@@ -488,21 +488,21 @@ If a value is not assigned, we denote it as $\cdot$.
 The \textit{backtrack} operation is summarised in 3 key steps.
 If the priority queue is empty then we found a satisfying assignment.
 Otherwise, pick a node from the priority queue. For each value in its set,
-create a copy of the current queue, current solution assingment and value set state
+create a copy of the current queue, current solution assignment and value set state
 and apply the \textit{Unit value propagation} operation. After that create a recursive call
 apply the \textit{backtrack opertation} again until the current recursion chain
 terminates with a solution or rejects.
 At the root of every execution call, merge the solution assignments in each level and return
-the sets. The root call will return a set of every possible valid assingment set.
+the sets. The root call will return a set of every possible valid assignment set.
 
 
 \subsubsection{Correctness and Running Time analysis}
 
 For the running time analysis, we can observe that each time we assign a node,
-the unit propagation operation, resticts the solution set of the value nodes that are incident
+the unit propagation operation, restricts the solution set of the value nodes that are incident
 by one gate. Even in the worst case scenario where no reduction occurs, we can clearly
 see that each time, our priority queue will select a node and will recurse through each of its possible values,
-creating a call tree with depth of at most $n$. Therefore we can argue that the running time of the algorithm
+creating a call tree with depth of at most $n$. Therefore, we can argue that the running time of the algorithm
 is $O(3^n)$, we can observe as the unit propagation and set reduction methods attempt to reduce in the average cases.
 
 
@@ -512,8 +512,8 @@ at what happens at the \textit{unit propagation} stage. We can observe that in e
 we are essentially limiting the set of solutions to only the ones
 that will give a satisfying assignment. The idea is that we are fast-forwarding the backtracking calls
 by taking advantage of the localised changes of each gate.
-Value that we discard are nodes that are guarnteed to give unsatisfying assingments and therefore
-we are not discrading any solutions.
+Value that we discard are nodes that guarantee to give unsatisfying assingments, and therefore
+we are not discarding any solutions.
 If the value set of a node is zero, it means that no assignment
 will lead to a solution and therefore we reject the current path.
 If no nodes are left in the queue, that means that all value nodes are assigned and therefore we can return the current assignment.

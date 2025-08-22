@@ -4,7 +4,7 @@ In the current section, we introduce all the necessary preliminaries
 with respect to search problems and counting complexity theory.
 Moreover we give an overview of the core problem
 of the research \textit{PureCircuit}, and its connections
-with search problems and \textit{Kleene logic}. %% TODO 
+with search problems and \textit{Kleene logic}. % TODO: Cleanup 
 
 
 \subsection{Search problems}
@@ -79,7 +79,7 @@ In the current project we are mainly interested
 in \textbf{PPAD}, known as ``Polynomial Parity of Augmented DiGraphs'', created by Papadimitriou \cite{papadimitriou_ComplexityParityArgument_1994}.
 We will give a formal definition of the class as well as several cornerstone problems that we will refer to in the upcoming chapters.
 We will first introduce the \textit{EndOfLine} problem \ref{def:eol-ppad} by Papadimtirou \cite{papadimitriou_ComplexityParityArgument_1994},
-which takes advantage of the combinatorial fact that if there exists an unbalanced node in a directed graph, %% TODO Lio disgusting
+which takes advantage of the combinatorial fact that if there exists an unbalanced node in a directed graph, %% TODO: Cleanup
 there must always exist a different one.
 
 \begin{figure}[h!]
@@ -218,7 +218,7 @@ by Rubinstein \cite{deligkas_PureCircuitTightInapproximability_2024,rubinstein_I
 This results in a circuit which uses the set of values $\{0,\bot, 1\}$ to denote the range of values
 $(0),(0,1),(1)$.
 Incindentally, the above triplet of values coincides with \textit{Kleene algebra} which extends the traditional binary logic \cite{kleene_IntroductionMetamathematics_2009}.
-We will explore the above algebra in greater depth in section \ref{subsect:chap-2:kleene}. %%TODO
+We will explore the above algebra in greater depth in section \ref{subsect:chap-2:kleene}.
 This problem was created by Deligkas et al. \cite{deligkas_PureCircuitTightInapproximability_2024}
 to demonstrate the hardness of approximating \textbf{PPAD} problems and was shown to be \textbf{PPAD}-complete.
 
@@ -421,7 +421,7 @@ so we can assume that all reductions (not necessarily counting reductions) work 
 \cite{chen_SettlingComplexityComputing_2009, deligkas_PureCircuitTightInapproximability_2024, daskalakis_ComplexityComputingNash_2006, chen_Complexity2DDiscrete_2009}.
 
 Other than topological colouring, we will also give a small introduction, to a tiling problem known as mutilated chessboards. Tiling
-spaces has been used throughout literature \cite{hollender_ComplexityMultisourceVariants_2018,chan_ComputationalComplexityCounting_2024}. %% TODO add Max Plank
+spaces has been used throughout literature \cite{hollender_ComplexityMultisourceVariants_2018,chan_ComputationalComplexityCounting_2024}.
 We will use as reference the \textbf{PPAD}-complete \textit{1-MC} problem. We refer
 to the problem introduced by Blank \cite{black1946critical} as follows:
 assume we have a $2n \times 2n$ chessboard. If we are provided with $1 \times 2$ pieces, we can trivially tile the board by filling each row with $n$ horizontal
@@ -557,11 +557,14 @@ Given the above definition, Pak et al. \cite{pak_WhatCombinatorialInterpretation
 used $\textbf{\#P}$ to decide whether a class of numbers or objects have or do not have a combinatorial interpretation.
 Moreover, they argue that the usage of $\textbf{\#P}$ has several benefits:
 
-\begin{enumerate}%% TODO
+\begin{enumerate}
     \item By polynomially bounding objects, we avoid cases such as: $f(w) = |\{1, \hdots, f(w)\}|$. In other words, we create a set
           of combinatorial objects.
-    \item We can work with $f(\cdot)$  even if its direct computation is hard.
-    \item $\textbf{\#P}$ is a formal system that is highly flexible.
+    \item We can work with $f(\cdot)$  even if its direct computation is hard. For example, counting
+    the number of cycles in a graph is believed to be an \textbf{NP}-complete problem but verifying
+    individual cycles is trivial.
+    \item $\textbf{\#P}$ is a formal system that is highly flexible. Specifically, we are able to use
+    results in complexity theory and NTMs to find interpretations or prove their non-existence.
 \end{enumerate}
 
 % The current framework was used in several papers such as
@@ -593,7 +596,7 @@ where we relate the difficulty of sudoku solving to a graph colouring problem.
     \label{fig:chap-2:pars-reduction}
 \end{figure}
 
-%% TODO: Investigate if needed
+%% TODO: Reminder to check before submission if needed. Chris 22/Aug says not
 % We introduce a more relaxed variant of parsimonious reductions in \ref{def:func-pars}
 % for one-to-many reductions, such that the two solutions sets are bounded by some
 % polynomial with respect to the size of the input. We observed that for several problems,
