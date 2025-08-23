@@ -2,9 +2,9 @@ The current section focuses on how we can extend our reductions
 to \textit{SourceOrExcess}. In the previous sections,
 we gave an overview on how we can go from an \textit{EndOfLine} problem
 to a topological \textit{StrongSperner} problem.
-Our work on the current objective focused on finding topological representations of the
-\textit{SourceOrExcess} problem since a full chain of reductions from the previous section can be resolved,
-one could possibly use similar techniques to extend them to the excess reduction.
+By providing a topological interpretation of the
+\textit{SourceOrExcess} problem, we hope to re-use the construction for future reductions
+with the \textit{PureCircuit} problem.
 
 We will first show how we can topologically reduce the \textit{SourceOrExcess}$(2,1)$
 problem to a \textit{2D} space. We will demonstrate some limitations with \textit{2D} topological problems and then we will
@@ -14,12 +14,13 @@ will allow for a full parsimonious reduction.
 
 \subsubsection{Topological representations}
 
-Given a \textit{SourceOrExcess}$(2,1)$ input we
-attempt to eliminate all excess nodes, meaning nodes with degree $(2,1)$ by separating
+Given a \textit{SourceOrExcess}$(2,1)$ input we first
+eliminate all excess nodes, meaning nodes with degree $(2,1)$ by separating
 one of the lines as shown in the figure \ref{fig:source-or-excess-trans}.
+This simplifies our counting argument to only 3 scenarios.
 Moreover for double sinks, we enforce that the MSB value of the bit-string for one of the two values is one.
 We can observe that these modifications can be done in polynomial time since they only require to analyse
-the local neighbouring of nodes, and they preserve the number of solutions.
+the local neighbouring of nodes, and they preserve the number of solutions
 
 \begin{figure}[h!]
     \centering

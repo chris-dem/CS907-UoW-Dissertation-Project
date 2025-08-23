@@ -1,13 +1,10 @@
-We start with looking at the \textit{StrongSperner}
-problem under the lens of \textit{Kleene logic}.
-The first objective of our disseration was to reduce the
-\textit{EndOfLine} problem to the \textit{PureCircuit} problem
-parsimoniously. We emphasize, that a non-parsimonious
-reduction chain was already established by Deligkas et al. \cite{deligkas_PureCircuitTightInapproximability_2024}.
-Due to the difficulty of achieving such reductions, we tried to tackle the problem from both
-directions. One is by finding related problems from the \textit{EndOfLine}
-and the other is by finding problems that reduce to the \textit{PureCircuit} problem.
-%TODO 
+As mentioned previously, the current project focuses on using
+topological expressions for reductions between problems.
+We built upon the \textit{StrongSperner} idea that Deligkas
+used by expressing how we can redefine the problems under \textit{Kleene logic} \cite{deligkas_PureCircuitTightInapproximability_2024}.
+We then demonstrate how we can relate \textit{PureCircuit} and
+the \textit{EndOfLine} problem to each of them as well as highlighting
+the current limitations of these approaches.
 
 \subsubsection{Hazard Free StrongSperner}
 
@@ -31,19 +28,14 @@ definitions
 Ideally, we would like to express a cube as a coordinate of Kleene numbers, implying
 the resolutions of the point will result in a hypercube, where each point is within
 $\|\cdot\|_{\infty} \leq 1$ of each other.
-An example of that can be seen in figure \ref{fig:chap-3:res-hyper}.
+% An example of that can be seen in figure \ref{fig:chap-3:res-hyper}.
 This leads to a natural interpretation of the \textit{StrongSperner} problem in \textit{Kleene logic}.
 We will start with two definitions, one for \textit{nD-StrongSperner} and the other for
 \textit{StrongSperner}. We remind that the main difference of the two problems is the former
 has fixed dimensions $n$ of exponentially large cubes, whereas the other can have varying
 dimensions of polynomially large widths.
 
-\begin{figure}[h!]
-    \centering
-    \includegraphics[width=0.3\textwidth]{Chapter3/1753903956-dissertation-drawing-assets.pdf}
-    \caption{}-
-    \label{fig:chap-3:res-hyper}
-\end{figure}
+
 
 
 \begin{definitionbox}{\textit{HF-nD-StrongSperner} problem}{hf-nd-strong-sperner}
@@ -57,8 +49,6 @@ dimensions of polynomially large widths.
 We argue that the above problem is \textbf{PPAD}-complete for all \textit{HF-nD-StrongSperner} problems. First we
 can observe that all \textit{HF-nD-SS} are reducible to their \textit{nD-SS} counterparts since
 hazard-free transformations have no effect on binary inputs and therefore our circuits acts like any other boolean circuit.
-Chen et al. \cite{chen_SettlingComplexityComputing_2009} demonstated that for any $n \in \mathbb{N}$, \textit{nD-StrongSperner}
-is \textbf{PPAD}-complete, and therefore \textit{HF-nD-StrongSperner} is in \textbf{PPAD}.
 To show the hardness, we claim that
 
 \begin{theorembox}{\textit{HF-nD-SS} hardness}{hf-nd-ss-hard}
@@ -92,13 +82,13 @@ To show the hardness, we claim that
         We argue that we can bijectively map between $S \leftrightarrow S_{\text{even}}$.
         To show the left to right direction, assume $p \in S$.
         Using figure \ref{fig:chap-3:dim-double} as reference, we can observe that each point becomes
-        a $2^d$ hypercube. Essentially the hypercube that was anchored at $(p_1, ..., p_n)$ is mapped to
+        an $n$-dimensional hypercube. Essentially the hypercube that was anchored at $(p_1, ..., p_n)$ is mapped to
         the hypercube anchored at $(2p_1, ..., 2p_n)$. To prove that, we can observe that:
         \begin{align*}
-            \forall (2p_i)_{i \in [n]} \in (\{0,1\}^{k+1})^n, b \in \{0,1\}^n & :\Lambda((2p_i + b)_{i \in [n]})\,                                                              \\
-                                                                              & = \lambda\left(\left(\left\lfloor\frac{2p_i + b + 1}{2} \right\rfloor\right)_{i \in [n]}\right) \\
-                                                                              & = \lambda\left(\left(\left\lfloor p_i + \frac{b + 1}{2} \right\rfloor\right)_{i \in [n]}\right) \\
-                                                                              & = \lambda\left((p_i + b)_{i \in [n]}\right)                                                     \\
+            \forall (2p_i)_{i \in [n]} \in (\{0,1\}^{k+1})^n, b \in \{0,1\}^n & :\Lambda((2p_i + b_i)_{i \in [n]})\,                                                              \\
+                                                                              & = \lambda\left(\left(\left\lfloor\frac{2p_i + b_i + 1}{2} \right\rfloor\right)_{i \in [n]}\right) \\
+                                                                              & = \lambda\left(\left(\left\lfloor p_i + \frac{b_i + 1}{2} \right\rfloor\right)_{i \in [n]}\right) \\
+                                                                              & = \lambda\left((p_i + b_i)_{i \in [n]}\right)                                                     \\
         \end{align*}
         Which implies that the cube anchored at $p$ must also be panchromatic.
     \end{proof}
@@ -153,14 +143,22 @@ For examples of the above notation we refer to the following table:
     \textbf{Output}: A point $p \in M_{\leq 1}^n$ if and only if: $\lambda(p) =  \bot^n$.
 \end{definitionbox}
 
+\begin{figure}[h!]
+    \centering
+    \includegraphics[width=0.3\textwidth]{Chapter3/1753903956-dissertation-drawing-assets.pdf}
+    \caption{Kleene Hypercube using unary notation}
+    \label{fig:chap-3:res-hyper}
+\end{figure}
+
 We will mainly focus on subproblems of the \textit{HF-StrongSperner} where two cubes do not overlap with each other.
 We will use figure \ref{fig:chap-3:overlapping-sperner-solutions} for reference,
 but essentially if two cubes overlap, that means a subspace of the cube (face or edge)
 is panchromatic. This means that for the same cube, we can have
 multiple solutions, such as the cube it self, the face that contains the panchromatic edge
-or the edge it self. To simplify the counting arguments
-we focus on \textit{Discrete panchromatic} instances, where there are no
-consecutive panchormatic cubes, and define its complexity class as \ref{def:hf-discrete-strong-sperner}.
+or the edge it self. To simplify the counting arguments,
+we define the problem \textit{HF-DiscreteStrongSperner} \ref{def:hf-discrete-strong-sperner},
+such that  all solutions are  \textit{discrete}, meaning there are no
+overlapping panchormatic cubes,
 
 
 \begin{figure}[h!]
@@ -172,7 +170,6 @@ consecutive panchormatic cubes, and define its complexity class as \ref{def:hf-d
 
 
 \begin{definitionbox}{\textit{HF-DiscreteStrongSperner} problem}{hf-discrete-strong-sperner}
-    \label{def:hf-discrete-strong-sperner}
     An \textit{HF-StrongSperner} instance $\lambda$ such that $\forall p \in M_1^n$, if $\lambda(p)= \bot^n$, then
     $$
         \forall y \in M_{\leq 1}^n: p \preceq y \implies \lambda(y) \neq \bot^n
@@ -180,10 +177,9 @@ consecutive panchormatic cubes, and define its complexity class as \ref{def:hf-d
     Essentially, any subspace of the cube should not yield a panchromatic solution.
 \end{definitionbox}
 
-Lastly we introduce a specific subset of the above solutions where introduce antipodal panchromatic cubes.
-In the specific type of solution said we argue that two opposite corners of a cube contain opposite colourings.
+Lastly we introduce a specific subset of the above solutions where we enforce antipodal panchromatic cubes.
+In the specific type of solution, we argue that every two opposite corners of a cube contain opposite colourings.
 More formally we say
-
 
 \begin{definitionbox}{\textbf{MinRes} min and max resolution functions}{min-res-func}
     We use the \textbf{MinRes}, to denote the smallest resolution of a kleene string. More formally we can use the following equivalent definitions:
@@ -234,7 +230,6 @@ contains all $2^d$ colours.
 \end{proof}
 
 
-
 All the problems above are clearly in \textbf{PPAD} as all of them reduce to the \textit{StrongSperner} problem,
 since we assume by construction that they \textit{natural} and therefore behave as normal binary circuits. For the purposes of our current
 research, we demonstrate a parsimonious reduction from\\\textit{HF-DiscreteStrongSperner} to \textit{PureCircuit}.
@@ -263,8 +258,6 @@ research, we demonstrate a parsimonious reduction from\\\textit{HF-DiscreteStron
               $M_{\leq 1}^n$ space, we apply the $\Lambda$ function to extract a set of output nodes $(o^i)_{i \in [n]}$.
         \item  \textbf{Output nodes}: We use the \scn{Copy} gate to copy $o^i \to s_i$, for all $i \in [n]$.
     \end{enumerate}
-    The 1st and last part of our construction is self-explanatory, we explain the \textit{bit generator gadget} in greater depth
-    and prove some claims.
 
     \begin{figure}[h!]
         \centering
@@ -304,8 +297,9 @@ research, we demonstrate a parsimonious reduction from\\\textit{HF-DiscreteStron
 
 
     \paragraph*{Correctness and parsimonious argument}
-    One can observe that the current construction is a valid construction, as we satisfy the arities of all gates and ensured
-    that every value node has an in-degree of at most $1$.
+    One can observe that we have a valid construction since the instace is
+    of polynomial size, all gates have the correct arity and
+    every value node has in-degree of at most $1$.
     It suffices to demonstrate that every assingment corresponds to a solution of \textit{HF-DiscreteStrongSperner}
     using lemma \ref{lem:pure-correct-lem}.
 
@@ -316,7 +310,7 @@ research, we demonstrate a parsimonious reduction from\\\textit{HF-DiscreteStron
 
     It suffices to show that every vector assignment is of the form $\forall i \in [n]: \mathbf{x}[o^i] = \bot$.
     Assume that we have a correct assignment, and WLOG $\mathbf{x}[o^i] = 0$  for some $i \in [n]$.
-    By our copy that, we know that $\mathbf{x}[u^i]= \mathbf{x}[s_i]$.
+    By our copy that, we know that $\mathbf{x}[o^i]= \mathbf{x}[s_i]$.
     By our bit generator lemma \ref{clm:chap-3:pur-claim} we know that $\mathbf{x}[u^i] = 0^i$.
     Since our circuit is hazard-free and applies the boundary conditions of the sperner problem, we know that
     $[\Lambda(x_{-i}(0))]_i = 1 \neq \mathbf{x}[o^i]$. We can make a similar argument for $\mathbf{x}[o^i] = 1$.
@@ -328,37 +322,50 @@ research, we demonstrate a parsimonious reduction from\\\textit{HF-DiscreteStron
 
 Although the above reduction also works for the general \textit{HF-StrongSperner}, it will not be parsimonious since
 the \textit{PureCircuit} will accept solutions for all $(n-1)$ subspaces that contain a covering set as explained previously.
+Since all \textit{AntipodalStrongSperner} are also discrete, it directly follows The
+corollary \ref{cor:antipodal-ss-pc}.
+
+
+\begin{corollarybox}{}{antipodal-ss-pc}
+    $$
+        \textbf{\#PPAD}(\textit{HF-AntipodalStrongSperner}) \subseteq \textbf{\#PPAD}(\textit{PureCircuit})
+    $$
+\end{corollarybox}
+
+
 
 
 \subsubsection{EndOfLine to AntipodalStrongSperner}
 
 Provining hardness for \textit{HF-StrongSperner} is a much harder task.
-In the paper
-\cite{chen_SettlingComplexityComputing_2009} they showed that given $f(n) \in O(n)$,
-they demonstrated how one can apply the \textit{Snake Embedding} technique
-where one can fold the space in higher and higher dimensions
-with the goal of going from a $2^n \times 2^n$ space to  $f(n)^m$  where $m, f(n) \in O(n)$. The original reduction,
-expresses the ability to go from a $2^n \times 2^n$ space, to a $[2^{f(n)}]^d$ where $d = \lceil \frac{n}{f(n)} \rceil$ space,
-where $f(n)$ is some well-defined polynomial function that grows linearly or less.
-We know that \textit{EndOfLine} can parsimoniously reduce to the \textit{2D-StrongSperner} problem using
-planar embedding method by Chen et al. \cite{chen_Complexity2DDiscrete_2009},
-and as we will demonstrate in the later sections, using their snake embedding technique, the
-number of solutions will be preserved per folding. The problem is that we cannot guarantee,
-the hazard-freeness property of every fold.
+Chen et al.
+\cite{chen_SettlingComplexityComputing_2009} showed that every
+Sperner problem of space $[f(n)]^d$ where $d = \left\lceil \frac{n}{f(n)} \right\rceil$
+and   $f(n) \leq n/2$ for large enough $n$,
+it is \textbf{PPAD}-complete and parsimonious from the \textit{EndOfLine} problem,
+using \textit{Snake Embedding} technique.
+The idea is that we start from the \textit{2D-Sperner} problem
+and repeatedly fold and pad dimensions until we reach the desired space.
+
+Ideally we would like to use the same method to go from
+\textit{2D-DiscreteStrongSperner} to \textit{HF-DiscreteStrongSperner}
+as that would demonstrate a full parsimonious reduction chain from
+the \textit{EndOfLine}.
+The problem is that we cannot guarantee,
+the hazard-freeness property after every fold.
 If we try to use the corollary 10 by \ref{col:k-bit-haz},
-we observe that the circuit size will increase exponentially. This implies the best we can hope for
-when using their method is:
+we observe that the circuit size will increase exponentially.
+This implies the best we can hope is the following space:
 $$
     M = n^k, f(n) = \log_2(n)^k \implies d = \frac{n}{log(n)^k}
 $$
 But that wound imply that the size of our circuit is $\Omega\left(2^{n/log^k(n)}\right)$.
 In the upcoming sections, we propose a chain of parsimonious reductions from the \textit{EndOfLine}
 to \textit{AntipodalStrongSperner}. We emphasize that this method will still not be hazard-free,
-but we hope that the antipodal properties of resulting problem may enable for a full reduction in the future.
+but we hope that the antipodal properties of resulting problem may enable for a full reduction in the future
+since by \ref{cor:antipodal-ss-pc}, we know that its hazard-free variant can be parsimoniously reduced.
 We will start with a formal description of the planar embedding technique in order to define
 \textit{2D-EoL} instances.
-We will then demonstrate how we can apply with the \textit{Bipolar colouring}, where we extend
-the colouring technique Chen et al. \cite{chen_Complexity2DDiscrete_2009}.
 
 \paragraph{Planar Graph Embedding}\label{par:chap-2:planar-graph-embedding}
 We define the graph embedding of a graph $G = (V,E)$ as $G_n = (V_n, E_n)$ where $|V| = n$ and $V_n$ is defined as
@@ -580,7 +587,7 @@ An example of how such reduction looks like can be seen in figure \ref{fig:chap-
 \begin{figure}[h!]
     \centering
     \includegraphics[width=0.5\textwidth]{Chapter3/2d-sperner-eol.pdf}
-    \caption{2D EndOfLine Bipolar Colouring}
+    \caption{\textit{2D-EoL} Bipolar Colouring}
     \label{fig:chap-3:eol-sperner-colouring}
 \end{figure}
 
@@ -627,14 +634,14 @@ the mappings with the colourings, will look like the figure in \ref{fig:chap-3:t
 
 To show our second part of our solution, we can observe that:
 All nodes that are not boundary and not in $\bigcup_{i }I(P_{i}) \cup L(P_{i}) \cup S(P_{i})$ are coloured $-$.
-All $+$ coloured nodes are on the tail and in all lines, all non-tail nodes are cushioned by $\pm, \mp$ and every non-tail node is not poly chromatic.
-All $-$ elements do not affect $\pm,\mp$  coloured nodes.
-Since all lines are sufficiently apart from each other, it suffices to check only the ends of paths, as
-for squares in the lines we can observe that we only have labels $\{\pm, +\}$ or $\{\mp, +\}$.
-One can observe that the square that contains $s_{P_{i}}$ and the start of a line,
-or the square that contains $e_{P_{i}}$ and the end of a line will be panchromatic.
+We will use figure \ref{fig:chap-3:eol-sperner-colouring} for reference.
+We can observe that all squares on the left or the right of the line
+do not result in solutions as they contain only labels $\{\pm, +\}$ and $\{\mp, +\}$
+respectively as seen in figure \ref{fig:chap-3:eol-sperner-colouring}.
+One can observe that the square that contains $s_{P_{i}}$ or  $e_{P_{i}}$
+and a point of the line will be panchormatic as the two points will be antipodal.
 Therefore, we have a valid and parsimonious reduction since we only cubes and the beginnings or ends of lines can be solutions.
-We call this coloured instances as \textit{2D-StrongEoL}
+We call this coloured instances as \textit{2D-StrongEoL}.
 
 \paragraph{Going from \textit{2D} to higher dimensions}
 
@@ -644,7 +651,7 @@ a slightly adjusted method than one proposed by Chen et al. \cite{chen_SettlingC
 which closely resembles the \textit{Snake Embedding} technique used
 by Deligkas et al. \cite{deligkas_ConstantInapproximabilityPPA_2022}
 on the \textit{StrongTucker} version of the problem, which reduced the space
-from $2^n \times 2^n \to 7^m$, where $m = O(n)$. We will show how to expand their method
+from $2^n \times 2^n \to [7]_0^m$, where $m = O(n)$. We will show how to expand their method
 for the \textit{StrongSperner} problems as well as demonstrate that
 such reduction will resolve in an \textit{AntipodalStrongSperner} instance.
 
@@ -701,19 +708,21 @@ such reduction will resolve in an \textit{AntipodalStrongSperner} instance.
 
     \paragraph{Snake Folding} below we will give a overview of the snake folding operation.
     Before giving a formal definition, we will first give an informal overview of what
-    the technique actually does based on the figure \ref{fig:chap-3:snake-embedding-visualisation-basic}.
-    The $y$-axis denotes the new dimension, denoted as $d'$ and the $x$ axis denotes the folded dimension
+    the technique actually does based on the figure \ref{fig:chap-3:snake-embedding-visualisation-basic}
+    where we view our folding with respect to the folded and new dimension.
+    The $y$-axis denotes the new dimension, denoted as $n_{t+1}$ and the $x$ axis denotes the folded dimension
     referred as $\bar{i}$ with width $m_{\bar{i}}^{t+1} = s + 3 = m_{\bar{i}}^{t'}$,
     given that the original width was $3s+1$ for some $s \in \mathbb{N}$.
     Moreover, we will use notation $(a, b)$ to refer to $a$ as the labels in the
     $n_t$ subspace and $b$ as the label of the $n_t+1$ dimension.
     From the figure we observe that we have orange, red, green and blue lines.
     Blue and orange lines denote $(\omega, -)$ and $(\omega, +)$ where $\omega$
-    is the $d$-dim null space, where for each point $>0$, we use label $-$ and for $0$
-    we use label $+$. For the red and green lines,
-    these are denoted as $(\star, -), (\star, +)$ where $\star$ is an $n$-dim copy of the lower
+    is the $n_t$-dimensional \textit{null} space, where for each point $>0$, we use label $-$ and for $0$
+    we use label $+$. These lines are meant to satisfy
+    the boundary conditions. For the red and green lines,
+    these are denoted as $(\star, -), (\star, +)$ where $\star$ is the $n_t$-dimensional copy of the lower
     space with some additional points. The core idea is that all solutions, must belong in between
-    the red and green lines, and if we have a solution in the $n_t$-space, we should also have a
+    the red and green lines, such that if we have a solution in the $n_t$-space, we should also have a
     solution in the $n_t+1$ space, as shown in the figure \ref{fig:chap-3:snake-embedding-2d-to-3d-sol}.
 
 
@@ -756,9 +765,9 @@ such reduction will resolve in an \textit{AntipodalStrongSperner} instance.
     Using the above we formally define the operation the snake embedding operation $S(T, i)$.
 
     \begin{definitionbox}{Snake Embedding operation $S(\Lambda^t, i)$}{snake-emb-op}
-        Given labelling function $\Lambda: M^t \to \{-1, +1\}^n$, apply the snake embedding operation
+        Given labelling function $\Lambda: M^t \to \{-1, +1\}^{n_t}$, apply the snake embedding operation
         on dimension $i \in [n]$, where $m_i \equiv 1 \mod 3$, to a get a new labelling function
-        $\Lambda^{t+1}: M^{t+1} \to \{-1, +1\}^{n+1}$ such that $m'_i = s + 3, n_{t+1} = n_t +1, m_{n_{t+1}} = 8$, where $\Lambda^{t+1}$ is defined
+        $\Lambda^{t+1}: M^{t+1} \to \{-1, +1\}^{n_{t+1}}$ such that $m'_i = s + 3, n_{t+1} = n_t +1, m_{n_{t+1}} = 8$, where $\Lambda^{t+1}$ is defined
         based on the above description.
     \end{definitionbox}
 
@@ -778,29 +787,38 @@ such reduction will resolve in an \textit{AntipodalStrongSperner} instance.
         \ref{fig:chap-3:snake-embedding-visualisation-basic}), otherwise the new dimension will not be covered.
         Moreover, one can observe that a panchromatic hypercube can never be anchored in any of the turning points since
         our labelling is discrete and we know that
-        any $n_t-1$ subspace cannot yield any panchromatic solutions. Assume we have a point
+        any $n_t-1$ subspace cannot yield any panchromatic solutions.
+        
+        
+        Assume we have a point
         in $p \in M^{t+1}$, which is an anchor of some panchromatic solution for some $p_j \in [m^{t+1}_j]$ and
         $p_x \in[m^{t+1}_{n_{t+1}}]$. We can observe from the diagram \ref{fig:chap-3:snake-embedding-visualisation-basic}
         that the coordinates $(\cdot, p_j, p_x)$  correspond to some point $(\cdot, j)$ for some point in the pre-folded space.
-        WLOG assume that $(\cdot, j+1)$  corresponds to the point $(\cdot, p_j + 1, p_x)$.
-        We can observe that the above correspondance occurs on the horizontal portions. On
-        the vertical portions, the $(\cdot, j+1)$ point corresponds to $(\cdot, p_j, p_x+1)$.
-        We can make the same arguments for any dimensionality permutation so we avoid analysing every scenario.
-        That would imply that
-        points $(\cdot, p_j, p_x), (\cdot, p_j + 1, p_x)$ yield a panchromatic solution for the $n_t$-dimensional subspace.
-        In order to cover the $n_{t+1}$-th dimension, we can observe that
-        the points $(\cdot, p_j, p_x+1), (\cdot, p_j+1, p_x+1)$  with $(\cdot, p_j, p_x), (\cdot, p_j + 1, p_x)$
-        are sufficient to cover all labels. But we can observe that those solutions points are part
-        of the $n_{t+1}$-dim cube which implies that we have a panchromatic solution.
+        We can also observe that the point $(\cdot, j+1)$  may correspond to the point $(\cdot, p_j + 1, p_x)$.
+        or $(\cdot, p_j, p_x+1)$, depeding on whether $j \in \{2s, 2s+1\}$
+        as it implies whether its on the vertical portion of the space or the horizontal portion.
+        We denote this observation as the effective direction, meaning
+        if $(\cdot, j) \to(\cdot, j +1)  \implies (\cdot, p_j, p_x) \to(\cdot, p_j +1, p_x)$,  then we say that the $j$th
+        dimension is the effective direction, otherwise the $n_{t+1}$th will
+        be the effective dimension
 
 
-        This would also imply that if the $n_t$ subspace of the cube does not cover the first $n_t$ labels, then the folded
-        dimension will also not yield any labels, which implies that the number of solutions is preserved between foldings.
-        We can also observe that if the effective dimension is on the $j$ dimension then if $p$ is a panchromatic anchor of the new subspace:
+        WLOG we assume the effective dimension is $j$
+        Since $(\cdot, p_j, p_x)$ are the anchor of a panchromatic cube
+        it implies that the points  $(\cdot, p_j, p_x), (\cdot, p_j +1, p_x)$ 
+        cover all the $n_t$ labels and $p_x$ will cover the $n_{t+1}$th dimension.
+        This shows that we can map bijectively between each space
+        and therefore preserve the cardinality of the solution sets.
+    
+        We can also observe that our solutions remain antipodal. 
+        WLOG assumet that the effective dimension is $j$. We know that
+        if $p$ is a solution of the prefolded, then
+        $\forall b: \Lambda^t(p + b) = - \Lambda^t(p + \bar{b})$. This implies
+        that if $\hat{p}$ is its corresponding solution in the folded space then:
         $$
-            \forall b \in \{0,1\}^{n_{t}}, j \in [n_{t+1}]:  [\lambda(p + b0)]_j = - [\lambda(p  + \bar{p}1)]_j
+        \forall b \in \{0,1\}^{n_{t+1}}: \Lambda^{t+1}(\hat{p} + b_{-n_{t+1}}(0)) = - \Lambda^{t+1}(\hat{p} + \bar{b}_{-n_{t+1}}(1))
         $$
-        Which implies that our cube is also antipodal.
+        since the $n_{t+1}$th dimension will not affect the labelling of the other dimensions.
     \end{proof}
     We observed that our operations do not affect the cardinality of solutions. We now outline
     our construction of our new circuit
@@ -811,19 +829,17 @@ such reduction will resolve in an \textit{AntipodalStrongSperner} instance.
         \item If there are no operations that can be applied then we can terminate
     \end{enumerate}
     We can observe that in each step of the algorithm we preserve our solutions. Moreover, each fold
-    divides the dimension by some factor of $3$. We can therefore observe that the runtime for the creation
-    of such circuit will take applications of each operation $O(n\log_32)$. This concludes our proof.
+    divides the dimension by some factor of $3$. Since we start with space of $2^n \times 2^n$, 
+    we can conclude that the number of operations needed will be on the factor or $O(n\log_32)$. This concludes our proof.
 \end{proof}
 
 This is the closest that we manage to bring the reduction chain across \textit{EndOfLine} and \textit{PureCircuit}.
-We argue the antipodality property might offer useful properties as we can immediately discern solutions
-by looking at antipodal pairs as it is much more computationally efficient than trying to find $d+1$ points in some hypercube
-and it doesn't scale with the dimensionality of the space. Unfortunately, we haven't figured a way to exploit,
-this property with hazard-free logic and we leave it as a future direction.
-
-
-Lastly, we observe that throughout literature such as \cite{ikenmeyer_ComplexityHazardfreeCircuits_2019}
-and \cite{deligkas_PureCircuitTightInapproximability_2024}, it is commont to take advantage of speculative
-computing, where we calculate the input on multiple copies of the value and use the result of the majority.
-Unfortunately, while this can resolve a lot of the reductions, it may lead to 1-to-many mapping
-between the solutions of the original problem domain and the \textit{PureCircuit} domain.
+We can observe two interesting directions: if one can create a bit generator
+for kleene binary numbers as presented previously, then we can a similar construction to
+the proof we did in \ref{thm:hf-discrete-to-pure} for a full parsimonious reduction between
+\textit{nD-SS} to \textit{PureCircuit}.
+Alternatively one can attempt to reduce \textit{AntipodalStrongSperner} to \textit{HF-AntipodalStrongSperner} or \textit{PureCircuit}
+parsimoniously. We argue that the antipodality property allows us to check for solutions
+much more efficient than trying to find $d+1$ points in some hypercube. 
+In hindsight, we argue that if one could construct a gadget to generate the maximum and the minimum 
+resolution of a \textit{Kleene unary}, it would offer a major breakthrough towards the full reduction.

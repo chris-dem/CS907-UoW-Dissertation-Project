@@ -1,5 +1,5 @@
 % !TEX root =  ../Report.tex
-\section{Theoretical Preliminaries}
+\section{Theoretical Preliminaries and Literature Overview}
 In the current section, we introduce all the necessary preliminaries
 with respect to search problems and counting complexity theory.
 Moreover we give an overview of the core problem
@@ -561,10 +561,10 @@ Moreover, they argue that the usage of $\textbf{\#P}$ has several benefits:
     \item By polynomially bounding objects, we avoid cases such as: $f(w) = |\{1, \hdots, f(w)\}|$. In other words, we create a set
           of combinatorial objects.
     \item We can work with $f(\cdot)$  even if its direct computation is hard. For example, counting
-    the number of cycles in a graph is believed to be an \textbf{NP}-complete problem but verifying
-    individual cycles is trivial.
+          the number of cycles in a graph is believed to be an \textbf{NP}-complete problem but verifying
+          individual cycles is trivial.
     \item $\textbf{\#P}$ is a formal system that is highly flexible. Specifically, we are able to use
-    results in complexity theory and NTMs to find interpretations or prove their non-existence.
+          results in complexity theory and NTMs to find interpretations or prove their non-existence.
 \end{enumerate}
 
 % The current framework was used in several papers such as
@@ -707,7 +707,7 @@ to construct $k$-bit hazard free circuits
     such that:
     \begin{align*}
         \textit{size}(C')\, & = \left(\frac{ne}{k}\right)^k (\textit{size}(C) + 6) + O(n^{2.71k}) \\
-        \textit{depth}(C') & = \textit{depth}(C) + 8k + O(k \log n)
+        \textit{depth}(C')  & = \textit{depth}(C) + 8k + O(k \log n)
     \end{align*}
     Where $\textit{size}(P)$ denotes the number of gates of $P$ and $\textit{depth}(P)$ denotes the longest path from
     the input bit to the output bit
@@ -857,7 +857,7 @@ An example of a computation tree can be observed in the figure \ref{fig:chap-2:a
 We can observe that one can encode Kleene logic into the computation of Turing machines. We use
 this framework as one of the main motivations of the project.
 
-\section{Literature Review}
+\subsection{Bridging Counting Complexity, Search problems and Kleene Logic}
 
 Our work is primarily focused around the paper by Ikenmeyer et al. \cite{ikenmeyer_WhatWhatNot_2022} and the
 parsimonious reductions discovered across various \textbf{PPAD} problems.
@@ -873,50 +873,46 @@ We demonstrate an example of the above notation using a finding from the paper
 by Ikenmeyer et al. \cite{ikenmeyer_WhatWhatNot_2022}: $\textbf{\#PPAD}(\textit{EndOfLine} -1) /2 = \textbf{\#P}$.
 To show inclusion it is easy to see that one can accept all the non-zero sources, since each source is paired with a sink,
 and we are able to ignore the sink paired with the $0^n$ source. To show the other direction, they demonstrate an example
-where they reduce $\textit{\#CircuitSAT} \leq_C (\textbf{\#PPAD}(\textit{EndOfLine}) -1) /2$ by creating a graph, where
-for each input $x$, we create a source and sink pair $(0x, 1x)$.
+where they reduce $\textit{\#CircuitSAT} \subseteq ((\textit{\#EndOfLine}) -1) /2$ by creating a graph, where
+for each input $x$, we create a source and sink pair $(0x, 1x)$ if and only if $f(x) = 1$.
 
-Ikenmeyer et al. \cite{ikenmeyer_WhatWhatNot_2022} developed tools to demonstrate how can one
-show whether a problem is in \textbf{\#P} or not, or more specifically, how do demonstrated
-whether certain functions exhibit combinatorial interpretations.
-In their paper, they established that for some \textbf{PPAD} problems,
-$\textbf{\#PPAD}(\cdot) -1 \subseteq \textbf{\#P}$ but for some other this statement did not hold true under relativising reductions,
-such as the \textit{SourceOrExcess}. The aforementioned statement is known as an
-oracle separation. The details of how it works
-are beyond the scope of the current project and therefore we focus on the key takeaway that
-$\textbf{\#PPAD}(\textit{SourceOrExcess}(2,1)) -1$ is a harder problem than $\textbf{\#PPAD}(\textit{EndOfLine}) -1$.
-
-But one can ask, how does $\textbf{\#PPAD}(\textit{SourceOrExcess}(k,1)) -1$ behave for some $k \in \mathbb{N}_{\geq 3}$
-and in general we will demonstrate that there are many other problems that have interesting counting properties.
-This leads us directly to the question of, can we somehow quantify each problem in \textbf{PPAD}, or more
-specifically, is there a problem that can ``enumerate everything'' else?
+In the paper by, Ikenmeyer et al. \cite{ikenmeyer_WhatWhatNot_2022}, they developed tools to demonstrate how one
+can show whether a problem is in \textbf{\#P} or not, with the help of relativising techniques.
+The idea of relativisation is that we can equip our circuits or TMs with calls to
+arbitrary oracles. They demonstrated that for several problems in \textbf{TFNP} as seen in figure \ref{fig:chap-2:tfnp-hierarchy},
+some can be parsimoniously reduce to each other under all oracles, where as for some
+directions (the ones with the warning sign) this is not the the case.
+From the figure we can observe that for seveal \textbf{PPAD}-complete, \textbf{CLS} and
+\textbf{PPADS} problems one can indeed find parsimonious redutions.
+For other problems, even \textbf{PPAD}-complete ones like $\textbf{\#PPAD}(\textit{SourceOrExcess}(k,1)) -1$, 
+this does not seem to be the case.
 
 
-\subsection{Project Question and Objectives}
+\section{Project Question and Objectives}
 
 As mentioned in the previous section, we observed how different \textbf{PPAD} problems can behave differently.
 The main motivation comes from the observation of how \textit{Kleene logic} can be used to simulate the computation
 paths of NTMs. We can parallelise this to the boolean problem of \textit{SAT} which
-given the \textit{Cook-Levin} theorem \cite{cook_ComplexityTheoremprovingProcedures_1971}
-one can convert every \textbf{NP} problem into a \textit{SAT}(problem of satisfying assingments for boolean expression) problem by
-creating a boolean expression for each snapshot of the Turing Machine such that it returns an accepting state.
-Another property of the \textit{Cook-Levin} is that every problem can be parsimoniously reduced to a
-\textit{SAT} assignment, meaning:
+given by the \textit{Cook-Levin} theorem \cite{cook_ComplexityTheoremprovingProcedures_1971}
+one can convert every \textbf{NP} problem into a \textit{SAT} problem.
+The general idea is to create a boolean expression for each snapshot of the
+Turing Machine such that a satisfying assingment corresponds to an accepting path.
+As corollary the \textit{Cook-Levin} also demonstrates that every \textbf{NP} problem can be parsimoniously reduced to the
+\textit{SAT} problem, meaning:
 $$
     \forall L \in \textbf{NP}: \#L \subseteq  \textit{\#SAT}
 $$
-A reasonable conjecture could also be if one can exploit Kleene-circuit nature of \textit{PureCircuit} to
+A reasonable conjecture would also be if one can exploit Kleene-circuit nature of \textit{PureCircuit} to
 create a \textit{Cook-Levin} type equivalent reduction for \textbf{PPAD} problems, or more formally:
 $$
     \forall L \in \textbf{PPAD}: \textbf{\#PPAD}(L) \subseteq  \textbf{\#PPAD}(\textit{PureCircuit})
 $$
-If the above statement were indeed true, then it would give us insights as to how counting problems behave in \textbf{PPAD}
-as we highlighted that even if two problems are \textbf{PPAD}-complete, it does not necessarily imply
-they are counting equivalent.
+If the above statement were indeed true, then it would give us insights as to how counting problems behave in $\textbf{PPAD}-1$.
+Unfortunately, there is limited research with respect to the combinatorial
+nature of the problem. We wish to offer a new perspective of \textit{PureCircuit}
+and establish its \textit{parsimonious relations} with other problems.
+To break down our conjecture we offer the following set of objectives:
 
-As established previously and as of the time of writing this paper, the \textit{PureCircuit} was mainly established
-for inapproximability bounds of \textbf{PPAD} problems. Therefore, to tackle the aforementioned conjecture
-we established the following set of milestones.
 \begin{enumerate}
     \item Establish a chain of parsimonious reductions from the \textit{EndOfLine} to the \textit{PureCircuit} problem.
     \item Establish a chain of parsimonious reductions from the $\textit{SourceOrExcess}(2,1)$ to the \textit{PureCircuit} problem.
@@ -929,12 +925,17 @@ we established the following set of milestones.
           $$
 \end{enumerate}
 
-The above milestones aim to break down the generalised conjecture into versions of the problem
-with incremental difficulty. Our main findings sections focuses as to
+The above milestones were created in mind to tackle the main conjecture in incremental steps.
+Demonstrating a parsimonious reduction from the \textit{EndOfLine} is an important baseline
+as every \textbf{PPAD} problems reduces to the \textit{EndOfLine} even if its not parsimoniously.
+The second milestone is meant to demonstrate that we can use \textit{PureCircuit} for
+problems with no combinatorial interpretations. Our last objective is the overall
+main conjecture that we are trying to prove.
+
+Our main findings sections focuses as to
 how we tackled each problem and the efforts we did. Even though, the project did not
 manage to yield any positive results, we provides several tools, new problems and
 conjectures that may help in future research.
-
 To assist with the theory development, we set out to develop a visualisation tool that will be able
 to visualise instances of the problem as well as find solutions or enumerate through solutions for small instances.
 We therefroe provide this additional list of software deliverables:

@@ -8,26 +8,40 @@
 
 Due to the hybrid nature of our project, we wanted to make sure were able
 to both the software portion and the theory portion of the project.
-As we explained in the {}, we used agile methodologies
-for rapid prototyping and feature addition.
-With regard to the research management, we revolved methodology around the \textit{Zettelkasten method}. 
+With respect to our software management, we primarily used the waterfall approach
+while incorporating iteartive sprints, since expected the core
+set of requirements to change over time as we developed our theories and ideas.
+
+With regard to the research management, we revolved our methodology around the \textit{Zettelkasten method}.
 \textit{Niklas Luhmann} developed this method to keep track of notes and
 information when dealing with a massive wave of publications  \cite{cevolini_ForgettingMachinesKnowledge_2018}.
 The method embodies the following elements:
 \begin{enumerate}
     \item \textbf{Literature Notes}: Atomic notes that have been extracted from each
-    paper which contain the ideas and techniques of the paper.
+          paper which contain the ideas and techniques of the paper.
     \item \textbf{Fleeting notes}: Ideas that pop up randomly but are not really linked with any particular source.
     \item \textbf{Permanent notes}: Reviewed literature notes and fleeting notes which have been promoted to
-    \textbf{permanent} ones.
+          \textbf{permanent} ones.
 \end{enumerate}
 Each of these notes can be annotated with a tagging systems and relate to each other with the use of references.
-With the use of the \texttt{Obsidian} \footnote{https://obsidian.md/} tool, we managed to
-create the graph as observed in \ref{fig:chap-5:obsidian-canvas}. %% TODO: Look for more
+
+\section{Tooling}
+
+To aid our research management, we made use of the \texttt{Obsidian} \footnote{https://obsidian.md/} tool.
+\texttt{Obsidian}'s graphical reprentation of the semantical relations between nodes as well as its smart
+tagging system, made it easier to keep track of our ideas and on-going theories.
+Moreover it incorperates additional features as seen in the figure  \ref{fig:theory:obsidian-usages},
+such as a canvas or a mindmap. All these features allowed us to streamline and refine thought processes,
+throughout the project.
+In additon, to keep version control, we used \texttt{Github} \footnote{https://github.com/}
+as it one of the most well known version control applications in industry.
+This allowed us to keep constant backups of our code and notes, whilst being able to refer
+back in case something unexpected occured.
+
 
 \begin{figure}[htbp]
     \centering
-    \subfloat[Obsidian Graph]{
+    \subfloat[Obsidan graph. Each dot represents a node and eack link corresponds to a reference between two nodes]{
         \includegraphics[width=0.3\linewidth]{assets/obsidian_graph.png}
         \label{fig:chap-5:obsidian-graph}
     }
@@ -44,17 +58,74 @@ create the graph as observed in \ref{fig:chap-5:obsidian-canvas}. %% TODO: Look 
 \end{figure}
 
 
+\section{Ethical Considerations}
+
+Due to the nature to the theoretical nature of the project, there were no ethical consideration
+that were required. All the data and diagrams that were created were either made by the
+author, redrawn by the author or borrowed from another paper. The libraries
+used to build the software were under the MIT licence.
+
+
 
 \section{Risk Management}
 
-Due to the limited prior research on the counting complexity of $\textsc{\#TFNP} -1$,
-this project involves significant risks.
-Our justification for the proposed milestones was largely informed by existing knowledge regarding the complexity of circuit constructions.
-However, it remained entirely possible that our proposed reductions could prove to be infeasible.
-Furthermore, working with Kleene logic introduced additional complexity, and it could be the reason why
-establishing fully parsimonious reductions between the target problems may not be achievable.
-This is also the reason why we diverted our attention to bounded parsimonious reductions instead.
-A detailed overview of the associated risks and our proposed mitigation strategies is provided in the table \ref{tab:management:risk-management}.
+
+
+
+\section{Timetable}
+
+
+% Figure \ref{fig:gantt-new} depicts how the remaining project is expected to progress with regard
+% to the milestones we aim to achieve. Overall we modified our timeline to prioritise
+% theory crafting, and therefore we hope this adjusted timeline will capture accurately the remaining duration
+% of the project.
+
+% \begin{figure}[h!]
+%     \centering
+%     \includegraphics[width=0.85\textwidth]{assets/Interim Gantt 20250708.pdf}
+%     \caption{Updated Gantt chart}\label{fig:gantt-new}
+% \end{figure}
+
+We provide a figure of our final iteration of our gantt chart in figure.
+Overall the project followed the expected timetable, with some changes that had to be made
+after the interim report. First and foremost, we prioritised finishing
+the software. This was mainly due to ensure a final deliverable as well as
+to have a tool to verify our \textit{PureCircuit} gadgets. Moreover,
+we shifted our focus to find supporting arguments for objectives,
+we faced a lot of difficulties achieving our goals.
+
+
+\section{Appraisals and Reflections}
+
+
+
+
+Unfortunately there were some things that did not go as planned. 
+First, a minimum viable version of the software was
+completed towards a much later stage project. In
+an idea scenario, it would have been more valuable for
+us had we prioritised the development of the visualisation tool
+as it would have allowed for a faster verification of results.
+Moreover, one of our major results from the interim
+report, ended up having a major issues that halted our process. 
+Luckily we were able to adjust to that incident by finding
+results that help or may help resolve our objectives.
+
+On the hand, we were able handle some of the incidents.
+Through our intensive note taking procedure, we were able
+to tackle a difficult topic by breaking ideas down
+and combining ideas from people. 
+In addition, a lot of our failed ideas came together in the end such as,
+the main proofs in our sections in our sections \ref{sec:pc-plus-eol} and \ref{sec:sc-excess},
+For each proof or theorem in those sections, we have 10 other failed attempts or ideas,
+from all which we were able to extrapolate the missing piece of the next puzzle.
+
+%% TODO mention risk managemetn
+Morevover, our extensive
+testing gave us confidence in our resulting applciation. 
+
+
+
 
 
 \begin{xltabular}{0.95\linewidth}{|Z{1.2cm}|Z{1.75cm}|Y|Y|Z{1.2cm}|}
@@ -77,26 +148,12 @@ A detailed overview of the associated risks and our proposed mitigation strategi
     \caption{Risk management table.} \label{tab:management:risk-management}
 \end{xltabular}
 
+% Due to the limited prior research on the counting complexity of $\textsc{\#TFNP} -1$,
+% this project involves significant risks.
+% Our justification for the proposed milestones was largely informed by existing knowledge regarding the complexity of circuit constructions.
+% However, it remained entirely possible that our proposed reductions could prove to be infeasible.
+% Furthermore, working with Kleene logic introduced additional complexity, and it could be the reason why
+% establishing fully parsimonious reductions between the target problems may not be achievable.
+% This is also the reason why we diverted our attention to bounded parsimonious reductions instead.
+% A detailed overview of the associated risks and our proposed mitigation strategies is provided in the table \ref{tab:management:risk-management}.
 
-\section{Timetable}
-
-Figure \ref{fig:gantt-new} depicts how the remaining project is expected to progress with regard
-to the milestones we aim to achieve. Overall we modified our timeline to prioritise
-theory crafting, and therefore we hope this adjusted timeline will capture accurately the remaining duration
-of the project.
-
-\begin{figure}[h!]
-    \centering
-    \includegraphics[width=0.85\textwidth]{assets/Interim Gantt 20250708.pdf}
-    \caption{Updated Gantt chart}\label{fig:gantt-new}
-\end{figure}
-
-
-\section{Ethical Considerations}
-
-Due to the nature to the theoretical nature of the project, there were no ethical consideration
-that were required. All the data and diagrams that were created were either made by the
-author, redrawn by the author or borrowed from another paper. The libraries
-used to build the software were under the MIT licence.
-
-\section{Appraisals and Reflections}

@@ -10,6 +10,8 @@ Marino's continuity argument \cite{marino_GeneralTheoryMetastable_1981}.
 We therefore make use of topological problems with the idea that resolutions of our input
 corresponds to some set nearby points in a space. If all points abide some property
 then we can use that to detect solutions.
+This is an extension of the non-parsimonious reduction used by Deligkas
+et al. \cite{deligkas_PureCircuitTightInapproximability_2024} when showing \textbf{PPAD}-hardness.
 
 
 With respect to the first objective, we provide the following
@@ -26,7 +28,7 @@ and with \textbf{PPAD} as a whole
 Following the same thought process for our second objective, we demonstated how to reduce \textit{SourceOrExcess}
 to a topological problem. Specifically in section \ref{sec:sc-excess} we argue the following result
 $$
-    \textit{\#SourceOrExcess}(2,1) \subseteq \textit{\#3D-CountingStrongSperner} %% TODO
+    \textit{\#SourceOrExcess}(2,1) \subseteq \textit{\#3D-CountingStrongSperner} \text{ \ref{thm:counting-ss-excess}}
 $$
 Where we define a different combinatorial version of the \textit{3D-StrongSperner} and demonstrate
 how it can be used for parsiomonious reductions between the $\textit{SourceOrExcess}(2,1)$ problem.
@@ -38,3 +40,11 @@ given Hollender et al.'s work \cite{hollender_ComplexityMultisourceVariants_2018
 on directed graphs with multiple known sources, we make
 on observations as to the combinatorial nature of the problems that can be created
 as well as important problems to analyse for a full \textit{PureCircuti} Cook-Levin type theorem.
+
+Lastly we provide two supplementary findings with regards to the \textit{PureCircuit} reductions.
+We first demonstrate how we can relate to \textit{Tarski} with \textit{Kleene theory} and
+show how to create parsimonious reductions using \textit{PureCircuit}.
+Second, we show how simplifications of the \textit{PureCircuit} problem can lead
+to parsimonious reductions to the \textit{EndOfLine}. Since
+these proofs to not offer any indication of the hardness of the problem,
+we provide their full proofs in the appendix.
