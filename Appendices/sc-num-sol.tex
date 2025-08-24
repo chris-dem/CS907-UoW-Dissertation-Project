@@ -1,0 +1,20 @@
+We provide a proof of the \ref{clm:sc-deg-src}.
+\begin{proof}
+    Given $\alpha\textit{S-SourceOrExcess}(\beta,1)$, in order to find
+    the minimum number of solutions, we can assume that we there are no other sources other than the first $\alpha$ nodes.
+    We argue that the minimum number of solutions is $\mu = \lceil \alpha/\beta \rceil$ since we can create 
+    $\mu$ sinks that connect to at most $\beta$ nodes each. We will refer to these
+    graphs as sink graphs.
+
+    We can demonstrate that any graph can be reduced to a sink graph.
+    Our first observation is to convert every excess node to a sink node. To do that we can apply two simplification 
+    phases:
+    \begin{enumerate}
+        \item Removal phase: Remove all paths between two excess nodes or between excess and sink nodes.
+        We can observe that after this steps our graph only contains sources and sinks.
+        \item Merging phase: If there are sinks with degrees $(a,0)$ and $(b,0)$ such that
+        $a + b \leq \beta$ then we can merge the two to remove a solution. Keep repeating this process until
+        no two sinks can be merged
+    \end{enumerate}
+    We can observe that any graph will simplify to a sink graph and therefore we will always have at least $\mu$ solutions.
+\end{proof}

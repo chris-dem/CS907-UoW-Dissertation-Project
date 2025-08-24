@@ -4,8 +4,8 @@ did not manage to achieve the desired theorem, we hope to demonstrate interestin
 us to reveal more intricate properties of $\textbf{\#PPAD}$. Our first step is to extend the hierarchy
 between \textit{EndOfLine} and \textit{SourceOrExcess}$(2,1)$. We can observe that
 $$
-\forall a,b \in \mathbb{N}: a \leq b \implies \textbf{\#PPAD}(\textit{SourceOrExcess})(a,1) \subseteq
-\textbf{\#PPAD}(\textit{SourceOrExcess})(b,1)
+    \forall a,b \in \mathbb{N}: a \leq b \implies \textbf{\#PPAD}(\textit{SourceOrExcess})(a,1) \subseteq
+    \textbf{\#PPAD}(\textit{SourceOrExcess})(b,1)
 $$
 In fact, we can extend the degree of graphs to polynomial degrees.
 For that we provide a formal definiton of the \textit{Unbalanced} problem \ref{def:unbalanced}
@@ -26,10 +26,9 @@ For that we provide a formal definiton of the \textit{Unbalanced} problem \ref{d
 
 
 \begin{lemmabox}{}{unbalanced-lem-ppad-complete}
-    \label{lem:unbalanced-lem-ppad-complete}
     $\textit{Unbalanced}$ is \textbf{PPAD}-complete \cite{hollender_ComplexityMultisourceVariants_2018}
 \end{lemmabox}
-
+The proof of the above lemma is presented in the appendix \ref{app:sec:polys-unbalanced-with-unbalanced}
 As previously mentioned, Hollender et al. \cite{hollender_ComplexityMultisourceVariants_2018},
 demonstrated how extending the number of known sources of the \textit{EndOfLine} problem
 does not affect its \textbf{PPAD}-completeness. Moreover,
@@ -46,30 +45,6 @@ the \textit{Unbalanced} problem is not affected.
     $$
 \end{lemmabox}
 
-\begin{proof}
-    To show our reduction, that we have an instance of \textit{PolyS-Unbalanced},
-    where have $f(n)$ known sources. Assume that $g(n)$ describes the input
-    degree and $h(n)$ the output degree. We create a new \textit{Unbalanced}
-    instance with in- and out-degree polynomials $p(n)= (\max\{g(n), h(n)\}) \cdot f(n)$.
-    We will use the figure \ref{fig:unbalanced-ms-trans} to illustrate our reduction. Essentially, we are
-
-    where $s_i$ is the $i$th known source of the original problem. For each node
-    $k$ of the $i$th group, denoted as $v^i_k$, we are adding edge $v^i_k \to s_i$.
-    Since each $s_i$ element has  $\textit{in-degree} = \textit{out-degree}$, we can
-    observe that we are not creating any additional solutions. Since this transformation
-    is local, any other unbalanced node will stay the same and therefore the set of Solutions
-    is preserved.
-
-
-
-    \begin{figure}[h!]
-        \centering
-        \includegraphics[width=0.5\textwidth]{Chapter3/unbalanced-multi-source.pdf}
-        \caption{\textit{PolyS-Unbalanced} transformation to \textit{Unbalanced}}
-        \label{fig:unbalanced-ms-trans}
-    \end{figure}
-\end{proof}
-
 For simpler instances, such as the \textit{EndOfLine}, the reduction
 demonstrated by Hollender is non parsimonious, meaning there is a
 possibilitiy of an oracle separation betwwen \textit{EndOfLine} and \textit{2S-EoL}.
@@ -77,9 +52,9 @@ In fact one can observe that we can create a 3D-matrix of problems such that
 $$
     \forall i, j, k \in \mathbb{N} \cup \{\textit{Poly}\} : M_{i,j,k} = k\textit{S-Unbalanced(i,j)}
 $$
-Where $\omega$ denotes polynomial values. 
+Where $\omega$ denotes polynomial values.
 Morover, these hierarchies seem to reveal some hidden combinatorial structures in \textbf{PPAD} and in
-\textbf{TFNP} as a whole. 
+\textbf{TFNP} as a whole.
 For example, one can demonstrated the following claim \ref{clm:sc-deg-src}
 
 \begin{claimbox}{SourceOrExcess with fixed degrees and sources}{sc-deg-src}
@@ -87,25 +62,7 @@ For example, one can demonstrated the following claim \ref{clm:sc-deg-src}
     $\mu = \lceil \alpha/\beta \rceil$ solutions.
 \end{claimbox}
 
-\begin{proof}
-    Given $\alpha\textit{S-SourceOrExcess}(\beta,1)$, in order to find
-    the minimum number of solutions, we can assume that we there are no other sources other than the first $\alpha$ nodes.
-    We argue that the minimum number of solutions is $\mu = \lceil \alpha/\beta \rceil$ since we can create 
-    $\mu$ sinks that connect to at most $\beta$ nodes each. We will refer to these
-    graphs as sink graphs.
-
-    We can demonstrate that any graph can be reduced to a sink graph.
-    Our first observation is to convert every excess node to a sink node. To do that we can apply two simplification 
-    phases:
-    \begin{enumerate}
-        \item Removal phase: Remove all paths between two excess nodes or between excess and sink nodes.
-        We can observe that after this steps our graph only contains sources and sinks.
-        \item Merging phase: If there are sinks with degrees $(a,0)$ and $(b,0)$ such that
-        $a + b \leq \beta$ then we can merge the two to remove a solution. Keep repeating this process until
-        no two sinks can be merged
-    \end{enumerate}
-    We can observe that any graph will simplify to a sink graph and therefore we will always have at least $\mu$ solutions.
-\end{proof}
+The proof our statement will be provided in the appendix \ref{app:sec:sc-num-sol}.
 This implies there exists subclasses in \textbf{PPAD} which we can denote as $\textbf{PPAD}(k)$ where we have \textbf{PPAD} problems with at least $k$ solutions.
 This may lead in future directions where we can ask about combinatorial interpretations of $\textbf{PPAD}(\alpha)-\beta$ for $\alpha \geq \beta$.
 

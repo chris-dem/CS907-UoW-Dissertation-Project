@@ -36,18 +36,18 @@ in perspective may also give insights to other areas such as the circuit complex
 \subsubsection{Parsimonious Topological Representations of \textbf{PPAD} problems }
 
 
-From the previous sections we observed how to reduce \textit{SourceOrExcess}$(2,1)$ to a topological problem.
-Just like in the \textit{EndOfLine} problem, we found it essential to reduce it to a \textit{StrongSperner} problem
-with polynomial sides and very high dimensionality. We believe that one could abuse the \textit{Snake Embedding} methodology
-that we proposed earlier but there are two main questions that need to be resolved:
-\begin{enumerate}
-    \item Will the number of solutions between foldings stay the same?
-    \item Is there a natural way to define \textit{Counting-SS}?
-\end{enumerate}
-More interestingly, we made references of $\alpha-\textit{SUnbalanced}(\Delta_i, \Delta_o)$
-and how they can affect the counting nature of each other. Like we mentioned previously, for
-\textit{2D-StrongSperner} and \textit{1-MC}, we cannot guarantee parsimonious reductions, but
-when we mapped our instances to a $3D$ space that was indeed possible. We therefore make the following conjecture:
+% From the previous sections we observed how to reduce \textit{SourceOrExcess}$(2,1)$ to a topological problem.
+% Just like in the \textit{EndOfLine} problem, we found it essential to reduce it to a \textit{StrongSperner} problem
+% with polynomial sides and very high dimensionality. We believe that one could abuse the \textit{Snake Embedding} methodology
+% that we proposed earlier but there are two main questions that need to be resolved:
+% \begin{enumerate}
+%     \item Will the number of solutions between foldings stay the same?
+%     \item Is there a natural way to define \textit{Counting-SS}?
+% \end{enumerate}
+% More interestingly, we made references of $\alpha-\textit{SUnbalanced}(\Delta_i, \Delta_o)$
+% and how they can affect the counting nature of each other. Like we mentioned previously, for
+% \textit{2D-StrongSperner} and \textit{1-MC}, we cannot guarantee parsimonious reductions, but
+% when we mapped our instances to a $3D$ space that was indeed possible. We therefore make the following conjecture:
 
 \begin{conjecturebox}{\textit{nD-CountingSS} and \textit{Unbalanced}}{}
     There exist some polynomial computable function $f :\mathbb{N}^3 \to \mathbb{N}$, such that
@@ -66,15 +66,7 @@ for enumerating solutions.
 
 
 \subsubsection{PureCircuit Gate Extension} %% TODO 
-The \textit{PureCircuit} instance we defined uses the gate set
-\textit{NOR, Purify}. In fact, Deligkas et al. \cite{deligkas_PureCircuitTightInapproximability_2024}
-demonstrated that if $G$ is our gate set, then for the problem to be \textbf{PPAD}-complete,
-it must be the case that
-\begin{gather*}
-G \supseteq \{\textsc{Purify}, v\} \text{ for } v \in \{\textsc{Nor}, \textsc{Nand}\} \\
-\text{ or }\\
-G \supseteq \{\textsc{Purify}, \textsc{Not}, v\}  \text{ for } \{\textsc{And}, \textsc{Or}\} \\
-\end{gather*}
+
 The proof for the \textbf{PPAD}-inclusion can be summarised as expressing a \textit{PureCircuit} instances
 as a \textit{Brouwer} function from $[0,1]^n \to [0,1]^n$, given fixed point $x^\star$ then
 we denote the folloiwng assignment: if $x^\star_i \in \{0,1\}$ then $v_i = x^{\star}_i$, otherwise
@@ -87,18 +79,18 @@ and whether they may affect the combinatorial nature of the \textit{PureCircuit}
 
 \subsubsection{Algorithmic Extensions}
 Although the aforementioned algorithms work as expected, there are several improvements that can be made.
-For all three of the algoritmic methods we mentioned, the first and most important extension
+For all three of the algorithmic methods we mentioned, the first and most important extension
 is to treat weakly directly connected components individually. Trivially an assignment in one
 weakly connected component should not affect the solution set of the other one.
 We can therefore reduce the search spaces of our problems by finding
-the solution sets in each graph seperately. Moreover for the
+the solution sets in each graph separately. Moreover, for the
 \textit{backtracking} algorithm, we can extend the above idea by considering
 the cartesian product of the solution sets, meaning:
-let $G_i$ denote a (weakly) connected component of $G$ and $\textbf{sol}(\cdot)$
-denotes its solution set. Its trivial to observe that
 $$
     \textbf{sol}(G) = \bigtimes_{k \in [k]}  \textbf{sol}(G_k)
 $$
+Where $G_i$ is the $i$th connected component.
+
 
 We can also optimise the backtracking algorithm even further.
 First one can observe that if our graph was acyclic, then
@@ -120,16 +112,4 @@ of steps to make the backtracking algorithm simpler:
 
 We argue that the above heuristic may result in improved average times but of course
 further research can be done in order to determine more suitable selection heuristics.
-Furthermore, an additional heuristic that we failed to consider is using the notion
-of alternation or varying path.
-This has been introduced by \cite{eichelberger_HazardDetectionCombinational_1965}
-and the idea is the ``application'' of the gates to propagate values.
-Their algorithm can be summarised as such:
-Start with an initial set of nodes, and apply gates of each circuit enough times.
-For nodes that alternate their values between $0,1$, replace their value with $\bot$
-Repeat until no altrenation occurs. This algorithm is still exponential
-in its running time but one could deduce useful insights as to notion
-of alternating paths.
-It has to be noted that it may not be entirely clear how such construction
-could be applied as the purify gate has a non-deterministic output, meaning
-for the $\bot$ value, the outputs could be multiple.
+

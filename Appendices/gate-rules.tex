@@ -1,0 +1,66 @@
+\begin{table}[h!]
+    \centering
+    \begin{tabular}{|c|c|}
+        \hline
+        \rowcolor[HTML]{EAE1E1}
+        {\color[HTML]{333333} \textbf{NOR input}}                  & {\color[HTML]{333333} \textbf{Output sets}}                                                  \\ \hline
+        $\forall v \in \mathbb{T}: (\cdot, \cdot, v)$              & $(\mathbb{T}_{\leq \neg v},\mathbb{T}_{\leq \neg v}, \{v\} )$                                \\ \hline
+        $\forall v \in \mathbb{T}: (\cdot, v, \cdot)$              & $(\mathbb{T}, \{v\}, \mathbb{T}_{\leq \neg v})$                                              \\ \hline
+        $\forall a,b \in \mathbb{T}: a > b \implies (\cdot, a, b)$ & $(\{\neg b\}, \{a\}, \{b\})$                                                                 \\ \hline
+        $\forall v \in \mathbb{T}: (\cdot, v, \neg v)$             & $(\mathbb{T}_{\leq v}, \{v\}, \{\neg v\})$                                                   \\ \hline
+        $\forall a,b \in \mathbb{T}:a < b \implies (\cdot, a, b)$  & Invalid combination                                                                          \\ \hline
+        $\forall a,b \in \mathbb{T}: (a, b, \cdot)$                & $(\{a\}, \{b\}, \{\neg \max(a,b) \})$                                                        \\ \hline
+        $\forall a,b,c \in \mathbb{T}:  (a, b, c)$                 & $(\{a\}, \{b\}, \{c \})$, only if the triplet $(a,b,c)$ is a correct \textbf{NOR} assignment \\ \hline
+    \end{tabular}
+    \caption{\textbf{NOR} value propagation rules}
+    \label{tab:chap-4:nor-propagation}
+\end{table}
+
+\begin{table}[h!]
+    \centering
+    \begin{tabular}{|c|c|}
+        \hline
+        \rowcolor[HTML]{EAE1E1}
+        {\color[HTML]{333333} \textbf{NAND input}}        & {\color[HTML]{333333} \textbf{Output sets}}                                                   \\ \hline
+        $\forall v \in \mathbb{T}: (\cdot, \cdot, v)$     & $(\mathbb{T}_{\geq \neg v},\mathbb{T}_{\geq \neg v}, \{v\} )$                                 \\ \hline
+        $\forall v \in \mathbb{T}: (\cdot, v, \cdot)$     & $(\mathbb{T}, \{v\}, \mathbb{T}_{\geq \neg v})$                                               \\ \hline
+        $\forall a,b \in \mathbb{T}: a < b (\cdot, a, b)$ & $(\{\neg b\}, \{a\}, \{b\})$                                                                  \\ \hline
+        $\forall v \in \mathbb{T}: (\cdot, v, \neg v)$    & $(\mathbb{T}_{\geq v}, \{v\}, \{\neg v\})$                                                    \\ \hline
+        $\forall a,b \in \mathbb{T}:a > b (\cdot, a, b)$  & Invalid combination                                                                           \\ \hline
+        $\forall a,b \in \mathbb{T}:a > b (a, b, \cdot)$  & $(\{a\}, \{b\}, \{\neg \max(a,b) \})$                                                         \\ \hline
+        $\forall a,b,c \in \mathbb{T}:  (a, b, c)$        & $(\{a\}, \{b\}, \{c \})$, only if the triplet $(a,b,c)$ is a correct \textbf{NAND} assignment \\ \hline
+    \end{tabular}
+    \caption{\textbf{NAND} value propagation rules}
+    \label{tab:chap-4:nand-propagation}
+\end{table}
+
+
+\begin{table}[h!]
+    \centering
+    \begin{tabular}{|c|c|}
+        \hline
+        \rowcolor[HTML]{EAE1E1}
+        {\color[HTML]{333333} \textbf{COPY input}}             & {\color[HTML]{333333} \textbf{Output sets}}                                       \\ \hline
+        $\forall v \in \mathbb{T}: (\cdot, v) \vee (\cdot, v)$ & $(\{v\}, \{v\})$                                                                  \\ \hline
+        $\forall a,b \in \mathbb{T}:  (a, b)$                  & $(\{a\}, \{b\})$, only if the tuple $(a,b)$ is a correct \textbf{COPY} assignment \\ \hline
+    \end{tabular}
+    \caption{\textbf{COPY} value propagation rules}
+    \label{tab:chap-4:copy-propagation}
+\end{table}
+
+\begin{table}[h!]
+    \centering
+    \begin{tabular}{|c|c|}
+        \hline
+        \rowcolor[HTML]{EAE1E1}
+        {\color[HTML]{333333} \textbf{NOT input}} & {\color[HTML]{333333} \textbf{Output sets}}                                      \\ \hline
+        $\forall v \in \mathbb{T}: (\cdot, v)$    & $(\{\neg v\}, \{v\})$                                                            \\ \hline
+        $\forall v \in \mathbb{T}: (v, \cdot)$    & $(\{v\}, \{\neg v\})$                                                            \\ \hline
+        $\forall a,b \in \mathbb{T}:  (a, b)$     & $(\{a\}, \{b\})$, only if the tuple $(a,b)$ is a correct \textbf{NOT} assignment \\ \hline
+    \end{tabular}
+    \caption{\textbf{NOT} value propagation rules}
+    \label{tab:chap-4:not-propagation}
+\end{table}
+
+
+
