@@ -17,10 +17,8 @@ But one could ask further questions such as, could we define
 complexity classes such as \textbf{HF-PPAD} and could we show that
 $\textbf{HF-PPAD} = \textbf{PPAD}$.
 Along similar line, we can also ask the questions as to existence of problems
-\textit{HF-nD-Counting-SS} and if they are parsimonious to their non hazard-free variants.
-We know that the non counting version can be resolved parsimoniously
-but we argue that it is not so simple when we omit panchromatic cubes as by doubling
-the cubes, we may introduce more solutions.
+\textit{HF-nD-Counting-SS} as previously stated and whether they
+retain the parsimonious reduction like the \textit{HF-nD--SS} problem.
 
 
 Even more naturally, one can also ask further questions such as, how does hazard-freeness
@@ -36,20 +34,15 @@ in perspective may also give insights to other areas such as the circuit complex
 \subsubsection{Parsimonious Topological Representations of \textbf{PPAD} problems }
 
 
-% From the previous sections we observed how to reduce \textit{SourceOrExcess}$(2,1)$ to a topological problem.
-% Just like in the \textit{EndOfLine} problem, we found it essential to reduce it to a \textit{StrongSperner} problem
-% with polynomial sides and very high dimensionality. We believe that one could abuse the \textit{Snake Embedding} methodology
-% that we proposed earlier but there are two main questions that need to be resolved:
-% \begin{enumerate}
-%     \item Will the number of solutions between foldings stay the same?
-%     \item Is there a natural way to define \textit{Counting-SS}?
-% \end{enumerate}
-% More interestingly, we made references of $\alpha-\textit{SUnbalanced}(\Delta_i, \Delta_o)$
-% and how they can affect the counting nature of each other. Like we mentioned previously, for
-% \textit{2D-StrongSperner} and \textit{1-MC}, we cannot guarantee parsimonious reductions, but
-% when we mapped our instances to a $3D$ space that was indeed possible. We therefore make the following conjecture:
+We summarise our conclusion from the section \ref{sec:sc-excess}, by arguing about
+the existence of a parsimonious reduction from an \textit{nD-Counting-SS} to a
+\textit{Counting-SS} problem as it would demonstrate an important stepping
+stone towards its parsimonious reduction to the \textit{PureCircuit} problem.
+Moreover, given our \textbf{PPAD} hierrchies, we can create the following conjecture
+which combines the graph representations with the topological ones \ref{conj:conj-counting-ss-unb}
 
-\begin{conjecturebox}{\textit{nD-CountingSS} and \textit{Unbalanced}}{}
+
+\begin{conjecturebox}{\textit{nD-CountingSS} and \textit{Unbalanced}}{conj-counting-ss-unb}
     There exist some polynomial computable function $f :\mathbb{N}^3 \to \mathbb{N}$, such that
     given $\alpha,\Delta_i, \Delta_o \in \mathbb{N}$ and $m= f(\alpha, \Delta_i, \Delta_o)$
     $$
@@ -65,20 +58,20 @@ problem? A reduction like that would be an important milestone for the usage top
 for enumerating solutions.
 
 
-\subsubsection{PureCircuit Gate Extension} %% TODO 
+\subsubsection{PureCircuit Gate Extension} 
 
 The proof for the \textbf{PPAD}-inclusion can be summarised as expressing a \textit{PureCircuit} instances
 as a \textit{Brouwer} function from $[0,1]^n \to [0,1]^n$, given fixed point $x^\star$ then
 we denote the folloiwng assignment: if $x^\star_i \in \{0,1\}$ then $v_i = x^{\star}_i$, otherwise
-$v_i = \bot$. We argue that there may exist gates which exhibit any behaviour of the sort $f \in [0,1]^k \to [0,1]^m$
-such that $f$ is contiuous, where they may make our reductions easier and more straight forward.
-This could raise additional directions as to the behaviour of the additional functions
-and whether they may affect the combinatorial nature of the \textit{PureCircuit} problem.
+$v_i = \bot$. We argue the existance gates which exhibit any behaviour of the sort $f \in [0,1]^k \to [0,1]^m$
+such that $f$ is contiuous, where they give may rise to stronger combinatorial expression
+than our current set.
+
 
 \subsection{Software future Directions}
 
-\subsubsection{Algorithmic Extensions}
-Although the aforementioned algorithms work as expected, there are several improvements that can be made.
+Given the algorithms that we proposed for our software, we argue that there are several improv\-ements
+that can be made.
 For all three of the algorithmic methods we mentioned, the first and most important extension
 is to treat weakly directly connected components individually. Trivially an assignment in one
 weakly connected component should not affect the solution set of the other one.
@@ -111,5 +104,5 @@ of steps to make the backtracking algorithm simpler:
 \end{enumerate}
 
 We argue that the above heuristic may result in improved average times but of course
-further research can be done in order to determine more suitable selection heuristics.
+further research can be done in order to determine more suitable selection heuristics for our priority queue.
 
