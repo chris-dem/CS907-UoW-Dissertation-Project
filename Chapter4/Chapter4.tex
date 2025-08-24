@@ -526,27 +526,29 @@ This implies that our resulting array of assignments contains only valid solutio
 covers the maximal solution set.
 
 We provide a table in \ref{tab:chap-4:running-time-analysis}
-with respect to the number of backtracking calls.
-We can observe that the
-premature cancellations and the value set reductions allow us to keep a low number
-of calls despite the graph size. We will provide a list of the solutions in the appendix \ref{}.
+with respect to the number of backtracking calls. The smaller the number the less smaller
+the recursion tree and therefore less values to check. 
+We can observe that the premature cancellations and the value set reductions allow us to keep a low number
+of calls despite the graph size. We will provide a list of the solutions in the appendix \ref{sec:app:sol-enum}.
 
 \begin{figure}[htbp]
     \centering
-    \includegraphics[width=0.3\linewidth]{Appendices/circuit-solutions/small-circuit-1.png}
+    \includegraphics[width=0.5\linewidth]{Appendices/circuit-solutions/small-circuit-1.png}
     \caption{Small Circuit example}
     \label{fig:chap-4:small-circuit}
 
 \end{figure}
 \begin{figure}[htbp]
-    \includegraphics[width=0.3\linewidth]{Appendices/circuit-solutions/bit-gen-1.png}
+    \centering
+    \includegraphics[width=0.5\linewidth]{Appendices/circuit-solutions/bit-gen-1.png}
     \caption{Bit Generator}
     \label{fig:chap-4:bit-gen}
 \end{figure}
 \begin{figure}[htbp]
-    \includegraphics[width=0.3\linewidth]{Appendices/circuit-solutions/complex-1.png}
-    \label{fig:chap-4:complex}
+    \centering
+    \includegraphics[width=0.5\linewidth]{Appendices/circuit-solutions/complex-1.png}
     \caption{Complex Circuit}
+    \label{fig:chap-4:complex}
 \end{figure}
 
 
@@ -558,7 +560,7 @@ of calls despite the graph size. We will provide a list of the solutions in the 
         {\color[HTML]{333333} \textbf{Circuit types}} & {\color[HTML]{333333} \textbf{Number of nodes}} & {\color[HTML]{333333} \textbf{Number of backtrack calls}} \\ \hline
         Simple circuit \ref{fig:chap-4:small-circuit} & 4                                               & 2                                                         \\
         Medium circuit  \ref{fig:chap-4:bit-gen}      & 9                                               & 9                                                         \\
-        Complex circuit \ref{fig:chap-4:complex}      & 13                                              & 3                                                         \\
+        Complex circuit \ref{fig:chap-4:complex}      & 13                                              & 3                                                         \\ \hline
     \end{tabular}
     \caption{Number of \textsc{Backtrack} calls}
     \label{tab:chap-4:running-time-analysis}
