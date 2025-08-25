@@ -96,7 +96,7 @@ To show the hardness, we claim that
     \begin{figure}[h!]
         \centering
         \includegraphics[width=0.7\textwidth]{Chapter3/dim-doubling.pdf}
-        \caption{Dimension doubling. We demonstrate the example in two dimensions.}
+        \caption[Dimension doubling \textit{StrongSperner}]{Dimension doubling. We demonstrate the example in two dimensions.}
         \label{fig:chap-3:dim-double}
     \end{figure}
 
@@ -273,7 +273,7 @@ research, we demonstrate a parsimonious reduction from\\\textit{HF-DiscreteStron
     \begin{figure}[h!]
         \centering
         \includegraphics[width=0.5\textwidth]{Chapter3/purification-stage-construction.pdf}
-        \caption{Purification gadget. The red nodes denote the outputs of the purification gadget.}
+        \caption[Bit Generator Gadget]{Bit Generator gadget. The red nodes denote the outputs of the purification gadget.}
         \label{fig:chap-3:purification-gadget}
     \end{figure}
 
@@ -413,7 +413,7 @@ denoted in blue based on the cases denoted in the figure \ref{fig:chap-2:rleafd-
 \begin{figure}[h!]
     \centering
     \includegraphics[width=\textwidth]{Chapter2/rleafd.pdf}
-    \caption{Figure redrawn from \cite{chen_Complexity2DDiscrete_2009}}
+    \caption[Planar embedding 4-degree reduction]{Edges to add for each $4$ degree vertex. Figure redrawn from \cite{chen_Complexity2DDiscrete_2009}}
     \label{fig:chap-2:rleafd-new-edges}
 \end{figure}
 
@@ -426,7 +426,7 @@ figure \ref{fig:chap-2:rleaf-k3}.
 \begin{figure}[h!]
     \centering
     \includegraphics[width=0.5\textwidth]{Chapter2/rleaf-edge-example.pdf}
-    \caption{Edge between points $i,j$ of the original graph. Main observation is the fact that each point comes with a pair of
+    \caption[Edge demonstration Planar Embedding]{Edge between points $i,j$ of the original graph. Main observation is the fact that each point comes with a pair of
         exponentially long lines, which we refer to as the input output lines.}
     \label{fig:chap-2:edge-rleaf}
 \end{figure}
@@ -434,7 +434,7 @@ figure \ref{fig:chap-2:rleaf-k3}.
 \begin{figure}[h!]
     \centering
     \includegraphics[width=0.7\textwidth]{Chapter2/rleaf-k3-example.pdf}
-    \caption{$K_3$ graph construction. Combinations of colours indicate an edge between the two nodes. Solid dots indicate edges from $0$,
+    \caption[$K_3$ graph construction]{$K_3$ graph construction. Combinations of colours indicate an edge between the two nodes. Solid dots indicate edges from $0$,
         crossed lines indicate edges from $1$ and stripped lines indicate edges from $2$. We Add two coloured stripped circles on the
         4 degree nodes to indicate the $E^2_n$ edges. Image reconstructed from \cite{chen_Complexity2DDiscrete_2009}.}
     \label{fig:chap-2:rleaf-k3}
@@ -454,7 +454,7 @@ as we can see from the figure \ref{fig:chap-2:rleaf-eol}. We will use these redu
 \begin{figure}[h!]
     \centering
     \includegraphics[width=0.7\textwidth]{Chapter2/reduced-EOL.pdf}
-    \caption{Depiction of the edge removal. Main idea is that this we keep the number of sources or sinks as well as invertible (we can trace the source or sink from the original instance),
+    \caption[Edge removal in 2D-EoL constructions]{Depiction of the edge removal. Main idea is that this we keep the number of sources or sinks as well as invertible (we can trace the source or sink from the original instance),
         despite losing a lot of graph information.}
     \label{fig:chap-2:rleaf-eol}
 \end{figure}
@@ -508,12 +508,12 @@ $$
     O(P) = \{  \mathbf{p} \in B_{2^{4k+10}} \setminus I(P) :\mid: \exists \mathbf{p}' \in I(P), \|p- p'\|_{\infty} = 1 \}
 $$
 
-\begin{figure*}
+\begin{figure}[htbp]
     \centering
     \includegraphics[width=0.5\textwidth]{Chapter3/coiling-eol.pdf}
     \caption{Shielding method on 2D-EoL embeddings.}
     \label{fig:chap-3:eol-shielding}
-\end{figure*}
+\end{figure}
 If $P$ is a simple path we can decompose $\{ \mathbf{s}_{p}, \mathbf{e}_{p} \} \cup L(P) \cup R(P)$ such that:
 $\mathbf{s}_{p} = \mathcal{F}(\mathbf{u}^1) + \Delta + \Delta^\perp$, where $\Delta = (\mathbf{u^1}- \mathbf{u}^2)$,
 $\mathbf{e}_{p} = \mathcal{F}(\mathbf{u}^1) + \bar{\Delta} + \bar{{\Delta}}^\perp$, where $\bar{\Delta}= (\mathbf{u}^t - \mathbf{u}^{t-1})$
@@ -729,7 +729,7 @@ such reduction will resolve in an \textit{AntipodalStrongSperner} instance.
     \begin{figure}[h!]
         \centering
         \includegraphics[width=0.7\textwidth]{Chapter3/snake-embedding-simplified.pdf}
-        \caption{Snake Embedding technique view between the folded dimension $j$ and the new dimension. The $x$-axis denotes the folded
+        \caption[Snake Embedding 2D visualisation]{Snake Embedding technique view between the folded dimension $j$ and the new dimension. The $x$-axis denotes the folded
             dimension and the $y$-axis denotes the new dimension. The point $\ell_i$ denote the indexes that correspond the $j$
             dimension of the pre-folded space.}
         \label{fig:chap-3:snake-embedding-visualisation-basic}
@@ -738,7 +738,7 @@ such reduction will resolve in an \textit{AntipodalStrongSperner} instance.
     \begin{figure}[h!]
         \centering
         \includegraphics[width=0.5\textwidth]{Chapter3/2d-to-3d-snake-sol.pdf}
-        \caption{Snake Embedding technique between the folding dimension and the new dimension}
+        \caption{Panchromatic squares between the folded dimension and the new dimension}
         \label{fig:chap-3:snake-embedding-2d-to-3d-sol}
     \end{figure}
 

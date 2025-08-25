@@ -25,7 +25,7 @@ the local neighbouring of nodes, and they preserve the number of solutions
 \begin{figure}[h!]
     \centering
     \includegraphics[width=0.7\textwidth]{Chapter3/source-or-excess-trans.pdf}
-    \caption{The current table shows how we deal with excess nodes. All other nodes such as sources, sinks, lines or isolated
+    \caption[\textit{SourceOrExcess} simplification]{The current table shows how we deal with excess nodes. All other nodes such as sources, sinks, lines or isolated
         vertices stay the same.}
     \label{fig:source-or-excess-trans}
 \end{figure}
@@ -73,7 +73,7 @@ and we would end up double counting solutions.
 By removing excess nodes, we only have to focus on double sinks. Since there is no output line in a double sink,
 we take advantage of that by sending one inputs from the traditional input path, and the other from the output path.
 
-We can use similar arguments as in the original proof, to argue that: %% TODO
+We can use similar arguments as in the planar graph construction \ref{par:chap-2:planar-graph-embedding}, to argue that:
 $\forall v \in V: \textit{degree}(v) \in \{(0,1),(1,0), (1,1), (2,2), (2,0)\}$.
 We can observe that, if we do not have any double sinks, our graph follows the original transformation
 where only 4 out of the 5 possible degrees are possible. The only
@@ -264,7 +264,7 @@ that the cubes create discrete antipodal solutions.
 \begin{figure}[h!]
     \centering
     \includegraphics[width=0.7\textwidth]{Chapter3/3d-rlefad-colouring.pdf}
-    \caption{Example colouring where the arrow denotes the direction. In between the red and blue cubes in the bottom corners
+    \caption[Colouring overview of the 3D \textit{StrongSperner} colouring]{Example colouring where the arrow denotes the direction. In between the red and blue cubes in the bottom corners
         we have the positive line. The brown cubes around denote the negative labels}
     \label{fig:chap-3:simple-line-example}
 \end{figure}
@@ -286,7 +286,7 @@ that the set of panchromatic solutions correspond to a 1-to-1 mapping with the \
 \begin{figure}[h!]
     \centering
     \includegraphics[width=0.5\textwidth]{Chapter3/3d-counting-ss-doubleslink.pdf}
-    \caption{Colouring around the double sink points. The colours correspond to the colour legend
+    \caption[\textit{3D-CountingSS} double sink colouring]{Colouring around the double sink points. The colours correspond to the colour legend
         of \ref{fig:chap-3:3d-counting-ss-simple-line} }
     \label{fig:chap-3:double-sink-point}
 \end{figure}
