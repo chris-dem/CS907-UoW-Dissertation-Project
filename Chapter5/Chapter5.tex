@@ -6,10 +6,10 @@
 
 \section{Project management methodology}
 
-Due to the hybrid nature of our project, we wanted to make sure were able
-to both the software portion and the theory portion of the project.
+Due to the hybrid nature of our project, we wanted to make sure that we are able to
+to both the software portion and the theory portion of the project effectively.
 With respect to our software management, we primarily used the waterfall approach
-while incorporating iteartive sprints, since expected the core
+while incorporating iteartive sprints, since we expected the core
 set of requirements to change over time as we developed our theories and ideas.
 
 With regard to the research management, we revolved our methodology around the \textit{Zettelkasten method}.
@@ -21,9 +21,11 @@ The method embodies the following elements:
           paper which contain the ideas and techniques of the paper.
     \item \textbf{Fleeting notes}: Ideas that pop up randomly but are not really linked with any particular source.
     \item \textbf{Permanent notes}: Reviewed literature notes and fleeting notes which have been promoted to
-          \textbf{permanent} ones.
+          \textbf{permanent} ones. These notes maybe linked with other permanent notes to create a web of knowledge.
 \end{enumerate}
 Each of these notes can be annotated with a tagging systems and relate to each other with the use of references.
+Using the above method, we were able to extract ideas from different papers and create robust
+theorems that are based off the current literature.
 
 \section{Tooling}
 
@@ -67,7 +69,39 @@ used to build the software were under the MIT licence.
 
 
 
-\section{Risk Management}
+\section{Risk Assessment}
+
+We provide a table of our current risk assessment in
+the table \ref{tab:management:risk-management}. Overall through our extensive testing,
+we were able to develop our algorithms fast enough without the worry of logic errors.
+With respect to the theory crafting we faced several issues, as it was expected due
+to the nature of the project. Due to the lack of progress, we focused on instead on developing theorems
+for each of our objectives with the hopes that they will aid in their future
+resolution. Moreover, we had trouble dealing with incorrect proofs as expanded in greater
+detail in our reflections section \ref{sec:app-and-ref}. We focused instead on expanding
+on the theorems and proof of the already existing literature in order to reduce the margin of error.
+We give our previous risk assessment table in the appendix \ref{sec:app:interim-risk}.
+
+
+\begin{xltabular}{0.95\linewidth}{|Z{1.5cm}|Z{1.5cm}|Y|Y|Z{1.75cm}|}
+    \hline
+    \textbf{Severity} & \textbf{Prob} & \textbf{Description} & \textbf{Mitigation} & \textbf{Resolved} \\
+    \hhline{|=|=|=|=|=|}
+    High   & Medium & Software may not be feasible within the remaining time frame. & We focus on the validation and creation of instances.
+    The current project is primarily research-based, and therefore we are mainly prioritising the theoretical development aspect. & \checkmark      \\ \hline
+    Low    & Medium & Software not identifying a correct solution. & Usage of TDD techniques and property testing to ensure correctness.  Comparison with handmade instances. & \checkmark      \\ \hline
+    Medium & Low    & Difficulty of showing the parsimonious reduction from the  \textit{EndOfLine} to \textit{PureCircuit}. & Find parsimonious reductions from both directions.
+    Reduce the overall reduction goal to a simpler one such as \textit{AntipodalSS} with \textit{HF-AntipodalSS}. &  - \\ \hline
+    High   & High   & Inability to make significant progress on the \textit{SourceOrExcess} problems or the generalised statement. &
+    Analyse the counting complexity of \textbf{PPAD}. Find parsimonious reductions from the \textit{SourceOrExcess} problem. & \checkmark \\ \hline
+    High   & High   & Incorrect proofs or reductions. &
+    Analyse the problem under different constraints.
+    Apply the duck method, where you attempt to explain the solution to a person who is not necessarily an expert. Validate proof with the supervisor or
+    use the tool to investigate sample cases. & -  \\ \hline
+    High   & Medium & Develop combinatorial-friendly variants of \textit{PureCircuit}. & Apply robustness on the gate set of \textsc{PureCircuit}. Develop new gates or variants are easier to work with or focus
+    on a subset of solutions as explained in \ref{par:pure-circ-def}. & \checkmark  \\ \hline
+    \caption{Risk management table.} \label{tab:management:risk-management}
+\end{xltabular}
 
 
 
@@ -80,73 +114,59 @@ used to build the software were under the MIT licence.
 % theory crafting, and therefore we hope this adjusted timeline will capture accurately the remaining duration
 % of the project.
 
-% \begin{figure}[h!]
-%     \centering
-%     \includegraphics[width=0.85\textwidth]{assets/Interim Gantt 20250708.pdf}
-%     \caption{Updated Gantt chart}\label{fig:gantt-new}
-% \end{figure}
 
-We provide a figure of our final iteration of our gantt chart in figure.
-Overall the project followed the expected timetable, with some changes that had to be made
-after the interim report. First and foremost, we prioritised finishing
-the software. This was mainly due to ensure a final deliverable as well as
-to have a tool to verify our \textit{PureCircuit} gadgets. Moreover,
-we shifted our focus to find supporting arguments for objectives,
-we faced a lot of difficulties achieving our goals.
+We provide a figure of our final iteration of our gantt chart in figure \ref{fig:gantt-new}
+and the gantt chart from our interim report in the appendix \ref{sec:app:interim-report-gantt}.
+Overall there were substantial changes. We split the library development,
+into the \textit{PureCircuit} datastructure development as well as
+the time for the solution finders and enumerators.
 
+Due to complications that arose shortly after the interim report,
+as mentioned in our risk assessment section, we shifted focus
+to the topological interpretations of superpolynomial graphs
+with polynomial degrees. This is also one of the reasons
+why the software development was finished this late in project.
+We expand on this matter in greater detail in our  \ref{sec:app-and-ref}.
+Overall, the project was able to finish within the expected timeframe with some
+deliverables.
+
+
+
+\begin{figure}[h!]
+    \centering
+    \includegraphics[width=0.85\textwidth]{gantt/gantt-pdf.pdf}
+    \caption{Final Gantt chart}\label{fig:gantt-new}
+\end{figure}
 
 \section{Appraisals and Reflections}
+\label{sec:app-and-ref}
 
-
-
-Unfortunately there were some things that did not go as planned.
+Like every project, there were things that did and did not go our way.
 First, a minimum viable version of the software was
 completed towards a much later stage project. In
 an idea scenario, it would have been more valuable for
 us had we prioritised the development of the visualisation tool
-as it would have allowed for a faster verification of results.
+as it would have allowed for faster verification of results.
 Moreover, one of our major results from the interim
 report, ended up having a major issues that halted our process.
-Luckily we were able to adjust to that incident by finding
-results that help or may help resolve our objectives.
 
-On the hand, we were able handle some of the incidents.
-Through our intensive note taking procedure, we were able
-to tackle a difficult topic by breaking ideas down
-and combining ideas from people.
-In addition, a lot of our failed ideas came together in the end such as,
-the main proofs in our sections in our sections \ref{sec:pc-plus-eol} and \ref{sec:sc-excess},
-For each proof or theorem in those sections, we have 10 other failed attempts or ideas,
-from all which we were able to extrapolate the missing piece of the next puzzle.
-
-%% TODO mention risk managemetn
-Morevover, our extensive
-testing gave us confidence in our resulting applciation.
+On the bright side,
+our rigorous testing methodology enabled us to complete the software development without encountering any major issues.
+Additionally, our systematic note-taking process proved invaluable when handling unforeseen incidents,
+allowing us to pivot from research objectives effectively and explore alternative approaches such as topological interpretations
+and multi-source problem analysis.
+This comprehensive documentation system also enabled us to learn from previous attempts
+and refine our current results with greater certainty.
+Many of our initially unsuccessful ideas ultimately contributed to breakthrough results,
+particularly in the main proofs presented in sections \ref{sec:pc-plus-eol} and \ref{sec:sc-excess}.
 
 
-
-
-
-\begin{xltabular}{0.95\linewidth}{|Z{1.2cm}|Z{1.75cm}|Y|Y|Z{1.2cm}|}
-    \hline
-    \textbf{Severity} & \textbf{Probability} & \textbf{Description} & \textbf{Mitigation} & \textbf{Address} \\
-    \hhline{|=|=|=|=|=|}
-    High   & Medium & Software may not be feasible within the remaining time frame. & We focus on the validation and creation of instances.
-    The current project is primatoly research-based, and therefore we are mainly prioritising the theoretical development aspect. & Not yet      \\ \hline
-    Low    & Medium & Software not identifying a correct solution. & Usage of TDD techniques and property testing to ensure correctness.  Comparison with handmade instances. & Not yet      \\ \hline
-    Medium & Low    & Difficulty of showing the parsimonious reduction between  \textsc{PureCircuit} and  \textsc{nD-StrongSperner}. & Consult with the researchers that actively work on these problems. Lower the requirements
-    to polynomially bounded reductions instead. &  Not yet \\ \hline
-    High   & High   & Inability to make significant progress on the \textsc{SourceOrExcess} problems or the generalised statement. &
-    Establish reductions from other problems in order to demonstrate \textsc{\#P} hardness by starting from $\textsc{nD-StrongSperner}$. & Not yet \\ \hline
-    High   & High   & Incorrect proofs or reductions. &
-    Analyse the problem under different constraints.
-    Apply the duck method, where you attempt to explain the solution to a person who is not necessarily an expert. Validate proof with the supervisor or
-    use the tool to investigate sample cases. & On-going  \\ \hline
-    High   & Medium & Develop combinatorial-friendly variants of \textsc{PureCircuit}. & Apply robustness on the gate set of \textsc{PureCircuit}. Develop new gates or variants are easier to work with or focus
-    on a subset of solutions as explained in \ref{par:pure-circ-def}. & $\checkmark$  \\ \hline
-    \caption{Risk management table.} \label{tab:management:risk-management}
-\end{xltabular}
-
+Overall this project was very fun to work with. The opportunity to work in the intersection
+of many well-studied fields allowed me to explore each one individually as well as
+experiment with a variety of approaches. Adding on, it offered me valuable
+experience and skills with more research based projects as well as a deeper
+understanding of complexity theory. This project truly shaped my view of computer science and
+my ambitions as a future reseacher. 
 % Due to the limited prior research on the counting complexity of $\textsc{\#TFNP} -1$,
 % this project involves significant risks.
 % Our justification for the proposed milestones was largely informed by existing knowledge regarding the complexity of circuit constructions.

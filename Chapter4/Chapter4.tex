@@ -118,7 +118,7 @@ For the solution selection we opted with metaheuristic algorithms. Since these p
 to find solutions especially as the number of nodes increase, we focused on the idea of approximation
 algorithms in order to find mostly satisfying assignments in large graphs or gadgets.
 With the help of the \texttt{genetic\_algorithm}\footnote{https://crates.io/crates/genetic\_algorithm} library,
-we use the \textit{HillClimbing algorithm} and \textit{Genetic algorithm}  in order
+we use the \textit{Hill Climbing algorithm} and \textit{Genetic algorithm}  in order
 to find solutions. We will give a brief explanation on how they work in the upcoming sections but in general
 we express our graph as a chromosome of \textit{value} nodes which correspond to nodes in the original graph.
 Moreover, we formulate our problem as series of gates with references to the location of their
@@ -242,7 +242,7 @@ use refer to the following list as a summary of parameters:
 \subsubsection{Algorithm comparison}
 
 Both algorithms are capable of finding an assignment.
-The \textit{HillClimbing} is much cheaper to run but more prone to
+The \textit{Hill Climbing} is much cheaper to run but more prone to
 be stuck at local minima \cite{Brewka_1996}. The \textit{Genetic algorithm}
 is much more computationally expensive out of the two but can be fine-tuned
 sufficiently to almost always find a solution. In general,

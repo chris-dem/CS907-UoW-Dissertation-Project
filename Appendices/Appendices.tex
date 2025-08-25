@@ -31,4 +31,37 @@
     \subsubsection*{Complex circuit Example}
     \input{Appendices/complex.tex}
 
+
+    \section*{Project Management}
+    \subsection*{Interim Risk Assessment}
+    \label{sec:app:interim-risk}
+    \begin{xltabular}{0.95\linewidth}{|Z{1.2cm}|Z{1.75cm}|Y|Y|Z{1.2cm}|}
+        \hline
+        \textbf{Severity} & \textbf{Probability} & \textbf{Description} & \textbf{Mitigation} & \textbf{Address} \\
+        \hhline{|=|=|=|=|=|}
+        High   & Medium & Software may not be feasible within the remaining time frame. & We focus on the validation and creation of instances.
+        The current project is primarily research-based, and therefore we are mainly prioritising the theoretical development aspect. & Not yet      \\ \hline
+        Low    & Medium & Software not identifying a correct solution. & Usage of TDD techniques and property testing to ensure correctness.  Comparison with handmade instances. & Not yet      \\ \hline
+        Medium & Low    & Difficulty of showing the parsimonious reduction between  \textsc{PureCircuit} and  \textsc{nD-StrongSperner}. & Consult with the researchers that actively work on these problems. Lower the requirements
+        to polynomially bounded reductions instead. &  Not yet \\ \hline
+        High   & High   & Inability to make significant progress on the \textsc{SourceOrExcess} problems or the generalised statement. &
+        Establish reductions from other problems in order to demonstrate \textsc{\#P} hardness by starting from $\textsc{nD-StrongSperner}$. & Not yet \\ \hline
+        High   & High   & Incorrect proofs or reductions. &
+        Analyse the problem under different constraints.
+        Apply the duck method, where you attempt to explain the solution to a person who is not necessarily an expert. Validate proof with the supervisor or
+        use the tool to investigate sample cases. & On-going  \\ \hline
+        High   & Medium & Develop combinatorial-friendly variants of \textsc{PureCircuit}. & Apply robustness on the gate set of \textsc{PureCircuit}. Develop new gates or variants are easier to work with or focus
+        on a subset of solutions as explained in \ref{par:pure-circ-def}. & $\checkmark$  \\ \hline
+        \caption*{Interim risk assessment table}
+    \end{xltabular}
+    \FloatBarrier
+
+    \subsection*{Interim Report Timetable}
+    \label{sec:app:interim-report-gantt}
+    \begin{figure}
+        \centering
+        \includegraphics[width=0.7\textwidth]{assets/Interim Gantt 20250708.pdf}
+        \caption*{Interim report gantt chart}
+    \end{figure}
+
 \end{appendices}
