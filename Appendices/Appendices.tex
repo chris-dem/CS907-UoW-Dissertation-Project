@@ -1,6 +1,21 @@
 \begin{appendices}
     \addcontentsline{toc}{chapter}{Appendices}
 
+    \section*{AntipodalStrongSperner Colours}
+    \label{antipodal-ss-proof}
+    Proof of the claim \ref{clm:antipodal-discrete-square}
+    \begin{proof}
+        We are going to assume proof by contradiction. Assume there exists
+        colour $j$ that is duplicated on two points $p_1 = p + b_1, p_2 = p + b_2$ such that
+        $p$ is the anchor of a panrchomatic solution and $b_1, b_2 \in \mathbb{B}^n$.
+        Since the cube is antipodal, that means that we have to be wary of $\bar{p}_2$ which
+        is at the position $p + \overline{b_2}$. Since the cube in discrete, it implies
+        that $\bar{p}_2$ and $p_1$ cannot belong in any $(n-1)$-subspace, otherwise
+        our cube won't be discrete. But that would imply that $\forall i \in [n]: |[\bar{p}_2 - p_1]_i | = 1$. We know
+        the only position in the hypercube that satisfies that is $\bar{p}_1$ which implies $p_1 = p_2$.
+        Therefore every corner of an antipodal discrete cube must contain a different colour.
+    \end{proof}
+
     \section*{PolyS-Unbalanced with Unbalanced}
     \label{app:sec:polys-unbalanced-with-unbalanced}
     \input{Appendices/app-polys-unbalanced.tex}
