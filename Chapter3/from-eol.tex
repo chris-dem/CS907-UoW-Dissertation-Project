@@ -1,7 +1,7 @@
 As mentioned previously, the current project focuses on using
 topological expressions for reductions between problems.
-We built upon the \textit{StrongSperner} idea that Deligkas
-used by expressing how we can redefine the problems under \textit{Kleene logic} \cite{deligkas_PureCircuitTightInapproximability_2024}.
+We built upon the \textit{StrongSperner} idea that Deligkas et al.  \cite{deligkas_PureCircuitTightInapproximability_2024}
+used by expressing how we can redefine the problems under \textit{Kleene logic}.
 We then demonstrate how we can relate \textit{PureCircuit} and
 the \textit{EndOfLine} problem to each of them as well as highlighting
 the current limitations of these approaches.
@@ -90,7 +90,8 @@ To show the hardness, we claim that
                                                                               & = \lambda\left(\left(\left\lfloor p_i + \frac{b_i + 1}{2} \right\rfloor\right)_{i \in [n]}\right) \\
                                                                               & = \lambda\left((p_i + b_i)_{i \in [n]}\right)                                                     \\
         \end{align*}
-        Which implies that the cube anchored at $p$ must also be panchromatic.
+        Which implies that the cube anchored at $2p$ must also be panchromatic. We can use a similar line argument
+        to prove the inverse direction.
     \end{proof}
 
     \begin{figure}[h!]
@@ -100,9 +101,9 @@ To show the hardness, we claim that
         \label{fig:chap-3:dim-double}
     \end{figure}
 
-    To ensure that $\Lambda$ is hazard free we can use the corollary \ref{col:k-bit-haz}, where we can create an
-    $n$-bit hazard-free circuit. One must observe that even though, the size of the circuit increases exponentially
-    with respect to the dimensions, but since all the input instances scale with respect to the width of the hypercube space,
+    To ensure that $\Lambda$ is hazard free we can use the corollary \ref{cor:k-bit-haz}, where we can create an
+    $n$-bit hazard-free circuit. One must observe that despite the size of the circuit increasing exponentially
+    with respect to the dimensions, since all the input instances scale with respect to the width of the hypercube space,
     that would imply that we are able to keep the size of the circuit polynomial.
     We therefore claim that this reduction is polynomial and can parsimoniously find all panchromatic cubes.
 \end{proof}
@@ -174,7 +175,7 @@ overlapping panchormatic cubes,
     $$
         \forall y \in M_{\leq 1}^n: p \preceq y \implies \lambda(y) \neq \bot^n
     $$
-    Essentially, any subspace of the cube should not yield a panchromatic solution.
+    Essentially, no subspace of a panchromatic cube should yield a result.
 \end{definitionbox}
 
 Lastly we introduce a specific subset of the above solutions where we enforce antipodal panchromatic cubes.
@@ -184,9 +185,9 @@ More formally we say
 \begin{definitionbox}{\textbf{MinRes} min and max resolution functions}{min-res-func}
     We use the \textbf{MinRes}, to denote the smallest resolution of a kleene string. More formally we can use the following equivalent definitions:
     \begin{align*}
-        \forall x \in \{0,1,\bot\}^*, j \in [|x|]:  [\textbf{MinRes}(x)]_j
+        \forall x \in \mathbb{T}^*, j \in [|x|]:  [\textbf{MinRes}(x)]_j
          & \triangleq \begin{cases}
-                          x_i & \text{if } x_i \in \{0,1\} \\
+                          x_j & \text{if } x_j \in \{0,1\} \\
                           0   & \text{otherwise}
                       \end{cases}
     \end{align*}
@@ -195,7 +196,7 @@ More formally we say
 
 \begin{definitionbox}{\textit{HF-AntipodalStrongSperner} problem}{hf-strong-sperner}
     An \textit{HF-DiscreteStrongSperner} instance $\lambda$ such that $\forall p \in M_1^n$, if $\lambda(p)= \bot^n$,
-    and denote $\textbf{MinRes}(x) = \hat{x}$ as the \textit{anchor} of the cube, then:
+    and $\textbf{MinRes}(x) = \hat{x}$, then:
     $$
         \forall b \in \{0,1\}^n, j \in [n]: [\lambda(\hat{x} + b)]_j = -[\lambda(\hat{x} +  1^n \oplus b)]_j
     $$
@@ -205,6 +206,12 @@ We emphasize that the above class considers the subset of the \textit{Hf-Discret
 as the antipodality condition cannot ensure discreteness. We can also define a non-HF variant
 of the problem which we can refer to \textit{AntipodalStrongSperner} where for each cube,
 we only need to check its two opposite ends to verify if its a valid solution.
+For the discrete and the antipodal properties we emphasize that these are \textit{promise problems},
+meaning we assume that all solutions abide the properties of the description
+of the definition. Moreover, we claim that an antipodal discrete squares
+must contain all $2^d$ colours. We use this property in later sections
+to verify some of our results.
+
 
 
 \begin{claimbox}{Antipodal discrete squares}{antipodal-discrete-square}
@@ -213,9 +220,6 @@ we only need to check its two opposite ends to verify if its a valid solution.
         \forall j \in \{-1, 1\}^n, \exists! x \in \textbf{Res}(p): \lambda(x) =  j
     $$
 \end{claimbox}
-
-We essentially claim that a panchromatic solution of a \textit{HF-AntipodalStrongSperner}
-contains all $2^d$ colours.
 
 \begin{proof}
     We are going to assume proof by contradiction. Assume there exists
@@ -231,11 +235,9 @@ contains all $2^d$ colours.
 
 
 All the problems above are clearly in \textbf{PPAD} as all of them reduce to the \textit{StrongSperner} problem,
-since we assume by construction that they \textit{natural} and therefore behave as normal binary circuits. For the purposes of our current
+since we assume by construction that they \textit{natural}. For the purposes of our current
 research, we demonstrate a parsimonious reduction from\\\textit{HF-DiscreteStrongSperner} to \textit{PureCircuit}.
 
-
-\subsubsection{Hazard Free StrongSperner To PureCircuit}
 
 \begin{theorembox}{}{hf-discrete-to-pure}
     % \label{thm:hf-discrete-to-pure}
@@ -295,7 +297,7 @@ research, we demonstrate a parsimonious reduction from\\\textit{HF-DiscreteStron
         This shows that all possible strings generated are of the form $0^*\bot^{0\mid 1} 1^k \in M_{\leq 1}$.
     \end{proof}
 
-
+    In the appendix \ref{sec:app:sol-enum}, we can observe that \textit{Bit generator} solutions match our claim.
     \paragraph*{Correctness and parsimonious argument}
     One can observe that we have a valid construction since the instace is
     of polynomial size, all gates have the correct arity and
@@ -310,7 +312,7 @@ research, we demonstrate a parsimonious reduction from\\\textit{HF-DiscreteStron
 
     It suffices to show that every vector assignment is of the form $\forall i \in [n]: \mathbf{x}[o^i] = \bot$.
     Assume that we have a correct assignment, and WLOG $\mathbf{x}[o^i] = 0$  for some $i \in [n]$.
-    By our copy that, we know that $\mathbf{x}[o^i]= \mathbf{x}[s_i]$.
+    By our \textsc{Copy} gate, we know that $\mathbf{x}[o^i]= \mathbf{x}[s_i]$.
     By our bit generator lemma \ref{clm:chap-3:pur-claim} we know that $\mathbf{x}[u^i] = 0^i$.
     Since our circuit is hazard-free and applies the boundary conditions of the sperner problem, we know that
     $[\Lambda(x_{-i}(0))]_i = 1 \neq \mathbf{x}[o^i]$. We can make a similar argument for $\mathbf{x}[o^i] = 1$.
@@ -348,12 +350,12 @@ The idea is that we start from the \textit{2D-Sperner} problem
 and repeatedly fold and pad dimensions until we reach the desired space.
 
 Ideally we would like to use the same method to go from
-\textit{2D-DiscreteStrongSperner} to \textit{HF-DiscreteStrongSperner}
+\textit{2D-DiscreteStrongSperner} to \\\textit{HF-DiscreteStrongSperner}
 as that would demonstrate a full parsimonious reduction chain from
 the \textit{EndOfLine}.
 The problem is that we cannot guarantee,
 the hazard-freeness property after every fold.
-If we try to use the corollary 10 by \ref{col:k-bit-haz},
+If we try to use the corollary 10 by \ref{cor:k-bit-haz},
 we observe that the circuit size will increase exponentially.
 This implies the best we can hope is the following space:
 $$
