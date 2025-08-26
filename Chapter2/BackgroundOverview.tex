@@ -549,60 +549,80 @@ Moreover, they argue that the usage of $\textbf{\#P}$ has several benefits:
           results in complexity theory and NTMs to find interpretations or prove their non-existence.
 \end{enumerate}
 
-% The current framework was used in several papers such as
-% \cite{ikenmeyer_WhatWhatNot_2022} and \cite{ikenmeyer_PositivitySymmetricGroup_2024}
-% to demonstrate the existence of combinatorial interpretations.
-Lastly, we introduce the idea of correlating two counting problems with the help of
-\textit{parsimonious reductions}. Simply, we say
-that a problem $A$ can be parsimoniously reduced to a problem $B$, if for inputs of $A$,
-one can create instances of $B$ such that the set of solutions between the two problems
-have the same cardinality. More formally we refer to the defintion \ref{def:pars-reduction}.
+We introduce the notation $\#L$ notation to denote the counting version
+of a search problem $L$, more formally use the definition \ref{def:sharp-l-notation}.
+Sometimes we use notations $\#L$ or $\#K(L)$ interchangeably to highlight
+that $L$ is in complexity class $K$.
+
+\begin{definitionbox}{$\#L$ Notation}{sharp-l-notation}
+    Given a search problem $L$ with relation $R$, we can
+    define its counting version as the function $\#L$ where:
+    $$
+    \forall w \in \{0,1\}*: \#L(w) = |R(w)|
+    $$
+    Where for relation $R$ we say $R(x) \triangleq \{y \in \{0,1\}^* \mid xRy \}$.
+\end{definitionbox}
+
+Given the above, we introduce the idea of correlating two counting problems with the help of
+\textit{parsimonious reductions} which we define in \ref{def:pars-reduction}.
 An example of how such reduction may look like, can be seen in figure \ref{fig:chap-2:pars-reduction},
 where we relate the difficulty of sudoku solving to a graph colouring problem.
 
 
 \begin{definitionbox}{Parsimonious reductions}{pars-reduction}
-    Let $R, R'$ be search problems, and let $f$ be a reduction of
-    $S_R = \{x \mid R(x) \neq \emptyset \}$ to $S_{R'} = \{x \mid R'(x) \neq \emptyset \}$.
-    We say $f$ is \textbf{parsimonious} if:
+    Let $L, L'$ be counting problems.
+    We say $L$ is parsimoniously reducible to $L'$, if there exists a polynomial computable function. $f: \{0,1\}^* \to \{0,1\}^*$
+    such that
     $$
-        \forall x \in S_R : |R(x)| = |R'(f(x))|
+        \forall x \in \{0,1\}^*: L(x) = L'(f(x))
     $$
-    Where for relation $R$ we say $R(x) \triangleq \{y \in \{0,1\}^* \mid xRy \}$
+    We denote the reduction above as $L \subseteq L'$.
 \end{definitionbox}
 
 \begin{figure}
     \centering
     \includegraphics[width=0.5\textwidth]{Chapter2/parsimonious-reduction-example.pdf}
-    \caption[Parsimonious Reduction between Sudoku and graph colouring]{Example of reducing a 6x6 sudoku puzzle, into a graph colouring problem}
+    \caption[Parsimonious Reduction between Sudoku and graph colouring]
+    {Example of reducing a 6x6 sudoku puzzle into a graph colouring problem.
+    Each colouring corresponds to a sudoku solution of the original}
     \label{fig:chap-2:pars-reduction}
 \end{figure}
 
-%% TODO: Reminder to check before submission if needed. Chris 22/Aug says not
-% We introduce a more relaxed variant of parsimonious reductions in \ref{def:func-pars}
-% for one-to-many reductions, such that the two solutions sets are bounded by some
-% polynomial with respect to the size of the input. We observed that for several problems,
-% it can be difficult to obs
+Since counting problems are regarded as functions to natural numbers, that means
+that we can create new counting problems through composition. We denote
+this as $f(L)$ or more fomrally we say:
 
-% \begin{definitionbox}{Poly-Function Bounded Parsimonious Reductions}{func-pars}
-%     \label{def:func-pars}
-%     Given two counting problems $A, B : \mathbb{B}^* \to \mathbb{N}$
-%     and a poly-function $f : \mathbb{N} \to \mathbb{N}$, we
-%     say that:
-%     $$
-%         A \subseteq^f B \iff \forall x \in \mathbb{B}^n:  A(x) \leq B(x) \leq f(|x|) \cdot A(x)
-%     $$
-%     If $\forall x : f(x) = c$ for $c \in \mathbb{N}$, we use the abbreviation:
-%     $$
-%         A \subseteq^c B
-%     $$
-% \end{definitionbox}
+
+\begin{definitionbox}{Function composition in counting problems}{pars-reduction}
+    Given counting problem $L$ and a function $f: \mathbb{N} \to \mathbb{N}$,
+    we can define a new counting problem $f(L)$ such that:
+    $$
+    \forall w \{0,1\}* \to \mathbb{N}: f(L)(w) = f(L(w))
+    $$
+\end{definitionbox}
+
+We demonstrate an example of the above notation using a finding from the paper
+by Ikenmeyer et al. \cite{ikenmeyer_WhatWhatNot_2022} where  they demonstrate $\textit{\#CircuitSAT} \subseteq ((\textit{\#EndOfLine}) -1) /2$
+where $\textit{CircuitSAT}$ is the circuit variant of \textit{SAT}.
+Given instance $C$, using figure \ref{fig:chap-2:pars-eol-csat}, we can see that
+for each satisfying assingment, we are creating a source/sink pair. Excluding
+the sink that is always paired with the $0^n$ sink, it is easy that the solution sets
+have the same cardinality.
+
+\begin{figure}
+    \centering
+    \includegraphics[width=0.7\textwidth]{Chapter2/eol2circuitsat.pdf}
+    \caption{\textit{\#CircuitSAT} to $((\textit{\#EndOfLine}) -1) /2$}
+    \label{fig:chap-2:pars-eol-csat}
+\end{figure}
+
 
 
 \subsection{Kleene Logic and Hazard-Free Circuits}
 \label{subsect:chap-2:kleene}
 
-Kleene logic uses the boolean system with an additional \textit{unstable} value \cite{kleene_IntroductionMetamathematics_2009}.
+Kleene logic uses the boolean system with an additional \textit{unstable} value \cite{kleene_IntroductionMetamathematics_2009},
+which we denote as $\bot$.
 The study of Kleene logic assisted in
 the development of robust physical systems \cite{friedrichs_MetastabilityContainingCircuits_2018} and
 aiding in the development of lower bounds for monotone circuits
@@ -610,10 +630,10 @@ aiding in the development of lower bounds for monotone circuits
 The current section offers a brief summary to relevant notions and concepts in Kleene logic.
 
 \begin{definitionbox}{Kleene value ordering \cite{mukaidono_BternaryLogicFunction_1972}}{kleene-order}
-    The \textit{instability ordering} or \textit{information ordering} for $\leq^u$ is defined as: $\bot \leq^u 0,1$. The $n$-dimensional
+    The \textit{instability ordering} or \textit{information ordering} for $\preceq$ is defined as: $\bot \preceq 0,1$. The $n$-dimensional
     extension of the ordering is:
     $$
-        \forall x,y \in \mathbb{T}^n: x \leq^u y \implies \forall j \in [n]: (x_j \in \mathbb{B} \implies x_i = y_i)
+        \forall x,y \in \mathbb{T}^n: x \preceq y \implies \forall j \in [n]: (x_j \in \mathbb{B} \implies x_i = y_i)
     $$
     We can also refer to an alternative type of ordering, known as \textit{voltage} ordering, such that:
     $$
@@ -636,30 +656,34 @@ The current section offers a brief summary to relevant notions and concepts in K
     if it satisfies the following properties:
     \begin{enumerate}
         \item \textit{Preserves stable values}: $\forall x \in \mathbb{B}^n: F(x) \in \mathbb{B}^m$
-        \item \textit{Preserves monotonicity}: $\forall x,y \in \mathbb{T}^n: x \preceq y \implies F(x) \preceq F(y)$ \ref{def:mono-func} \ref{def:kleene-res}
+        \item \textit{Preserves monotonicity}: $\forall x,y \in \mathbb{T}^n: x \preceq y \implies F(x) \preceq F(y)$
     \end{enumerate}
 \end{definitionbox}
 
-Unless otherwise specified, we assume that all Kleene functions are \textit{natural} \ref{def:nat-func}, since
+Unless otherwise specified, we will assume that all Kleene functions are \textit{natural} \ref{def:nat-func}, since
 they can be represented by circuits \ref{prop:nat-func-circ}.
 Natural functions essentially indicate that a point with its resolution
 should respect the information order, or more simply if $f(00) =1$ then
 $f(0\bot) \neq 0$ as then it will not preserve stability.
 Moreover we can think resolutions of a point $x$ as all the values it ``could be''. For example
-resolutions of $0\bot$ could be either $00$ or $01$.
+$0\bot$ could be either $00$ or $01$.
 Naturally, if $f(00) = f(01) = 1$ then naturally we should also expect that $f(0\bot) = 1$.
 This yields the concept of hazards or points in $x \in \mathbb{T}^n$ where,
 its resolutions have the same value but the point itself does not more formally defined in \ref{def:hf-def}.
 Detecting hazards is a concept that is analysed heavily when talking about Kleene logic and
-it is an \textbf{NP}-hard problem \cite{ikenmeyer_ComplexityHazardfreeCircuits_2019}.
-An example of hazard values can be seen in the figure \ref{fig:hazard-example}.
+it is an \textbf{NP}-hard problem \cite{ikenmeyer_ComplexityHazardfreeCircuits_2019,bund_SmallHazardFreeTransducers_2025,eichelberger_HazardDetectionCombinational_1965}.
+An example of hazard values can be seen in the figure Ikenmeyer et al. \ref{fig:hazard-example}.
 
 
 \begin{figure}[h!]
     \centering
     \subfloat[Multiplexer with hazard at $(1,1,\bot)$]{\centering\includegraphics[width=0.3\textwidth]{assets/hazard_circuit.png}}
     \subfloat[Hazard free multiplexer]{\centering\includegraphics[width=0.3\textwidth]{assets/hazard-free-circuit.png}}
-    \caption[Example of hazard and non-hazard-free circuits]{Hazard circuit and hazard-free circuit. Figure by \cite{ikenmeyer_ComplexityHazardfreeCircuits_2019}}\label{fig:hazard-example}
+    \caption[Example of hazard and non-hazard-free circuits]
+    {Hazard circuit and hazard-free circuit. Main idea is for $\textit{MUX}(s,x,y)$, $\textit{MUX}(\bot, 1,1)$ 
+    should be $1$ by our hazard definition. We can see that when we replace $s= \bot, x= 1, y =1$ to our circuits,
+    one of them presents a hazard.
+    Figure by \cite{ikenmeyer_ComplexityHazardfreeCircuits_2019}}\label{fig:hazard-example}
 \end{figure}
 
 \begin{propositionbox}{Natural functions and Circuits \cite{mukaidono_BternaryLogicFunction_1972,ikenmeyer_ComplexityHazardfreeCircuits_2019}}{nat-func-circ}
@@ -698,12 +722,13 @@ to construct $k$-bit hazard free circuits
 \subsubsection{Kleene logic and Complexity Theory}
 Lastly we want to introduce the notion of \textit{Alternating Turing Machines}, which are meant to represent
 a generalisation of non-deterministic Turing machines.
-These have been introduced by Chandra et al. \cite{chandra1981alternation} and the idea is that we introduce universal and existential quantifiers
+These have been introduced by Chandra et al. \cite{chandra1981alternation} and the idea is to use universal and existential quantifiers
 to alternate the course of computation. The informal presentation can be thought as follows:
-In a non-deterministic TM, given a single state $q$ or configuration $c$, we execute
-$\beta_1, ..., \beta_k$ separate processes. We say that $q$ will accept if at least one of the processes
+In a non-deterministic TM, given its current state $q$ or configuration $\mathcal{C}$, we spawn
+$\beta_1, ..., \beta_k$ separate processes. We say that the current state will accept if at least one of the processes
 $\{\beta_i\}_{i \in [k]}$ accepts. Alternating Turing machines introduce additional conditions where
-one impose the condition that all subprocesses $\{\beta_i\}_{i \in [k]}$ must accept accept or in case of a negation state, if $\beta_1$ accepts, then
+we enforce that all subprocesses $\{\beta_i\}_{i \in [k]}$ must accept. Moreover we can introduce
+negation states where if $\beta_1$ accepts, then
 $q$ rejects or vice versa. More formally, we offer the definition in \ref{def:alt-tm}.
 
 \begin{definitionbox}{Alteranting Turing Machines(ATM) \cite{kozen_TheoryComputation_2006, chandra1981alternation}}{alt-tm}
@@ -734,7 +759,7 @@ $q$ rejects or vice versa. More formally, we offer the definition in \ref{def:al
 
 The machine essentially contains a read-only input tape with endmarkers and $k$ work tapes which are
 initially blank. A \textit{step} of $M$ consists of reading a symbol from the input tape,
-writing a symbol to each work tape, moving the writing head in each head left or right
+writing a symbol to each work tape, and then moving each head left or right
 while transitioning into a new state.
 
 \begin{definitionbox}{ATM configurations \cite{kozen_TheoryComputation_2006, chandra1981alternation}}{alt-conf}
@@ -759,7 +784,7 @@ Where $\lambda$ is a null string.
     $\mathcal{C}$, if we can go from one configuration to another with a single $\delta$ rule.
     We require for $\delta$ that, for accepting or rejecting configurations to have no successors,
     for universal or existential to have at least one successor configuration, and for negating configurations to have only one.
-    We can define the \textbf{computation} of a path on $x$ as a sequence
+    We can define the \textbf{computation path} on input $x$ as a sequence
     $a_0 \vdash a_1 \vdash ... \vdash a_n$ where $a_0 = \sigma_M(x)$
 \end{definitionbox}
 
@@ -783,7 +808,7 @@ But some processes may never halt or require a much greater computation than nec
 We therefore use Kleene logic $\mathbb{T}$ where $\bot$ denotes configurations
 that we do not know if they are accepting or not. The quantifiers
 use the same logic as described in the tables \ref{tab:three-val-logic}.
-We now say that a labelling of configurations is a map $\ell: C_M \to \{0, \bot ,1\}$.
+We now say that a labelling of configurations is a map $\ell: \mathcal{C}_M \to \{0, \bot ,1\}$.
 We define an operator $\tau$ to be an operator of mappings such that:
 $$
     \tau(\ell)(\mathcal{C}) = \begin{cases}
@@ -795,20 +820,20 @@ $$
     \end{cases}
 $$
 We can check that $\tau$ is monotone with respect to $\preceq$ since
-if $l \preceq l'$, then $\tau(l) \preceq \tau(l')$. By
+if $l \preceq l'$, then $\tau(l) \preceq \tau(l')$. By the \textit{Tarski theorem}
 \ref{def:knaster-tarski} there must exist maximum labelling such that
 $$
     \ell^* = \sup_{m \in \mathbb{N}} \tau^m(\Omega)
 $$
-where the supremum is with respect to $\preceq$, where
+where we define $\tau^m$ as:
 \begin{align*}
     \tau^0(\ell)      & = \ell               \\
     \tau^{m +1}(\ell) & = \tau(\tau^m(\ell))
 \end{align*}
 where $\Omega$ is denoted as the minimal labelling function $\lambda x. \bot$.
-In a way that the above procedure describes is the "propagation" process from the leaf nodes up to the root of the tree
+In a way, the above procedure describes is the ``propagation'' process from the leaf nodes up to the root of the tree
 where the leaf nodes are assigned a label of $\bot$ or accepting.
-Lastly given the above we can finally give a definition of halting states
+Given the above, we can finally give a definition of halting states:
 
 \begin{definitionbox}{Halting states\cite{chandra1981alternation}}{alt-halt}
     \label{def:alt-halt}
@@ -817,20 +842,26 @@ Lastly given the above we can finally give a definition of halting states
 \end{definitionbox}
 
 We aim for this ATM to work for only recursively enumerable sets and therefore we aim to limit to
-the depth of the recursion. Therefore, we define operator $\tau_C$ where $C \subseteq C_M$ such that
+the depth of the recursion. Therefore, we define operator $\tau_{\hat{C}}$ where $\hat{C} \subseteq \mathcal{C}_M$ such that
 $$
-    \tau_C(\ell)(a) \triangleq \begin{cases}
-        \tau(\ell)(a) & \text{if } a \in C \\
+    \tau_{\hat{C}}(\ell)(a) \triangleq \begin{cases}
+        \tau(\ell)(a) & \text{if } a \in \hat{C} \\
         \bot          & \text{otherwise}   \\
     \end{cases}
 $$
-Where we can say that $C$ is the set of configuration that are reachable within some
+Where we can say that $\hat{C}$ is the set of configuration that are reachable within some
 $f(|x|)$ steps or require space of at most $f(|x|)$.
 An example of a computation tree can be observed in the figure \ref{fig:chap-2:atm-comp-tree}.
+
 \begin{figure}[h!]
     \centering
     \includegraphics[width=0.7\textwidth]{Chapter2/ATM-computation-graph.pdf}
-    \caption{Computation tree of an ATM with labellings}
+    \caption[Computation tree of an ATM with labellings]{
+    Computation tree of an ATM with labellings. We can observe that we start with an initial
+    configuration and for each child, we end up in different states and configurations that have
+    different accepting conditions. In the leafs of our tree, we may have accepting, rejecting 
+    or do not know configurations. What the $\tau$ operator does is propagating
+    the state from the leafs, all the way up to the root}
     \label{fig:chap-2:atm-comp-tree}
 \end{figure}
 
@@ -841,33 +872,25 @@ this framework as one of the main motivations of the project.
 \subsection{Bridging Counting Complexity and Search problems}
 \label{sec:back:count-plus-search}
 
-Our work is primarily focused around the paper by Ikenmeyer et al. \cite{ikenmeyer_WhatWhatNot_2022} and the
-parsimonious reductions discovered across various \textbf{PPAD} problems.
-We introduce the notation $\textbf{\#PPAD}(L)$, where this indicates
-the class of problems which are parsimoniously reducible to $L$.
-In fact, we extend this notation with $f(\textbf{\#PPAD}(L))$  to indicate reductions of the form,
-given $L'$, we say that $L' \in f(\textbf{\#PPAD}(L))$ if
-$$
-    \forall x \in S_{L'}: |R_{L'}(x)| = f(|R_L(g(x))|)
-$$
-
-We demonstrate an example of the above notation using a finding from the paper
-by Ikenmeyer et al. \cite{ikenmeyer_WhatWhatNot_2022}: $\textbf{\#PPAD}(\textit{EndOfLine} -1) /2 = \textbf{\#P}$.
-To show inclusion it is easy to see that one can accept all the non-zero sources, since each source is paired with a sink,
-and we are able to ignore the sink paired with the $0^n$ source. To show the other direction, they demonstrate an example
-where they reduce $\textit{\#CircuitSAT} \subseteq ((\textit{\#EndOfLine}) -1) /2$ by creating a graph, where
-for each input $x$, we create a source and sink pair $(0x, 1x)$ if and only if $f(x) = 1$.
-
 In the paper by, Ikenmeyer et al. \cite{ikenmeyer_WhatWhatNot_2022}, they developed tools to demonstrate how one
 can show whether a problem is in \textbf{\#P} or not, with the help of relativising techniques.
 The idea of relativisation is that we can equip our circuits or TMs with calls to
-arbitrary oracles. They demonstrated that for several problems in \textbf{TFNP} as seen in figure \ref{fig:chap-2:tfnp-hierarchy},
+arbitrary oracles \cite{beame_RelativeComplexityNP_1998}.
+They demonstrated that for several problems in \textbf{TFNP} as seen in figure \ref{fig:chap-2:count-hier-tfnp},
 some can be parsimoniously reduce to each other under all oracles, where as for some
 directions (the ones with the warning sign) this is not the the case.
 From the figure we can observe that for seveal \textbf{PPAD}-complete, \textbf{CLS} and
 \textbf{PPADS} problems one can indeed find parsimonious redutions.
 For other problems, even \textbf{PPAD}-complete ones like $\textbf{\#PPAD}(\textit{SourceOrExcess}(k,1)) -1$, 
 this does not seem to be the case.
+
+\begin{figure}
+    \centering
+    \includegraphics[width=0.7\textwidth]{assets/chart-plot_full.png}
+    \caption[Total Search Problem Counting Hierachy]
+    {Total Search Problem Counting Hierachy}
+    \label{fig:chap-2:count-hier-tfnp}
+\end{figure}
 
 
 \section{Project Question and Objectives}
@@ -911,22 +934,24 @@ The above milestones were created in mind to tackle the main conjecture in incre
 Demonstrating a parsimonious reduction from the \textit{EndOfLine} is an important baseline
 as every \textbf{PPAD} problems reduces to the \textit{EndOfLine} even if its not parsimoniously.
 The second milestone is meant to demonstrate that we can use \textit{PureCircuit} for
-problems with no combinatorial interpretations. Our last objective is the overall
+problems with no combinatorial interpretations, as we can see from the figure
+\ref{fig:chap-2:count-hier-tfnp}. Our last objective is the overall
 main conjecture that we are trying to prove.
 
 Our main findings sections focuses as to
 how we tackled each problem and the efforts we did. Even though, the project did not
-manage to yield any positive results, we provides several tools, new problems and
-conjectures that may help in future research.
+manage to yield accomplish any of its intended milestones, we provide several tools, new problems and
+conjectures that may help in their future resolution.
 To assist with the theory development, we set out to develop a visualisation tool that will be able
-to visualise instances of the problem as well as find solutions or enumerate through solutions for small instances.
-We therefore provide this additional list of software deliverables:
+to validate and create instances of the problem. We hope that this
+will aid with the theory development and therefore we provide the following
+core set of requirements:
 \begin{enumerate}
     \item Establish a program that in which the user is able to construct a \textit{PureCircuit} instance.
           The tool should be capable of verifying instance
           or highlighting unsatisfied nodes.
-    \item Establish algorithms to find solutions or at least approxiamte solutions.
-    \item Establish algorithms to enumerate solutions for small graphs.
+    \item Develop algorithms to find solutions or at least approxiamte solutions.
+    \item Construct algorithms to enumerate all solutions solutions for small graphs.
 \end{enumerate}
 
 We will a give a greater in-depth overview of the tool in the section \ref{sec:chap-4}
