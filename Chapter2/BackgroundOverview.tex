@@ -2,9 +2,8 @@
 \section{Theoretical Preliminaries and Literature Overview}
 In the current section, we introduce all the necessary preliminaries
 with respect to search problems and counting complexity theory.
-Moreover we give an overview of the core problem
-of the research \textit{PureCircuit}, and its connections
-with search problems and \textit{Kleene logic}. % TODO: Cleanup 
+Moreover we give an overview of the \textit{PureCircuit} problems, and its connections
+with search problems and its relations with \textit{Kleene logic}. 
 
 
 \subsection{Search problems}
@@ -13,11 +12,9 @@ A common example are problems founds in \textbf{P} and \textbf{NP} classes,
 known as decision problems, where given an input, the output is a boolean
 value of whether the specific instance is in the language or not.
 Function problems or search problems are extensions of decision problems,
-where we can represent functions or relations as explained
+where we  represent functions or relations as explained
 in the definitions \ref{def:search-problems}.
-In addition, we reference an additional subclass of these
-problems known as \textit{Total Search problems}, in
-which for every input, there must exist at least one solution.
+
 
 \begin{definitionbox}{Search Problems}{search-problems}
     \label{def:search-problems}
@@ -73,13 +70,12 @@ search problem variant known as \textit{Levin Reductions}  using the definition 
 
 \end{definitionbox}
 
-Various \textbf{TFNP} were introduced by various researchers which form the hierarchy as seen in \ref{fig:chap-2:tfnp-hierarchy}
+The \textbf{TFNP} hierarchy contains several subclasses (see figure \ref{fig:chap-2:tfnp-hierarchy}) as defined by various researchers
 \cite{papadimitriou_ComplexityParityArgument_1994,johnson_HowEasyLocal_1988,daskalakis_ContinuousLocalSearch_2011,fearnley_CLSNewProblems_2017}.
 In the current project we are mainly interested
 in \textbf{PPAD}, known as ``Polynomial Parity of Augmented DiGraphs'', created by Papadimitriou \cite{papadimitriou_ComplexityParityArgument_1994}.
-We will give a formal definition of the class as well as several cornerstone problems that we will refer to in the upcoming chapters.
-We will first introduce the \textit{EndOfLine} problem \ref{def:eol-ppad} by Papadimtirou \cite{papadimitriou_ComplexityParityArgument_1994},
-which takes advantage of the combinatorial fact that if there exists an unbalanced node in a directed graph, %% TODO: Cleanup
+We first introduce the \textit{EndOfLine} problem \ref{def:eol-ppad} 
+which takes advantage of the combinatorial fact that if there exists an unbalanced node in a directed graph,
 there must always exist a different one.
 
 \begin{figure}[h!]
@@ -127,18 +123,14 @@ From this problem, we define the \textbf{PPAD} complexity class \ref{def:ppad-co
 \subsubsection{EndOfLine variants and extensions}
 
 We introduce several key variants of the \textit{EndOfLine} that have been created in the past.
-Alexandros et al. in the paper \cite{hollender_ComplexityMultisourceVariants_2018} was able to demonstrate that for several modifications
-of the original problem such as adding
-$k$ known sources, where $k$ can be a polynomial function with respect to the number of sources. Moreover, people
-have experimented with changing the degrees of the graphs, as demonstrated by Ikenmeyer et al. \cite{ikenmeyer_WhatWhatNot_2022},
-with the problems such as \textit{SourceOrExcess}$(k,1)$ where $k$ it the maximum in-degree for each node
-as defined in \ref{def:source-or-excess}.
-All these problems remain \textbf{PPAD} complete. More interestingly, works by Papadimitriou \cite{papadimitriou_GraphtheoreticLemmataComplexity_1990},
+We first highlight the
+works by Papadimitriou \cite{papadimitriou_GraphtheoreticLemmataComplexity_1990},
 Beame et al. \cite{beame_RelativeComplexityNP_1998} and
-Alexandros et al. \cite{hollender_ComplexityMultisourceVariants_2018} were able to demonstrate that in the more general case of superpolynomial graphs,
+Alexandros et al. \cite{hollender_ComplexityMultisourceVariants_2018} since they demonstrated that in the more general case of superpolynomial graphs,
 if we bound the in-degree and out-degree of each node to some polynomial of the input size, then the problem remains \textbf{PPAD}.
+We introduce the \textit{SourceOrExcess}$(2,1)$ problem by Ikenmeyer et al. \cite{ikenmeyer_WhatWhatNot_2022}, since it
+lacks a combinatorial intrepretation under decrementation. We expand on this more on section \ref{sec:back:count-plus-search}. 
 
-%:TODO: work `SourceOrExcess`. You probably want to define its full thing in the main findings section -3
 \begin{definitionbox}{\textit{SourceOrExcess} problem \cite{ikenmeyer_WhatWhatNot_2022}}{source-or-excess}
     \label{def:source-or-excess}
     We define as $\textit{SourceOrExcess}(k,1)$ for $k \in \mathbb{N}_{\geq 2}$ as such
@@ -156,8 +148,8 @@ if we bound the in-degree and out-degree of each node to some polynomial of the 
 In addition to the aforementioned adjustments, researchers were able to give a topological interpretation
 to the \textit{EndOfLine} \ref{def:eol-ppad} problem, by creating embeddings of the graph
 into 2D or 3D spaces as demonstrated by several researchers \cite{chen_Complexity2DDiscrete_2009, hollender_ComplexityMultisourceVariants_2018,daskalakis_ComplexityComputingNash_2006}.
-We will mainly look at two of these problems, known as \textit{RLeafD} and \textit{2D-EOL}
-created by Chen et al. and Alexandros respectively.
+We will mainly focus on the \textit{2D-EOL}
+created by Chen et al. and Hollender et al. \cite{chen_Complexity2DDiscrete_2009,hollender_ComplexityMultisourceVariants_2018}.
 
 \begin{definitionbox}{\textit{2D-EOL} problem \cite{chen_Complexity2DDiscrete_2009,hollender_ComplexityMultisourceVariants_2018}}{2d-eol}
     \label{2d-eol}
@@ -173,19 +165,13 @@ created by Chen et al. and Alexandros respectively.
 
 The above description defines a superpolynomial such that an edge $(x,y) \in E$
 if and only if $S(x) = y \wedge P(y) = x$ as well as the closeness constraint $\|x-S(x)\|_1 \leq 1$.
-Chen et al. \cite{chen_Complexity2DDiscrete_2009} introduced a reduction
-on how one can parsimoniously reduce an \textit{EndOfLine} problem to a \textit{2D-EOL} problem
-(written as \textit{RLeafD} in their paper)
-using planar graph embeddings. We find this construction useful for our results
-and therefore we give a full report on how it works.
-
-
+We refer will refer to this problem in later sections to talk about the topological reprentations of our graphs.
 
 \paragraph*{Multi-Source variants}
-Lastly we introduce the class of variants for which the \textit{EndOfLine} problem
-which we extend the known number of sources.
+Lastly we introduce variants of the \textit{EndOfLine} problem
+where we extend the number of known sources.
 These
-multi source problems (formally defined using \ref{def:polys-eol}) were created by Hollender et al. \cite{hollender_ComplexityMultisourceVariants_2018}
+multi-source problems (formally defined using \ref{def:polys-eol}) were created by Hollender et al. \cite{hollender_ComplexityMultisourceVariants_2018}
 and were demonstrated to be \textbf{PPAD}-complete.
 
 \begin{definitionbox}{\textit{PolyS-EoL} definition}{polys-eol}
@@ -210,11 +196,11 @@ $V$ denote value nodes and $G$ denote gate nodes. Each value node is assigned a 
 and the gates denote can denote the standard set of arithmetic operations $\{+, - ,*\}$ with other
 nodes or some constant, or boolean operators $\{\wedge, \vee, \neg, <, >, =\}$ with other nodes or some constant.
 The goal of the problem is to assign every problem with a value such that the assingment is correct up to a
-factor of $\pm \epsilon$. This problem was crucial to demonstrate \textit{PPAD}-hardness for constant $\epsilon > 0$
+factor of $\pm \epsilon$. This problem was crucial to demonstrate \textbf{PPAD}-hardness for constant $\epsilon > 0$
 by Rubinstein \cite{deligkas_PureCircuitTightInapproximability_2024,rubinstein_InapproximabilityNashEquilibrium_2015}.
 
 
-\textit{PureCircuit} is the problem that we get when taking the limit $\epsilon \to \infty$ of the $\epsilon\textit{-GCircuit}$ problem.
+\textit{PureCircuit} is the problem that we get when taking the limit $\epsilon \to 0$ of the $\epsilon\textit{-GCircuit}$ problem.
 This results in a circuit which uses the set of values $\{0,\bot, 1\}$ to denote the range of values
 $(0),(0,1),(1)$.
 Incindentally, the above triplet of values coincides with \textit{Kleene algebra} which extends the traditional binary logic \cite{kleene_IntroductionMetamathematics_2009}.
@@ -329,11 +315,9 @@ to one of its vertices. A visual example can be seen in figure \ref{fig:chap-2:s
         there will always be a small simplex that contains all colours}
     \label{fig:chap-2:sperner-example}
 \end{figure}
-This type colouring will be referred to as the \textbf{linear} colouring
-where for dimension $d$, assign $d+1$ distinct colours to each point \cite{daskalakis_ComplexityComputingNash_2006, chen_Complexity2DDiscrete_2009},
-and it was shown that one can define a \textbf{PPAD}-complete variant of this lemma property.
-There several variants of the problem, where we can either work in a triangle with an exponential amount of subdivisions
-or polynomial subdivision but on higher dimensional simplexes. Both of these problems are \textbf{PPAD}-complete
+This type colouring will be referred to as the \textbf{linear} colouring.
+There are several variants of the problem, where we can either work in a triangle with an exponential amount of subdivisions
+or with polynomial subdivisions but on higher dimensional simplexes. Both of these problems are \textbf{PPAD}-complete
 \cite{papadimitriou_ComplexityParityArgument_1994,chen_SettlingComplexityComputing_2009,chen_Complexity2DDiscrete_2009}.
 
 We introduce an alternative variant of the Sperner problems,
@@ -341,11 +325,11 @@ introduced by Daskalakis et al. \cite{daskalakis_ComplexityConstrainedMinmax_202
 Instead of assigning
 $d+1$ colours to find a panchromatic simplex, each vertex is assigned $d$ colours rather than one. We refer to the figure \ref{fig:chap-2:bisperner-example}
 for a visual interpretation of the colouring. Essentially for each point
-in some hypercube $[N]^d$, we assigned $d$ colours, where for colour $i$ have choices
+in some hypercube $[N]^d$, we assign $d$ colours, where for colour $i$ we can choose
 either $\{i^+, i^-\}$. The goal is to find a cube where in every dimension there exists at least two points that cover both colours.
 This has been used in many problems throughout
 literature as seen in the papers \cite{chen_SettlingComplexityComputing_2009, deligkas_PureCircuitTightInapproximability_2024, daskalakis_ComplexityConstrainedMinmax_2021}
-to demonstrated \textbf{PPAD}-hardness of many problems.
+to demonstrate \textbf{PPAD}-hardness of many problems.
 
 \begin{figure}
     \centering
@@ -356,14 +340,14 @@ to demonstrated \textbf{PPAD}-hardness of many problems.
 
 We will refer to this type of colouring as \textbf{bipolar} colouring, which has been used in grid-like topologies of the Sperner property.
 We note that these terms are not standard in literature; we adopt this naming convention
-for of clarity.
+for clarity.
 
 \begin{definitionbox}{Bipolar colouring}{bipolar-colouring}
     \label{def:bipolar-colouring}
     Given a set $S^d$, where $S$ is some arbitrary set, we refer
-    to bipolar colouring $C$ as:
+    to bipolar colouring $C: S^d \to \{-1,+1\}^n$ as:
     $$
-        \forall v \in S^d, j \in [d]: [C(v)]_j \in \{-1,1\}
+        \forall v \in S^d, j \in [d]: [C(v)]_j \in \{-1,+1\}
     $$
     We say that a set of points $A \subseteq S^d$ \textbf{cover all the labels} if:
     $$
@@ -384,6 +368,7 @@ the colouring condition, which implies that we need at most $d$ separate points 
         \item if $x_i = 1 \implies [\lambda(x)]_i = +1$
         \item if $x_i = M \implies [\lambda(x)]_i = -1$
     \end{itemize}
+    Such that $M \in n^{O(1)}$
     \textbf{Output}: A set of points $\{x^{(i)}\}_{i \in [N]} \subseteq [M]^{N}$, such that:
     \begin{itemize}
         \item \textit{Closeness condition}: $\forall i,j \in [N]: \|x^{(i)} - x^{(j)}\|_{\infty} \leq 1$
@@ -397,9 +382,6 @@ This is very similar to a different type of problem known as \textit{StrongTucke
 \textit{PPA} analog of \textit{StrongSperner} \cite{papadimitriou_ComplexityParityArgument_1994,aisenberg_2DTuckerPPA_2020}.
 The two problems satisfy different boundary conditions
 but due to their similar labelling nature, we will borrow some techniques used in later sections.
-
-It is important to observe that the \textit{StrongSperner} problem is defined for hypercubes
-of dimensionality $n$ and width $m \in n^{O(1)}$.
 Chen et al. \cite{chen_SettlingComplexityComputing_2009} demonstrated that for a fixed
 dimensionality with an exponentially large width the problem remains \textbf{PPAD}-complete,
 as defined in \ref{def:nd-strong-sperner}.
@@ -422,14 +404,13 @@ so we can assume that all reductions (not necessarily counting reductions) work 
 \cite{chen_SettlingComplexityComputing_2009, deligkas_PureCircuitTightInapproximability_2024, daskalakis_ComplexityComputingNash_2006, chen_Complexity2DDiscrete_2009}.
 
 Other than topological colouring, we will also give a small introduction, to a tiling problem known as mutilated chessboards. Tiling
-spaces has been used throughout literature \cite{hollender_ComplexityMultisourceVariants_2018,chan_ComputationalComplexityCounting_2024}.
-We will use as reference the \textbf{PPAD}-complete \textit{1-MC} problem. We refer
+spaces have been used throughout literature \cite{hollender_ComplexityMultisourceVariants_2018,chan_ComputationalComplexityCounting_2024}.
+We will use as reference the \textbf{PPAD}-complete \textit{1-MC} problem by Hollender et al. \cite{hollender_ComplexityMultisourceVariants_2018}. We refer
 to the problem introduced by Blank \cite{black1946critical} as follows:
 assume we have a $2n \times 2n$ chessboard. If we are provided with $1 \times 2$ pieces, we can trivially tile the board by filling each row with $n$ horizontal
 pieces. The idea is when we remove the bottom left corner, the board becomes impossible to tile. The argument
 can be thought of as such: each tile piece covers an even square and an odd square, which implies that it has to be the case that one of the squares
-has to remain untilled. An example can be seen in the figure \ref{fig:chap-2:1-mc-example}. More formally we use the following definition \ref{def:1-mc-definition},
-and Hollender et al. \cite{hollender_ComplexityMultisourceVariants_2018} demonstrated that this problem
+has to remain untilled. An example can be seen in the figure \ref{fig:chap-2:1-mc-example} where we can observe that there will always be an untiled square.
 
 
 
@@ -655,7 +636,7 @@ The current section offers a brief summary to relevant notions and concepts in K
     if it satisfies the following properties:
     \begin{enumerate}
         \item \textit{Preserves stable values}: $\forall x \in \mathbb{B}^n: F(x) \in \mathbb{B}^m$
-        \item \textit{Preserves monotonicity} \ref{def:mono-func} \ref{def:kleene-res}
+        \item \textit{Preserves monotonicity}: $\forall x,y \in \mathbb{T}^n: x \preceq y \implies F(x) \preceq F(y)$ \ref{def:mono-func} \ref{def:kleene-res}
     \end{enumerate}
 \end{definitionbox}
 
@@ -857,7 +838,8 @@ An example of a computation tree can be observed in the figure \ref{fig:chap-2:a
 We can observe that one can encode Kleene logic into the computation of Turing machines. We use
 this framework as one of the main motivations of the project.
 
-\subsection{Bridging Counting Complexity, Search problems and Kleene Logic}
+\subsection{Bridging Counting Complexity and Search problems}
+\label{sec:back:count-plus-search}
 
 Our work is primarily focused around the paper by Ikenmeyer et al. \cite{ikenmeyer_WhatWhatNot_2022} and the
 parsimonious reductions discovered across various \textbf{PPAD} problems.

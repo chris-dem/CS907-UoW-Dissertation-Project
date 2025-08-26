@@ -40,7 +40,7 @@ or there exists at least one pair of points that is mapped to the same bin by th
 So now we can ask: does the function $e'(C) \doteq e(C) -1$ also
 have a set of object which we can enumerate over?
 Ikenmeyer et al. \cite{ikenmeyer_WhatWhatNot_2022} demonstrated that
-this problem does not have a combinatorial interpretation.
+this problem may not have a combinatorial interpretation.
 This leads to the questions of how can we formally represent the meaning
 of combinatorial interpretations, and what can we do to verify whether
 a function has one?
@@ -58,19 +58,19 @@ conjecture \cite{ikenmeyer_WhatWhatNot_2022, ikenmeyer_VanishingKroneckerCoeffic
 In our current work, we focus on extending the work done by
 Ikenmeyer et al. \cite{ikenmeyer_WhatWhatNot_2022}, where they focused on the creation of frameworks
 that determine whether $f \in^? \textbf{\#P}$, by looking
-at the subclasses of $\textbf{\#TFNP}-1$ problems, a class of problems
-whose combinatorial nature guarantee the existence of a solution.
+at the subclasses of $\textbf{\#TFNP}-1$ problems, a class of problems in which we can guarantee a solution.
 More specifically, we look into the \textbf{PPAD} class which
-seems to have several problems where under decrementation,
+seems to have several \textit{complete} problems where under decrementation,
 may or may not have a combinatorial interpretation \cite{ikenmeyer_WhatWhatNot_2022}.
-This implies that \textbf{PPAD} acts as some sort of barrier,
-to $\textbf{\#P}$ which motivates the research as to what causes
+This implies that class \textbf{PPAD} acts as some sort of barrier,
+to $\textbf{\#P}$ which motivates a deeper question as to what cause this difference.
+
 
 To accomplish this task,
-we studied \textit{PureCircuit}
+we studied \textit{PureCircuit} problem
 which was created by Deligkas et al. \cite{deligkas_PureCircuitTightInapproximability_2024},
 as we hope its \textbf{PPAD}-completeness and circuit-like nature may give us
-useful insights to the counting complexity of $\textbf{PPAD}-1$.
+useful insights to the counting complexity of $\textbf{\#PPAD}-1$.
 
 
 We will now give an extensive introduction to the literature and the related problems
