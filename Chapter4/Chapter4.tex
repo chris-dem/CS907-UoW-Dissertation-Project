@@ -114,7 +114,7 @@ operations.
 
 \subsection{Solution Selection}
 
-For the solution selection we opted with metaheuristic algorithms. Since these problems are conventionally hard
+For the solution selection we opted with meta-heuristic algorithms. Since these problems are conventionally hard
 to find solutions especially as the number of nodes increase, we focused on the idea of approximation
 algorithms in order to find mostly satisfying assignments in large graphs or gadgets.
 With the help of the \texttt{genetic\_algorithm}\footnote{https://crates.io/crates/genetic\_algorithm} library,
@@ -175,7 +175,7 @@ in optimisation problems such as \textit{TSP} problems \cite{moon_EfficientGenet
 or \textit{Neural Networks} \cite{stanley_EvolvingNeuralNetworks_2002,stanley_HypercubeBasedIndirectEncoding_2009}.
 
 Using figure \ref{fig:chap-4:evo-drawing} as reference,
-we start with a population of chrosomomes. We define a function that evaluates
+we start with a population of chromosomes. We define a function that evaluates
 how good a specific chromosome is, also known as its \textit{fitness function}.
 We then apply the \textit{selection method} which picks the parents for the next generation
 based on the performance of the chromosomes.
@@ -184,7 +184,7 @@ the offspring. And lastly we have the \textit{mutation step},
 where we randomly mutate the genes of the new population in order to 
 introduce diversity and escape from local minima.
 We can repeat the above series of steps until we reach the target value or until
-we pass the maximum timestep limit.
+we pass the maximum time-step limit.
 In our application, using figure {fig:chap-4:ga-params}, we
 use refer to the following list as a summary of parameters:
 
@@ -195,20 +195,20 @@ use refer to the following list as a summary of parameters:
     \item \textbf{Population size}: Number of chromosomes per species.
     \item \textbf{Selection step}: We allow for two selection methods: \textit{Tournament based} and \textit{Elitism selection}.
           \textit{Elitism selection} selects the based elements of each population whereas
-          \textit{Tournament based} selection creates random sets tournaments across our chrosomomes and picks the best ones
+          \textit{Tournament based} selection creates random sets tournaments across our chromosomes and picks the best ones
           from each.
     \item \textbf{Crossover step}: We allow for two main types of crossover methods:
           \begin{enumerate}
               \item \textit{Crossover Uniform}: Each gene of the child is randomly selected from either parent. This allows for
                     diverse solutions to be explored. Can reduce diversity but performs well on large population sizes \cite{katoch_ReviewGeneticAlgorithm_2021}.
-              \item \textit{Crossover MultiPoint}: Using figure \ref{fig:chap-4:crossover-cutoff} as reference,
-                    we select crossover points that determine cutoff points
+              \item \textit{Crossover Multi-point}: Using figure \ref{fig:chap-4:crossover-cutoff} as reference,
+                    we select crossover points that determine cut-off points
                     from each parent. For each even sequence we use the sequence of the other parent. This method
                     can be useful if consecutive pairs of genes are needed to improve the fitness.
           \end{enumerate}
     \item \textbf{Mutation step}: Given the offspring of the
           \textbf{Crossover step}, we stochastically modify each gene in
-          order to introduce diversity, which allows our chromosones to explore
+          order to introduce diversity, which allows our chromosomes to explore
           the solution space and escape local optima \cite{katoch_ReviewGeneticAlgorithm_2021}.
 \end{enumerate}
 
@@ -234,7 +234,7 @@ use refer to the following list as a summary of parameters:
 \begin{figure}[h!]
     \centering
     \includegraphics[width=0.3\textwidth]{Chapter4/cutoffpoint.png}
-    \caption[Crossover with cutoff points visualisation]{Crossover with multiple cutoff points. Image source \cite{katoch_ReviewGeneticAlgorithm_2021}}
+    \caption[Crossover with cut-off points visualisation]{Crossover with multiple cut-off points. Image source \cite{katoch_ReviewGeneticAlgorithm_2021}}
     \label{fig:chap-4:crossover-cutoff}
 \end{figure}
 
@@ -246,7 +246,7 @@ The \textit{Hill Climbing} is much cheaper to run but more prone to
 be stuck at local minima \cite{Brewka_1996}. The \textit{Genetic algorithm}
 is much more computationally expensive out of the two but can be fine-tuned
 sufficiently to almost always find a solution. In general,
-there are many metaheuristic algorithms that can be applied as listed in \cite{abdel-basset_Chapter10Metaheuristic_2018}
+there are many meta-heuristic algorithms that can be applied as listed in \cite{abdel-basset_Chapter10Metaheuristic_2018}
 but we for now we consider them as future extensions.
 
 
@@ -382,7 +382,7 @@ We want to reduce the recursive calls as much as possible and eliminate any part
 that lead to unsatisfying solutions.
 The queue stores the node references of the value nodes
 and uses as keys the structure \textsc{KeyStruct}$(e)$.
-The \textsc{KeyStruct} is a special structrue that orders elements lexicographically
+The \textsc{KeyStruct} is a special structure that orders elements lexicographically
 based on the following order:
 \begin{enumerate}
     \item \textbf{In descending}: The number of possible value elements the current node can take
@@ -391,7 +391,7 @@ based on the following order:
 \end{enumerate}
 We argue that the above strategy minimises the breadth of the recursive calls. Moreover,
 for each node with \textit{in-degree} of $0$ as for each value of their assignment, a solution should exist.
-The heurestical argument for this can be observed in Deligkas et al. \cite{deligkas_PureCircuitTightInapproximability_2024},
+The heuristical argument for this can be observed in Deligkas et al. \cite{deligkas_PureCircuitTightInapproximability_2024},
 where their construction for finding solutions allows for source nodes to be independent.
 Lastly, prioritising nodes with the highest neighbour count implies that we
 propagate changes to a greater number gates and therefore maximise the influence of the \textit{Unit Propagation}
@@ -494,7 +494,7 @@ If the priority queue is empty then we found a satisfying assignment.
 Otherwise, pick a node from the priority queue. For each value in its set,
 create a copy of the current queue, current solution assignment and value set state
 and apply the \textit{Unit value propagation} operation. After that create a recursive call
-apply the \textit{backtrack opertation} again until the current recursion chain
+apply the \textit{backtrack operation} again until the current recursion chain
 terminates with a solution or it rejects.
 At the root of every execution call, merge the solution assignments in each level and return
 the sets. The root call will return a set of every possible valid assignment set.
@@ -517,7 +517,7 @@ at what happens at the \textit{unit propagation} stage. We can observe that in e
 we are essentially limiting the set of solutions to only the ones
 that will give a satisfying assignment. The idea is that we are fast-forwarding the backtracking calls
 by taking advantage of the localised changes of each gate.
-Values that we discard are nodes that guaranteed to give unsatisfying assingments, and therefore
+Values that we discard are nodes that guaranteed to give unsatisfying assignments, and therefore
 we are not discarding any solutions.
 This implies that our resulting array of assignments contains only valid solutions, and this array
 covers the maximal solution set.

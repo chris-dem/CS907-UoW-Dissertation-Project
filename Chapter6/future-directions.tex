@@ -7,11 +7,11 @@ and topological representations of directed graphs
 \subsubsection{\textbf{HF-PPAD} in  \textbf{PPAD}}
 
 In our sections \ref{sec:pc-plus-eol} and \ref{sec:sc-excess}, made references to
-how Kleene logic can be incorpoeated with \textbf{PPAD} problems. For
+how Kleene logic can be incorporated with \textbf{PPAD} problems. For
 the \textit{nD-StrongSperner} problems we observed that \textit{Kleene logic}
 provides a natural extension and is equivalent to its non hazard counterpart.
 For other problems such as \textit{StrongSperner}, we observed that this
-is not clcar by current complexity assumptions and indeed proving \textbf{PPAD}-hardness
+is not clear by current complexity assumptions and indeed proving \textbf{PPAD}-hardness
 would be essential for establishing the counting hardness of \textit{PureCircuit}.
 But one could ask further questions such as, could we define
 complexity classes such as \textbf{HF-PPAD} and could we show that
@@ -26,8 +26,8 @@ affect \textbf{TFNP} as a whole. We conjecture that one can make
 similar observations to the \textit{StrongTucker} problem \cite{aisenberg_2DTuckerPPA_2020},
 in order to create similar classes such as \textbf{HF-PPA} as
 it also uses a very similar colouring argument as the \textit{StrongSperner} argument.
-Morevore we were able to observe how we can use \textit{Kleene logic} with
-\textit{PLS} subproblems like \textit{Tarski}. We believe that this shift
+Moreover we were able to observe how we can use \textit{Kleene logic} with
+\textit{PLS} sub-problems like \textit{Tarski}. We believe that this shift
 in perspective may also give insights to other areas such as the circuit complexity \textit{Hazard-Free Circuits}.
 
 
@@ -38,7 +38,7 @@ We summarise our conclusion from the section \ref{sec:sc-excess}, by arguing abo
 the existence of a parsimonious reduction from an \textit{nD-Counting-SS} to a
 \textit{Counting-SS} problem as it would demonstrate an important stepping
 stone towards its parsimonious reduction to the \textit{PureCircuit} problem.
-Moreover, given our \textbf{PPAD} hierrchies, we can create the following conjecture
+Moreover, given our \textbf{PPAD} hierarchies, we can create the following conjecture
 which combines the graph representations with the topological ones \ref{conj:conj-counting-ss-unb}
 
 
@@ -62,15 +62,15 @@ for enumerating solutions.
 
 The proof for the \textbf{PPAD}-inclusion can be summarised as expressing a \textit{PureCircuit} instances
 as a \textit{Brouwer} function from $[0,1]^n \to [0,1]^n$, given fixed point $x^\star$ then
-we denote the folloiwng assignment: if $x^\star_i \in \{0,1\}$ then $v_i = x^{\star}_i$, otherwise
-$v_i = \bot$. We argue the existance gates which exhibit any behaviour of the sort $f \in [0,1]^k \to [0,1]^m$
-such that $f$ is contiuous, where they give may rise to stronger combinatorial expression
+we denote the following assignment: if $x^\star_i \in \{0,1\}$ then $v_i = x^{\star}_i$, otherwise
+$v_i = \bot$. We argue the existence gates which exhibit any behaviour of the sort $f \in [0,1]^k \to [0,1]^m$
+such that $f$ is continuous, where they give may rise to stronger combinatorial expression
 than our current set.
 
 
 \subsection{Software future Directions}
 
-Given the algorithms that we proposed for our software, we argue that there are several improv\-ements
+Given the algorithms that we proposed for our software, we argue that there are several improvements
 that can be made.
 For all three of the algorithmic methods we mentioned, the first and most important extension
 is to treat weakly directly connected components individually. Trivially an assignment in one
@@ -78,7 +78,7 @@ weakly connected component should not affect the solution set of the other one.
 We can therefore reduce the search spaces of our problems by finding
 the solution sets in each graph separately. Moreover, for the
 \textit{backtracking} algorithm, we can extend the above idea by considering
-the cartesian product of the solution sets, meaning:
+the Cartesian product of the solution sets, meaning:
 $$
     \textbf{sol}(G) = \bigtimes_{k \in [k]}  \textbf{sol}(G_k)
 $$

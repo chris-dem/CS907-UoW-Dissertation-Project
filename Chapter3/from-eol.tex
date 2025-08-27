@@ -151,7 +151,7 @@ For examples of the above notation we refer to the following table:
     \label{fig:chap-3:res-hyper}
 \end{figure}
 
-We will mainly focus on subproblems of the \textit{HF-StrongSperner} where two cubes do not overlap with each other.
+We will mainly focus on sub-problems of the \textit{HF-StrongSperner} where two cubes do not overlap with each other.
 We will use figure \ref{fig:chap-3:overlapping-sperner-solutions} for reference,
 but essentially if two cubes overlap, that means a subspace of the cube (face or edge)
 is panchromatic. This means that for the same cube, we can have
@@ -159,7 +159,7 @@ multiple solutions, such as the cube it self, the face that contains the panchro
 or the edge it self. To simplify the counting arguments,
 we define the problem \textit{HF-DiscreteStrongSperner} \ref{def:hf-discrete-strong-sperner},
 such that  all solutions are  \textit{discrete}, meaning there are no
-overlapping panchormatic cubes,
+overlapping panchromatic cubes,
 
 
 \begin{figure}[h!]
@@ -183,7 +183,7 @@ In the specific type of solution, we argue that every two opposite corners of a 
 More formally we say
 
 \begin{definitionbox}{\textbf{MinRes} min and max resolution functions}{min-res-func}
-    We use the \textbf{MinRes}, to denote the smallest resolution of a kleene string. More formally we can use the following equivalent definitions:
+    We use the \textbf{MinRes}, to denote the smallest resolution of a Kleene string. More formally we can use the following equivalent definitions:
     \begin{align*}
         \forall x \in \mathbb{T}^*, j \in [|x|]:  [\textbf{MinRes}(x)]_j
          & \triangleq \begin{cases}
@@ -297,10 +297,10 @@ research, we demonstrate a parsimonious reduction from\\\textit{HF-DiscreteStron
 
     In the appendix \ref{sec:app:sol-enum}, we can observe that \textit{Bit generator} solutions match our claim.
     \paragraph*{Correctness and parsimonious argument}
-    One can observe that we have a valid construction since the instace is
+    One can observe that we have a valid construction since the instance is
     of polynomial size, all gates have the correct arity and
     every value node has in-degree of at most $1$.
-    It suffices to demonstrate that every assingment corresponds to a solution of \textit{HF-DiscreteStrongSperner}
+    It suffices to demonstrate that every assignment corresponds to a solution of \textit{HF-DiscreteStrongSperner}
     using lemma \ref{lem:pure-correct-lem}.
 
     \begin{lemmabox}{Correctness Lemma}{pure-correct-lem}
@@ -312,7 +312,7 @@ research, we demonstrate a parsimonious reduction from\\\textit{HF-DiscreteStron
     Assume that we have a correct assignment, and WLOG $\mathbf{x}[o^i] = 0$  for some $i \in [n]$.
     By our \textsc{Copy} gate, we know that $\mathbf{x}[o^i]= \mathbf{x}[s_i]$.
     By our bit generator lemma \ref{clm:chap-3:pur-claim} we know that $\mathbf{x}[u^i] = 0^i$.
-    Since our circuit is hazard-free and applies the boundary conditions of the sperner problem, we know that
+    Since our circuit is hazard-free and applies the boundary conditions of the Sperner problem, we know that
     $[\Lambda(x_{-i}(0))]_i = 1 \neq \mathbf{x}[o^i]$. We can make a similar argument for $\mathbf{x}[o^i] = 1$.
     Therefore, a satisfying assignment corresponds to some panchromatic solution. Given that
     our instance is in \textit{HF-DiscreteStrongSperner}, it has to be the case that
@@ -337,7 +337,7 @@ corollary \ref{cor:antipodal-ss-pc}.
 
 \subsubsection{EndOfLine to AntipodalStrongSperner}
 
-Provining hardness for \textit{HF-StrongSperner} is a much harder task.
+Proving hardness for \textit{HF-StrongSperner} is a much harder task.
 Chen et al.
 \cite{chen_SettlingComplexityComputing_2009} showed that every
 Sperner problem of space $[f(n)]^d$ where $d = \left\lceil \frac{n}{f(n)} \right\rceil$
@@ -641,7 +641,7 @@ We can observe that all squares on the left or the right of the line
 do not result in solutions as they contain only labels $\{\pm, +\}$ and $\{\mp, +\}$
 respectively as seen in figure \ref{fig:chap-3:eol-sperner-colouring}.
 One can observe that the square that contains $\textbf{s}_{P_{i}}$ or  $\textbf{e}_{P_{i}}$
-and a point of the line will be panchormatic as the two points will be antipodal. 
+and a point of the line will be panchromatic as the two points will be antipodal. 
 Therefore, we have a valid and parsimonious reduction since we only cubes and the beginnings or ends of lines can be solutions.
 We call these coloured instances as \textit{2D-StrongEoL}.
 
@@ -793,7 +793,7 @@ such reduction will resolve in an \textit{AntipodalStrongSperner} instance.
         $p_x \in[m^{t+1}_{n_{t+1}}]$. We can observe from the diagram \ref{fig:chap-3:snake-embedding-visualisation-basic}
         that the coordinates $(\cdot, p_j, p_x)$  correspond to some point $(\cdot, j)$ for some point in the pre-folded space.
         We can also observe that the point $(\cdot, j+1)$  may correspond to the point $(\cdot, p_j + 1, p_x)$.
-        or $(\cdot, p_j, p_x+1)$, depeding on whether $j \in \{2s, 2s+1\}$
+        or $(\cdot, p_j, p_x+1)$, depending on whether $j \in \{2s, 2s+1\}$
         as it implies whether its on the vertical portion of the space or the horizontal portion.
         We denote this observation as the effective direction, meaning
         if $(\cdot, j) \to(\cdot, j +1)  \implies (\cdot, p_j, p_x) \to(\cdot, p_j +1, p_x)$,  then we say that the $j$th
@@ -809,7 +809,7 @@ such reduction will resolve in an \textit{AntipodalStrongSperner} instance.
     
         We can also observe that our solutions remain antipodal. 
         WLOG assume that the effective dimension is $j$. We know that
-        if $p$ is a solution of the prefolded, then
+        if $p$ is a solution of the pre-folded, then
         $\forall b: \Lambda^t(p + b) = - \Lambda^t(p + \bar{b})$. This implies
         that if $\hat{p}$ is its corresponding solution in the folded space then:
         $$
@@ -834,13 +834,13 @@ such reduction will resolve in an \textit{AntipodalStrongSperner} instance.
 
 This is the closest that we manage to bring the reduction chain across \textit{EndOfLine} and \textit{PureCircuit}.
 We can observe two interesting directions: if one can create a bit generator
-for kleene binary numbers as presented previously, then we can a similar construction to
+for Kleene binary numbers as presented previously, then we can a similar construction to
 the proof we did in \ref{thm:hf-discrete-to-pure} for a full parsimonious reduction between
 \textit{nD-SS} to \textit{PureCircuit}.
 Alternatively one can attempt to reduce \textit{AntipodalStrongSperner} to \textit{HF-AntipodalStrongSperner} or \textit{PureCircuit}
 parsimoniously. We argue that the antipodality property allows us to check for solutions
 much more efficient than trying to find $d+1$ points in some hypercube. 
-In hindsight, we argue that if one could construct a kleene gadget to generate the maximum and the minimum 
+In hindsight, we argue that if one could construct a Kleene gadget to generate the maximum and the minimum 
 resolution of a \textit{Kleene unary}, it would allow us to create \textit{PureCircuit} instances
 that take advantage of antipodal property.
 

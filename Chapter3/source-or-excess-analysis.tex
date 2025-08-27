@@ -39,7 +39,7 @@ with small changes. First we double $V_n$ as such:
     \forall n \in \mathbb{N}:  V_n \triangleq \Big\{\mathbf{u} \in \mathbb{N}_0^2\mid \mathbf{u}_1 \leq 6(n^2 - 1) , \mathbf{u}_2 \leq 12(n - 1) + 6 \Big\}
 \]
 Every node is now represented as $(0, 12i)$.
-Morevover given an edge in $(i,j) \in E_{n}$ where the MSB of $i$ is $0$, we define path:
+Moreover given an edge in $(i,j) \in E_{n}$ where the MSB of $i$ is $0$, we define path:
 \begin{align*}
     \mathbf{p}^1 & = (0, 12i)                                                                 \\
     \mathbf{p}^2 & = (6(ni + j), 12i)                                                         \\
@@ -98,7 +98,7 @@ of our lines in a specific way, such that we always end up with panchromatic sol
 The issue is that when we try to extend the same logic to the
 \textit{2D-SourceOrExcess}$(2,1)$ problem, we end up with the problem shown in the figure \ref{fig:chap-3:rleaf-ss}.
 Any permutation of colours we choose will always result in $2+$ solutions. Even
-if we relax the problem to allow squares incident to panchormatic edges to count as a single
+if we relax the problem to allow squares incident to panchromatic edges to count as a single
 solution, we still get multiple solutions.
 The problem occurs due to the chirality of the colouring since we are connecting a
 left handed line with another left handed line at opposite ends.
@@ -149,7 +149,7 @@ which is a combinatorial friendly version of the \textit{3D-StrongSperner}.
 \end{definitionbox}
 The above idea is a natural extension of the \textit{StrongSperner} interpretation. 
 Using figure \ref{fig:chap-3:panc-sub}, in the traditional
-sperner problem, we would count two solutions. 
+Sperner problem, we would count two solutions. 
 In the current variant we argue that it suffices to only count the edge,
 as it is the set covers our labels.
 We abuse this notion to count only the anchor of the cube which is incident to the smallest panchromatic subspace.
@@ -164,7 +164,7 @@ An example of the counting argument is seen in figure \ref{fig:chap-3:panc-sub}.
 \end{figure}
 
 Trivially \textit{3D-CountingSS} can be reduced to \textit{3D-StrongSperner}
-even if we are overcounting the cubes. To show hardness,
+even if we are over-counting the cubes. To show hardness,
 we make the following theorem:
 
 \begin{theorembox}{}{counting-ss-excess}
@@ -239,7 +239,7 @@ An example of the above colouring can be seen in figure \ref{fig:chap-3:3d-count
 
 \paragraph*{Correctness argument}
 Using figure \ref{fig:chap-3:simple-line-example}, assume that we have an edge $\mathbf{p}^t, \mathbf{p}^{t+1}$
-of some path. We use red to represend the points on the left of the edge, blue the points on the right, and brown for the surrounding.
+of some path. We use red to represent the points on the left of the edge, blue the points on the right, and brown for the surrounding.
 The red cube will not be panchromatic as $x$-coordinate is $+$ on all corners
 and vice versa for the blue cube on the $y$-coordinate. In addition we can observe that the brown cubes surrounding
 each face will also not result in a panchromatic cube as: for the brown cube on the left of red will be $-$ on all $y$
@@ -259,7 +259,7 @@ results to discrete antipodal solutions.
 For the double sink case, we use the figure \ref{fig:chap-3:double-sink-point}, to observe what happens around the double
 sink area.
 For points $m_{ij}^{0}, m_{ij}^{1}$, we can observe that their labelling is antipodal, meaning given our counting
-defintion, all surrounding cubes that contain the side $(m_{ij}^{0}, m_{ij}^{1})$ count as one solution.
+definition, all surrounding cubes that contain the side $(m_{ij}^{0}, m_{ij}^{1})$ count as one solution.
 We will refer to all the cubes incident to the edge as the combined panchromatic cube.
 We can manually observe that for each outer face of the combined panchromatic cube there will
 always exist a dimension whose colouring is not covered. For example we can see

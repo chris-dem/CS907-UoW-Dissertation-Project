@@ -103,7 +103,7 @@ there must always exist a different one.
 \begin{figure}
     \centering
     \includegraphics[width=0.7\linewidth]{assets/eol-subgraphs.png}
-    \caption{Types of subgraphs in \textit{EndOfLine}}
+    \caption{Types of sub-graphs in \textit{EndOfLine}}
     \label{fig:eol-subgraphs}
 \end{figure}
 
@@ -129,7 +129,7 @@ Beame et al. \cite{beame_RelativeComplexityNP_1998} and
 Alexandros et al. \cite{hollender_ComplexityMultisourceVariants_2018} since they demonstrated that in the more general case of superpolynomial graphs,
 if we bound the in-degree and out-degree of each node to some polynomial of the input size, then the problem remains \textbf{PPAD}.
 We introduce the \textit{SourceOrExcess}$(2,1)$ problem by Ikenmeyer et al. \cite{ikenmeyer_WhatWhatNot_2022}, since it
-lacks a combinatorial intrepretation under decrementation. We expand on this more on section \ref{sec:back:count-plus-search}. 
+lacks a combinatorial interpretation under decrementation. We expand on this more on section \ref{sec:back:count-plus-search}. 
 
 \begin{definitionbox}{\textit{SourceOrExcess} problem \cite{ikenmeyer_WhatWhatNot_2022}}{source-or-excess}
     \label{def:source-or-excess}
@@ -165,7 +165,7 @@ created by Chen et al. and Hollender et al. \cite{chen_Complexity2DDiscrete_2009
 
 The above description defines a superpolynomial such that an edge $(x,y) \in E$
 if and only if $S(x) = y \wedge P(y) = x$ as well as the closeness constraint $\|x-S(x)\|_1 \leq 1$.
-We refer will refer to this problem in later sections to talk about the topological reprentations of our graphs.
+We refer will refer to this problem in later sections to talk about the topological representations of our graphs.
 
 \paragraph*{Multi-Source variants}
 Lastly we introduce variants of the \textit{EndOfLine} problem
@@ -195,7 +195,7 @@ General idea of $\epsilon\textit{-GCircuit}$ is that we have a directed graph  $
 $V$ denote value nodes and $G$ denote gate nodes. Each value node is assigned a value in $[0,1]$
 and the gates denote can denote the standard set of arithmetic operations $\{+, - ,*\}$ with other
 nodes or some constant, or boolean operators $\{\wedge, \vee, \neg, <, >, =\}$ with other nodes or some constant.
-The goal of the problem is to assign every problem with a value such that the assingment is correct up to a
+The goal of the problem is to assign every problem with a value such that the assignment is correct up to a
 factor of $\pm \epsilon$. This problem was crucial to demonstrate \textbf{PPAD}-hardness for constant $\epsilon > 0$
 by Rubinstein \cite{deligkas_PureCircuitTightInapproximability_2024,rubinstein_InapproximabilityNashEquilibrium_2015}.
 
@@ -203,7 +203,7 @@ by Rubinstein \cite{deligkas_PureCircuitTightInapproximability_2024,rubinstein_I
 \textit{PureCircuit} is the problem that we get when taking the limit $\epsilon \to 0$ of the $\epsilon\textit{-GCircuit}$ problem.
 This results in a circuit which uses the set of values $\{0,\bot, 1\}$ to denote the range of values
 $(0),(0,1),(1)$.
-Incindentally, the above triplet of values coincides with \textit{Kleene algebra} which extends the traditional binary logic \cite{kleene_IntroductionMetamathematics_2009}.
+Incidentally, the above triplet of values coincides with \textit{Kleene algebra} which extends the traditional binary logic \cite{kleene_IntroductionMetamathematics_2009}.
 We will explore the above algebra in greater depth in section \ref{subsect:chap-2:kleene}.
 This problem was created by Deligkas et al. \cite{deligkas_PureCircuitTightInapproximability_2024}
 to demonstrate the hardness of approximating \textbf{PPAD} problems and was shown to be \textbf{PPAD}-complete.
@@ -292,7 +292,7 @@ of their topology in order to guarantee a solution.
 \paragraph{Sperner Problems}
 Below we will refer to the notion of Sperner problems, which are types of problems that
 are based around \textit{Sperner's Lemma} \cite{yang_SpernerTheory_1999}. The idea is as follows, given a triangle %% ADD CITATION
-that has subdivided into smaller subtriangles, we first define the index of each point using the following set:
+that has subdivided into smaller sub-triangles, we first define the index of each point using the following set:
 $$
     \forall n \in \mathbb{N}: \mathcal{T}_n \triangleq \{(x,y,z) \in [n] \mid x + y + z = n\}
 $$
@@ -458,7 +458,7 @@ has to remain untilled. An example can be seen in the figure \ref{fig:chap-2:1-m
 
 Lastly, we will introduce \textit{Tarski} \ref{def:tarski-ppad}
 which uses the Knaster-Tarski fixed point theorem \ref{thm:knaster-tarski} and
-belongs in \textbf{CLS}, the class that convers the intersection
+belongs in \textbf{CLS}, the class that covers the intersection
 of parity graphs (\textbf{PPAD}) and local search (\textbf{PLS})
 \cite{papadimitriou_ComplexityParityArgument_1994,johnson_HowEasyLocal_1988,fearnley_ComplexityGradientDescent_2021}.
 
@@ -590,7 +590,7 @@ where we relate the difficulty of sudoku solving to a graph colouring problem.
 
 Since counting problems are regarded as functions to natural numbers, that means
 that we can create new counting problems through composition. We denote
-this as $f(L)$ or more fomrally we say:
+this as $f(L)$ or more formally we say:
 
 
 \begin{definitionbox}{Function composition in counting problems}{pars-reduction}
@@ -605,7 +605,7 @@ We demonstrate an example of the above notation using a finding from the paper
 by Ikenmeyer et al. \cite{ikenmeyer_WhatWhatNot_2022} where  they demonstrate $\textit{\#CircuitSAT} \subseteq ((\textit{\#EndOfLine}) -1) /2$
 where $\textit{CircuitSAT}$ is the circuit variant of \textit{SAT}.
 Given instance $C$, using figure \ref{fig:chap-2:pars-eol-csat}, we can see that
-for each satisfying assingment, we are creating a source/sink pair. Excluding
+for each satisfying assignment, we are creating a source/sink pair. Excluding
 the sink that is always paired with the $0^n$ sink, it is easy that the solution sets
 have the same cardinality.
 
@@ -731,7 +731,7 @@ we enforce that all subprocesses $\{\beta_i\}_{i \in [k]}$ must accept. Moreover
 negation states where if $\beta_1$ accepts, then
 $q$ rejects or vice versa. More formally, we offer the definition in \ref{def:alt-tm}.
 
-\begin{definitionbox}{Alteranting Turing Machines(ATM) \cite{kozen_TheoryComputation_2006, chandra1981alternation}}{alt-tm}
+\begin{definitionbox}{Alternating Turing Machines(ATM) \cite{kozen_TheoryComputation_2006, chandra1981alternation}}{alt-tm}
     \label{def:alt-tm}
     An alternating TM is a seven tuple
     $$
@@ -757,7 +757,7 @@ $q$ rejects or vice versa. More formally, we offer the definition in \ref{def:al
 
 \end{definitionbox}
 
-The machine essentially contains a read-only input tape with endmarkers and $k$ work tapes which are
+The machine essentially contains a read-only input tape with end-markers and $k$ work tapes which are
 initially blank. A \textit{step} of $M$ consists of reading a symbol from the input tape,
 writing a symbol to each work tape, and then moving each head left or right
 while transitioning into a new state.
@@ -879,16 +879,16 @@ arbitrary oracles \cite{beame_RelativeComplexityNP_1998}.
 They demonstrated that for several problems in \textbf{TFNP} as seen in figure \ref{fig:chap-2:count-hier-tfnp},
 some can be parsimoniously reduce to each other under all oracles, where as for some
 directions (the ones with the warning sign) this is not the the case.
-From the figure we can observe that for seveal \textbf{PPAD}-complete, \textbf{CLS} and
-\textbf{PPADS} problems one can indeed find parsimonious redutions.
+From the figure we can observe that for several \textbf{PPAD}-complete, \textbf{CLS} and
+\textbf{PPADS} problems one can indeed find parsimonious reductions.
 For other problems, even \textbf{PPAD}-complete ones like $\textbf{\#PPAD}(\textit{SourceOrExcess}(k,1)) -1$, 
 this does not seem to be the case.
 
 \begin{figure}
     \centering
     \includegraphics[width=0.7\textwidth]{assets/chart-plot_full.png}
-    \caption[Total Search Problem Counting Hierachy]
-    {Total Search Problem Counting Hierachy}
+    \caption[Total Search Problem Counting Hierarchy]
+    {Total Search Problem Counting Hierarchy}
     \label{fig:chap-2:count-hier-tfnp}
 \end{figure}
 
@@ -901,7 +901,7 @@ paths of NTMs. We can parallelise this to the boolean problem of \textit{SAT} wh
 given by the \textit{Cook-Levin} theorem \cite{cook_ComplexityTheoremprovingProcedures_1971}
 one can convert every \textbf{NP} problem into a \textit{SAT} problem.
 The general idea is to create a boolean expression for each snapshot of the
-Turing Machine such that a satisfying assingment corresponds to an accepting path.
+Turing Machine such that a satisfying assignment corresponds to an accepting path.
 As corollary the \textit{Cook-Levin} also demonstrates that every \textbf{NP} problem can be parsimoniously reduced to the
 \textit{SAT} problem, meaning:
 $$
@@ -950,7 +950,7 @@ core set of requirements:
     \item Establish a program that in which the user is able to construct a \textit{PureCircuit} instance.
           The tool should be capable of verifying instance
           or highlighting unsatisfied nodes.
-    \item Develop algorithms to find solutions or at least approxiamte solutions.
+    \item Develop algorithms to find solutions or at least approximate solutions.
     \item Construct algorithms to enumerate all solutions solutions for small graphs.
 \end{enumerate}
 
