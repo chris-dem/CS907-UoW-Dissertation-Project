@@ -1,14 +1,12 @@
 The current section focuses on how we can extend our reductions
-to \textit{SourceOrExcess}. In the previous sections,
-we gave an overview on how we can go from an \textit{EndOfLine} problem
-to a topological \textit{StrongSperner} problem.
+to \textit{SourceOrExcess} using topological interpretations.
 By providing a topological interpretation of the
 \textit{SourceOrExcess} problem, we hope to re-use the construction for future reductions
 with the \textit{PureCircuit} problem.
 
 We will first show how we can topologically reduce the \textit{SourceOrExcess}$(2,1)$
-problem to a \textit{2D} space. We will demonstrate some limitations with \textit{2D} topological problems and then we will
-demonstrate how using a \textit{3D} counting version of the \textit{StrongSperner} problem
+problem to a \textit{2D} space. We will demonstrate some limitations with \textit{2D} topological problems and then we show
+how using a \textit{3D} counting version of the \textit{StrongSperner} problem
 will allow for a full parsimonious reduction.
 
 
@@ -35,15 +33,13 @@ the local neighbouring of nodes, and they preserve the number of solutions
 
 \paragraph*{Planar Transformation}
 
-Our transformation \ref{par:chap-2:planar-graph-embedding}
-is identical to the one that done when reducing
-\textit{EndOfLine} to \textit{2D-EoL} with a slight change on
-the space and the paths the nodes take. First we double $V_n$ as such:
+We reuse the planar embedding method \ref{par:chap-2:planar-graph-embedding}
+with small changes. First we double $V_n$ as such:
 \[
     \forall n \in \mathbb{N}:  V_n \triangleq \Big\{\mathbf{u} \in \mathbb{N}_0^2\mid \mathbf{u}_1 \leq 6(n^2 - 1) , \mathbf{u}_2 \leq 12(n - 1) + 6 \Big\}
 \]
-Such that now every node is represented as $(0, 12i)$.
-Morevover for edge in $(i,j) \in E_{n}$ create path and MSB of $i$ is $0$, then we define path:
+Every node is now represented as $(0, 12i)$.
+Morevover given an edge in $(i,j) \in E_{n}$ where the MSB of $i$ is $0$, we define path:
 \begin{align*}
     \mathbf{p}^1 & = (0, 12i)                                                                 \\
     \mathbf{p}^2 & = (6(ni + j), 12i)                                                         \\
@@ -71,9 +67,9 @@ which can be exponentially large.
 This would make it computationally difficult to differentiate between double sinks and excess nodes
 and we would end up double counting solutions.
 By removing excess nodes, we only have to focus on double sinks. Since there is no output line in a double sink,
-we take advantage of that by sending one inputs from the traditional input path, and the other from the output path.
+we take advantage of that by sending one inputs from the input path, and the other from the output path.
 
-We can use similar arguments as in the planar graph construction \ref{par:chap-2:planar-graph-embedding}, to argue that:
+We use similar arguments as in the previous planar graph construction \ref{par:chap-2:planar-graph-embedding}, to argue that:
 $\forall v \in V: \textit{degree}(v) \in \{(0,1),(1,0), (1,1), (2,2), (2,0)\}$.
 We can observe that, if we do not have any double sinks, our graph follows the original transformation
 where only 4 out of the 5 possible degrees are possible. The only
@@ -86,13 +82,13 @@ other node with LSB $0$ its main path stays the same except if its incident
 to a double sink, where we add 3 additional edges.
 For all edges, we know that the height of the path $E(\mathbf{p}^2,\mathbf{p}^3)$ can only
 be at height greater or equal to $6$, and therefore no path other than the
-two incoming edges will ever intersect $(3,12i)$.
+two incoming edges will ever intersect $(3,12i)$. The above paths denote the set $E^1_n$.
 
 We follow the same construction for the $E^2_n$ and apply the same removal transformation.
 The resulting graph is the same as in the traditional \textit{2D-EoL} problem but with the addition of double sinks
 and we call this \textit{2D-SourceOrExcess}$(2,1)$.
 Moreover we can observe that \textit{2D-SourceOrExcess}$(2,1)$ is parsimonious to the \textit{SourceOrExcess}$(2,1)$ problem as
-sources and sinks are preserved, and any removal of edges can never affect our doubled sinks.
+sources and sinks are preserved.
 
 
 \paragraph{Topological Difficulty}
@@ -151,13 +147,12 @@ which is a combinatorial friendly version of the \textit{3D-StrongSperner}.
     such that $A = \arg \min_{A \in \mathcal{D}} |A|$. Accept
     only if $p = \textbf{Anc}(A)$.
 \end{definitionbox}
-The above idea is a natural extension of the \textit{StrongSperner} interpretation, where
-its labelling represents the direction of a continuous function. If a face
-of a cube is panchromatic, then that implies that there has to be a fixed point somewhere,
-as seen in the figure \ref{fig:chap-3:panc-edge}. If an edge were to be panchromatic,
-then that means that a fixed point could lie on the edge. If we were treating this as a
-fixed point problem instead of a colouring one, it would make sense to argue that we have one solution.
-We abuse this notion to count only the anchor of the cube which is incident to the panchromatic subspace.
+The above idea is a natural extension of the \textit{StrongSperner} interpretation. 
+Using figure \ref{fig:chap-3:panc-sub}, in the traditional
+sperner problem, we would count two solutions. 
+In the current variant we argue that it suffices to only count the edge,
+as it is the set covers our labels.
+We abuse this notion to count only the anchor of the cube which is incident to the smallest panchromatic subspace.
 An example of the counting argument is seen in figure \ref{fig:chap-3:panc-sub}.
 
 \begin{figure}[h!]
@@ -165,15 +160,8 @@ An example of the counting argument is seen in figure \ref{fig:chap-3:panc-sub}.
     \includegraphics[width=0.5\textwidth]{Chapter3/panc-example.pdf}
     \caption{Panchromatic edge counting example}
     \label{fig:chap-3:panc-sub}
-    \includegraphics[width=0.5\textwidth]{Chapter3/edge-colouring.pdf}
-    \caption{Panchromatic edge for 2 dimensions}
-    \label{fig:chap-3:panc-edge}
+
 \end{figure}
-
-% \begin{figure}[h!]
-%     \centering
-%     \end{figure}
-
 
 Trivially \textit{3D-CountingSS} can be reduced to \textit{3D-StrongSperner}
 even if we are overcounting the cubes. To show hardness,
@@ -186,7 +174,7 @@ we make the following theorem:
 \end{theorembox}
 
 
-\subsubsection{Proof of the theorem}
+\paragraph*{Proof of the theorem}
 
 Our first reduction is transforming our $2D$ grid, into a
 $3D$ with grid points:
@@ -213,10 +201,10 @@ $$
 $$
 We can observe that the above essentially is our \textit{2D-SourceOrExcess}$(2,1)$ but copied
 twice in the 3D space.  We note of the terms $I^b(P_i), L^b(P_i), R^b(P_i), \textbf{s}^b_{P_i}, \textbf{e}^b_{P_i}$
-that we defined in the paragraph \ref{par:chap-2:planar-graph-embedding} and say use index ${b}$ to denote
+that we defined in the paragraph \ref{par:chap-2:planar-graph-embedding} and index ${b}$ denotes
 the first copy and the second copy. Lastly, we introduce $m_{ij}^b$ to denote the ``midpoint'' or
 the point with degree $(2,0)$ that meets path $i$ and path $j$ with $b$ to denote the upper and lower face.
-The ends of the paths $P_1, P_2$ are placed collinearly to the ``midpoint'' $m_{ij}$ as seen
+If these paths $P_i, P_j$ meet at $m_{ij}$, then we place their ends $\textbf{e}_i, \textbf{e}_j$ as seen
 in the figure \ref{fig:chap-3:2d-sink}.
 
 \begin{figure}[h!]
@@ -238,7 +226,7 @@ $$
     \end{cases}
 $$
 
-An example of how the above colouring for simple lines can be seen in figure \ref{fig:chap-3:3d-counting-ss-simple-line}.
+An example of the above colouring can be seen in figure \ref{fig:chap-3:3d-counting-ss-simple-line}.
 
 \begin{figure}[h!]
     \centering
@@ -249,17 +237,16 @@ An example of how the above colouring for simple lines can be seen in figure \re
 
 
 
-\subsubsection{Correctness proof}
-We now prove that our reduction is correct.
-We use figure \ref{fig:chap-3:simple-line-example} and assume that we have an edge $\mathbf{p}^t, \mathbf{p}^{t+1}$
+\paragraph*{Correctness argument}
+Using figure \ref{fig:chap-3:simple-line-example}, assume that we have an edge $\mathbf{p}^t, \mathbf{p}^{t+1}$
 of some path. We use red to represend the points on the left of the edge, blue the points on the right, and brown for the surrounding.
 The red cube will not be panchromatic as $x$-coordinate is $+$ on all corners
 and vice versa for the blue cube on the $y$-coordinate. In addition we can observe that the brown cubes surrounding
 each face will also not result in a panchromatic cube as: for the brown cube on the left of red will be $-$ on all $y$
 coordinates, with the same argument for blue. And for the brown cubs on top, we can observe that $z$-coordinate will be $-$
 on all points. Therefore points in between lines or cycles will not result in solutions.
-As we can observe from the figure \ref{fig:chap-3:3d-counting-ss-simple-line}, we can observe
-that the cubes create discrete antipodal solutions.
+As we can observe from the figure \ref{fig:chap-3:3d-counting-ss-simple-line}, our construction
+results to discrete antipodal solutions.
 
 \begin{figure}[h!]
     \centering
@@ -280,14 +267,13 @@ that for all faces on top of the combine cube never cover the $-$ dimension.
 We can make similar arguments for the left and right outer faces.
 Since the outer faces do not yield a solution, that means we have only one solution and therefore
 we can observe
-that the set of panchromatic solutions correspond to a 1-to-1 mapping with the \textit{SourceOrExcess}$(2,1)$ problem.
+that the set of panchromatic solutions correspond to a 1-to-1 mapping with the original problem.
 
 
 \begin{figure}[h!]
     \centering
     \includegraphics[width=0.5\textwidth]{Chapter3/3d-counting-ss-doubleslink.pdf}
-    \caption[\textit{3D-CountingSS} double sink colouring]{Colouring around the double sink points. The colours correspond to the colour legend
-        of \ref{fig:chap-3:3d-counting-ss-simple-line} }
+    \caption[\textit{3D-CountingSS} double sink colouring]{Colouring around the double sink points}
     \label{fig:chap-3:double-sink-point}
 \end{figure}
 
@@ -299,20 +285,11 @@ we had to introduce antipodal edges in order to group solutions as one.
 As a result, the current method cannot be generalised directly 
 to other \textit{SourceOrExcess}$(k,1)$ problems unless
 we generalise the planar embedding technique. In addition, 
-our snake embedding method, the cardinality of solution is not
-guaranteed to be the same the duplication of turning points may increase the number of cubes.
+given our snake embedding method, the cardinality of solution is not
+guaranteed to be preserved, since the turning points may increase the number of solutions.
 On the contrary, our result raises questions as to the relation between the degree
 of a graph and its the dimension of its topological embeddings. We analyse
 this in greater detail in our future works section \ref{sec:future-work}.
-
-Additionally we observed that a Kleene interpretation of the problem may 
-not be as natural. As we have seen in \textit{nD-HF-SS}, we showed that we
-parsimoniously reduce from its non-hazard-free variant by doubling dimensions
-and applying the corollary \ref{cor:k-bit-haz}.
-The same methodology may not work in the current counting variant. Moreover, 
-generalising our solution to \textit{Counting-SS} may not be possible using our previous 
-methods since we allow for panchromatic subspaces, we cannot guarantee that the cardinality
-of solutions will be preserved over each folding.
 
 
 

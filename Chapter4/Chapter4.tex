@@ -47,18 +47,18 @@ each other based on their edges.
 \subsection{Software Testing methodology}
 The core philosophy of our testing is Test-Driven-Development. This methodology
 was used to develop and validate our critical parts of our code, such as graph validation
-or solution enumeration. The main idea of this development is to first write the unit test,
+or solution enumeration. Its main idea is to first write the unit tests,
 and then develop the code to resolve them. This allows us for the code to be self-documenting
 as well as ensuring that we are acting within the expected scope.
 
 
 Another testing technique that we heavily took advantage of is \textit{Property-based Testing},
 which we implement using the \texttt{Proptest} library \footnote{https://github.com/proptest-rs/proptest}.
-This idea was inspired by the \texttt{Haskell} library \texttt{QuickCheck}  \cite{claessen_QuickCheckLightweightTool_2000},
+This idea was inspired by the \texttt{Haskell} library \texttt{QuickCheck} \cite{claessen_QuickCheckLightweightTool_2000},
 where we test the properties of a pure function across a range of inputs. The idea is, the more complex,
 the input of the function, the greater is the input space and therefore harder and cumbersome to check all possible
 combinations or edge-cases. With \texttt{Proptest}, we check whether a property of our function is
-maintained across all possible inputs, such as a sorted output, or a validating assignment.
+maintained across most inputs, such as a sorted output, or a validating assignment.
 
 For our purposes, we use value-based property testing in which:
 We define a set of types where in each one we define a \textit{generator} and a \textit{shrinking strategy}.
@@ -88,8 +88,8 @@ into the functionalities in the upcoming sections.
 
 
 Our application is composed of 5 different states which are summarised in the table \ref{tab:chap-4:app-states}.
-Use the aforementioned states, we are able to add/remove edges as well as move them around or change their values.
-We added visual indicator so if gate has an incorrect arity or incorrect assignment, the user will be notified.
+Using the aforementioned states, we are able to add/remove edges as well as move them around or change their values.
+We added visual indicators so if a gate has an incorrect arity or an incorrect assignment, it will be highlighted.
 Moreover, we attached numbers to our edges so the user we will be able to differentiate between inputs and outputs.
 This is mostly useful for the \textsc{Purify} gate as each output behaves differently.
 In our appendix we will attach user stories that explain in greater detail how one can perform the above
@@ -120,9 +120,9 @@ algorithms in order to find mostly satisfying assignments in large graphs or gad
 With the help of the \texttt{genetic\_algorithm}\footnote{https://crates.io/crates/genetic\_algorithm} library,
 we use the \textit{Hill Climbing algorithm} and \textit{Genetic algorithm}  in order
 to find solutions. We will give a brief explanation on how they work in the upcoming sections but in general
-we express our graph as a chromosome of \textit{value} nodes which correspond to nodes in the original graph.
-Moreover, we formulate our problem as series of gates with references to the location of their
-incident value nodes, and we count the of unsatisfying gates. The goal of either algorithm
+we express our graph as a chromosome of value nodes.
+Moreover, we formulate our optimisation function as the number of unsatisfied gates
+given an assignment. The goal of either algorithm
 is to minimise the number of errors. Once an assignment is found,
 we pass the solutions back into our graph and display them.
 
@@ -141,15 +141,14 @@ Overall this algorithm, one of the simplest and faster algorithms to run and can
 well for convex problems as explained in \cite{schwefel_EvolutionOptimumSeeking_1995}.
 It may significantly struggle against large graphs or instances
 that multiple changes need to occur in order to reach an optimal point.
-In fact we can further argue that hill climbing may struggle on the
-\textit{Purify}  gate due to the non-linearity that they present.
-
-
+For the purposes of the current project, we allow for multiple re-runs 
+in order to maximise our odds of finding a solution. We expand
+on the future works section \ref{sec:future-work} about potential extensions.
 
 In our figure, we use the arguments as shown in figure \ref{fig:chap-4:hill-climb-params}.
 The number of runs determine how many times we can re-run the algorithm
 until an optimal solution is found. Population size determines the number
-of assignments to work with in parallel. The strategies are the one that we described
+of assignments to work with in parallel. The strategies are the ones that we described
 previously.
 
 
@@ -170,23 +169,24 @@ previously.
 
 Genetic algorithms are based of the
 idea of evolution.
-They were introduced by \cite{holland_AdaptationNaturalArtificial_1992},
-it is a useful algorithm has found several usages in computer science, particularly
+They were introduced by Holland \cite{holland_AdaptationNaturalArtificial_1992},
+and has found many usages throughout computer science, particularly
 in optimisation problems such as \textit{TSP} problems \cite{moon_EfficientGeneticAlgorithm_2002}
 or \textit{Neural Networks} \cite{stanley_EvolvingNeuralNetworks_2002,stanley_HypercubeBasedIndirectEncoding_2009}.
 
-We summarise the steps of the algorithm as follows, using figure \ref{fig:chap-4:evo-drawing} for reference.
-We start with a population of chrosomomes. We define a function that evaluates
-how good a specific chromosome is, also known as a \textit{fitness function}.
-We then apply the \textit{selection method} which picks the parents for the next generation.
+Using figure \ref{fig:chap-4:evo-drawing} as reference,
+we start with a population of chrosomomes. We define a function that evaluates
+how good a specific chromosome is, also known as its \textit{fitness function}.
+We then apply the \textit{selection method} which picks the parents for the next generation
+based on the performance of the chromosomes.
 The \textit{crossover method} determines how to combine the genes of two parents in order to create
 the offspring. And lastly we have the \textit{mutation step},
-where we randomly mutate the genes of the new population in order to escape from local minima.
+where we randomly mutate the genes of the new population in order to 
+introduce diversity and escape from local minima.
 We can repeat the above series of steps until we reach the target value or until
 we pass the maximum timestep limit.
 In our application, using figure {fig:chap-4:ga-params}, we
 use refer to the following list as a summary of parameters:
-
 
 \begin{enumerate}
     \item \textbf{Number of species}: We allow for our algorithm
@@ -250,19 +250,16 @@ there are many metaheuristic algorithms that can be applied as listed in \cite{a
 but we for now we consider them as future extensions.
 
 
-
-
 \subsection{Solution Enumeration}
 
 To enumerate through solutions, we employed a traditional backtracking algorithm.
-Our idea is similar to the DPLL algorithm used for \textit{SAT} solving,
+Our idea is similar to the DPLL algorithm \cite{davis_ComputingProcedureQuantification_1960} used for \textit{SAT} solving,
 where we recursively assign values to our graph. If all the values
 have been assigned a value, then we return the current assignment. If at a specific
 node, there are no more values that we can assign then we reject the current solution.
-We reduce the computational burden by prioritising nodes that can take only
-one value and each time we limit the solution set of each gate based on the assignment
-of the surrounding nodes. We summarise our algorithm in \ref{alg:chap-4:backtrack}
-and we summarise our algorithm into the following components:
+To reduce the computational burden, we employ greedy techniques
+by eliminating invalid assignments. We summarise our algorithm in \ref{alg:chap-4:backtrack}
+and break it down into the following components:
 \textbf{Backtrack Initialisation},
 \textbf{Unit Propagation operation},
 \textbf{Set Simplification operation},
@@ -324,8 +321,8 @@ and \textbf{Backtrack Operation}.
         \Function{UnitPropagation}{
         \Statex \qquad pc         \texttt{:PureCircuitInstance},
         \Statex \qquad nod\_ind   \texttt{:GraphIndex},
-        \Statex \qquad nod\_val   \texttt{:GraphValue},
-        \Statex \qquad $A$        \texttt{:Arr[Kleene]},
+        \Statex \qquad nod\_val   \texttt{:KleeneValue},
+        \Statex \qquad $A$        \texttt{:Arr[KleeneValue]},
         \Statex \qquad $S$        \texttt{:Arr[KleeneSet]},
         \Statex \qquad $Q$        \texttt{:PriorityQueue}
         \\}
@@ -357,12 +354,12 @@ and \textbf{Backtrack Operation}.
         \Statex \qquad $Q$        \texttt{:PriorityQueue}
         \\}
         \For{$g \in$ \Call{GetAllGateNeighbours}{pc, nod\_ind}}
-        \State $I \leftarrow$ \Call{GetValueSets}{\texttt{Input}}
-        \State $O \leftarrow$ \Call{GetValueSets}{\texttt{Output}}
+        \State $I, O \leftarrow$ \Call{GetValueSets}{$g$, $A$}
+        \Comment{Get the current assignment of the input/output values of $g$}
         \State $(I', O') \leftarrow$ \Call{SetSimplification}{$g, I, O$}
         \Comment{Determine the available value sets for each input output element given the elements that have been already assigned}
         \State \Call{PropagateSetValues}{$Q,S, I', I$}
-        \Comment{Propagate the changes to their value sets and to their queue keys for both the input and output elements}
+        \Comment{Update the value sets of the unassigned values for both input/output gates}
         \State \Call{PropagateSetValues}{$Q,S, O', O$}
         \EndFor
         \EndFunction
@@ -395,14 +392,14 @@ based on the following order:
 We argue that the above strategy minimises the breadth of the recursive calls. Moreover,
 for each node with \textit{in-degree} of $0$ as for each value of their assignment, a solution should exist.
 The heurestical argument for this can be observed in Deligkas et al. \cite{deligkas_PureCircuitTightInapproximability_2024},
-where there construction for finding solutions allows for source nodes to be independent.
+where their construction for finding solutions allows for source nodes to be independent.
 Lastly, prioritising nodes with the highest neighbour count implies that we
 propagate changes to a greater number gates and therefore maximise the influence of the \textit{Unit Propagation}
 procedure.
 
 \paragraph*{Unit Propagation operation}
 The algorithm assigns the selected value to a node
-by modifying to the solution set and the value set.
+by modifying their solution set and the value set.
 Then for each gate that is incident to the node apply the \textit{Set simplification operation}.
 While the top element of the queue
 has one possible solution, extract the solution and repeat the \textit{unit value propagation operation}
@@ -520,7 +517,7 @@ at what happens at the \textit{unit propagation} stage. We can observe that in e
 we are essentially limiting the set of solutions to only the ones
 that will give a satisfying assignment. The idea is that we are fast-forwarding the backtracking calls
 by taking advantage of the localised changes of each gate.
-Values that we discard are nodes that guarantee to give unsatisfying assingments, and therefore
+Values that we discard are nodes that guaranteed to give unsatisfying assingments, and therefore
 we are not discarding any solutions.
 This implies that our resulting array of assignments contains only valid solutions, and this array
 covers the maximal solution set.
