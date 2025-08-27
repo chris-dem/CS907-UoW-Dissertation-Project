@@ -15,10 +15,10 @@ or more informally, can we associate our sequence of numbers to sets of objects?
 
 
 To understand this notion, we provide an example from the papers by Ikenmeyer and Pak \cite{pak_WhatCombinatorialInterpretation_2022,ikenmeyer_WhatWhatNot_2022}:
-Assume that $f(G)$ counts the number of 3-colourings of a graph $G$. Now one can,
+Assume that $f(G)$ counts the number of 3-colourings of a graph $G$. Now one can
 ask: does the function $h(G) \triangleq f(G)/ 6$ also count something?
-The answer is yes as argued in \cite{pak_WhatCombinatorialInterpretation_2022,ikenmeyer_WhatWhatNot_2022} and the idea is,
-as for every colouring $\chi$, we can compute $3!$ additional colourings since
+The answer is yes as argued in \cite{pak_WhatCombinatorialInterpretation_2022,ikenmeyer_WhatWhatNot_2022}. The idea is:
+for every colouring $\chi$, there are $3!$ additional colourings since
 we can permute the colours we assigned. Therefore, we only need to count
 one of the permutations, or the smallest colouring. We can therefore argue that $h(G)$ 
 counts the smallest possible 3-colourings of a graph $G$.
@@ -41,8 +41,8 @@ So now we can ask: does the function $e'(C) \doteq e(C) -1$ also
 have a set of object which we can enumerate over?
 Ikenmeyer et al. \cite{ikenmeyer_WhatWhatNot_2022} demonstrated that
 this problem may not have a combinatorial interpretation.
-This leads to the questions of how can we formally represent the meaning
-of combinatorial interpretations, and what can we do to verify whether
+This leads to the question of how can we formally represent the meaning
+of a combinatorial interpretation, and what can we do to verify whether
 a function has one?
 
 In recent years, there has been a revolutionary initiative to answer the aforementioned questions,
