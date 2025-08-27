@@ -9,11 +9,11 @@ the current limitations of these approaches.
 \subsubsection{Hazard Free StrongSperner}
 
 First we begin with the idea that solutions of \textit{StrongSperner} problems
-revolve around the notion of panchromatic hypercubes. We can use the idea and make the following
-definitions
+revolve around the notion of panchromatic hypercubes. We start by
+associating points with cubes and vice versa using the definitions
+in \ref{def:ss-anchor}.
 
 \begin{definitionbox}{\textit{StrongSperner} anchor points}{ss-anchor}
-    \label{def:ss-anchor}
     Given a hypercube $H \subset \mathbb{Z}^n$ of side lengths $1$, we denote
     the $\textbf{Anc}(H)$ as
     $$
@@ -102,9 +102,9 @@ To show the hardness, we claim that
     \end{figure}
 
     To ensure that $\Lambda$ is hazard free we can use the corollary \ref{cor:k-bit-haz}, where we can create an
-    $n$-bit hazard-free circuit. One must observe that despite the size of the circuit increasing exponentially
-    with respect to the dimensions, since all the input instances scale with respect to the width of the hypercube space,
-    that would imply that we are able to keep the size of the circuit polynomial.
+    $n$-bit hazard-free circuit. One must observe that despite the size of the circuit increases exponentially
+    with respect to the dimensions. Since all the input instances scale with respect to the width of the hypercube space,
+    that would imply that we are able to keep the size of the circuit polynomial since $2^k \ggg 2^n$.
     We therefore claim that this reduction is polynomial and can parsimoniously find all panchromatic cubes.
 \end{proof}
 
@@ -151,15 +151,17 @@ For examples of the above notation we refer to the following table:
     \label{fig:chap-3:res-hyper}
 \end{figure}
 
+We can use figure \ref{fig:chap-3:res-hyper}, as reference to demonstate how
+the Kleene resolutions of a point relate to a cube.
 We will mainly focus on sub-problems of the \textit{HF-StrongSperner} where two cubes do not overlap with each other.
-We will use figure \ref{fig:chap-3:overlapping-sperner-solutions} for reference,
-but essentially if two cubes overlap, that means a subspace of the cube (face or edge)
-is panchromatic. This means that for the same cube, we can have
-multiple solutions, such as the cube it self, the face that contains the panchromatic edge
-or the edge it self. To simplify the counting arguments,
+Using figure \ref{fig:chap-3:overlapping-sperner-solutions} as reference, if two cubes overlap,
+that means a subspace of the cube (face or edge)
+is panchromatic. This means that for the same cube we can have
+multiple solutions. For example if an edge is panchromatic then: the cube, the face that contains the panchromatic edge
+and the edge it self are all valid solutions. To simplify the counting arguments,
 we define the problem \textit{HF-DiscreteStrongSperner} \ref{def:hf-discrete-strong-sperner},
 such that  all solutions are  \textit{discrete}, meaning there are no
-overlapping panchromatic cubes,
+overlapping panchromatic cubes.
 
 
 \begin{figure}[h!]
@@ -265,7 +267,6 @@ research, we demonstrate a parsimonious reduction from\\\textit{HF-DiscreteStron
         \caption{Pure Circuit construction visualisation}
         \label{fig:chap-3:pure-circuit}
     \end{figure}
-    %% TODO reword 
     \paragraph*{Bit generator gadget} In order to create Kleene unary numbers we make use of a binary tree of \scn{Purify} gates
     as seen in the figure \ref{fig:chap-3:purification-gadget}. We now claim that the current construction has certain desirable properties.
 
@@ -295,7 +296,9 @@ research, we demonstrate a parsimonious reduction from\\\textit{HF-DiscreteStron
         This shows that all possible strings generated are of the form $0^*\bot^{0\mid 1} 1^k \in M_{\leq 1}$.
     \end{proof}
 
-    In the appendix \ref{sec:app:sol-enum}, we can observe that \textit{Bit generator} solutions match our claim.
+    In the appendix \ref{sec:app:sol-enum}, we can observe that
+    our visualisation application validates our \textit{Bit generator} claim.
+
     \paragraph*{Correctness and parsimonious argument}
     One can observe that we have a valid construction since the instance is
     of polynomial size, all gates have the correct arity and
@@ -311,12 +314,12 @@ research, we demonstrate a parsimonious reduction from\\\textit{HF-DiscreteStron
     It suffices to show that every vector assignment is of the form $\forall i \in [n]: \mathbf{x}[o^i] = \bot$.
     Assume that we have a correct assignment, and WLOG $\mathbf{x}[o^i] = 0$  for some $i \in [n]$.
     By our \textsc{Copy} gate, we know that $\mathbf{x}[o^i]= \mathbf{x}[s_i]$.
-    By our bit generator lemma \ref{clm:chap-3:pur-claim} we know that $\mathbf{x}[u^i] = 0^i$.
+    By our bit generator lemma \ref{clm:chap-3:pur-claim} we know that $\mathbf{x}[u^i] = 0$.
     Since our circuit is hazard-free and applies the boundary conditions of the Sperner problem, we know that
-    $[\Lambda(x_{-i}(0))]_i = 1 \neq \mathbf{x}[o^i]$. We can make a similar argument for $\mathbf{x}[o^i] = 1$.
+    $[\Lambda(u)]_i = 1 \neq \mathbf{x}[o^i]$. We can make a similar argument for $\mathbf{x}[o^i] = 1$.
     Therefore, a satisfying assignment corresponds to some panchromatic solution. Given that
     our instance is in \textit{HF-DiscreteStrongSperner}, it has to be the case that
-    all $u^i \in M_1^n$, otherwise that would imply that there exists a $(n-1)$-subspace that also covers all the labels.
+    all $u^i \in M_1$, otherwise that would imply that there exists a $(n-1)$-subspace that also covers all the labels.
     This also shows that there exists a 1-to-1 mapping between a panchromatic cube and a satisfying assignment.
 \end{proof}
 
@@ -348,7 +351,7 @@ The idea is that we start from the \textit{2D-Sperner} problem
 and repeatedly fold and pad dimensions until we reach the desired space.
 
 Ideally we would like to use the same method to go from
-\textit{2D-DiscreteStrongSperner} to \\\textit{HF-DiscreteStrongSperner}
+\textit{2D-HF-DiscreteSS} to \\\textit{HF-DiscreteSS}
 as that would demonstrate a full parsimonious reduction chain from
 the \textit{EndOfLine}.
 The problem is that we cannot guarantee,
@@ -379,9 +382,9 @@ To define the edge set, we will first introduce the following notations.
 \begin{definitionbox}{$E(\mathbf{p}^1\mathbf{p}^2 )$}{rleaf-edge}
     \label{def:rleaf-edge}
     Given two points $\mathbf{p}^1, \mathbf{p}^2 \in V_n$ we define the set of edges
-    $E(\mathbf{p}^1, \mathbf{p}^2)$ as:
+    $E(\mathbf{p}^1\mathbf{p}^2)$ as:
     $$
-        E(\mathbf{p}^1, \mathbf{p}^2) \triangleq \begin{cases}
+        E(\mathbf{p}^1 \mathbf{p}^2) \triangleq \begin{cases}
             \{(\alpha, k) \mid k \in \mathbb{N} : \min\{\mathbf{p}^1_2, \mathbf{p}^2_2\} \leq k  \leq \max\{\mathbf{p}^1_2, \mathbf{p}^2_2\}\} & \text{if }\mathbf{p}^1_1 = \mathbf{p}^2_1 = \alpha \\
             \{(k, \alpha) \mid k \in \mathbb{N} : \min\{\mathbf{p}^1_1, \mathbf{p}^2_1\} \leq k  \leq \max\{\mathbf{p}^1_1, \mathbf{p}^2_1\}\} & \text{if }\mathbf{p}^1_2 = \mathbf{p}^2_2 = \alpha \\
             \emptyset                                                                                                                          & \text{otherwise}                                   \\
@@ -448,19 +451,19 @@ $$
 $$
 Using as reference the figure \ref{fig:chap-2:edge-rleaf}, we remove all the edges of nodes with degree of $(2,2)$.
 This in a way creates a different graph but the key insight is that the number of sources or sinks remain the same as we are essentially redirecting the lines
-as we can see from the figure \ref{fig:chap-2:rleaf-eol}. We will use these reductions in later sections to demonstrate reductions with excess problems as well.
+as we can see from the figure \ref{fig:chap-2:rleaf-eol}. 
 
 \begin{figure}[h!]
     \centering
     \includegraphics[width=0.7\textwidth]{Chapter2/reduced-EOL.pdf}
     \caption[Edge removal in 2D-EoL constructions]{Depiction of the edge removal.
-    Main idea is that this we keep the number of sources or sinks by redirecting the lines.}
+        Main idea is that this we keep the number of sources or sinks by redirecting the lines.}
     \label{fig:chap-2:rleaf-eol}
 \end{figure}
 
 Assume that $C_n \subset G_n$ are the sets of all planar graphs such that
 $$
-\forall v\in V_n: \textit{deg}(v) \in \{(1,0), (0,0), (0,1), (1,1)\}
+    \forall v\in V_n: \textit{deg}(v) \in \{(1,0), (0,0), (0,1), (1,1)\}
 $$
 
 Clearly we can observe that by the above construction of edge removal, all \textit{EndOfLine} problems
@@ -493,7 +496,7 @@ $$
     \end{pmatrix} \in B_{2^{4k+10}}
 $$
 Since $G \in C_{2^k}$, its edge-set can be decomposed into a collection of paths and cycles $(P_{i})_{i \in [m]}$.
-By using $\mathcal{F}$, every $P_{i}$ is mapped to a set $I(P_{i}) \subset B_{2^{4k+10}}$
+By using $\mathcal{F}$, every $P_{i}$ is mapped to a set $I(P_{i}) \subset B_{2^{4k+10}}$.
 We will colour every point  on $I(P_{i})$ with $+$
 \begin{gather*}
     P = \mathbf{u}^1,\dots,\mathbf{u}^t \text{, if P is a cycle } \mathbf{u}^1 = \mathbf{u}^t \\
@@ -513,7 +516,7 @@ $$
     \centering
     \includegraphics[width=0.5\textwidth]{Chapter3/coiling-eol.pdf}
     \caption[Shielding method on 2D-EoL embeddings]{Shielding method on 2D-EoL embeddings. We can observe
-    that each square of our figure does not yield a panchromatic solution.}
+        that each square of our figure does not yield a panchromatic solution.}
     \label{fig:chap-3:eol-shielding}
 \end{figure}
 If $P$ is a simple path we can decompose $\{ \mathbf{s}_{p}, \mathbf{e}_{p} \} \cup L(P) \cup R(P)$ such that:
@@ -641,206 +644,206 @@ We can observe that all squares on the left or the right of the line
 do not result in solutions as they contain only labels $\{\pm, +\}$ and $\{\mp, +\}$
 respectively as seen in figure \ref{fig:chap-3:eol-sperner-colouring}.
 One can observe that the square that contains $\textbf{s}_{P_{i}}$ or  $\textbf{e}_{P_{i}}$
-and a point of the line will be panchromatic as the two points will be antipodal. 
+and a point of the line will be panchromatic as the two points will be antipodal.
 Therefore, we have a valid and parsimonious reduction since we only cubes and the beginnings or ends of lines can be solutions.
 We call these coloured instances as \textit{2D-StrongEoL}.
 
 \paragraph{Going from \textit{2D} to higher dimensions}
 
 We now demonstrate how to go from \textit{2D-StrongEoL} to \\$\textit{AntipodalStrongSperner}$.
-We employ
-a slightly adjusted method than one proposed by Chen et al. \cite{chen_SettlingComplexityComputing_2009},
-which closely resembles the \textit{Snake Embedding} technique used
-by Deligkas et al. \cite{deligkas_ConstantInapproximabilityPPA_2022}
-on the \textit{StrongTucker} version of the problem, which reduced the space
-from $2^n \times 2^n \to [7]_0^m$, where $m = O(n)$. We will expand their method
-for the \textit{StrongSperner} problems and demonstrate that
-such reduction will resolve in an \textit{AntipodalStrongSperner} instance.
+    We employ
+    a slightly adjusted method than one proposed by Chen et al. \cite{chen_SettlingComplexityComputing_2009},
+    which closely resembles the \textit{Snake Embedding} technique used
+    by Deligkas et al. \cite{deligkas_ConstantInapproximabilityPPA_2022}
+    on the \textit{StrongTucker} version of the problem, which reduced the space
+    from $2^n \times 2^n \to [7]_0^m$, where $m = O(n)$. We will expand their method
+    for the \textit{StrongSperner} problems and demonstrate that
+    such reduction will resolve in an \textit{AntipodalStrongSperner} instance.
 
 
-\begin{theorembox}{}{parsimonious-2d-strong-eol-to-antipodalss}
-    % \label{thm:parsimonious-2d-strong-eol-to-antipodalss}
-    $$
-        \textbf{\#PPAD}(\textit{2D-StrongEoL}) \subseteq \textbf{\#PPAD}(\textit{AntipodalStrongSperner})
-    $$
-\end{theorembox}
-
-\begin{proof}
-    We are given as an input a $2^n \times 2^n$ grid representing any \textit{2D-StrongEoL} problem.
-    The procedure is summarised as follows:
-    Given dimension to fold $i$ where width of $i$ is $n > 8$, apply the \textit{padding operation} such that $n' = 3 \cdot s + 1$ for some $s \in \mathbb{N}$.
-    Then apply the \textit{folding operation}, which reduces ``width'' of the space to
-    $s + 3$ and compresses the space into a higher dimension.
-    We will now go into a greater detail as to how each operation works.
-    To make notation simple and consistent, we define $M^t$ as
-    $$
-        M^t \triangleq  \bigtimes_{i \in [n_t]} [m_i^t]
-    $$
-    Where $m_i^t$ denotes the width of dimension $i$ at iteration $t$, and $n_t$ as the number of dimensions.
-
-    \paragraph*{Padding Dimensions} We will use the definition \ref{def:pad-dim-op} to define our padding operation.
-
-    \begin{definitionbox}{Padding dimension $P(T,i,u)$}{pad-dim-op}
-        \label{def:pad-dim-op}
-        Given labelling function $\Lambda^t: M^t \to \{-1,+1\}^{n_t}$, we define
-        the padding operation $P(\Lambda^t, i, u)$ for $i \in [n_t]$ and $u \in \mathbb{N}$ where
-        $n_{t+1} = n_t$ and
+    \begin{theorembox}{}{parsimonious-2d-strong-eol-to-antipodalss}
+        % \label{thm:parsimonious-2d-strong-eol-to-antipodalss}
         $$
-            \forall j \in [n_{t+1}]: m_j = \begin{cases}
-                m_i     & \text{if }  i \neq j \\
-                m_i + u & \text{otherwise}
-            \end{cases}
+            \textbf{\#PPAD}(\textit{2D-StrongEoL}) \subseteq \textbf{\#PPAD}(\textit{AntipodalStrongSperner})
         $$
-    \end{definitionbox}
-
-    The above operation extends dimension $i$ with $u$ additional layers.
-    How the operation work is that we append a \textit{null} dimension such that,
-    given $\bar{x} = x_{-i}(m_i^t + 1)$ where $x \in M^t$
-    $$
-        \forall j \in [n] : [\Lambda^{t+1}(\bar{x})]_j  = \begin{cases}
-            -1 & \text{if } \bar{x}_i > 0 \\
-            +1 & \text{otherwise}
-        \end{cases}
-    $$
-    We can be sure that the above will not result in any new solutions since
-    in $[\Lambda^t(\cdot, m^t_i, \cdot)]_i = -1$, and therefore
-    any solution between  $(\cdot, m^t_i, \cdot), (\cdot, m^t_i+ 1, \cdot)$  will not yield in a solution.
-    We can repeat the above procedure $u$ times, if we need to pad the dimension by $u$.
-
-    \paragraph{Snake Folding} below we will give a overview of the snake folding operation.
-    We first give an informal overview of what
-    the technique actually does based on the figure \ref{fig:chap-3:snake-embedding-visualisation-basic}.
-    The $y$-axis denotes the new dimension, denoted as $n_{t+1}$ and the $x$ axis denotes the folded dimension
-    referred as $\bar{i}$ with width $m_{\bar{i}}^{t+1} = s + 3 = m_{\bar{i}}^{t'}$,
-    given that the original width was $3s+1$ for some $s \in \mathbb{N}$.
-    Moreover, we will use notation $(a, b)$ to refer to $a$ as the labels in the
-    $n_t$ subspace and $b$ as the label of the $n_t+1$ dimension.
-    From the figure we observe that we have orange, red, green and blue lines.
-    Blue and orange lines denote $(\omega, -)$ and $(\omega, +)$ where $\omega$
-    is the $n_t$-dimensional \textit{null} space, where for each point $>0$, we use label $-$ and for $0$
-    we use label $+$. These lines are meant to satisfy
-    the boundary conditions. For the red and green lines,
-    these are denoted as $(\star, -), (\star, +)$ where $\star$ is the $n_t$-dimensional copy of the lower
-    space with some additional points. The core idea is that all solutions, must belong in between
-    the red and green lines, such that if we have a solution in the $n_t$-space, we should also have a
-    solution in the $n_t+1$ space, as shown in the figure \ref{fig:chap-3:snake-embedding-2d-to-3d-sol}.
-
-
-    \begin{figure}[h!]
-        \centering
-        \includegraphics[width=0.7\textwidth]{Chapter3/snake-embedding-simplified.pdf}
-        \caption[Snake Embedding 2D visualisation]{Snake Embedding technique view between the folded dimension $j$ and the new dimension. The $x$-axis denotes the folded
-            dimension and the $y$-axis denotes the new dimension. The point $\ell_i$ denote the indexes that correspond the $j$
-            dimension of the pre-folded space.}
-        \label{fig:chap-3:snake-embedding-visualisation-basic}
-    \end{figure}
-
-    \begin{figure}[h!]
-        \centering
-        \includegraphics[width=0.5\textwidth]{Chapter3/2d-to-3d-snake-sol.pdf}
-        \caption{Panchromatic squares between the folded dimension and the new dimension}
-        \label{fig:chap-3:snake-embedding-2d-to-3d-sol}
-    \end{figure}
-
-    To define the above more formally, we define sets $B^U,B^L \subseteq M^{t'}$
-    which denote the set of boundary indices of the orange and blue lines.
-    In addition, we define functions $\ell^P, \ell^N \subseteq M^{t'}$ to denote the points on the green and red lines
-    with functions $\phi^P, \phi^N$  that are the inverse maps to the original original space.
-    Given our new circuit $\Lambda^{t+1}$, we define the following:
-    $$
-        \forall x \in M^{t+1}, j\in [n_t]:  [\Lambda^{t+1}(x)]_j = \begin{cases}
-            -1                         & \text{if  }  x \in B^U \cup B^O \wedge x_j > 0 \\
-            +1                         & \text{if  }  x \in B^U \cup B^O \wedge x_j = 0 \\
-            [\Lambda^{t}(\phi^P(x))]_j & \text{if } x \in \ell^P                        \\
-            [\Lambda^{t}(\phi^N(x))]_j & \text{if } x \in \ell^N                        \\
-        \end{cases}
-    $$
-    For the new dimension, we apply the labelling rules as described previously
-    $$
-        \forall x \in M^{t+1}:  [\Lambda^{t+1}(x)]_{n_t+1} = \begin{cases}
-            -1 & \text{if  }  x \in B^U \cup \ell^N \\
-            +1 & \text{if  }  x \in B^L \cup \ell^P \\
-        \end{cases}
-    $$
-    Using the above we formally define the operation the snake embedding operation $S(T, i)$.
-
-    \begin{definitionbox}{Snake Embedding operation $S(\Lambda^t, i)$}{snake-emb-op}
-        Given labelling function $\Lambda: M^t \to \{-1, +1\}^{n_t}$, apply the snake embedding operation
-        on dimension $i \in [n]$, where $m_i \equiv 1 \mod 3$, to a get a new labelling function
-        $\Lambda^{t+1}: M^{t+1} \to \{-1, +1\}^{n_{t+1}}$ such that $m'_i = s + 3, n_{t+1} = n_t +1, m_{n_{t+1}} = 8$, where $\Lambda^{t+1}$ is defined
-        based on the above description.
-    \end{definitionbox}
-
-    \begin{claimbox}{Antipodality Solution preservation}{snake-emb-sol-anti}
-        Given operation $S(\Lambda^t, i)$, we argue the following hold true:
-        \begin{enumerate}
-            \item The operation will preserve the discrete antipodal properties of the function.
-            \item The number of solutions between the two spaces will be preserved
-        \end{enumerate}
-    \end{claimbox}
+    \end{theorembox}
 
     \begin{proof}
-        Assume we apply the snake folding operation on dimension $j$.
-        We can observe that all solutions in the embedded space will be anchored between the red or green lines
-        (using figure
-        \ref{fig:chap-3:snake-embedding-visualisation-basic}), otherwise the new dimension will not be covered.
-        Moreover, one can observe that a panchromatic hypercube can never be anchored in any of the turning points since
-        our labelling is discrete.
-        
-        
-        Assume we have a point
-        in $p \in M^{t+1}$, which is an anchor of some panchromatic solution for some $p_j \in [m^{t+1}_j]$ and
-        $p_x \in[m^{t+1}_{n_{t+1}}]$. We can observe from the diagram \ref{fig:chap-3:snake-embedding-visualisation-basic}
-        that the coordinates $(\cdot, p_j, p_x)$  correspond to some point $(\cdot, j)$ for some point in the pre-folded space.
-        We can also observe that the point $(\cdot, j+1)$  may correspond to the point $(\cdot, p_j + 1, p_x)$.
-        or $(\cdot, p_j, p_x+1)$, depending on whether $j \in \{2s, 2s+1\}$
-        as it implies whether its on the vertical portion of the space or the horizontal portion.
-        We denote this observation as the effective direction, meaning
-        if $(\cdot, j) \to(\cdot, j +1)  \implies (\cdot, p_j, p_x) \to(\cdot, p_j +1, p_x)$,  then we say that the $j$th
-        dimension is the effective direction, otherwise the $n_{t+1}$th will
-        be the effective dimension
+        We are given as an input a $2^n \times 2^n$ grid representing any \textit{2D-StrongEoL} problem.
+        The procedure is summarised as follows:
+        Given dimension to fold $i$ where width of $i$ is $n > 8$, apply the \textit{padding operation} such that $n' = 3 \cdot s + 1$ for some $s \in \mathbb{N}$.
+        Then apply the \textit{folding operation}, which reduces ``width'' of the space to
+        $s + 3$ and compresses the space into a higher dimension.
+        We will now go into a greater detail as to how each operation works.
+        To make notation simple and consistent, we define $M^t$ as
+        $$
+            M^t \triangleq  \bigtimes_{i \in [n_t]} [m_i^t]
+        $$
+        Where $m_i^t$ denotes the width of dimension $i$ at iteration $t$, and $n_t$ as the number of dimensions.
+
+        \paragraph*{Padding Dimensions} We will use the definition \ref{def:pad-dim-op} to define our padding operation.
+
+        \begin{definitionbox}{Padding dimension $P(T,i,u)$}{pad-dim-op}
+            \label{def:pad-dim-op}
+            Given labelling function $\Lambda^t: M^t \to \{-1,+1\}^{n_t}$, we define
+            the padding operation $P(\Lambda^t, i, u)$ for $i \in [n_t]$ and $u \in \mathbb{N}$ where
+            $n_{t+1} = n_t$ and
+            $$
+                \forall j \in [n_{t+1}]: m_j = \begin{cases}
+                    m_i     & \text{if }  i \neq j \\
+                    m_i + u & \text{otherwise}
+                \end{cases}
+            $$
+        \end{definitionbox}
+
+        The above operation extends dimension $i$ with $u$ additional layers.
+        How the operation work is that we append a \textit{null} dimension such that,
+        given $\bar{x} = x_{-i}(m_i^t + 1)$ where $x \in M^t$
+        $$
+            \forall j \in [n] : [\Lambda^{t+1}(\bar{x})]_j  = \begin{cases}
+                -1 & \text{if } \bar{x}_i > 0 \\
+                +1 & \text{otherwise}
+            \end{cases}
+        $$
+        We can be sure that the above will not result in any new solutions since
+        in $[\Lambda^t(\cdot, m^t_i, \cdot)]_i = -1$, and therefore
+        any solution between  $(\cdot, m^t_i, \cdot), (\cdot, m^t_i+ 1, \cdot)$  will not yield in a solution.
+        We can repeat the above procedure $u$ times, if we need to pad the dimension by $u$.
+
+        \paragraph{Snake Folding} below we will give a overview of the snake folding operation.
+        We first give an informal overview of what
+        the technique actually does based on the figure \ref{fig:chap-3:snake-embedding-visualisation-basic}.
+        The $y$-axis denotes the new dimension, denoted as $n_{t+1}$ and the $x$ axis denotes the folded dimension
+        referred as $\bar{i}$ with width $m_{\bar{i}}^{t+1} = s + 3 = m_{\bar{i}}^{t'}$,
+        given that the original width was $3s+1$ for some $s \in \mathbb{N}$.
+        Moreover, we will use notation $(a, b)$ to refer to $a$ as the labels in the
+        $n_t$ subspace and $b$ as the label of the $n_t+1$ dimension.
+        From the figure we observe that we have orange, red, green and blue lines.
+        Blue and orange lines denote $(\omega, -)$ and $(\omega, +)$ where $\omega$
+        is the $n_t$-dimensional \textit{null} space, where for each point $>0$, we use label $-$ and for $0$
+        we use label $+$. These lines are meant to satisfy
+        the boundary conditions. For the red and green lines,
+        these are denoted as $(\star, -), (\star, +)$ where $\star$ is the $n_t$-dimensional copy of the lower
+        space with some additional points. The core idea is that all solutions, must belong in between
+        the red and green lines, such that if we have a solution in the $n_t$-space, we should also have a
+        solution in the $n_t+1$ space, as shown in the figure \ref{fig:chap-3:snake-embedding-2d-to-3d-sol}.
 
 
-        WLOG we assume the effective dimension is $j$.
-        Since $(\cdot, p_j, p_x)$ are the anchor of a panchromatic cube
-        it implies that the points  $(\cdot, p_j, p_x), (\cdot, p_j +1, p_x)$ 
-        cover all the $n_t$ labels and $p_x, p_x + 1$ will cover the $n_{t+1}$th dimension.
-        This shows that we can preserve the cardinality of the solution sets.
-    
-        We can also observe that our solutions remain antipodal. 
-        WLOG assume that the effective dimension is $j$. We know that
-        if $p$ is a solution of the pre-folded, then
-        $\forall b: \Lambda^t(p + b) = - \Lambda^t(p + \bar{b})$. This implies
-        that if $\hat{p}$ is its corresponding solution in the folded space then:
+        \begin{figure}[h!]
+            \centering
+            \includegraphics[width=0.7\textwidth]{Chapter3/snake-embedding-simplified.pdf}
+            \caption[Snake Embedding 2D visualisation]{Snake Embedding technique view between the folded dimension $j$ and the new dimension. The $x$-axis denotes the folded
+                dimension and the $y$-axis denotes the new dimension. The point $\ell_i$ denote the indexes that correspond the $j$
+                dimension of the pre-folded space.}
+            \label{fig:chap-3:snake-embedding-visualisation-basic}
+        \end{figure}
+
+        \begin{figure}[h!]
+            \centering
+            \includegraphics[width=0.5\textwidth]{Chapter3/2d-to-3d-snake-sol.pdf}
+            \caption{Panchromatic squares between the folded dimension and the new dimension}
+            \label{fig:chap-3:snake-embedding-2d-to-3d-sol}
+        \end{figure}
+
+        To define the above more formally, we define sets $B^U,B^L \subseteq M^{t'}$
+        which denote the set of boundary indices of the orange and blue lines.
+        In addition, we define functions $\ell^P, \ell^N \subseteq M^{t'}$ to denote the points on the green and red lines
+        with functions $\phi^P, \phi^N$  that are the inverse maps to the original original space.
+        Given our new circuit $\Lambda^{t+1}$, we define the following:
         $$
-        \forall b \in \{0,1\}^{n_{t+1}}: \Lambda^{t+1}(\hat{p} + b_{-n_{t+1}}(0)) = - \Lambda^{t+1}(\hat{p} + \bar{b}_{-n_{t+1}}(1))
+            \forall x \in M^{t+1}, j\in [n_t]:  [\Lambda^{t+1}(x)]_j = \begin{cases}
+                -1                         & \text{if  }  x \in B^U \cup B^O \wedge x_j > 0 \\
+                +1                         & \text{if  }  x \in B^U \cup B^O \wedge x_j = 0 \\
+                [\Lambda^{t}(\phi^P(x))]_j & \text{if } x \in \ell^P                        \\
+                [\Lambda^{t}(\phi^N(x))]_j & \text{if } x \in \ell^N                        \\
+            \end{cases}
         $$
-        since the $n_{t+1}$th dimension will not affect the labelling of the other dimensions.
-        We can use a similar argument if the effective dimension is $n_{t+1}$ since it will take 
-        the role of the $j$th dimension.
+        For the new dimension, we apply the labelling rules as described previously
+        $$
+            \forall x \in M^{t+1}:  [\Lambda^{t+1}(x)]_{n_t+1} = \begin{cases}
+                -1 & \text{if  }  x \in B^U \cup \ell^N \\
+                +1 & \text{if  }  x \in B^L \cup \ell^P \\
+            \end{cases}
+        $$
+        Using the above we formally define the operation the snake embedding operation $S(T, i)$.
+
+        \begin{definitionbox}{Snake Embedding operation $S(\Lambda^t, i)$}{snake-emb-op}
+            Given labelling function $\Lambda: M^t \to \{-1, +1\}^{n_t}$, apply the snake embedding operation
+            on dimension $i \in [n]$, where $m_i \equiv 1 \mod 3$, to a get a new labelling function
+            $\Lambda^{t+1}: M^{t+1} \to \{-1, +1\}^{n_{t+1}}$ such that $m'_i = s + 3, n_{t+1} = n_t +1, m_{n_{t+1}} = 8$, where $\Lambda^{t+1}$ is defined
+            based on the above description.
+        \end{definitionbox}
+
+        \begin{claimbox}{Antipodality Solution preservation}{snake-emb-sol-anti}
+            Given operation $S(\Lambda^t, i)$, we argue the following hold true:
+            \begin{enumerate}
+                \item The operation will preserve the discrete antipodal properties of the function.
+                \item The number of solutions between the two spaces will be preserved
+            \end{enumerate}
+        \end{claimbox}
+
+        \begin{proof}
+            Assume we apply the snake folding operation on dimension $j$.
+            We can observe that all solutions in the embedded space will be anchored between the red or green lines
+            (using figure
+            \ref{fig:chap-3:snake-embedding-visualisation-basic}), otherwise the new dimension will not be covered.
+            Moreover, one can observe that a panchromatic hypercube can never be anchored in any of the turning points since
+            our labelling is discrete.
+
+
+            Assume we have a point
+            in $p \in M^{t+1}$, which is an anchor of some panchromatic solution for some $p_j \in [m^{t+1}_j]$ and
+            $p_x \in[m^{t+1}_{n_{t+1}}]$. We can observe from the diagram \ref{fig:chap-3:snake-embedding-visualisation-basic}
+            that the coordinates $(\cdot, p_j, p_x)$  correspond to some point $(\cdot, j)$ for some point in the pre-folded space.
+            We can also observe that the point $(\cdot, j+1)$  may correspond to the point $(\cdot, p_j + 1, p_x)$.
+            or $(\cdot, p_j, p_x+1)$, depending on whether $j \in \{2s, 2s+1\}$
+            as it implies whether its on the vertical portion of the space or the horizontal portion.
+            We denote this observation as the effective direction, meaning
+            if $(\cdot, j) \to(\cdot, j +1)  \implies (\cdot, p_j, p_x) \to(\cdot, p_j +1, p_x)$,  then we say that the $j$th
+            dimension is the effective direction, otherwise the $n_{t+1}$th will
+            be the effective dimension
+
+
+            WLOG we assume the effective dimension is $j$.
+            Since $(\cdot, p_j, p_x)$ are the anchor of a panchromatic cube
+            it implies that the points  $(\cdot, p_j, p_x), (\cdot, p_j +1, p_x)$
+            cover all the $n_t$ labels and $p_x, p_x + 1$ will cover the $n_{t+1}$th dimension.
+            This shows that we can preserve the cardinality of the solution sets.
+
+            We can also observe that our solutions remain antipodal.
+            WLOG assume that the effective dimension is $j$. We know that
+            if $p$ is a solution of the pre-folded, then
+            $\forall b: \Lambda^t(p + b) = - \Lambda^t(p + \bar{b})$. This implies
+            that if $\hat{p}$ is its corresponding solution in the folded space then:
+            $$
+                \forall b \in \{0,1\}^{n_{t+1}}: \Lambda^{t+1}(\hat{p} + b_{-n_{t+1}}(0)) = - \Lambda^{t+1}(\hat{p} + \bar{b}_{-n_{t+1}}(1))
+            $$
+            since the $n_{t+1}$th dimension will not affect the labelling of the other dimensions.
+            We can use a similar argument if the effective dimension is $n_{t+1}$ since it will take
+            the role of the $j$th dimension.
+        \end{proof}
+        We observed that our operations do not affect the cardinality of solutions. We now outline
+        our construction of our new circuit
+        \begin{enumerate}
+            \item Check if there is a dimension  $j$ with $m_j^t > 8$. If yes, first pad the dimension such that $m_j^t \equiv 1 \mod 3$.
+                  Afterwards fold the dimension on $j$ to get new folded circuit
+            \item If the folding results in a width of $m_j^t <8$, then we can pad the dimension to have a width of $8$
+            \item If there are no operations that can be applied then we can terminate
+        \end{enumerate}
+        We can observe that in each step of the algorithm we preserve our solutions. Moreover, each fold
+        divides the dimension by some factor of $3$. Since we start with space of $2^n \times 2^n$,
+        we can conclude that the number of operations needed are $O(n\log_32)$. This concludes our proof.
     \end{proof}
-    We observed that our operations do not affect the cardinality of solutions. We now outline
-    our construction of our new circuit
-    \begin{enumerate}
-        \item Check if there is a dimension  $j$ with $m_j^t > 8$. If yes, first pad the dimension such that $m_j^t \equiv 1 \mod 3$.
-              Afterwards fold the dimension on $j$ to get new folded circuit
-        \item If the folding results in a width of $m_j^t <8$, then we can pad the dimension to have a width of $8$
-        \item If there are no operations that can be applied then we can terminate
-    \end{enumerate}
-    We can observe that in each step of the algorithm we preserve our solutions. Moreover, each fold
-    divides the dimension by some factor of $3$. Since we start with space of $2^n \times 2^n$, 
-    we can conclude that the number of operations needed are $O(n\log_32)$. This concludes our proof.
-\end{proof}
 
-This is the closest that we manage to bring the reduction chain across \textit{EndOfLine} and \textit{PureCircuit}.
-We can observe two interesting directions: if one can create a bit generator
-for Kleene binary numbers as presented previously, then we can a similar construction to
-the proof we did in \ref{thm:hf-discrete-to-pure} for a full parsimonious reduction between
-\textit{nD-SS} to \textit{PureCircuit}.
-Alternatively one can attempt to reduce \textit{AntipodalStrongSperner} to \textit{HF-AntipodalStrongSperner} or \textit{PureCircuit}
-parsimoniously. We argue that the antipodality property allows us to check for solutions
-much more efficient than trying to find $d+1$ points in some hypercube. 
-In hindsight, we argue that if one could construct a Kleene gadget to generate the maximum and the minimum 
+    This is the closest that we manage to bring the reduction chain across \textit{EndOfLine} and \textit{PureCircuit}.
+    We can observe two interesting directions: if one can create a bit generator
+    for Kleene binary numbers as presented previously, then we can a similar construction to
+    the proof we did in \ref{thm:hf-discrete-to-pure} for a full parsimonious reduction between
+    \textit{nD-SS} to \textit{PureCircuit}.
+    Alternatively one can attempt to reduce \textit{AntipodalStrongSperner} to \textit{HF-AntipodalStrongSperner} or \textit{PureCircuit}
+    parsimoniously. We argue that the antipodality property allows us to check for solutions
+    much more efficient than trying to find $d+1$ points in some hypercube.
+In hindsight, we argue that if one could construct a Kleene gadget to generate the maximum and the minimum
 resolution of a \textit{Kleene unary}, it would allow us to create \textit{PureCircuit} instances
 that take advantage of antipodal property.
 

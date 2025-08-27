@@ -2,8 +2,8 @@
 \section{Theoretical Preliminaries and Literature Overview}
 In the current section, we introduce all the necessary preliminaries
 with respect to search problems and counting complexity theory.
-Moreover we give an overview of the \textit{PureCircuit} problems, and its connections
-with search problems and its relations with \textit{Kleene logic}. 
+Moreover we give an overview of the \textit{PureCircuit} problem, and its connections
+with search problems and relations with \textit{Kleene logic}. 
 
 
 \subsection{Search problems}
@@ -55,7 +55,7 @@ search problem variant known as \textit{Levin Reductions}  using the definition 
               $$
                   \forall x \in \{0,1\}^*: x \in  S_{R_A} \implies f(x) \in S_{R_B}\\
               $$
-        \item Using an element $R_b(f(x))$, we can construct a solution to $R_A$ such that:
+        \item Using an element $R_B(f(x))$, we can construct a solution to $R_A$ such that:
               $$
                   \forall x \in S_{R_A}, y' \in R_B(f(x)): (x,g(x,y)) \in R_A
               $$
@@ -72,6 +72,8 @@ search problem variant known as \textit{Levin Reductions}  using the definition 
 
 The \textbf{TFNP} hierarchy contains several subclasses (see figure \ref{fig:chap-2:tfnp-hierarchy}) as defined by various researchers
 \cite{papadimitriou_ComplexityParityArgument_1994,johnson_HowEasyLocal_1988,daskalakis_ContinuousLocalSearch_2011,fearnley_CLSNewProblems_2017}.
+Each of these problems take advantage of a different combinatorial property such as,
+the pigeonhole principle or sinks in DAGs.
 In the current project we are mainly interested
 in \textbf{PPAD}, known as ``Polynomial Parity of Augmented DiGraphs'', created by Papadimitriou \cite{papadimitriou_ComplexityParityArgument_1994}.
 We first introduce the \textit{EndOfLine} problem \ref{def:eol-ppad} 
@@ -96,7 +98,7 @@ there must always exist a different one.
     We define source nodes as $v \in V: \textit{deg}(v) = (0,1)$  and sink nodes as
     $\textit{deg}(v) = (1,0)$.
     We also syntactically ensure that the $0^n$ node is always a source, meaning
-    $S(P(0^n)) \neq 0 \wedge P(S(0^n)) = 0^n$.
+    $S(P(0^n)) \neq 0^n \wedge P(S(0^n)) = 0^n$.
     A node $v \in V$ is a solution \textit{iff} $\textit{in-deg}(v) \neq \textit{out-deg}(v)$.
 \end{definitionbox}
 
@@ -164,49 +166,65 @@ created by Chen et al. and Hollender et al. \cite{chen_Complexity2DDiscrete_2009
 \end{definitionbox}
 
 The above description defines a superpolynomial such that an edge $(x,y) \in E$
-if and only if $S(x) = y \wedge P(y) = x$ as well as the closeness constraint $\|x-S(x)\|_1 \leq 1$.
+if and only if $S(x) = y \wedge P(y) = x$ as well as the closeness constraint $\|x-y\|_1 \leq 1$.
 We refer will refer to this problem in later sections to talk about the topological representations of our graphs.
 
 \paragraph*{Multi-Source variants}
 Lastly we introduce variants of the \textit{EndOfLine} problem
 where we extend the number of known sources.
 These
-multi-source problems (formally defined using \ref{def:polys-eol}) were created by Hollender et al. \cite{hollender_ComplexityMultisourceVariants_2018}
+multi-source problems were created by Hollender et al. \cite{hollender_ComplexityMultisourceVariants_2018}
 and were demonstrated to be \textbf{PPAD}-complete.
 
 \begin{definitionbox}{\textit{PolyS-EoL} definition}{polys-eol}
     \label{def:polys-eol}
     \textbf{Input}: We are given triplet $(S, P, \bar{f})$, where $S, P$ are successors, predecessor circuits
     of an \textit{EndOfLine} problem with $n$ input-output bits, and $\bar{f}$ is a poly-sized circuit that computes some polynomial function
-    $f: \mathbb{N}\to \mathbb{N}$. In addition, we impose the following restriction:
+    $f: \mathbb{N}\to \mathbb{N}$. We impose the following restriction:
     $$
         \forall i \in [f(n)]_0: S(P(i)) \neq i \wedge P(S(i)) = i
     $$
-    \textbf{Output}: A node $k \not\in [f(n)]_0$ such that $S(P(x)) \neq x \oplus P(S(x)) \neq x$.
+    \textbf{Output}: A node $x \not\in [f(n)]_0$ such that $S(P(x)) \neq x \oplus P(S(x)) \neq x$.
 \end{definitionbox}
 
 
 
 \subsubsection{The PureCircuit problem}
 \label{par:pure-circ-def}
-The \textit{PureCircuit} problem is a discretised version of the $\epsilon\textit{-GCircuit}$
+We first start with $\epsilon\textit{-GCircuit}$
 which was first introduced by Chen et al. \cite{deligkas_PureCircuitTightInapproximability_2024,chen_SettlingComplexityComputing_2009}.
 General idea of $\epsilon\textit{-GCircuit}$ is that we have a directed graph  $T= (V,G)$ where
 $V$ denote value nodes and $G$ denote gate nodes. Each value node is assigned a value in $[0,1]$
 and the gates denote can denote the standard set of arithmetic operations $\{+, - ,*\}$ with other
 nodes or some constant, or boolean operators $\{\wedge, \vee, \neg, <, >, =\}$ with other nodes or some constant.
-The goal of the problem is to assign every problem with a value such that the assignment is correct up to a
-factor of $\pm \epsilon$. This problem was crucial to demonstrate \textbf{PPAD}-hardness for constant $\epsilon > 0$
-by Rubinstein \cite{deligkas_PureCircuitTightInapproximability_2024,rubinstein_InapproximabilityNashEquilibrium_2015}.
+The goal of the problem is to assign every value node with a value such that the assignment is correct up to a
+factor of $\pm \epsilon$.
+We refer figure \ref{fig:chap-2:eps-gcirc} as example.
+This problem was crucial to demonstrate the hardness of approximating of \textbf{PPAD} problems
+since Rubinstein demonstated that there exists $\epsilon > 0$
+for which $\epsilon\textit{-GCircuit}$ is \textbf{PPAD}-hard
+\cite{deligkas_PureCircuitTightInapproximability_2024,rubinstein_InapproximabilityNashEquilibrium_2015}.
+
+\begin{figure}[htbp]
+    \centering
+    \includegraphics[width=0.3 \textwidth]{Chapter2/eps-CIRCUIT.pdf}
+    \caption[$\epsilon\textit{-GCircuit}$ example]
+    {$\epsilon\textit{-GCircuit}$ example.
+    A valid assignment would be $(0.2, 0.2, 0.2, 0.2)$
+    since each gate will be satisfied up to an $\epsilon$ factor.
+    Image by Chen et al. \cite{chen_SettlingComplexityComputing_2009}}
+    \label{fig:chap-2:eps-gcirc}
+\end{figure}
 
 
-\textit{PureCircuit} is the problem that we get when taking the limit $\epsilon \to 0$ of the $\epsilon\textit{-GCircuit}$ problem.
+\textit{PureCircuit} is the problem that we get when taking the limit $\epsilon \to 1$ of the $\epsilon\textit{-GCircuit}$ problem.
 This results in a circuit which uses the set of values $\{0,\bot, 1\}$ to denote the range of values
 $(0),(0,1),(1)$.
 Incidentally, the above triplet of values coincides with \textit{Kleene algebra} which extends the traditional binary logic \cite{kleene_IntroductionMetamathematics_2009}.
 We will explore the above algebra in greater depth in section \ref{subsect:chap-2:kleene}.
 This problem was created by Deligkas et al. \cite{deligkas_PureCircuitTightInapproximability_2024}
-to demonstrate the hardness of approximating \textbf{PPAD} problems and was shown to be \textbf{PPAD}-complete.
+to demonstrate that for all $\epsilon < 1/10$, $\epsilon\textit{-GCircuit}$ is \textbf{PPAD}-hard
+and it was shown to be \textbf{PPAD}-complete.
 
 \begin{definitionbox}{\textbf{PureCiruit} Problem Definition \cite{deligkas_PureCircuitTightInapproximability_2024}}{purecircuit-def}
     \label{def:purecircuit-def}
@@ -214,21 +232,21 @@ to demonstrate the hardness of approximating \textbf{PPAD} problems and was show
     $\forall g \in G: g=(T,u,v,w)$ where $u,v,w \in V$ and $T \in \{\text{NOR}, \text{Purify}\}$.
     Each gate is interpreted as:
     \begin{enumerate}
-        \item \textit{NOR}: Takes as input $u,v$ and outputs $w$
-        \item \textit{Purify}: Takes as input $u$ and outputs $v,w$
+        \item \textsc{NOR}: Takes as input $u,v$ and outputs $w$
+        \item \textsc{Purify}: Takes as input $u$ and outputs $v,w$
     \end{enumerate}
     And each vertex is ensured to have $\text{in-deg}(v) \leq 1$.
     A solution to input instance $(V,G)$ is denoted as an assignment $\mathbf{x} : V \to \{0, \bot, 1\}$
     such that for all gates $g = (T,u,v,w)$ we have:
     \begin{enumerate}
-        \item \textit{NOR}:
+        \item \textsc{NOR}:
               \begin{gather*}
                   \mathbf{x}[u] = \mathbf{x}[v] = 0 \implies \mathbf{x}[w] = 1\\
                   (\mathbf{x}[u] =1 \vee \mathbf{x}[v] =1) \implies \mathbf{x}[w] = 0 \\
                   \text{otherwise} \implies \bot
               \end{gather*}
 
-        \item \textit{Purify}:
+        \item \textsc{Purify}:
               \begin{gather*}
                   \forall b \in \mathbb{B}: \mathbf{x}[u] = b \implies \mathbf{x}[v] = b \wedge \mathbf{x}[w] =  b\\
                   \, \mathbf{x}[u] = \bot \implies (\mathbf{x}[v], \mathbf{x}[w]) \in \{(0, \bot),
@@ -239,13 +257,13 @@ to demonstrate the hardness of approximating \textbf{PPAD} problems and was show
 
 In addition to the gates above, we will make use of the standard set of gates $\{\vee, \wedge, \neg\}$,
 whose behaviour is depicted in the tables \ref{tab:three-val-logic}.
-Moreover, we will make use of the \textit{Copy} gate which we can define as $\textit{Copy}(x) = \neg (\neg x)$.
-These gates are well defined based on the \textit{NOR} gate as shown by Deligkas et al. \cite{deligkas_PureCircuitTightInapproximability_2024}
+Moreover, we will make use of the \textsc{Copy} gate which we can define as $\textit{Copy}(x) = \neg (\neg x)$.
+These gates are well defined based on the \textsc{NOR} gate as shown by Deligkas et al. \cite{deligkas_PureCircuitTightInapproximability_2024}
 and do not directly affect the complexity of the problem.
-Furthermore, with respect to the \textit{Purify} gate,
+Furthermore, with respect to the \textsc{Purify} gate,
 the original problem states that one of two outputs must contain a pure value.
 We restrict the solution set to the one written in the definition as
-Deligkas et al. \cite{deligkas_PureCircuitTightInapproximability_2024} showed that the only \textit{Purify} solutions essential
+Deligkas et al. \cite{deligkas_PureCircuitTightInapproximability_2024} showed that the only \textsc{Purify} solutions essential
 for \textbf{PPAD}-completeness are $\{(0,\bot), (\bot,1), (0,1)\}$, and the addition of more solutions does not affect its complexity.
 
 
@@ -325,7 +343,7 @@ introduced by Daskalakis et al. \cite{daskalakis_ComplexityConstrainedMinmax_202
 Instead of assigning
 $d+1$ colours to find a panchromatic simplex, each vertex is assigned $d$ colours rather than one. We refer to the figure \ref{fig:chap-2:bisperner-example}
 for a visual interpretation of the colouring. Essentially for each point
-in some hypercube $[N]^d$, we assign $d$ colours, where for colour $i$ we can choose
+in some hypercube $[N]^d$, we assign $d$ colours, where for colour $i \in [d]$ we can choose
 either $\{i^+, i^-\}$. The goal is to find a cube where in every dimension there exists at least two points that cover both colours.
 This has been used in many problems throughout
 literature as seen in the papers \cite{chen_SettlingComplexityComputing_2009, deligkas_PureCircuitTightInapproximability_2024, daskalakis_ComplexityConstrainedMinmax_2021}
@@ -357,18 +375,18 @@ for clarity.
 
 Compared to the linear colouring variant,
 Deligkas et al. \cite{deligkas_PureCircuitTightInapproximability_2024, deligkas_ConstantInapproximabilityPPA_2022} showed that
-$\forall A \subseteq S^d: |A| \geq d+1$ and satisfies the colouring, $\exists D \subseteq A: |D| \leq d$ where $D$ also satisfies
+$\forall A \subseteq S^d: |A| \geq d+1$ and satisfy the bipolar colouring condition, $\exists D \subseteq A: |D| \leq d$ where $D$ also satisfies
 the colouring condition, which implies that we need at most $d$ separate points to achieve a colouring.
 
 \begin{definitionbox}{\textit{StrongSperner} problem}{strong-sperner}
     \label{def:strong-sperner}
-    \textbf{Input}: A boolean circuit that computes a bipolar labelling $\lambda: [M]^N \to \{-1, 1\}^N$ \ref{def:bipolar-colouring}
-    satisfying the following boundary conditions for every $i \in [N]$:
+    \textbf{Input}: A boolean circuit that computes a bipolar labelling $\lambda: [M]^N \to \{-1, 1\}^N$ \ref{def:bipolar-colouring},
+    such that $M \in n^{O(1)}$, which
+    satisfies the following boundary conditions for every $i \in [N]$:
     \begin{itemize}
         \item if $x_i = 1 \implies [\lambda(x)]_i = +1$
         \item if $x_i = M \implies [\lambda(x)]_i = -1$
     \end{itemize}
-    Such that $M \in n^{O(1)}$
     \textbf{Output}: A set of points $\{x^{(i)}\}_{i \in [N]} \subseteq [M]^{N}$, such that:
     \begin{itemize}
         \item \textit{Closeness condition}: $\forall i,j \in [N]: \|x^{(i)} - x^{(j)}\|_{\infty} \leq 1$
@@ -403,7 +421,7 @@ The authors refer to both colouring schemes interchangeably when discussing thei
 so we can assume that all reductions (not necessarily counting reductions) work similarly for either colouring
 \cite{chen_SettlingComplexityComputing_2009, deligkas_PureCircuitTightInapproximability_2024, daskalakis_ComplexityComputingNash_2006, chen_Complexity2DDiscrete_2009}.
 
-Other than topological colouring, we will also give a small introduction, to a tiling problem known as mutilated chessboards. Tiling
+Other than topological colouring, we will also give a small introduction to a tiling problem known as mutilated chessboards. Tiling
 spaces have been used throughout literature \cite{hollender_ComplexityMultisourceVariants_2018,chan_ComputationalComplexityCounting_2024}.
 We will use as reference the \textbf{PPAD}-complete \textit{1-MC} problem by Hollender et al. \cite{hollender_ComplexityMultisourceVariants_2018}. We refer
 to the problem introduced by Blank \cite{black1946critical} as follows:
@@ -549,7 +567,7 @@ Moreover, they argue that the usage of $\textbf{\#P}$ has several benefits:
           results in complexity theory and NTMs to find interpretations or prove their non-existence.
 \end{enumerate}
 
-We introduce the notation $\#L$ notation to denote the counting version
+We introduce the $\#L$ notation to denote the counting version
 of a search problem $L$, more formally use the definition \ref{def:sharp-l-notation}.
 Sometimes we use notations $\#L$ or $\#K(L)$ interchangeably to highlight
 that $L$ is in complexity class $K$.
@@ -558,7 +576,7 @@ that $L$ is in complexity class $K$.
     Given a search problem $L$ with relation $R$, we can
     define its counting version as the function $\#L$ where:
     $$
-    \forall w \in \{0,1\}*: \#L(w) = |R(w)|
+    \forall w \in \{0,1\}^*: \#L(w) = |R(w)|
     $$
     Where for relation $R$ we say $R(x) \triangleq \{y \in \{0,1\}^* \mid xRy \}$.
 \end{definitionbox}
@@ -571,7 +589,7 @@ where we relate the difficulty of sudoku solving to a graph colouring problem.
 
 \begin{definitionbox}{Parsimonious reductions}{pars-reduction}
     Let $L, L'$ be counting problems.
-    We say $L$ is parsimoniously reducible to $L'$, if there exists a polynomial computable function. $f: \{0,1\}^* \to \{0,1\}^*$
+    We say $L$ is parsimoniously reducible to $L'$, if there exists a polynomial computable function $f: \{0,1\}^* \to \{0,1\}^*$
     such that
     $$
         \forall x \in \{0,1\}^*: L(x) = L'(f(x))
@@ -584,7 +602,7 @@ where we relate the difficulty of sudoku solving to a graph colouring problem.
     \includegraphics[width=0.5\textwidth]{Chapter2/parsimonious-reduction-example.pdf}
     \caption[Parsimonious Reduction between Sudoku and graph colouring]
     {Example of reducing a 6x6 sudoku puzzle into a graph colouring problem.
-    Each colouring corresponds to a sudoku solution of the original}
+    Each colouring corresponds to a sudoku solution of the original instance}
     \label{fig:chap-2:pars-reduction}
 \end{figure}
 
@@ -879,7 +897,7 @@ arbitrary oracles \cite{beame_RelativeComplexityNP_1998}.
 They demonstrated that for several problems in \textbf{TFNP} as seen in figure \ref{fig:chap-2:count-hier-tfnp},
 some can be parsimoniously reduce to each other under all oracles, where as for some
 directions (the ones with the warning sign) this is not the the case.
-From the figure we can observe that for several \textbf{PPAD}-complete, \textbf{CLS} and
+From the figure we can observe that for several \textbf{PPAD}, \textbf{CLS} and
 \textbf{PPADS} problems one can indeed find parsimonious reductions.
 For other problems, even \textbf{PPAD}-complete ones like $\textbf{\#PPAD}(\textit{SourceOrExcess}(k,1)) -1$, 
 this does not seem to be the case.
