@@ -4,39 +4,28 @@
 \vspace{1cm}
 
 \large
-In the world of combinatorics, one should always seek the combinatorial
-interpretation of numbers. Such discoveries open the world to many interesting
-relations and structures which can bring forward groundbreaking results
-as argued by Pak \cite{pak_WhatCombinatorialInterpretation_2022}.
-This sentiment has sparked a movement where researchers have tried to answer
-that question with the help of counting complexity 
+Finding combinatorial interpretations for mathematical objects—associating concrete meaning to abstract numbers—has long
+been a driving force in mathematics,
+with recent work by Pak and others demonstrating how counting complexity can unlock deep structural insights
 \cite{pak_WhatCombinatorialInterpretation_2022,ikenmeyer_WhatWhatNot_2022}.
-A particularly interesting area of choice was brought forward
-by Ikenmeyer et al. \cite{ikenmeyer_WhatWhatNot_2022}, and their work on $\textbf{\#TFNP}-1$,
-the combinatorial interpretation of problems whose nature guarantee at least one solution.
-In our current project we focused around combinatorial interpretations 
-of $\textbf{\#PPAD}-1$ class as it was revealed in \cite{ikenmeyer_WhatWhatNot_2022},
-that several of its complete problems may have or may not
-have a combinatorial interpretation.
+We built upon their idea in order to study the combinatorial structure of the $\textbf{\#PPAD}-1$ complexity class
+using the \textit{PureCircuit},
+a circuit-like problem that uses three-valued logic to find satisfying assignments.
+Our main contribution builds upon the relation of \textit{PureCircuit} with topological structures
+and its potential usages for parsimonious reductions across \textbf{PPAD} problems.
 
-In our project, we attempt to resolve the above conjecture with the help
-of the \textit{PureCircuit} problem, a circuit-like problem that uses
-Kleene logic to find satisfying assignments.
-We demonstrated how one can embed \textit{hazard-free} logic into \textbf{PPAD},
-and how we can use topological problems with Kleene logic to parsimoniously reduce
-to the \textit{PureCircuit} problem.
-We then focused on the topological interpretations of unbalanced digraphs and 
-demonstrated key parsimonious reduction with the \textit{EndOfLine}
-and \textit{SourceOrExcess}$(2,1)$ problem.
-Lastly we analysed,
-deeper the effect of multi-source graphs and
-their combinatorial classes which they give rise to.
+We first demonstrate how to embed three-valued logic into the \textbf{PPAD} framework and
+different parsimonious reductions we can constuct across the \textit{EndOfLine} and
+$\textit{SourceOrExcess}(2,1)$ and \textit{PureCircuit}.
+There reductions allow us to analyse unbalanced diagraphs through a topological lens,
+uncovering previously unexplored combinatorial classes within $\textbf{\#PPAD}-1$.
+Moerover, our analysis extends to multi-source graph configurations, where we characterise their combinatorial structures
+and demonstrate their connections between combinatorial and topological interpretations.
 
-Moreover with our project we are outlining an application that is able to visualise \textit{PureCircuit}
-instances and validate. In addition, we were able to demonstrate the usage of meta-heuristic
-algorithms to find solutions. Lastly we built our own specialised backtracking algorithm
-for enumerating through solutions in \textit{PureCircuit} graphs  and demonstrated substantial
-improvements over the traditional brute force algorithm.
+We complement our theoretical work with computational tools for visualising \textit{PureCircuit} instances.
+We demonstrate the application of several meta-heuristic algorithms to approximate solutions
+as well as a specialised backtracking algorithm for solution enumeration,
+demonstrating practical improvements over standard approaches.
 
 
 
@@ -44,4 +33,4 @@ improvements over the traditional brute force algorithm.
 \vspace{1cm}
 
 \noindent \textit{Keywords: Counting complexity, Kleene logic, Combinatorial Interpretations,
-Search Problems, PPAD, Hazard-free Circuits, PureCircuit}
+    Search Problems, PPAD, Hazard-free Circuits, PureCircuit}
