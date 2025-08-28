@@ -263,7 +263,7 @@ definition, all surrounding cubes that contain the side $(m_{ij}^{0}, m_{ij}^{1}
 We will refer to all the cubes incident to the edge as the combined panchromatic cube.
 We can manually observe that for each outer face of the combined panchromatic cube there will
 always exist a dimension whose colouring is not covered. For example we can see
-that for all faces on top of the combine cube never cover the $-$ dimension.
+that for all faces on top of the combine cube never cover the $z$ dimension.
 We can make similar arguments for the left and right outer faces.
 Since the outer faces do not yield a solution, that means we have only one solution and therefore
 we can observe
@@ -284,9 +284,10 @@ to remove excess nodes and focus only on double sinks. Moreover,
 we had to introduce antipodal edges in order to group solutions as one.
 As a result, the current method cannot be generalised directly 
 to other \textit{SourceOrExcess}$(k,1)$ problems unless
-we generalise the planar embedding technique. In addition, 
+we generalise the planar embedding technique, since
+we cannot reduce our transformations to only paths and cycles. In addition, 
 given our snake embedding method, the cardinality of solution is not
-guaranteed to be preserved, since the turning points may increase the number of solutions.
+guaranteed to be preserved, since we dropped the discreteness requirement and the turning points may increase the number of solutions.
 On the contrary, our result raises questions as to the relation between the degree
 of a graph and its the dimension of its topological embeddings. We analyse
 this in greater detail in our future works section \ref{sec:future-work}.

@@ -104,7 +104,7 @@ To show the hardness, we claim that
     To ensure that $\Lambda$ is hazard free we can use the corollary \ref{cor:k-bit-haz}, where we can create an
     $n$-bit hazard-free circuit. One must observe that despite the size of the circuit increases exponentially
     with respect to the dimensions. Since all the input instances scale with respect to the width of the hypercube space,
-    that would imply that we are able to keep the size of the circuit polynomial since $2^k \ggg 2^n$.
+    that would imply that we are able to keep the size of the circuit polynomial with respect to the input.
     We therefore claim that this reduction is polynomial and can parsimoniously find all panchromatic cubes.
 \end{proof}
 
@@ -113,8 +113,7 @@ how to work with kleene unary \ref{def:kleene-unary} numbers. We will
 then demonstrate how to extend this notation to define the full \textit{HF-StrongSperner} problem.
 
 \begin{definitionbox}{Kleene Unary Numbers}{kleene-unary}
-    \label{def:kleene-unary}
-    Given a number $p \in M$, its unary representation can be depicted as a binary number $\{0,1\}^M$ such that: $k \in M \to 1^k \in \bar{M}$.
+    Given a number $p \in M$, its unary representation can be depicted as a binary number $\{0,1\}^M$ such that: $k \in M \to 1^k$.
     Under Kleene algebra, we mainly refer to notations $M_k^n$ where $k,n,M \in \mathbb{N}_0$  such that:
     $$
         M^n_k \triangleq \bigtimes_{i \in [n]} \{1^j\bot^k \mid \forall j \in \mathbb{N}_0 : j + k \leq M\}
@@ -210,7 +209,7 @@ of the problem which we can refer to \textit{AntipodalStrongSperner} where for e
 we only need to check its two opposite ends to verify if its a valid solution.
 For the discrete and the antipodal properties we emphasize that these are \textit{promise problems},
 meaning we assume that all solutions abide the properties of the description
-of the definition. Moreover, we claim that an antipodal discrete squares
+of the definition. Moreover, we claim \ref{clm:antipodal-discrete-square} that an antipodal discrete squares
 must contain all $2^d$ colours. We provide its proof in the appendix \ref{antipodal-ss-proof}.
 
 
@@ -253,9 +252,9 @@ research, we demonstrate a parsimonious reduction from\\\textit{HF-DiscreteStron
     construction we will refer to the figure in \ref{fig:chap-3:pure-circuit}. Each of these parts describe the following:
     \begin{enumerate}
         \item  \textbf{Input nodes}: Vector of $n$ value nodes which will be represented as $s_i$ for element $i$.
-        \item  \textbf{Bit generator gadget}: Given a value node $s_i$, apply the \textit{Bit generator} gadget such that we
+        \item  \textbf{Bit generator gadget}: Given a value node $s_i$, apply the \textit{Bit generator} gadget $C_i$ such that we
               create Kleene unary number as defined in \ref{def:kleene-unary}. We will refer
-              to the bit generator circuit as $C_i$ and the Kleene unary numbers as $(u^i_j)$ for $i \in [n]$ and $j \in [M]$.
+              to the Kleene unary numbers as $(u^i_j)$ for $i \in [n]$ and $j \in [M]$.
         \item  \textbf{Circuit application gadget}: Since the above numbers form coordinates in a
               $M_{\leq 1}^n$ space, we apply the $\Lambda$ function to extract a set of output nodes $(o^i)_{i \in [n]}$.
         \item  \textbf{Output nodes}: We use the \scn{Copy} gate to copy $o^i \to s_i$, for all $i \in [n]$.
@@ -325,7 +324,7 @@ research, we demonstrate a parsimonious reduction from\\\textit{HF-DiscreteStron
 
 Although the above reduction also works for the general \textit{HF-StrongSperner}, it will not be parsimonious since
 the \textit{PureCircuit} will accept solutions for all $(n-1)$ subspaces that contain a covering set as explained previously.
-Since all \textit{AntipodalStrongSperner} are also discrete, it directly follows The
+Since all \textit{AntipodalStrongSperner} instances are also discrete, it directly follows the
 corollary \ref{cor:antipodal-ss-pc}.
 
 
@@ -348,7 +347,7 @@ and   $f(n) \leq n/2$ for large enough $n$,
 is \textbf{PPAD}-complete and parsimonious from the \textit{EndOfLine} problem,
 using \textit{Snake Embedding} technique.
 The idea is that we start from the \textit{2D-Sperner} problem
-and repeatedly fold and pad dimensions until we reach the desired space.
+and repeatedly folding and padding dimensions until we reach the desired space.
 
 Ideally we would like to use the same method to go from
 \textit{2D-HF-DiscreteSS} to \\\textit{HF-DiscreteSS}
@@ -362,10 +361,10 @@ This implies the best we can hope is the following space:
 $$
     M = n^k, f(n) = \log_2(n)^k \implies d = \frac{n}{log(n)^k}
 $$
-But that wound imply that the size of our circuit is $\Omega\left(2^{n/log^k(n)}\right)$.
+But that wound imply that the size of our circuit is $\Omega\left(2^{n/(log(n))^k}\right)$ .
 In the upcoming sections, we propose a chain of parsimonious reductions from the \textit{EndOfLine}
-to \textit{AntipodalStrongSperner}. We emphasize that this method will still not be hazard-free,
-but we hope that the antipodal properties of resulting problem may enable for a full reduction in the future
+to \textit{AntipodalStrongSperner}. We emphasize that this method will not be hazard-free,
+but we hope that the antipodal properties of the resulting problem may enable for a full reduction in the future
 since by \ref{cor:antipodal-ss-pc}, we know that its hazard-free variant can be parsimoniously reduced.
 We will start with a formal description of the planar embedding technique by Chen et al. \cite{chen_Complexity2DDiscrete_2009} in order to define
 \textit{2D-EoL} instances.
@@ -438,13 +437,13 @@ figure \ref{fig:chap-2:rleaf-k3}.
     \centering
     \includegraphics[width=0.7\textwidth]{Chapter2/rleaf-k3-example.pdf}
     \caption[$K_3$ graph construction]{$K_3$ graph construction. Combinations of colours indicate an edge between the two nodes. Solid dots indicate edges from $0$,
-        crossed lines indicate edges from $1$ and stripped lines indicate edges from $2$. We Add two coloured stripped circles on the
+        crossed lines indicate edges from $1$ and stripped lines indicate edges from $2$. We add two coloured stripped circles on the
         4 degree nodes to indicate the $E^2_n$ edges. Image reconstructed from \cite{chen_Complexity2DDiscrete_2009}.}
     \label{fig:chap-2:rleaf-k3}
 \end{figure}
 
 \paragraph{Embedding of \textit{EndOfLine}}
-Key insight, is the observation that every planar embedding of an \textit{EndOfLine} graph
+Chen et al. \cite{chen_Complexity2DDiscrete_2009} demonstrated that every planar embedding of an \textit{EndOfLine} graph
 has the following property:
 $$
     \forall v \in V_n: \textit{deg}(v) \in \{(0,0), (1,1), (1,0), (0,1), (2,2)\}
@@ -500,9 +499,9 @@ By using $\mathcal{F}$, every $P_{i}$ is mapped to a set $I(P_{i}) \subset B_{2^
 We will colour every point  on $I(P_{i})$ with $+$
 \begin{gather*}
     P = \mathbf{u}^1,\dots,\mathbf{u}^t \text{, if P is a cycle } \mathbf{u}^1 = \mathbf{u}^t \\
-    I(P) \triangleq \bigcup_{i \in [t-1]} I(u^tu^{t-1})
+    I(P) \triangleq \bigcup_{i \in [t-1]} I(\mathbf{u}^i\mathbf{u}^{i +1})
 \end{gather*}
-It is common to use the method of shielding when dealing with line reductions\textit{Line reductions}, as seen in
+It is common to use the method of shielding when dealing with line reductions \textit{Line reductions}, as seen in
 \cite{chen_Complexity2DDiscrete_2009,deligkas_ConstantInapproximabilityPPA_2022,aisenberg_2DTuckerPPA_2020,chen_SettlingComplexityComputing_2009,daskalakis_ComplexityComputingNash_2006}.
 Essentially we embed our lines and cycles in a grid such that, everything not a line is denoted as a negative charge $-$.
 All lines are denoted as positive charge $+$. To protect our lines from creating solutions, we cover them
@@ -534,7 +533,7 @@ If $G$ is specified by $(S, P, 0^k) \subset C_{2^k}$, we can uniquely decompose 
 Every path is either a maximal path, or a cycle in $G$.
 We can use the following to describe our colouring algorithm:
 
-\begin{algorithm}
+\begin{breakablealgorithm}
     \caption{Turing machine $F$ with input $(p_1, p_2) \in B_{2^{4k+10}}$}
     \begin{algorithmic}
         % \If{$p_1 = 0$}
@@ -575,7 +574,7 @@ We can use the following to describe our colouring algorithm:
         \State \Return $M_K(\mathbf{p})$
         \EndIf
     \end{algorithmic}
-\end{algorithm}
+\end{breakablealgorithm}
 
 Where $M_{k}(\mathbf{p})$ is can be described with the following description:
 $$
@@ -638,13 +637,13 @@ the mappings with the colourings, will look like the figure in \ref{fig:chap-3:t
 
 
 To show our second part of our lemma, we can observe that:
-All nodes that are not boundary and not in $\bigcup_{i }I(P_{i}) \cup L(P_{i}) \cup S(P_{i})$ are coloured $-$.
+All nodes that are not boundary and not in $\bigcup_{i \in [m]}I(P_{i}) \cup L(P_{i}) \cup R(P_{i})$ are coloured $-$.
 We will use figure \ref{fig:chap-3:eol-sperner-colouring} for reference.
 We can observe that all squares on the left or the right of the line
 do not result in solutions as they contain only labels $\{\pm, +\}$ and $\{\mp, +\}$
 respectively as seen in figure \ref{fig:chap-3:eol-sperner-colouring}.
 One can observe that the square that contains $\textbf{s}_{P_{i}}$ or  $\textbf{e}_{P_{i}}$
-and a point of the line will be panchromatic as the two points will be antipodal.
+and a point of the line will be panchromatic as well as discrete and antipodal.
 Therefore, we have a valid and parsimonious reduction since we only cubes and the beginnings or ends of lines can be solutions.
 We call these coloured instances as \textit{2D-StrongEoL}.
 

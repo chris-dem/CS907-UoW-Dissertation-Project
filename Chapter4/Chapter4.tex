@@ -13,8 +13,8 @@ the algorithms we deployed for solutions finding.
 
 \section{Tooling Selection}
 
-\subsection{Rust Programming Language} The development language used for is Rust \footnote{https://www.rust-lang.org/}.
-Rust is a systems-level compiled programming language that can achieve high speeds due to
+\subsection{Rust Programming Language} The development language used for is \texttt{Rust} \footnote{https://www.rust-lang.org/}.
+\texttt{Rust} is a systems-level compiled programming language that can achieve high speeds due to
 its low-level compilation, while maintaining memory safety. Moreover,
 it offers high level features such as its strong algebraic and trait type system
 which allows us to represent complex states.
@@ -36,13 +36,13 @@ figure \ref{fig:chap-4:ecs-example}.
 The current tool comes with several benefits.
 It offers flexibility when it comes to drawing
 and interacting with shapes on a screen. We wanted to give our
-tool and editor-like aesthetic where the user can move the screen and individual
-nodes themselves as well as interact with them.
+tool and editor-like aesthetic where the user can navigate and interact with a \textit{PureCircuit} environment.
 Moreover, we are able to decouple
 the logic from entities to their individual components and express
 more intricate relations. Regarding the current application,
 we chose to represent the graph nodes as separate entities which interact with
-each other based on their edges.
+each other based on their edges. The above choice allow us
+to built upon a software which is prone to changes.
 
 \subsection{Software Testing methodology}
 The core philosophy of our testing is Test-Driven-Development. This methodology
@@ -55,9 +55,9 @@ as well as ensuring that we are acting within the expected scope.
 Another testing technique that we heavily took advantage of is \textit{Property-based Testing},
 which we implement using the \texttt{Proptest} library \footnote{https://github.com/proptest-rs/proptest}.
 This idea was inspired by the \texttt{Haskell} library \texttt{QuickCheck} \cite{claessen_QuickCheckLightweightTool_2000},
-where we test the properties of a pure function across a range of inputs. The idea is, the more complex,
+where we test the properties of a pure function across a range of inputs. The idea is, the more complex
 the input of the function, the greater is the input space and therefore harder and cumbersome to check all possible
-combinations or edge-cases. With \texttt{Proptest}, we check whether a property of our function is
+combinations or edge-cases. With \texttt{Proptest}, we can stochastically and strategically check whether a property of our function is
 maintained across most inputs, such as a sorted output, or a validating assignment.
 
 For our purposes, we use value-based property testing in which:
@@ -66,17 +66,17 @@ The \textit{generator} is responsible for generating significant values
 that represent the specific type. The \textit{shrinking strategy} is responsible
 for finding the smallest case in which our case fails. We then
 define test cases that automatically run the generator and shrinker procedures until
-we have tested that our function passes across all generated inputs, or finds the smallest test case it fails on.
+we have proved that our function passes all the generated cases, or finds the smallest test case it fails on.
 
 
 \section{Program Visualisation Summary}
 
-We provide a figure of our application in the figure \ref{fig:chap-4:app-layout}.
+We use the figure \ref{fig:chap-4:app-layout} as reference of our application UI.
 Our application contains a UI legend and a drawing board.
 The UI legend provides the user with the information about the
-current state of the app. Moreover, we provide the user with the key bindings
-that we assigned, in order to modify the state and lastly buttons
-that will execute the solution finding algorithm. We will dive deeper
+current state of the app. Moreover, we provide the user information with the key bindings
+that we assigned, as well as parameters and buttons  
+to execute our solution finding algorithms. We will dive deeper
 into the functionalities in the upcoming sections.
 
 \begin{figure}[htbp]
@@ -88,11 +88,11 @@ into the functionalities in the upcoming sections.
 
 
 Our application is composed of 5 different states which are summarised in the table \ref{tab:chap-4:app-states}.
-Using the aforementioned states, we are able to add/remove edges as well as move them around or change their values.
+Using the aforementioned states, we are able to add/remove nodes/edges as well as move them around or change their values.
 We added visual indicators so if a gate has an incorrect arity or an incorrect assignment, it will be highlighted.
 Moreover, we attached numbers to our edges so the user we will be able to differentiate between inputs and outputs.
 This is mostly useful for the \textsc{Purify} gate as each output behaves differently.
-In our appendix we will attach user stories that explain in greater detail how one can perform the above
+In our appendix \ref{app:user-stories}  we attach user stories that explain in greater detail how one can perform the above
 operations.
 
 
@@ -121,7 +121,7 @@ With the help of the \texttt{genetic\_algorithm}\footnote{https://crates.io/crat
 we use the \textit{Hill Climbing algorithm} and \textit{Genetic algorithm}  in order
 to find solutions. We will give a brief explanation on how they work in the upcoming sections but in general
 we express our graph as a chromosome of value nodes.
-Moreover, we formulate our optimisation function as the number of unsatisfied gates
+We then formulate our optimisation function as the number of unsatisfied gates
 given an assignment. The goal of either algorithm
 is to minimise the number of errors. Once an assignment is found,
 we pass the solutions back into our graph and display them.
@@ -131,11 +131,11 @@ we pass the solutions back into our graph and display them.
 \subsubsection{Hill Climbing Algorithm}
 
 The idea of hill climbing algorithms is to start by some base solution
-and repeatedly improve the solution. We allow for $2$ strategies, one
+and repeatedly improve our assignment. We allow for $2$ strategies, one
 of them strictly always chooses the best neighbour whereas one
-allows for stochastic choice. Moreover, we allow for additional option
-such as multiple re-runs in order to increase the odds of finding
-a successful assignment.
+allows for stochastic choice. The above operation is repeated
+until we either find a satisfying assignment or
+the maximum thershold of simulations has been reached.
 
 Overall this algorithm, one of the simplest and faster algorithms to run and can work
 well for convex problems as explained in \cite{schwefel_EvolutionOptimumSeeking_1995}.
@@ -181,22 +181,23 @@ We then apply the \textit{selection method} which picks the parents for the next
 based on the performance of the chromosomes.
 The \textit{crossover method} determines how to combine the genes of two parents in order to create
 the offspring. And lastly we have the \textit{mutation step},
-where we randomly mutate the genes of the new population in order to 
-introduce diversity and escape from local minima.
+where we randomly mutate the genes of the new population.
 We can repeat the above series of steps until we reach the target value or until
 we pass the maximum time-step limit.
-In our application, using figure {fig:chap-4:ga-params}, we
+In our application, using figure \ref{fig:chap-4:ga-params}, we
 use refer to the following list as a summary of parameters:
 
 \begin{enumerate}
     \item \textbf{Number of species}: We allow for our algorithm
-          to evolve population independently and then merge each population at the end
+          to evolve several population independently and then merge each population at the end
           to find the optimal solution. Increase the odds of avoiding local minima.
     \item \textbf{Population size}: Number of chromosomes per species.
     \item \textbf{Selection step}: We allow for two selection methods: \textit{Tournament based} and \textit{Elitism selection}.
-          \textit{Elitism selection} selects the based elements of each population whereas
+          \textit{Elitism selection} selects the best performing elements population whereas
           \textit{Tournament based} selection creates random sets tournaments across our chromosomes and picks the best ones
-          from each.
+          from each. The tournament method is repeated until we recreate the population size.
+          Out of the two method, elitism is the faster of the two but can result in less diversity
+          compared to the tournament method.
     \item \textbf{Crossover step}: We allow for two main types of crossover methods:
           \begin{enumerate}
               \item \textit{Crossover Uniform}: Each gene of the child is randomly selected from either parent. This allows for
@@ -245,16 +246,17 @@ Both algorithms are capable of finding an assignment.
 The \textit{Hill Climbing} is much cheaper to run but more prone to
 be stuck at local minima \cite{Brewka_1996}. The \textit{Genetic algorithm}
 is much more computationally expensive out of the two but can be fine-tuned
-sufficiently to almost always find a solution. In general,
-there are many meta-heuristic algorithms that can be applied as listed in \cite{abdel-basset_Chapter10Metaheuristic_2018}
-but we for now we consider them as future extensions.
-
+sufficiently to almost always find a solution. 
+Further analysis and deeper comparison of the two algorithms is beyond the scope of the current project.
+In general,
+there are many meta-heuristic algorithms that can be applied as listed in \cite{abdel-basset_Chapter10Metaheuristic_2018}.
+We expand more on our future works \ref{sec:future-work} on how to improve their performance.
 
 \subsection{Solution Enumeration}
 
 To enumerate through solutions, we employed a traditional backtracking algorithm.
 Our idea is similar to the DPLL algorithm \cite{davis_ComputingProcedureQuantification_1960} used for \textit{SAT} solving,
-where we recursively assign values to our graph. If all the values
+where we recursively assign values to our graph. If all the nodes
 have been assigned a value, then we return the current assignment. If at a specific
 node, there are no more values that we can assign then we reject the current solution.
 To reduce the computational burden, we employ greedy techniques
@@ -303,11 +305,12 @@ and \textbf{Backtrack Operation}.
         \State min\_graph\_ind $\leftarrow$ \Call{ExtractMin}{$Q$}
         \State $r \leftarrow []$
         \For{$v \in S[m]$}
+        \Comment{Select each value in the set of possible values of the selected node}
         \State $S' \leftarrow$ \Call{Clone}{$S$}
         \State $Q' \leftarrow$ \Call{Clone}{$Q$}
         \State $A' \leftarrow$ \Call{Clone}{$A$}
         \State $\textit{result} \leftarrow$\Call{UnitPropagate}{\text{pc}, min\_graph\_in, v, $A'$, $S'$, $Q'$}
-        \Comment{For each assignment in each solution set, clone the datastructure and assign the value selected}
+        \Comment{For each assignment in each solution set, clone our states and assign the value selected}
         \If{$\textit{result} = \bot$}
         \Comment{If our algorithm return false, it means that the current assignment is invalid and we ignore it}
         \State \textbf{Continue}
@@ -369,7 +372,7 @@ and \textbf{Backtrack Operation}.
 
 
 
-\paragraph*{Backtrack Initialisation} We initialise two main structures,
+\paragraph*{Backtrack Initialisation} We initialise two main structures:
 a priority queue $Q$, and a solution map $S$ for each node.
 $S$ the solution map contains the \textit{KleeneSet} data structure
 which is the set of values a node can take. We assume that all nodes
@@ -377,7 +380,8 @@ can take $\mathbb{T}$ in the beginning.
 
 
 The priority queue will essentially dictate
-which nodes to select and evaluate.
+which nodes to select and evaluate and we assume that we are
+using a min-based priority queue.
 We want to reduce the recursive calls as much as possible and eliminate any partial assignments
 that lead to unsatisfying solutions.
 The queue stores the node references of the value nodes
@@ -385,14 +389,14 @@ and uses as keys the structure \textsc{KeyStruct}$(e)$.
 The \textsc{KeyStruct} is a special structure that orders elements lexicographically
 based on the following order:
 \begin{enumerate}
-    \item \textbf{In descending}: The number of possible value elements the current node can take
-    \item \textbf{In Ascending}: Whether the node has an \textit{in-degree} of $0$
-    \item \textbf{In Ascending}: The total number of neighbours
+    \item \textbf{In Ascending}: The number of possible value elements the current node can take
+    \item \textbf{In Descending}: Whether the node has an \textit{in-degree} of $0$
+    \item \textbf{In Descending}: The total number of neighbours
 \end{enumerate}
 We argue that the above strategy minimises the breadth of the recursive calls. Moreover,
-for each node with \textit{in-degree} of $0$ as for each value of their assignment, a solution should exist.
+for each node with \textit{in-degree} of $0$, we know that for each value of their assignment, a solution should exist.
 The heuristical argument for this can be observed in Deligkas et al. \cite{deligkas_PureCircuitTightInapproximability_2024},
-where their construction for finding solutions allows for source nodes to be independent.
+where their construction for finding solutions allows for these source nodes to be independent.
 Lastly, prioritising nodes with the highest neighbour count implies that we
 propagate changes to a greater number gates and therefore maximise the influence of the \textit{Unit Propagation}
 procedure.

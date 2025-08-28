@@ -1,7 +1,7 @@
 
 \subsection{Theory Directions}
 In our research were able to highlight several directions that one could take.
-We mainly highlight to directions: \textbf{HF-PPAD} in  \textbf{PPAD}
+We mainly highlight directions: \textbf{HF-PPAD} in  \textbf{PPAD}
 and topological representations of directed graphs
 
 \subsubsection{\textbf{HF-PPAD} in  \textbf{PPAD}}
@@ -26,13 +26,14 @@ affect \textbf{TFNP} as a whole. We conjecture that one can make
 similar observations to the \textit{StrongTucker} problem \cite{aisenberg_2DTuckerPPA_2020},
 in order to create similar classes such as \textbf{HF-PPA} as
 it also uses a very similar colouring argument as the \textit{StrongSperner} argument.
-Moreover we were able to observe how we can use \textit{Kleene logic} with
-\textit{PLS} sub-problems like \textit{Tarski}. We believe that this shift
+Moreover we were able to observed how we can use Kleene logic with
+\textbf{PLS} sub-problems like \textit{Tarski}. Naturally,
+can we define the class of problems \textbf{HF-TFNP},
+and would it be equivalent to its non-hazard-free variant? We believe that this shift
 in perspective may also give insights to other areas such as the circuit complexity \textit{Hazard-Free Circuits}.
 
 
 \subsubsection{Parsimonious Topological Representations of \textbf{PPAD} problems }
-
 
 We summarise our conclusion from the section \ref{sec:sc-excess}, by arguing about
 the existence of a parsimonious reduction from an \textit{nD-Counting-SS} to a
@@ -63,9 +64,35 @@ for enumerating solutions.
 The proof for the \textbf{PPAD}-inclusion can be summarised as expressing a \textit{PureCircuit} instances
 as a \textit{Brouwer} function from $[0,1]^n \to [0,1]^n$, given fixed point $x^\star$ then
 we denote the following assignment: if $x^\star_i \in \{0,1\}$ then $v_i = x^{\star}_i$, otherwise
-$v_i = \bot$. We argue the existence gates which exhibit any behaviour of the sort $f \in [0,1]^k \to [0,1]^m$
-such that $f$ is continuous, where they give may rise to stronger combinatorial expression
-than our current set.
+$v_i = \bot$. For example, the \textsc{Purify} gate can be represented as:
+$$
+\textsc{Purify}(v) = \begin{pmatrix}
+    \max\{2v_1 -1 , 0\} \\
+    \min\{2v_2, 1\} \\
+\end{pmatrix}
+$$
+Deligkas et al. \cite{deligkas_PureCircuitTightInapproximability_2024} 
+showed that as long as our gate set consits of the \textsc{Purify} gate and \textsc{NOR} or \textsc{NAND}
+or any combination of gates that are functionally complete with respect to boolean logic,
+\textit{PureCircuit}  is \textbf{PPAD}-complete.
+It implies that we can extend the gate set of \textit{PureCircuit} to any gate that exhibits
+continuity behaviour under $[0,1]$ since we could always use the \textit{Brouwer} problem
+to find a solution. We argue that there may exists gates that could result in 
+a better combinatorial nature and therefore assist in the resolution of our conjectures.
+
+\subsubsection{PureCircuit with ATMs}
+\label{sub-sub-sec:fw:pc-atms}
+
+In our supplementary findings section \ref{sec:chap-3:supp-findings},
+we showed how to relate variants of the \textit{Tarski} problem
+with \textit{PureCircuit}. We also know that based on
+\textit{Tarski}'s theorem, we can always find a labelling function
+on ATMs which demonstrates whether our starting configuration is accepting, rejecting or non-halting.
+This interesting relation may provide a pathway towards the full Cook-levin type theorem
+that we seek. But one also has to acknowledge the difficulty of expressing
+operator functions such as $\tau$, as it seeks
+to find the maximal element in a poset of functions of $\mathcal{C} \to \mathbb{T}$. We leave this as integral evidence
+for the potential relation between \textit{PureCircuit} and ATMs.
 
 
 \subsection{Software future Directions}
@@ -80,7 +107,7 @@ the solution sets in each graph separately. Moreover, for the
 \textit{backtracking} algorithm, we can extend the above idea by considering
 the Cartesian product of the solution sets, meaning:
 $$
-    \textbf{sol}(G) = \bigtimes_{k \in [k]}  \textbf{sol}(G_k)
+    \textbf{sol}(G) = \bigtimes_{i \in [k]}  \textbf{sol}(G_i)
 $$
 Where $G_i$ is the $i$th connected component.
 
