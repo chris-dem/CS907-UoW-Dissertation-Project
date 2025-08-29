@@ -50,6 +50,14 @@ was used to develop and validate our critical parts of our code, such as graph v
 or solution enumeration. Its main idea is to first write the unit tests,
 and then develop the code to resolve them. This allows us for the code to be self-documenting
 as well as ensuring that we are acting within the expected scope.
+We provide a sample of our unit test results in figure \ref{fig:chap-4:test-cases}.
+
+\begin{figure}[htbp]
+    \centering
+    \includegraphics[width=0.7\textwidth]{Chapter4/test-cases-example.png}
+    \caption[Sample Unit Testcases]{Sample Unit Testcases}
+    \label{fig:chap-4:test-cases}
+\end{figure}
 
 
 Another testing technique that we heavily took advantage of is \textit{Property-based Testing},
@@ -67,6 +75,8 @@ that represent the specific type. The \textit{shrinking strategy} is responsible
 for finding the smallest case in which our case fails. We then
 define test cases that automatically run the generator and shrinker procedures until
 we have proved that our function passes all the generated cases, or finds the smallest test case it fails on.
+
+
 
 
 \section{Program Visualisation Summary}
@@ -266,7 +276,6 @@ and break it down into the following components:
 \textbf{Unit Propagation operation},
 \textbf{Set Simplification operation},
 and \textbf{Backtrack Operation}.
-
 
 \begin{breakablealgorithm}
     \caption{PureCircuit Backtracking Algorithm Enumerator}

@@ -3,7 +3,7 @@
 In the current section, we introduce all the necessary preliminaries
 with respect to search problems and counting complexity theory.
 Moreover, we give an overview of the \textit{PureCircuit} problem, and its connections
-with search problems and relations with \textit{Kleene logic}. 
+with search problems and relations with \textit{Kleene logic}.
 
 
 \subsection{Search problems}
@@ -76,7 +76,7 @@ Each of these problems take advantage of a different combinatorial property such
 the pigeonhole principle or sinks in DAGs.
 In the current project we are mainly interested
 in \textbf{PPAD}, known as ``Polynomial Parity of Augmented DiGraphs'', created by Papadimitriou \cite{papadimitriou_ComplexityParityArgument_1994}.
-We first introduce the \textit{EndOfLine} problem \ref{def:eol-ppad} 
+We first introduce the \textit{EndOfLine} problem \ref{def:eol-ppad}
 which takes advantage of the combinatorial fact that if there exists an unbalanced node in a directed graph,
 there must always exist a different one.
 
@@ -131,7 +131,7 @@ Beame et al. \cite{beame_RelativeComplexityNP_1998} and
 Alexandros et al. \cite{hollender_ComplexityMultisourceVariants_2018} since they demonstrated that in the more general case of superpolynomial graphs,
 if we bound the in-degree and out-degree of each node to some polynomial of the input size, then the problem remains \textbf{PPAD}.
 We introduce the \textit{SourceOrExcess}$(2,1)$ problem by Ikenmeyer et al. \cite{ikenmeyer_WhatWhatNot_2022}, since it
-lacks a combinatorial interpretation under decrementation (``$-1$''), as we demonstrate further in section \ref{sec:back:count-plus-search}. 
+lacks a combinatorial interpretation under decrementation (``$-1$''), as we demonstrate further in section \ref{sec:back:count-plus-search}.
 
 \begin{definitionbox}{\textit{SourceOrExcess} problem \cite{ikenmeyer_WhatWhatNot_2022}}{source-or-excess}
     \label{def:source-or-excess}
@@ -201,7 +201,7 @@ The goal of the problem is to assign every value node with a value such that the
 factor of $\pm \epsilon$.
 We refer figure \ref{fig:chap-2:eps-gcirc} as example.
 This problem was crucial to demonstrate the hardness of approximating of \textbf{PPAD} problems
-since Rubinstein demonstated that there exists $\epsilon > 0$
+since Rubinstein demonstrated that there exists $\epsilon > 0$
 for which $\epsilon\textit{-GCircuit}$ is \textbf{PPAD}-hard
 \cite{deligkas_PureCircuitTightInapproximability_2024,rubinstein_InapproximabilityNashEquilibrium_2015}.
 
@@ -210,9 +210,9 @@ for which $\epsilon\textit{-GCircuit}$ is \textbf{PPAD}-hard
     \includegraphics[width=0.3 \textwidth]{Chapter2/eps-CIRCUIT.pdf}
     \caption[$\epsilon\textit{-GCircuit}$ example]
     {$\epsilon\textit{-GCircuit}$ example.
-    A valid assignment would be $(0.2, 0.2, 0.2, 0.2)$
-    since each gate will be satisfied up to an $\epsilon$ factor.
-    Image by Chen et al. \cite{chen_SettlingComplexityComputing_2009}}
+        A valid assignment would be $(0.2, 0.2, 0.2, 0.2)$
+        since each gate will be satisfied up to an $\epsilon$ factor.
+        Image by Chen et al. \cite{chen_SettlingComplexityComputing_2009}}
     \label{fig:chap-2:eps-gcirc}
 \end{figure}
 
@@ -257,7 +257,7 @@ and it was shown to be \textbf{PPAD}-complete.
 
 In addition to the gates above, we will make use of the standard set of gates $\{\vee, \wedge, \neg\}$,
 whose behaviour is depicted in the tables \ref{tab:three-val-logic}.
-Moreover, we will make use of the \textsc{Copy} gate which we can define as $\textit{Copy}(x) = \neg (\neg x)$.
+Moreover, we will make use of the \textsc{Copy} gate which we can define as $\textsc{Copy}(x) = \neg (\neg x)$.
 These gates are well-defined based on the \textsc{NOR} gate as shown by Deligkas et al. \cite{deligkas_PureCircuitTightInapproximability_2024}
 and do not directly affect the complexity of the problem.
 Furthermore, with respect to the \textsc{Purify} gate,
@@ -340,8 +340,10 @@ or with polynomial subdivisions but on higher dimensional simplexes. Both of the
 
 We introduce an alternative variant of the Sperner problems,
 introduced by Daskalakis et al. \cite{daskalakis_ComplexityConstrainedMinmax_2021}, known as \textit{StrongSperner} or \textit{BiSperner}.
-Instead of assigning
-$d+1$ colours to find a panchromatic simplex, each vertex is assigned $d$ colours rather than one. We refer to the figure \ref{fig:chap-2:bisperner-example}
+In the traditional problem, we assign $1$ colour to each vertex
+in order to find a panchromatic simplex with $d+1$ colours.
+The \textit{StrongSperner} problem uses \textit{bipolar colouring} in a hypercube space \ref{def:bipolar-colouring}.
+We refer to the figure \ref{fig:chap-2:bisperner-example}
 for a visual interpretation of the colouring. Essentially for each point
 in some hypercube $[N]^d$, we assign $d$ colours, where for colour $i \in [d]$ we can choose
 either $\{i^+, i^-\}$. The goal is to find a cube where in every dimension there exists at least two points that cover both colours.
@@ -356,12 +358,8 @@ to demonstrate \textbf{PPAD}-hardness of many problems.
     \label{fig:chap-2:bisperner-example}
 \end{figure}
 
-We will refer to this type of colouring as \textbf{bipolar} colouring, which has been used in grid-like topologies of the Sperner property.
-We note that these terms are not standard in literature; we adopt this naming convention
-for clarity.
 
 \begin{definitionbox}{Bipolar colouring}{bipolar-colouring}
-    \label{def:bipolar-colouring}
     Given a set $S^d$, where $S$ is some arbitrary set, we refer
     to bipolar colouring $C: S^d \to \{-1,+1\}^n$ as:
     $$
@@ -397,7 +395,7 @@ the colouring condition, which implies that we need at most $d$ separate points 
 Throughout literature the same variants of the problem or specifications
 have been defined using the names Sperner or discrete Brouwer \cite{chen_SettlingComplexityComputing_2009, chen_Complexity2DDiscrete_2009, daskalakis_ComplexityComputingNash_2006, deligkas_PureCircuitTightInapproximability_2024}.
 This is very similar to a different type of problem known as \textit{StrongTucker}, which can be thought of as the
-\textit{PPA} analogue of \textit{StrongSperner} \cite{papadimitriou_ComplexityParityArgument_1994,aisenberg_2DTuckerPPA_2020}.
+\textbf{PPA} analogue of \textit{StrongSperner} \cite{papadimitriou_ComplexityParityArgument_1994,aisenberg_2DTuckerPPA_2020}.
 The two problems satisfy different boundary conditions
 but due to their similar labelling nature, we will borrow some techniques used in later sections.
 Chen et al. \cite{chen_SettlingComplexityComputing_2009} demonstrated that for a fixed
@@ -530,9 +528,10 @@ Search problems as we observed earlier ask what is a valid solution given the cu
 what is a valid colouring of a graph, satisfying assignment to a 3-SAT problem etc. Counting complexity,
 or counting problems take it a step further and usually ask how many valid solutions does a problem have.
 Valiant formalised this idea with the help of $\textbf{\#P}$ complexity class \ref{def:sharpp-class}, in which
-he demonstrated that even if a problem is polynomially solvable in its decision/search variant, can be
+he demonstrated that even if a problem is polynomially solvable in its decision/search variant, counting can be
 much harder. A much simpler example can be found in the book by Barak et al. \cite{arora_ComputationalComplexityModern_2009}
-where they provide a reduction from \textit{Ham-Cycle} to \textit{\#Cycle}.
+where they provide a reduction from the \textbf{NP}-complete problem of hamiltonian cycles to
+the cycle counting problem.
 
 
 \begin{definitionbox}{\(\textbf{\#P}\) Complexity Class \cite{valiant_ComplexityComputingPermanent_1979}}{sharpp-class}
@@ -576,7 +575,7 @@ that $L$ is in complexity class $K$.
     Given a search problem $L$ with relation $R$, we can
     define its counting version as the function $\#L$ where:
     $$
-    \forall w \in \{0,1\}^*: \#L(w) = |R(w)|
+        \forall w \in \{0,1\}^*: \#L(w) = |R(w)|
     $$
     Where for relation $R$ we say $R(x) \triangleq \{y \in \{0,1\}^* \mid xRy \}$.
 \end{definitionbox}
@@ -602,7 +601,7 @@ where we relate the difficulty of sudoku solving to a graph colouring problem.
     \includegraphics[width=0.5\textwidth]{Chapter2/parsimonious-reduction-example.pdf}
     \caption[Parsimonious Reduction between Sudoku and graph colouring]
     {Example of reducing a 6x6 sudoku puzzle into a graph colouring problem.
-    Each colouring corresponds to a sudoku solution of the original instance}
+        Each colouring corresponds to a sudoku solution of the original instance}
     \label{fig:chap-2:pars-reduction}
 \end{figure}
 
@@ -615,17 +614,16 @@ this as $f(L)$ or more formally we say:
     Given counting problem $L$ and a function $f: \mathbb{N} \to \mathbb{N}$,
     we can define a new counting problem $f(L)$ such that:
     $$
-    \forall w \{0,1\}* \to \mathbb{N}: f(L)(w) = f(L(w))
+        \forall w \{0,1\}* \to \mathbb{N}: f(L)(w) = f(L(w))
     $$
 \end{definitionbox}
 
-We demonstrate an example of the above notation using a finding from the paper
-by Ikenmeyer et al. \cite{ikenmeyer_WhatWhatNot_2022} where  they demonstrate $\textit{\#CircuitSAT} \subseteq ((\textit{\#EndOfLine}) -1) /2$
+We provide an example of the above notation using a finding from the paper
+by Ikenmeyer et al. \cite{ikenmeyer_WhatWhatNot_2022} where they demonstrate $\textit{\#CircuitSAT} \subseteq ((\textit{\#EndOfLine}) -1) /2$
 where $\textit{CircuitSAT}$ is the circuit variant of \textit{SAT}.
 Given instance $C$, using figure \ref{fig:chap-2:pars-eol-csat}, we can see that
 for each satisfying assignment, we are creating a source/sink pair. Excluding
-the sink that is always paired with the $0^n$ sink, it is easy that the solution sets
-have the same cardinality.
+the sink that is always paired with the $0^n$ sink, it is easy to see that our reduction is parsimonious.
 
 \begin{figure}
     \centering
@@ -649,7 +647,7 @@ The current section offers a brief summary to relevant notions and concepts in K
 
 \begin{definitionbox}{Kleene value ordering \cite{mukaidono_BternaryLogicFunction_1972}}{kleene-order}
     The \textit{instability ordering} or \textit{information ordering} for $\preceq$ is defined as: $\bot \preceq 0,1$. The $n$-dimensional
-    extension of the ordering is:
+    extension of the ordering, we say that:
     $$
         \forall x,y \in \mathbb{T}^n: x \preceq y \implies \forall j \in [n]: (x_j \in \mathbb{B} \implies x_i = y_i)
     $$
@@ -664,7 +662,7 @@ The current section offers a brief summary to relevant notions and concepts in K
     \label{def:kleene-res}
     Given $x \in \mathbb{T}^n$, we define the \textit{resolutions} of $x$, using the following notation:
     $$
-        \scn{Res}(x) \triangleq \big\{ y \in \mathbb{B}^n \mid x \leq^u y  \big\}
+        \scn{Res}(x) \triangleq \big\{ y \in \mathbb{B}^n \mid x \preceq y  \big\}
     $$
 \end{definitionbox}
 
@@ -682,26 +680,25 @@ Unless otherwise specified, we will assume that all Kleene functions are \textit
 they can be represented by circuits \ref{prop:nat-func-circ}.
 Natural functions essentially indicate that a point with its resolution
 should respect the information order, or more simply if $f(00) =1$ then
-$f(0\bot) \neq 0$ as then it will not preserve stability.
+$f(0\bot) \neq 0$ as then it will not preserve monotonicity.
 Moreover, we can think resolutions of a point $x$ as all the values it ``could be''. For example
 $0\bot$ could be either $00$ or $01$.
 Naturally, if $f(00) = f(01) = 1$ then naturally we should also expect that $f(0\bot) = 1$.
-This yields the concept of hazards or points in $x \in \mathbb{T}^n$ where,
-its resolutions have the same value but the point itself does not more formally defined in \ref{def:hf-def}.
-Detecting hazards is a concept that is analysed heavily when talking about Kleene logic and
+This yields the concept of hazards on circuits (formal definition \ref{def:hf-def}) where given $x \in \mathbb{T}^n$,
+its resolutions have the same value but the point itself does not.
+Detecting hazards is a concept that is analysed heavily when talking about Kleene logic, and
 it is an \textbf{NP}-hard problem \cite{ikenmeyer_ComplexityHazardfreeCircuits_2019,bund_SmallHazardFreeTransducers_2025,eichelberger_HazardDetectionCombinational_1965}.
 An example of hazard values can be seen in the figure Ikenmeyer et al. \ref{fig:hazard-example}.
 
-
 \begin{figure}[h!]
     \centering
-    \subfloat[Multiplexer with hazard at $(1,1,\bot)$]{\centering\includegraphics[width=0.3\textwidth]{assets/hazard_circuit.png}}
+    \subfloat[Multiplexer with hazard at $(s= \bot, x= \bot,y=\bot)$]{\centering\includegraphics[width=0.3\textwidth]{assets/hazard_circuit.png}}
     \subfloat[Hazard free multiplexer]{\centering\includegraphics[width=0.3\textwidth]{assets/hazard-free-circuit.png}}
     \caption[Example of hazard and non-hazard-free circuits]
-    {Hazard circuit and hazard-free circuit. Main idea is for $\textit{MUX}(s,x,y)$, $\textit{MUX}(\bot, 1,1)$ 
-    should be $1$ by our hazard definition. We can see that when we replace $s= \bot, x= 1, y =1$ to our circuits,
-    one of them presents a hazard.
-    Figure by \cite{ikenmeyer_ComplexityHazardfreeCircuits_2019}}\label{fig:hazard-example}
+    {Hazard circuit and hazard-free circuit. Main idea is for $\textit{MUX}(s,x,y)$, $\textit{MUX}(\bot, 1,1)$
+        should be $1$ by our hazard definition. We can see that when we replace $s= \bot, x= 1, y =1$ to our circuits,
+        one of them presents a hazard.
+        Figure by \cite{ikenmeyer_ComplexityHazardfreeCircuits_2019}}\label{fig:hazard-example}
 \end{figure}
 
 \begin{propositionbox}{Natural functions and Circuits \cite{mukaidono_BternaryLogicFunction_1972,ikenmeyer_ComplexityHazardfreeCircuits_2019}}{nat-func-circ}
@@ -709,7 +706,6 @@ An example of hazard values can be seen in the figure Ikenmeyer et al. \ref{fig:
 \end{propositionbox}
 
 \begin{definitionbox}{Hazard \cite{ikenmeyer_ComplexityHazardfreeCircuits_2019, eichelberger_HazardDetectionCombinational_1965}}{hf-def}
-    \label{def:hf-def}
     A \textit{circuit} $C$, on $n$ inputs has \textbf{hazard} at $x \in \mathbb{T}^n \iff C(x) = \bot$
     and $\exists b \in \mathbb{B}, \forall r \in \scn{Res}(x): C(r) = b$. If such value does not exist
     then we say that $C$ is hazard-free.
@@ -864,7 +860,7 @@ the depth of the recursion. Therefore, we define operator $\tau_{\hat{C}}$ where
 $$
     \tau_{\hat{C}}(\ell)(a) \triangleq \begin{cases}
         \tau(\ell)(a) & \text{if } a \in \hat{C} \\
-        \bot          & \text{otherwise}   \\
+        \bot          & \text{otherwise}         \\
     \end{cases}
 $$
 Where we can say that $\hat{C}$ is the set of configuration that are reachable within some
@@ -875,11 +871,11 @@ An example of a computation tree can be observed in the figure \ref{fig:chap-2:a
     \centering
     \includegraphics[width=0.7\textwidth]{Chapter2/ATM-computation-graph.pdf}
     \caption[Computation tree of an ATM with labellings]{
-    Computation tree of an ATM with labellings. We can observe that we start with an initial
-    configuration and for each child, we end up in different states and configurations that have
-    different accepting conditions. In the leafs of our tree, we may have accepting, rejecting 
-    or do not know configurations. What the $\tau$ operator does is propagating
-    the state from the leafs, all the way up to the root}
+        Computation tree of an ATM with labellings. We can observe that we start with an initial
+        configuration and for each child, we end up in different states and configurations that have
+        different accepting conditions. In the leafs of our tree, we may have accepting, rejecting
+        or do not know configurations. What the $\tau$ operator does is propagating
+        the state from the leafs, all the way up to the root}
     \label{fig:chap-2:atm-comp-tree}
 \end{figure}
 
@@ -899,7 +895,7 @@ some can be parsimoniously reduced to each other under all oracles, whereas for 
 directions (the ones with the warning sign) this is not the case.
 From the figure we can observe that for several \textbf{PPAD}, \textbf{CLS} and
 \textbf{PPADS} problems one can indeed find parsimonious reductions.
-For other problems, even \textbf{PPAD}-complete such as $\textbf{\#PPAD}(\textit{SourceOrExcess}(k,1)) -1$, 
+For other problems, even \textbf{PPAD}-complete such as $\textbf{\#PPAD}(\textit{SourceOrExcess}(k,1)) -1$,
 this does not seem to be the case.
 
 \begin{figure}
