@@ -2,13 +2,13 @@
 \section{Theoretical Preliminaries and Literature Overview}
 In the current section, we introduce all the necessary preliminaries
 with respect to search problems and counting complexity theory.
-Moreover we give an overview of the \textit{PureCircuit} problem, and its connections
+Moreover, we give an overview of the \textit{PureCircuit} problem, and its connections
 with search problems and relations with \textit{Kleene logic}. 
 
 
 \subsection{Search problems}
 In complexity theory, we are interested in different kinds of problems.
-A common example are problems founds in \textbf{P} and \textbf{NP} classes,
+Common examples are problems found in \textbf{P} and \textbf{NP} classes,
 known as decision problems, where given an input, the output is a boolean
 value of whether the specific instance is in the language or not.
 Function problems or search problems are extensions of decision problems,
@@ -131,11 +131,11 @@ Beame et al. \cite{beame_RelativeComplexityNP_1998} and
 Alexandros et al. \cite{hollender_ComplexityMultisourceVariants_2018} since they demonstrated that in the more general case of superpolynomial graphs,
 if we bound the in-degree and out-degree of each node to some polynomial of the input size, then the problem remains \textbf{PPAD}.
 We introduce the \textit{SourceOrExcess}$(2,1)$ problem by Ikenmeyer et al. \cite{ikenmeyer_WhatWhatNot_2022}, since it
-lacks a combinatorial interpretation under decrementation. We expand on this more on section \ref{sec:back:count-plus-search}. 
+lacks a combinatorial interpretation under decrementation (``$-1$''), as we demonstrate further in section \ref{sec:back:count-plus-search}. 
 
 \begin{definitionbox}{\textit{SourceOrExcess} problem \cite{ikenmeyer_WhatWhatNot_2022}}{source-or-excess}
     \label{def:source-or-excess}
-    We define as $\textit{SourceOrExcess}(k,1)$ for $k \in \mathbb{N}_{\geq 2}$ as such
+    We define as $\textit{SourceOrExcess}(k,1)$ for $k \in \mathbb{N}_{\geq 2}$ as such:
     Given a poly-sized successor circuit $S : \mathbb{B}^n$
     and a set of predecessor poly-sized circuits $\{P_i\}_{i \in [k]}$, we define
     the graph $G = (V,E)$ such that, $V = \mathbb{B}^n$ and $E$ as:
@@ -258,7 +258,7 @@ and it was shown to be \textbf{PPAD}-complete.
 In addition to the gates above, we will make use of the standard set of gates $\{\vee, \wedge, \neg\}$,
 whose behaviour is depicted in the tables \ref{tab:three-val-logic}.
 Moreover, we will make use of the \textsc{Copy} gate which we can define as $\textit{Copy}(x) = \neg (\neg x)$.
-These gates are well defined based on the \textsc{NOR} gate as shown by Deligkas et al. \cite{deligkas_PureCircuitTightInapproximability_2024}
+These gates are well-defined based on the \textsc{NOR} gate as shown by Deligkas et al. \cite{deligkas_PureCircuitTightInapproximability_2024}
 and do not directly affect the complexity of the problem.
 Furthermore, with respect to the \textsc{Purify} gate,
 the original problem states that one of two outputs must contain a pure value.
@@ -397,7 +397,7 @@ the colouring condition, which implies that we need at most $d$ separate points 
 Throughout literature the same variants of the problem or specifications
 have been defined using the names Sperner or discrete Brouwer \cite{chen_SettlingComplexityComputing_2009, chen_Complexity2DDiscrete_2009, daskalakis_ComplexityComputingNash_2006, deligkas_PureCircuitTightInapproximability_2024}.
 This is very similar to a different type of problem known as \textit{StrongTucker}, which can be thought of as the
-\textit{PPA} analog of \textit{StrongSperner} \cite{papadimitriou_ComplexityParityArgument_1994,aisenberg_2DTuckerPPA_2020}.
+\textit{PPA} analogue of \textit{StrongSperner} \cite{papadimitriou_ComplexityParityArgument_1994,aisenberg_2DTuckerPPA_2020}.
 The two problems satisfy different boundary conditions
 but due to their similar labelling nature, we will borrow some techniques used in later sections.
 Chen et al. \cite{chen_SettlingComplexityComputing_2009} demonstrated that for a fixed
@@ -445,7 +445,7 @@ has to remain untilled. An example can be seen in the figure \ref{fig:chap-2:1-m
 \begin{figure}[h!]
     \centering
     \includegraphics[width=0.7\textwidth]{Chapter2/1-mc-example.pdf}
-    \caption[1-MC example]{Example on an $8 \times 8$ chessboard with a missing square. As we can observe, there will always be one square we cannot tile }
+    \caption[1-MC example]{Example on a $8 \times 8$ chessboard with a missing square. As we can observe, there will always be one square we cannot tile }
     \label{fig:chap-2:1-mc-example}
 \end{figure}
 
@@ -683,7 +683,7 @@ they can be represented by circuits \ref{prop:nat-func-circ}.
 Natural functions essentially indicate that a point with its resolution
 should respect the information order, or more simply if $f(00) =1$ then
 $f(0\bot) \neq 0$ as then it will not preserve stability.
-Moreover we can think resolutions of a point $x$ as all the values it ``could be''. For example
+Moreover, we can think resolutions of a point $x$ as all the values it ``could be''. For example
 $0\bot$ could be either $00$ or $01$.
 Naturally, if $f(00) = f(01) = 1$ then naturally we should also expect that $f(0\bot) = 1$.
 This yields the concept of hazards or points in $x \in \mathbb{T}^n$ where,
@@ -711,7 +711,7 @@ An example of hazard values can be seen in the figure Ikenmeyer et al. \ref{fig:
 \begin{definitionbox}{Hazard \cite{ikenmeyer_ComplexityHazardfreeCircuits_2019, eichelberger_HazardDetectionCombinational_1965}}{hf-def}
     \label{def:hf-def}
     A \textit{circuit} $C$, on $n$ inputs has \textbf{hazard} at $x \in \mathbb{T}^n \iff C(x) = \bot$
-    and $\exists b \in \mathbb{B}, \forall r \in \scn{Res}(x): C(r) = b$. If such value does not exists
+    and $\exists b \in \mathbb{B}, \forall r \in \scn{Res}(x): C(r) = b$. If such value does not exist
     then we say that $C$ is hazard-free.
 \end{definitionbox}
 
@@ -895,11 +895,11 @@ can show whether a problem is in \textbf{\#P} or not, with the help of relativis
 The idea of relativisation is that we can equip our circuits or TMs with calls to
 arbitrary oracles \cite{beame_RelativeComplexityNP_1998}.
 They demonstrated that for several problems in \textbf{TFNP} as seen in figure \ref{fig:chap-2:count-hier-tfnp},
-some can be parsimoniously reduce to each other under all oracles, where as for some
-directions (the ones with the warning sign) this is not the the case.
+some can be parsimoniously reduced to each other under all oracles, whereas for some
+directions (the ones with the warning sign) this is not the case.
 From the figure we can observe that for several \textbf{PPAD}, \textbf{CLS} and
 \textbf{PPADS} problems one can indeed find parsimonious reductions.
-For other problems, even \textbf{PPAD}-complete ones like $\textbf{\#PPAD}(\textit{SourceOrExcess}(k,1)) -1$, 
+For other problems, even \textbf{PPAD}-complete such as $\textbf{\#PPAD}(\textit{SourceOrExcess}(k,1)) -1$, 
 this does not seem to be the case.
 
 \begin{figure}
@@ -950,26 +950,26 @@ To break down our conjecture we offer the following set of objectives:
 
 The above milestones were created in mind to tackle the main conjecture in incremental steps.
 Demonstrating a parsimonious reduction from the \textit{EndOfLine} is an important baseline
-as every \textbf{PPAD} problems reduces to the \textit{EndOfLine} even if its not parsimoniously.
+as every \textbf{PPAD} problems reduces to the \textit{EndOfLine} even if it is not parsimoniously.
 The second milestone is meant to demonstrate that we can use \textit{PureCircuit} for
 problems with no combinatorial interpretations, as we can see from the figure
 \ref{fig:chap-2:count-hier-tfnp}. Our last objective is the overall
 main conjecture that we are trying to prove.
 
-Our main findings sections focuses as to
+Our main findings section focuses as to
 how we tackled each problem and the efforts we did. Even though, the project did not
 manage to yield accomplish any of its intended milestones, we provide several tools, new problems and
 conjectures that may help in their future resolution.
 To assist with the theory development, we set out to develop a visualisation tool that will be able
 to validate and create instances of the problem. We hope that this
-will aid with the theory development and therefore we provide the following
+will aid with the theory development, and therefore we provide the following
 core set of requirements:
 \begin{enumerate}
     \item Establish a program that in which the user is able to construct a \textit{PureCircuit} instance.
           The tool should be capable of verifying instance
           or highlighting unsatisfied nodes.
     \item Develop algorithms to find solutions or at least approximate solutions.
-    \item Construct algorithms to enumerate all solutions solutions for small graphs.
+    \item Construct algorithms to enumerate all solutions for small graphs.
 \end{enumerate}
 
 We will a give a greater in-depth overview of the tool in the section \ref{sec:chap-4}

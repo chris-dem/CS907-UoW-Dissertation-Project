@@ -5,7 +5,7 @@ By providing a topological interpretation of the
 with the \textit{PureCircuit} problem.
 
 We will first show how we can topologically reduce the \textit{SourceOrExcess}$(2,1)$
-problem to a \textit{2D} space. We will demonstrate some limitations with \textit{2D} topological problems and then we show
+problem to a \textit{2D} space. We will demonstrate some limitations with \textit{2D} topological problems, and then we show
 how using a \textit{3D} counting version of the \textit{StrongSperner} problem
 will allow for a full parsimonious reduction.
 
@@ -16,7 +16,7 @@ Given a \textit{SourceOrExcess}$(2,1)$ input we first
 eliminate all excess nodes, meaning nodes with degree $(2,1)$ by separating
 one of the lines as shown in the figure \ref{fig:source-or-excess-trans}.
 This simplifies our counting argument to only 3 scenarios.
-Moreover for double sinks, we enforce that the MSB value of the bit-string for one of the two values is one.
+Furthermore, for double sinks, we enforce that the MSB value of the bit-string for one of the two values is one.
 We can observe that these modifications can be done in polynomial time since they only require to analyse
 the local neighbouring of nodes, and they preserve the number of solutions
 
@@ -64,8 +64,7 @@ If the MSB value of $i$ is $1$, then we create path
 
 In the original problem, we argued that for every node, we have I/O lines that denote the successor and predecessors of the current node,
 which can be exponentially large.
-This would make it computationally difficult to differentiate between double sinks and excess nodes
-and we would end up double counting solutions.
+This would make it computationally difficult to differentiate between double sinks and excess nodes, and we would end up double counting solutions.
 By removing excess nodes, we only have to focus on double sinks. Since there is no output line in a double sink,
 we take advantage of that by sending one inputs from the input path, and the other from the output path.
 
@@ -77,7 +76,7 @@ difference occurs on double sinks. We can observe that
 if the MSB of a node is $1$, it can only ever be incident to double sink,
 meaning $(3,12i)$ can never have an outwards edge. We know that
 for every node in its path, besides $(3,12i)$, its degrees can only
-ever be one of the 4 cases outlined. Similarly for the
+ever be one of the 4 cases outlined. Similarly, for the
 other node with LSB $0$ its main path stays the same except if its incident
 to a double sink, where we add 3 additional edges.
 For all edges, we know that the height of the path $E(\mathbf{p}^2,\mathbf{p}^3)$ can only
@@ -85,15 +84,14 @@ be at height greater or equal to $6$, and therefore no path other than the
 two incoming edges will ever intersect $(3,12i)$. The above paths denote the set $E^1_n$.
 
 We follow the same construction for the $E^2_n$ and apply the same removal transformation.
-The resulting graph is the same as in the traditional \textit{2D-EoL} problem but with the addition of double sinks
-and we call this \textit{2D-SourceOrExcess}$(2,1)$.
-Moreover we can observe that \textit{2D-SourceOrExcess}$(2,1)$ is parsimonious to the \textit{SourceOrExcess}$(2,1)$ problem as
+The resulting graph is the same as in the traditional \textit{2D-EoL} problem but with the addition of double sinks, and we call this \textit{2D-SourceOrExcess}$(2,1)$.
+Adding on, we can observe that \textit{2D-SourceOrExcess}$(2,1)$ is parsimonious to the \textit{SourceOrExcess}$(2,1)$ problem as
 sources and sinks are preserved.
 
 
 \paragraph{Topological Difficulty}
 
-We observe that in the \textit{2D-StrongEoL} bipolar colouring, we use the left handed rule to colour the shielding
+We observe that in the \textit{2D-StrongEoL} bipolar colouring, we use the left-handed rule to colour the shielding
 of our lines in a specific way, such that we always end up with panchromatic solutions at the ends of a line.
 The issue is that when we try to extend the same logic to the
 \textit{2D-SourceOrExcess}$(2,1)$ problem, we end up with the problem shown in the figure \ref{fig:chap-3:rleaf-ss}.
@@ -101,7 +99,7 @@ Any permutation of colours we choose will always result in $2+$ solutions. Even
 if we relax the problem to allow squares incident to panchromatic edges to count as a single
 solution, we still get multiple solutions.
 The problem occurs due to the chirality of the colouring since we are connecting a
-left handed line with another left handed line at opposite ends.
+left-handed line with another left-handed line at opposite ends.
 
 \begin{figure}[h!]
     \centering
@@ -241,10 +239,10 @@ An example of the above colouring can be seen in figure \ref{fig:chap-3:3d-count
 Using figure \ref{fig:chap-3:simple-line-example}, assume that we have an edge $\mathbf{p}^t, \mathbf{p}^{t+1}$
 of some path. We use red to represent the points on the left of the edge, blue the points on the right, and brown for the surrounding.
 The red cube will not be panchromatic as $x$-coordinate is $+$ on all corners
-and vice versa for the blue cube on the $y$-coordinate. In addition we can observe that the brown cubes surrounding
+and vice versa for the blue cube on the $y$-coordinate. In addition, we can observe that the brown cubes surrounding
 each face will also not result in a panchromatic cube as: for the brown cube on the left of red will be $-$ on all $y$
 coordinates, with the same argument for blue. And for the brown cubs on top, we can observe that $z$-coordinate will be $-$
-on all points. Therefore points in between lines or cycles will not result in solutions.
+on all points. Therefore, points in between lines or cycles will not result in solutions.
 As we can observe from the figure \ref{fig:chap-3:3d-counting-ss-simple-line}, our construction
 results to discrete antipodal solutions.
 
@@ -262,10 +260,10 @@ For points $m_{ij}^{0}, m_{ij}^{1}$, we can observe that their labelling is anti
 definition, all surrounding cubes that contain the side $(m_{ij}^{0}, m_{ij}^{1})$ count as one solution.
 We will refer to all the cubes incident to the edge as the combined panchromatic cube.
 We can manually observe that for each outer face of the combined panchromatic cube there will
-always exist a dimension whose colouring is not covered. For example we can see
+always exist a dimension whose colouring is not covered. For example, we can see
 that for all faces on top of the combine cube never cover the $z$ dimension.
 We can make similar arguments for the left and right outer faces.
-Since the outer faces do not yield a solution, that means we have only one solution and therefore
+Since the outer faces do not yield a solution, that means we have only one solution, and therefore
 we can observe
 that the set of panchromatic solutions correspond to a 1-to-1 mapping with the original problem.
 

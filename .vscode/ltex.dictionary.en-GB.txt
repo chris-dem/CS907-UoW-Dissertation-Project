@@ -12,3 +12,8 @@ decrementation
 Deligkas
 PPAD-completeness
 Papadimitriou
+untiled
+SourceOrExcess
+StrongSperner
+arity
+semantical

@@ -42,7 +42,7 @@ the logic from entities to their individual components and express
 more intricate relations. Regarding the current application,
 we chose to represent the graph nodes as separate entities which interact with
 each other based on their edges. The above choice allow us
-to built upon a software which is prone to changes.
+to build upon a software which is prone to changes.
 
 \subsection{Software Testing methodology}
 The core philosophy of our testing is Test-Driven-Development. This methodology
@@ -135,7 +135,7 @@ and repeatedly improve our assignment. We allow for $2$ strategies, one
 of them strictly always chooses the best neighbour whereas one
 allows for stochastic choice. The above operation is repeated
 until we either find a satisfying assignment or
-the maximum thershold of simulations has been reached.
+the maximum threshold of simulations has been reached.
 
 Overall this algorithm, one of the simplest and faster algorithms to run and can work
 well for convex problems as explained in \cite{schwefel_EvolutionOptimumSeeking_1995}.
@@ -146,7 +146,7 @@ in order to maximise our odds of finding a solution. We expand
 on the future works section \ref{sec:future-work} about potential extensions.
 
 In our figure, we use the arguments as shown in figure \ref{fig:chap-4:hill-climb-params}.
-The number of runs determine how many times we can re-run the algorithm
+The number of runs determines how many times we can re-run the algorithm
 until an optimal solution is found. Population size determines the number
 of assignments to work with in parallel. The strategies are the ones that we described
 previously.
@@ -189,11 +189,11 @@ use refer to the following list as a summary of parameters:
 
 \begin{enumerate}
     \item \textbf{Number of species}: We allow for our algorithm
-          to evolve several population independently and then merge each population at the end
+          to evolve several populations independently and then merge each population at the end
           to find the optimal solution. Increase the odds of avoiding local minima.
     \item \textbf{Population size}: Number of chromosomes per species.
     \item \textbf{Selection step}: We allow for two selection methods: \textit{Tournament based} and \textit{Elitism selection}.
-          \textit{Elitism selection} selects the best performing elements population whereas
+          \textit{Elitism selection} selects the best performing chromosomes whereas
           \textit{Tournament based} selection creates random sets tournaments across our chromosomes and picks the best ones
           from each. The tournament method is repeated until we recreate the population size.
           Out of the two method, elitism is the faster of the two but can result in less diversity
@@ -408,17 +408,17 @@ Then for each gate that is incident to the node apply the \textit{Set simplifica
 While the top element of the queue
 has one possible solution, extract the solution and repeat the \textit{unit value propagation operation}
 until the queue is empty or the cardinality of the value set at the head of the priority queue
-is different than $1$. If it's zero then
-current assignment is not valid and we return false, otherwise we return true.
+is different from $1$. If it's zero then
+current assignment is not valid, and we return false, otherwise we return true.
 
 
 \paragraph*{Set Simplification operation}
 Given a gate, we have a set of possible values for each of our nodes,
 as determined by our value set. The idea is
 that we want to reduce the set possible values by following the rules of the gate.
-For example, we given an \textbf{AND} gate.
+For example, assume we have an \textbf{AND} gate.
 If the output value is assigned the value $1$, then we know that the inputs can only take values
-$(1,1)$ and therefore we restrict the values of the input sets to $\{1\}, \{1\}$.
+$(1,1)$, and therefore we restrict the values of the input sets to $\{1\}, \{1\}$.
 If the current solution set of a node is $v_t$, then its updated set is
 $v_{t+1} \leftarrow v_t \cap \omega$, where $\omega$ are the set of values denoted
 by the simplification operation. We provide the rules for \textbf{AND}, \textbf{OR}
@@ -499,7 +499,7 @@ Otherwise, pick a node from the priority queue. For each value in its set,
 create a copy of the current queue, current solution assignment and value set state
 and apply the \textit{Unit value propagation} operation. After that create a recursive call
 apply the \textit{backtrack operation} again until the current recursion chain
-terminates with a solution or it rejects.
+terminates with a solution, or it rejects.
 At the root of every execution call, merge the solution assignments in each level and return
 the sets. The root call will return a set of every possible valid assignment set.
 
@@ -527,8 +527,8 @@ This implies that our resulting array of assignments contains only valid solutio
 covers the maximal solution set.
 
 We provide a table in \ref{tab:chap-4:running-time-analysis}
-with respect to the number of backtracking calls. The smaller the number the less smaller
-the recursion tree and therefore less values to check. 
+with respect to the number of backtracking calls. The smaller the number the smaller
+the recursion tree and therefore fewer values to check. 
 We can observe that the premature cancellations and the value set reductions allow us to keep a low number
 of calls despite the graph size. We will provide a list of the solutions in the appendix \ref{sec:app:sol-enum}.
 

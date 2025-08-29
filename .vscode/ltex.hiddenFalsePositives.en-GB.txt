@@ -1,0 +1,3 @@
+{"rule":"MORFOLOGIK_RULE_EN_GB","sentence":"^\\QThe current section focuses on how we can extend our reductions to SourceOrExcess using topological interpretations.\\E$"}
+{"rule":"IT_IS","sentence":"^\\QOn the contrary, our result raises questions as to the relation between the degree of a graph and its the dimension of its topological embeddings.\\E$"}
+{"rule":"POSSESSIVE_APOSTROPHE","sentence":"^\\QMoreover, we had trouble dealing with incorrect proofs as expanded in greater detail in our reflections section \\E(?:Dummy|Ina|Jimmy-)[0-9]+\\Q, which shifted our attention on expanding on the theorems and proofs of the already existing literature in order to reduce the margin of error.\\E$"}
