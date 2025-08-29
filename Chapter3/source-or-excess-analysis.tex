@@ -59,14 +59,14 @@ If the MSB value of $i$ is $1$, then we create path
     \mathbf{p}^2 & = (6(ni + j), 12i)                                                                              \\
     \mathbf{p}^3 & = (6(ni + j), 12j)                                                                              \\
     \mathbf{p}^4 & = (3, 12j)                                                                                      \\
-    E_{ij}       & = E(\mathbf{p}^1\mathbf{p}^2) \cup E(\mathbf{p}^3\mathbf{p}^4) \cup E(\mathbf{p}^3\mathbf{p}^4)
+    E_{ij}       & = E(\mathbf{p}^1\mathbf{p}^2) \cup E(\mathbf{p}^2\mathbf{p}^3) \cup E(\mathbf{p}^3\mathbf{p}^4)
 \end{align*}
 
 In the original problem, we argued that for every node, we have I/O lines that denote the successor and predecessors of the current node,
 which can be exponentially large.
 This would make it computationally difficult to differentiate between double sinks and excess nodes, and we would end up double counting solutions.
 By removing excess nodes, we only have to focus on double sinks. Since there is no output line in a double sink,
-we take advantage of that by sending one inputs from the input path, and the other from the output path.
+we take advantage of that by sending one input from the input path, and the other from the output path.
 
 We use similar arguments as in the previous planar graph construction \ref{par:chap-2:planar-graph-embedding}, to argue that:
 $\forall v \in V: \textit{degree}(v) \in \{(0,1),(1,0), (1,1), (2,2), (2,0)\}$.

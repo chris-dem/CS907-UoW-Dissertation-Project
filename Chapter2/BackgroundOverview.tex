@@ -161,7 +161,7 @@ created by Chen et al. and Hollender et al. \cite{chen_Complexity2DDiscrete_2009
 
 The above description defines a superpolynomial such that an edge $(x,y) \in E$
 if and only if $S(x) = y \wedge P(y) = x$ as well as the closeness constraint $\|x-y\|_1 \leq 1$.
-We refer will refer to this problem in later sections to talk about the topological representations of our graphs.
+We refer to this problem in later sections to talk about the topological representations of our graphs.
 
 \paragraph*{Multi-Source variants}
 Lastly we introduce variants of the \textit{EndOfLine} problem
@@ -188,7 +188,7 @@ We first start with $\epsilon\textit{-GCircuit}$
 which was first introduced by Chen et al. \cite{deligkas_PureCircuitTightInapproximability_2024,chen_SettlingComplexityComputing_2009}.
 General idea of $\epsilon\textit{-GCircuit}$ is that we have a directed graph  $T= (V,G)$ where
 $V$ denote value nodes and $G$ denote gate nodes. Each value node is assigned a value in $[0,1]$
-and the gates denote can denote the standard set of arithmetic operations $\{+, - ,*\}$ with other
+and the gates can denote the standard set of arithmetic operations $\{+, - ,*\}$ with other
 nodes or some constant, or boolean operators $\{\wedge, \vee, \neg, <, >, =\}$ with other nodes or some constant.
 The goal of the problem is to assign every value node with a value such that the assignment is correct up to a
 factor of $\pm \epsilon$.
@@ -416,7 +416,7 @@ to the problem introduced by Blank \cite{black1946critical} as follows:
 assume we have a $2n \times 2n$ chessboard. If we are provided with $1 \times 2$ pieces, we can trivially tile the board by filling each row with $n$ horizontal
 pieces. The idea is when we remove the bottom left corner, the board becomes impossible to tile. The argument
 can be thought of as such: each tile piece covers an even square and an odd square, which implies that it has to be the case that one of the squares
-has to remain untilled. An example can be seen in the figure \ref{fig:chap-2:1-mc-example} where we can observe that there will always be an untiled square.
+has to remain untiled. An example can be seen in the figure \ref{fig:chap-2:1-mc-example} where we can observe that there will always be an untiled square.
 
 
 
@@ -582,7 +582,7 @@ where we relate the difficulty of sudoku solving to a graph colouring problem.
     $$
     We denote the reduction above as $L \subseteq L'$.
 \end{definitionbox}
-
+%% TODO
 \begin{figure}
     \centering
     \includegraphics[width=0.5\textwidth]{Chapter2/parsimonious-reduction-example.pdf}
@@ -727,9 +727,9 @@ to alternate the course of computation. The informal presentation can be thought
 In a non-deterministic TM, given its current state $q$ or configuration $\mathcal{C}$, we spawn
 $\beta_1, ..., \beta_k$ separate processes. We say that the current state will accept if at least one of the processes
 $\{\beta_i\}_{i \in [k]}$ accepts. Alternating Turing machines introduce additional conditions where
-we enforce that all subprocesses $\{\beta_i\}_{i \in [k]}$ must accept. Moreover we can introduce
-negation states where if $\beta_1$ accepts, then
-$q$ rejects or vice versa. More formally, we offer the definition in \ref{def:alt-tm}.
+we can enforce that all subprocesses $\{\beta_i\}_{i \in [k]}$ must accept or accept if we have one
+subprocess that is rejecting.
+We provide a formal definition in \ref{def:alt-tm}.
 
 \begin{definitionbox}{Alternating Turing Machines(ATM) \cite{kozen_TheoryComputation_2006, chandra1981alternation}}{alt-tm}
     An alternating TM is a seven tuple
@@ -833,8 +833,8 @@ where the leaf nodes are assigned a label of $\bot$ or accepting.
 Given the above, we can finally give a definition of halting states:
 
 \begin{definitionbox}{Halting states\cite{chandra1981alternation}}{alt-halt}
-    We say that $M$ halts on $x$ iff $\lambda^*(\sigma_M(x)) \in \{0,1\}$ and
-    it accepts or rejects respectively iff  $\lambda^*(\sigma_M(x)) = 1$ or $\lambda^*(\sigma_M(x)) = 0$
+    We say that $M$ halts on $x$ iff $\ell^*(\sigma_M(x)) \in \{0,1\}$ and
+    it accepts or rejects respectively iff  $\ell^*(\sigma_M(x)) = 1$ or $\ell^*(\sigma_M(x)) = 0$
 \end{definitionbox}
 
 We aim for this ATM to work for only recursively enumerable sets and therefore we aim to limit to
@@ -856,7 +856,7 @@ An example of a computation tree can be observed in the figure \ref{fig:chap-2:a
         Computation tree of an ATM with labellings. We can observe that we start with an initial
         configuration and for each child, we end up in different states and configurations that have
         different accepting conditions. In the leafs of our tree, we may have accepting, rejecting
-        or do not know configurations. What the $\tau$ operator does is propagating
+        or unknown configurations. What the $\tau$ operator does is propagating
         the state from the leafs, all the way up to the root}
     \label{fig:chap-2:atm-comp-tree}
 \end{figure}
@@ -891,7 +891,7 @@ this does not seem to be the case.
 
 \section{Project Question and Objectives}
 
-As mentioned in the previous section, we observed how different \textbf{PPAD} problems can behave differently.
+As mentioned in the previous section, we observed how different \textbf{PPAD} problems can behave differently under decrementation.
 The main motivation comes from the observation of how \textit{Kleene logic} can be used to simulate the computation
 paths of NTMs. We can parallelise this to the boolean problem of \textit{SAT} which
 given by the \textit{Cook-Levin} theorem \cite{cook_ComplexityTheoremprovingProcedures_1971}
@@ -917,9 +917,11 @@ To break down our conjecture we offer the following set of objectives:
 \begin{enumerate}
     \item Establish a chain of parsimonious reductions from the \textit{EndOfLine} to the \textit{PureCircuit} problem.
     \item Establish a chain of parsimonious reductions from the $\textit{SourceOrExcess}(2,1)$ to the \textit{PureCircuit} problem.
-          Ideally, we would like to extend this to the entire hierarchy of \textit{SourceOrExcess}$(k,1)$ problems for
-          some $k \in \mathbb{N}$ or ideally. We will introduce these problems more formally in the upcoming sections
-          \textit{PolySourceOrExcess}.
+          Ideally, we would like to extend this to the entire hierarchy of \textit{SourceOrExcess}$(k,1)$ or more formally
+          $$
+              \forall k \in \mathbb{N}: \textbf{\#PPAD}(\textit{SourceOrExcess}(k,1)) \subseteq  \textbf{\#PPAD}(\textit{PureCircuit})
+          $$
+
     \item Establish a \textit{Cook-Levin} type theorem for the all \textbf{PPAD} problems or more formally
           $$
               \forall L \in \textbf{PPAD}: \textbf{\#PPAD}(L) \subseteq  \textbf{\#PPAD}(\textit{PureCircuit})
@@ -928,25 +930,25 @@ To break down our conjecture we offer the following set of objectives:
 
 The above milestones were created in mind to tackle the main conjecture in incremental steps.
 Demonstrating a parsimonious reduction from the \textit{EndOfLine} is an important baseline
-as every \textbf{PPAD} problems reduces to the \textit{EndOfLine} even if it is not parsimoniously.
+as every \textbf{PPAD} problem reduces to the \textit{EndOfLine} even if it is not parsimoniously.
 The second milestone is meant to demonstrate that we can use \textit{PureCircuit} for
 problems with no combinatorial interpretations, as we can see from the figure
 \ref{fig:chap-2:count-hier-tfnp}. Our last objective is the overall
 main conjecture that we are trying to prove.
 
-Our main findings section focuses as to
+Our main finding section focuses as to
 how we tackled each problem and the efforts we did. Even though, the project did not
-manage to yield accomplish any of its intended milestones, we provide several tools, new problems and
+manage to accomplish any of its intended milestones, we provide several tools, new problems and
 conjectures that may help in their future resolution.
 To assist with the theory development, we set out to develop a visualisation tool that will be able
-to validate and create instances of the problem. We hope that this
+to create and validate instances of the problem. We hope that this
 will aid with the theory development, and therefore we provide the following
 core set of requirements:
 \begin{enumerate}
     \item Establish a program that in which the user is able to construct a \textit{PureCircuit} instance.
           The tool should be capable of verifying instance
           or highlighting unsatisfied nodes.
-    \item Develop algorithms to find solutions or at least approximate solutions.
+    \item Develop algorithms to find or at least approximate solutions.
     \item Construct algorithms to enumerate all solutions for small graphs.
 \end{enumerate}
 

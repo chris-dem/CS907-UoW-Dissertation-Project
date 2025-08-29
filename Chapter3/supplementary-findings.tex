@@ -9,6 +9,11 @@ We define the following subclass of \textit{Tarski} \ref{def:tarski-ppad}:
     $\{\wedge, \vee, \neg, \mathbf{0}, \mathbf{1}\}$.
 \end{definitionbox}
 
+Since the above problem abuses the fact that $F$ is \textit{natural} since that implies
+that $F$ is monotone with respect to the partially ordered set $(\mathbb{T}^n, \preceq)$.
+We show how this naturally results in a parsimonious reduction between \textit{PureCircuit}
+and \textit{KleeneTarski}.
+
 \begin{propositionbox}{Parsimonious Reduction between $\textit{KleeneTarski}$ and $\textit{PureCircuit}$}{kleene-pure}
     $$
     \textit{\#KleeneTarski} \subseteq \textit{\#PureCircuit}

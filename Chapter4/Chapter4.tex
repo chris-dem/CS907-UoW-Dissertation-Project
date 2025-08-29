@@ -13,7 +13,7 @@ the algorithms we deployed for solutions finding.
 
 \section{Tooling Selection}
 
-\subsection{Rust Programming Language} The development language used for is \texttt{Rust} \footnote{https://www.rust-lang.org/}.
+\subsection{Rust Programming Language} The development language used is \texttt{Rust} \footnote{https://www.rust-lang.org/}.
 \texttt{Rust} is a systems-level compiled programming language that can achieve high speeds due to
 its low-level compilation, while maintaining memory safety. Moreover,
 it offers high level features such as its strong algebraic and trait type system
@@ -51,6 +51,8 @@ or solution enumeration. Its main idea is to first write the unit tests,
 and then develop the code to resolve them. This allows us for the code to be self-documenting
 as well as ensuring that we are acting within the expected scope.
 We provide a sample of our unit test results in figure \ref{fig:chap-4:test-cases}.
+A full log of our test results will be provided in our supplementary files.
+
 
 \begin{figure}[htbp]
     \centering
@@ -85,7 +87,7 @@ We use the figure \ref{fig:chap-4:app-layout} as reference of our application UI
 Our application contains a UI legend and a drawing board.
 The UI legend provides the user with the information about the
 current state of the app. Moreover, we provide the user information with the key bindings
-that we assigned, as well as parameters and buttons  
+that we assigned, as well as parameters and buttons
 to execute our solution finding algorithms. We will dive deeper
 into the functionalities in the upcoming sections.
 
@@ -151,11 +153,10 @@ Overall this algorithm, one of the simplest and faster algorithms to run and can
 well for convex problems as explained in \cite{schwefel_EvolutionOptimumSeeking_1995}.
 It may significantly struggle against large graphs or instances
 that multiple changes need to occur in order to reach an optimal point.
-For the purposes of the current project, we allow for multiple re-runs 
-in order to maximise our odds of finding a solution. We expand
-on the future works section \ref{sec:future-work} about potential extensions.
+For the purposes of the current project, we allow for multiple re-runs
+in order to maximise our odds of finding a solution.
 
-In our figure, we use the arguments as shown in figure \ref{fig:chap-4:hill-climb-params}.
+We provide a list of parameters as shown in figure \ref{fig:chap-4:hill-climb-params}.
 The number of runs determines how many times we can re-run the algorithm
 until an optimal solution is found. Population size determines the number
 of assignments to work with in parallel. The strategies are the ones that we described
@@ -200,14 +201,13 @@ use refer to the following list as a summary of parameters:
 \begin{enumerate}
     \item \textbf{Number of species}: We allow for our algorithm
           to evolve several populations independently and then merge each population at the end
-          to find the optimal solution. Increase the odds of avoiding local minima.
+          to find the optimal solution. Increase the odds of avoiding local minima and ensures diversity.
     \item \textbf{Population size}: Number of chromosomes per species.
     \item \textbf{Selection step}: We allow for two selection methods: \textit{Tournament based} and \textit{Elitism selection}.
           \textit{Elitism selection} selects the best performing chromosomes whereas
           \textit{Tournament based} selection creates random sets tournaments across our chromosomes and picks the best ones
           from each. The tournament method is repeated until we recreate the population size.
-          Out of the two method, elitism is the faster of the two but can result in less diversity
-          compared to the tournament method.
+          Out of the two methods, elitism is the faster method but can result in less diversity.
     \item \textbf{Crossover step}: We allow for two main types of crossover methods:
           \begin{enumerate}
               \item \textit{Crossover Uniform}: Each gene of the child is randomly selected from either parent. This allows for
@@ -219,8 +219,7 @@ use refer to the following list as a summary of parameters:
           \end{enumerate}
     \item \textbf{Mutation step}: Given the offspring of the
           \textbf{Crossover step}, we stochastically modify each gene in
-          order to introduce diversity, which allows our chromosomes to explore
-          the solution space and escape local optima \cite{katoch_ReviewGeneticAlgorithm_2021}.
+          order to introduce diversity, and escape local optima \cite{katoch_ReviewGeneticAlgorithm_2021}.
 \end{enumerate}
 
 
@@ -256,11 +255,9 @@ Both algorithms are capable of finding an assignment.
 The \textit{Hill Climbing} is much cheaper to run but more prone to
 be stuck at local minima \cite{Brewka_1996}. The \textit{Genetic algorithm}
 is much more computationally expensive out of the two but can be fine-tuned
-sufficiently to almost always find a solution. 
+sufficiently to almost always find a solution.
 Further analysis and deeper comparison of the two algorithms is beyond the scope of the current project.
-In general,
-there are many meta-heuristic algorithms that can be applied as listed in \cite{abdel-basset_Chapter10Metaheuristic_2018}.
-We expand more on our future works \ref{sec:future-work} on how to improve their performance.
+
 
 \subsection{Solution Enumeration}
 
@@ -303,7 +300,7 @@ and \textbf{Backtrack Operation}.
 
         \Function{BacktrackIteration}{
         \Statex \qquad pc \texttt{:PureCircuitInstance},
-        \Statex \qquad $A$ \texttt{:Arr[Kleene]},
+        \Statex \qquad $A$ \texttt{:Arr[KleeneValue]},
         \Statex \qquad $S$ \texttt{:Arr[KleeneSet]},
         \Statex \qquad $Q$ \texttt{:PriorityQueue}
         \\}
@@ -318,7 +315,7 @@ and \textbf{Backtrack Operation}.
         \State $S' \leftarrow$ \Call{Clone}{$S$}
         \State $Q' \leftarrow$ \Call{Clone}{$Q$}
         \State $A' \leftarrow$ \Call{Clone}{$A$}
-        \State $\textit{result} \leftarrow$\Call{UnitPropagate}{\text{pc}, min\_graph\_in, v, $A'$, $S'$, $Q'$}
+        \State $\textit{result} \leftarrow$\Call{UnitPropagate}{\text{pc}, min\_graph\_ind, v, $A'$, $S'$, $Q'$}
         \Comment{For each assignment in each solution set, clone our states and assign the value selected}
         \If{$\textit{result} = \bot$}
         \Comment{If our algorithm return false, it means that the current assignment is invalid and we ignore it}
@@ -339,6 +336,7 @@ and \textbf{Backtrack Operation}.
         \Statex \qquad $Q$        \texttt{:PriorityQueue}
         \\}
         \State \Call{AssignNode}{nod\_ind, nod\_val, $A$, $S$, $Q$}
+        \Comment{Assign value the selected node. Propagate the changes to the solution and assignment set}
         \State \Call{PropagateNode}{pc, nod\_ind, nod\_val, $A$, $S$, $Q$}
         \While{$\neg$\Call{IsEmpty}{$Q$}$ \wedge$ \Call{PeekKey}{$Q$}.set\_length $=1$}
         \Comment{While the queue contains an element whose value can take only one element, assign its value}
@@ -458,14 +456,14 @@ If a value is not assigned, we denote it as $\cdot$.
     \begin{tabular}{|c|c|}
         \hline
         \rowcolor[HTML]{EAE1E1}
-        {\color[HTML]{333333} \textbf{OR input}}          & {\color[HTML]{333333} \textbf{Output sets}}                                                 \\ \hline
-        $\forall v \in \mathbb{T}: (\cdot, \cdot, v)$     & $(\mathbb{T}_{\leq v},\mathbb{T}_{\leq v}, \{v\} )$                                         \\ \hline
-        $\forall v \in \mathbb{T}: (\cdot, v, \cdot)$     & $(\mathbb{T}, \{v\}, \mathbb{T}_{\geq v})$                                                  \\ \hline
-        $\forall a,b \in \mathbb{T}: a < b (\cdot, a, b)$ & $(\{b\}, \{a\}, \{b\})$                                                                     \\ \hline
-        $\forall v \in \mathbb{T}: (\cdot, v, v)$         & $(\mathbb{T}_{\leq v}, \{v\}, \{v\})$                                                       \\ \hline
-        $\forall a,b \in \mathbb{T}:a > b (\cdot, a, b)$  & Invalid combination                                                                         \\ \hline
-        $\forall a,b \in \mathbb{T}:a > b (a, b, \cdot)$  & $(\{a\}, \{b\}, \{\max(a,b) \})$                                                            \\ \hline
-        $\forall a,b,c \in \mathbb{T}:  (a, b, c)$        & $(\{a\}, \{b\}, \{c \})$, only if the triplet $(a,b,c)$ is a correct \textbf{OR} assignment \\ \hline
+        {\color[HTML]{333333} \textbf{OR input}}                   & {\color[HTML]{333333} \textbf{Output sets}}                                                 \\ \hline
+        $\forall v \in \mathbb{T}: (\cdot, \cdot, v)$              & $(\mathbb{T}_{\leq v},\mathbb{T}_{\leq v}, \{v\} )$                                         \\ \hline
+        $\forall v \in \mathbb{T}: (\cdot, v, \cdot)$              & $(\mathbb{T}, \{v\}, \mathbb{T}_{\geq v})$                                                  \\ \hline
+        $\forall a,b \in \mathbb{T}: a < b \implies (\cdot, a, b)$ & $(\{b\}, \{a\}, \{b\})$                                                                     \\ \hline
+        $\forall v \in \mathbb{T}: (\cdot, v, v)$                  & $(\mathbb{T}_{\leq v}, \{v\}, \{v\})$                                                       \\ \hline
+        $\forall a,b \in \mathbb{T}:a > b \implies (\cdot, a, b)$  & Invalid combination                                                                         \\ \hline
+        $\forall a,b \in \mathbb{T}: (a, b, \cdot)$                & $(\{a\}, \{b\}, \{\max(a,b) \})$                                                            \\ \hline
+        $\forall a,b,c \in \mathbb{T}:  (a, b, c)$                 & $(\{a\}, \{b\}, \{c \})$, only if the triplet $(a,b,c)$ is a correct \textbf{OR} assignment \\ \hline
     \end{tabular}
     \caption{\textbf{OR} value propagation rules}
     \label{tab:chap-4:or-propagation}
@@ -537,9 +535,11 @@ covers the maximal solution set.
 
 We provide a table in \ref{tab:chap-4:running-time-analysis}
 with respect to the number of backtracking calls. The smaller the number the smaller
-the recursion tree and therefore fewer values to check. 
+the recursion tree and therefore fewer values to check.
 We can observe that the premature cancellations and the value set reductions allow us to keep a low number
 of calls despite the graph size. We will provide a list of the solutions in the appendix \ref{sec:app:sol-enum}.
+The above algorithm does present with several limitations which we highlight
+as future extension in the section \ref{sec:future-work}.
 
 \begin{figure}[htbp]
     \centering

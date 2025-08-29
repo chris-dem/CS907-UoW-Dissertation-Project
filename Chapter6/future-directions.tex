@@ -16,7 +16,7 @@ complexity classes such as \textbf{HF-PPAD} and could we show that
 $\textbf{HF-PPAD} = \textbf{PPAD}$.
 Along similar line, we can also ask the questions as to existence of problems
 \textit{HF-nD-Counting-SS} as previously stated and whether there
-exists a parsimonious reduction  to its non-hazard-free variant.
+exists a parsimonious reduction to its non-hazard-free variant.
 
 
 Even more naturally, one can also ask further questions such as, how does hazard-freeness
@@ -28,7 +28,7 @@ Moreover, we were able to observed how we can use Kleene logic with
 \textbf{PLS} sub-problems like \textit{Tarski}. Naturally,
 can we define the class of problems \textbf{HF-TFNP},
 and would it be equivalent to its non-hazard-free variant? We believe that this shift
-in perspective may also give insights to other areas such as the circuit complexity \textit{Hazard-Free Circuits}.
+in perspective may also give insights to other areas such as the circuit complexity of \textit{Hazard-Free circuits}.
 
 
 \subsubsection{Parsimonious Topological Representations of \textbf{PPAD} problems }
@@ -45,23 +45,27 @@ which combines the graph representations with the topological ones \ref{conj:con
     There exist some polynomial computable function $f :\mathbb{N}^3 \to \mathbb{N}$, such that
     given $\alpha,\Delta_i, \Delta_o \in \mathbb{N}$ and $m= f(\alpha, \Delta_i, \Delta_o)$
     $$
-        \textbf{PPAD}(\alpha\textit{-SUnbalanced}(\Delta_i, \Delta_o)) \subseteq
-        \textbf{PPAD}(m\textit{D-CountingSS})
+        \textbf{\#PPAD}(\alpha\textit{-SUnbalanced}(\Delta_i, \Delta_o)) \subseteq
+        \textbf{\#PPAD}(m\textit{D-CountingSS})
     $$
 \end{conjecturebox}
 What the above conjecture essentially describes is, given a number of known sources and the
 maximum number of input/output vertices of graph, can we create some \textit{nD-CountingSS}
 that is parsimonious to its graphical representation? Since we know that the problem \textit{Unbalanced}
-can parsimoniously count every variant, can we also reduce \textit{Unbalanced} to a topological
+can parsimoniously count every graph variant, can we also reduce \textit{Unbalanced} to a topological
 problem? A reduction like that would be an important milestone for the usage topological \textit{PureCircuit} constructions
 for enumerating solutions.
 
 
 \subsubsection{PureCircuit Gate Extension} 
 
-The proof for the \textbf{PPAD}-inclusion can be summarised as expressing a \textit{PureCircuit} instances
-as a \textit{Brouwer} function from $[0,1]^n \to [0,1]^n$, given fixed point $x^\star$ then
-we denote the following assignment: if $x^\star_i \in \{0,1\}$ then $v_i = x^{\star}_i$, otherwise
+The proof for the \textbf{PPAD}-inclusion can be summarised as expressing a \textit{PureCircuit} instance
+as a \textit{Brouwer} function from $[0,1]^n \to [0,1]^n$, where
+each input represents a continuous assignment to the circuit nodes,
+and each output $F_i(x)$ is determined by a continuous function of the gate incident to node $i$ and its neighboring nodes
+\cite{deligkas_PureCircuitTightInapproximability_2024}.
+Given its fixed point $x^\star$ then
+we can denote the following assignment: if $x^\star_i \in \{0,1\}$ then $v_i = x^{\star}_i$, otherwise
 $v_i = \bot$. For example, the \textsc{Purify} gate can be represented as:
 $$
 \textsc{Purify}(v) = \begin{pmatrix}
@@ -89,7 +93,8 @@ on ATMs which demonstrates whether our starting configuration is accepting, reje
 This interesting relation may provide a pathway towards the full Cook-levin type theorem
 that we seek. But one also has to acknowledge the difficulty of expressing
 operator functions such as $\tau$, as it seeks
-to find the maximal element in the poset of functions of $\mathcal{C} \to \mathbb{T}$. We leave this as integral evidence
+to find the maximal element in the poset of functions of $\mathcal{C} \to \mathbb{T}$,
+whereas our reduction was based on the poset of the information ordering of Kleene logic. We leave this as integral evidence
 for the potential relation between \textit{PureCircuit} and ATMs.
 
 
@@ -122,12 +127,21 @@ of steps to make the backtracking algorithm simpler:
           or Gabow's Algorithm \cite{gabow_PathbasedDepthfirstSearch_2000}. 
     \item Treating SCCs as an individual node, identify nodes by their distances from
           base nodes (nodes with no incoming edges)
-    \item Extend the backtracking algorithm so instead of the using the is start label,
-          use the distance from base instead. The greater distance a node has from the
+    \item Extend the backtracking algorithm so instead of using the start label,
+          use the distance from the base instead. The greater distance a node has from the
           base, the less impact it has and therefore should be postponed in later stages of the
           backtracking calls.
 \end{enumerate}
 
 We argue that the above heuristic may result in improved average times but of course
 further research can be done in order to determine more suitable selection heuristics for our priority queue.
+
+
+
+Finally, we highlight potential improvements to our meta-heuristic algorithms. 
+The fitness function could be modified to take advantage of the continuity properties of the \textit{PureCircuit}, 
+and each algorithm can be improved using more sophisticated techniques. 
+More broadly, one could explore additional meta-heuristic approaches 
+beyond those considered here, as shown in \cite{abdel-basset_Chapter10Metaheuristic_2018}, 
+though such extensions lie beyond the scope of the project.
 
