@@ -17,7 +17,6 @@ in the definitions \ref{def:search-problems}.
 
 
 \begin{definitionbox}{Search Problems}{search-problems}
-    \label{def:search-problems}
     \textbf{Search problems} can be defined as relations $R \subseteq \mathbb{B}^* \times \mathbb{B}^*$,
     where given $x \in \mathbb{B}^*$, we want to find $y \in \mathbb{B}^*$  such that $xRy$.
 
@@ -30,7 +29,6 @@ known as \textbf{FNP} and its subclass for
 using the definitions in \ref{def:fnp-tfnp}.
 
 \begin{definitionbox}{$\textbf{FNP}$ and $\textbf{TFNP}$}{fnp-tfnp}
-    \label{def:fnp-tfnp}
     \textbf{FNP} are \textit{search problems} such that there exists poly-time \textit{TM} $M: \mathbb{B}^* \to \mathbb{B}$
     and a polynomial function $p : \mathbb{N} \to \mathbb{N}$ such that:
     $$
@@ -46,7 +44,6 @@ search problem variant known as \textit{Levin Reductions}  using the definition 
 \ref{def:levin-reductions}.
 
 \begin{definitionbox}{Levin Reductions}{levin-reductions}
-    \label{def:levin-reductions}
     Let $A$ and $B$ be two search problems with relations $R_A \subseteq \{0,1\}^* \times \{0,1\}^*$ and $R_B \subseteq \{0,1\}^* \times \{0,1\}^*$, respectively.
 
     We say that $A$ is \textit{Levin reducible} to $B$, denoted $A \leq_L B$, if there exist polynomial-time computable functions $f: \{0,1\}^* \to \{0,1\}^*$ and $g: \{0,1\}^* \times \{0,1\}^* \to \{0,1\}^*$ such that:
@@ -89,7 +86,6 @@ there must always exist a different one.
 
 
 \begin{definitionbox}{\textit{EndOfLine} problem \cite{papadimitriou_ComplexityParityArgument_1994}}{eol-ppad}\
-    \label{def:eol-ppad}
     Given poly-sized circuits $S, P \in \mathbb{B}^n \to \mathbb{B}^n$,
     we define a digraph $G = (V,E)$  such that $V= \mathbb{B}^n$ and $E$ defined as:
     $$
@@ -134,7 +130,6 @@ We introduce the \textit{SourceOrExcess}$(2,1)$ problem by Ikenmeyer et al. \cit
 lacks a combinatorial interpretation under decrementation (``$-1$''), as we demonstrate further in section \ref{sec:back:count-plus-search}.
 
 \begin{definitionbox}{\textit{SourceOrExcess} problem \cite{ikenmeyer_WhatWhatNot_2022}}{source-or-excess}
-    \label{def:source-or-excess}
     We define as $\textit{SourceOrExcess}(k,1)$ for $k \in \mathbb{N}_{\geq 2}$ as such:
     Given a poly-sized successor circuit $S : \mathbb{B}^n$
     and a set of predecessor poly-sized circuits $\{P_i\}_{i \in [k]}$, we define
@@ -154,7 +149,6 @@ We will mainly focus on the \textit{2D-EOL}
 created by Chen et al. and Hollender et al. \cite{chen_Complexity2DDiscrete_2009,hollender_ComplexityMultisourceVariants_2018}.
 
 \begin{definitionbox}{\textit{2D-EOL} problem \cite{chen_Complexity2DDiscrete_2009,hollender_ComplexityMultisourceVariants_2018}}{2d-eol}
-    \label{2d-eol}
     \textbf{Input}: Two poly-sized circuits $P,S: \{0,1\}^{2n} \to \{0,1\}^{2n}$ where $P(0^{n}, 0^{n}) = (0^{n},0^{n}) \neq S(0^{n}, 0^{n})$.
     \textbf{Output}: A point $x \in \{0,1\}^{2n}$ such that one of the following conditions are satisfied:
     \begin{enumerate}
@@ -177,7 +171,6 @@ multi-source problems were created by Hollender et al. \cite{hollender_Complexit
 and were demonstrated to be \textbf{PPAD}-complete.
 
 \begin{definitionbox}{\textit{PolyS-EoL} definition}{polys-eol}
-    \label{def:polys-eol}
     \textbf{Input}: We are given triplet $(S, P, \bar{f})$, where $S, P$ are successors, predecessor circuits
     of an \textit{EndOfLine} problem with $n$ input-output bits, and $\bar{f}$ is a poly-sized circuit that computes some polynomial function
     $f: \mathbb{N}\to \mathbb{N}$. We impose the following restriction:
@@ -227,7 +220,6 @@ to demonstrate that for all $\epsilon < 1/10$, $\epsilon\textit{-GCircuit}$ is \
 and it was shown to be \textbf{PPAD}-complete.
 
 \begin{definitionbox}{\textbf{PureCiruit} Problem Definition \cite{deligkas_PureCircuitTightInapproximability_2024}}{purecircuit-def}
-    \label{def:purecircuit-def}
     An instance of \textit{PureCircuit} is given by vertex set $V= [n]$ and gate set $G$ such that
     $\forall g \in G: g=(T,u,v,w)$ where $u,v,w \in V$ and $T \in \{\text{NOR}, \text{Purify}\}$.
     Each gate is interpreted as:
@@ -377,7 +369,6 @@ $\forall A \subseteq S^d: |A| \geq d+1$ and satisfy the bipolar colouring condit
 the colouring condition, which implies that we need at most $d$ separate points to achieve a colouring.
 
 \begin{definitionbox}{\textit{StrongSperner} problem}{strong-sperner}
-    \label{def:strong-sperner}
     \textbf{Input}: A boolean circuit that computes a bipolar labelling $\lambda: [M]^N \to \{-1, 1\}^N$ \ref{def:bipolar-colouring},
     such that $M \in n^{O(1)}$, which
     satisfies the following boundary conditions for every $i \in [N]$:
@@ -404,7 +395,6 @@ as defined in \ref{def:nd-strong-sperner}.
 
 
 \begin{definitionbox}{\textit{nD-StrongSperner} problem}{nd-strong-sperner}
-    \label{def:nd-strong-sperner}
     \textbf{Input}: A tuple $(\lambda,0^k)$ such that
     $\lambda : (\mathbb{B}^k)^n \to \{-1, +1\}^n$, and $\lambda$ abides the \textit{boundary conditions}
     of the \textit{StrongSperner} problem.\\
@@ -431,7 +421,6 @@ has to remain untilled. An example can be seen in the figure \ref{fig:chap-2:1-m
 
 
 \begin{definitionbox}{\textit{1-MC} \cite{hollender_ComplexityMultisourceVariants_2018}}{1-mc-definition}
-    \label{def:1-mc-definition}
     \textbf{Input}: Given a circuit $C : \{0,1\}^{2n} \to \{0,1\}^{2n}$, such that $C(0,0) = (0,0)$, such that tiling between two
     squares is indicated such that:
     $$
@@ -488,7 +477,6 @@ of parity graphs (\textbf{PPAD}) and local search (\textbf{PLS})
 %     
 %
 \begin{theorembox}{Knaster Tarski Fixed point theorem\cite{bronislaw_TheoremeFunctionsDensembles_1928, fearnley_FasterAlgorithmFinding_2022}}{knaster-tarski}
-    \label{def:knaster-tarski}
     Given a \textit{monotone} function $f: L \to L$ \ref{def:mono-func} of a complete lattice $(L, \wedge, \vee)$,  $\exists c \in L: f(c) = c$.
 \end{theorembox}
 
@@ -535,7 +523,6 @@ the cycle counting problem.
 
 
 \begin{definitionbox}{\(\textbf{\#P}\) Complexity Class \cite{valiant_ComplexityComputingPermanent_1979}}{sharpp-class}
-    \label{def:sharpp-class}
     A function \(f: \mathbb{B}^* \to \mathbb{N} \in \textbf{\#P}\), if there exists a
     poly-function \(p : \mathbb{N} \to \mathbb{N}\) and a poly-time TM \(M\) such that:
     \[
@@ -610,7 +597,7 @@ that we can create new counting problems through composition. We denote
 this as $f(L)$ or more formally we say:
 
 
-\begin{definitionbox}{Function composition in counting problems}{pars-reduction}
+\begin{definitionbox}{Function composition in counting problems}{func-comp-reduction}
     Given counting problem $L$ and a function $f: \mathbb{N} \to \mathbb{N}$,
     we can define a new counting problem $f(L)$ such that:
     $$
@@ -659,7 +646,6 @@ The current section offers a brief summary to relevant notions and concepts in K
 
 
 \begin{definitionbox}{Kleene Resolutions \cite{mukaidono_BternaryLogicFunction_1972, ikenmeyer_ComplexityHazardfreeCircuits_2019}}{kleene-res}
-    \label{def:kleene-res}
     Given $x \in \mathbb{T}^n$, we define the \textit{resolutions} of $x$, using the following notation:
     $$
         \scn{Res}(x) \triangleq \big\{ y \in \mathbb{B}^n \mid x \preceq y  \big\}
@@ -746,7 +732,6 @@ negation states where if $\beta_1$ accepts, then
 $q$ rejects or vice versa. More formally, we offer the definition in \ref{def:alt-tm}.
 
 \begin{definitionbox}{Alternating Turing Machines(ATM) \cite{kozen_TheoryComputation_2006, chandra1981alternation}}{alt-tm}
-    \label{def:alt-tm}
     An alternating TM is a seven tuple
     $$
         M = (k , Q, \Sigma, \Gamma, \delta, q_0, g)
@@ -777,7 +762,6 @@ writing a symbol to each work tape, and then moving each head left or right
 while transitioning into a new state.
 
 \begin{definitionbox}{ATM configurations \cite{kozen_TheoryComputation_2006, chandra1981alternation}}{alt-conf}
-    \label{def:alt-conf}
     A configuration $\mathcal{C}$ of an ATM $M$ is a element of the set $\mathcal{C}_M$
     $$
         \mathcal{C}_M \triangleq Q \times \Sigma^* \times (\Gamma \smallsetminus \{\#\})^k \times \mathbb{N}^{k+1}
@@ -793,7 +777,6 @@ $$
 Where $\lambda$ is a null string.
 
 \begin{definitionbox}{Successor of configurations \cite{chandra1981alternation}}{alt-succ}
-    \label{def:alt-succ}
     Given ATM $M$, we write $\mathcal{C} \vdash \mathcal{C'}$ to say that $\mathcal{C'}$ is the successor of
     $\mathcal{C}$, if we can go from one configuration to another with a single $\delta$ rule.
     We require for $\delta$ that, for accepting or rejecting configurations to have no successors,
@@ -835,7 +818,7 @@ $$
 $$
 We can check that $\tau$ is monotone with respect to $\preceq$ since
 if $l \preceq l'$, then $\tau(l) \preceq \tau(l')$. By the \textit{Tarski theorem}
-\ref{def:knaster-tarski} there must exist maximum labelling such that
+\ref{thm:knaster-tarski} there must exist maximum labelling such that
 $$
     \ell^* = \sup_{m \in \mathbb{N}} \tau^m(\Omega)
 $$
@@ -850,7 +833,6 @@ where the leaf nodes are assigned a label of $\bot$ or accepting.
 Given the above, we can finally give a definition of halting states:
 
 \begin{definitionbox}{Halting states\cite{chandra1981alternation}}{alt-halt}
-    \label{def:alt-halt}
     We say that $M$ halts on $x$ iff $\lambda^*(\sigma_M(x)) \in \{0,1\}$ and
     it accepts or rejects respectively iff  $\lambda^*(\sigma_M(x)) = 1$ or $\lambda^*(\sigma_M(x)) = 0$
 \end{definitionbox}
