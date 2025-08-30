@@ -6,8 +6,8 @@
 
 \section{Project management methodology}
 
-Due to the hybrid nature of our project, we wanted to make sure that we are able
-to both the software portion and the theory portion of the project effectively.
+Due to the hybrid nature of our project, we wanted to ensure that we are able
+to manage both the software portion and the theory portion of the project effectively.
 With respect to our software management, we primarily focused on a hybrid approach
 with the help of a Kanban board, since we expected the core
 set of requirements to change over time as we developed our theories and ideas.
@@ -29,9 +29,8 @@ With regard to the research management, we revolved our methodology around the \
 information when dealing with a massive wave of publications  \cite{cevolini_ForgettingMachinesKnowledge_2018}.
 The method embodies the following elements:
 \begin{enumerate}
-    \item \textbf{Literature Notes}: Atomic notes that have been extracted from each
-          paper which contain the ideas and techniques of the paper.
-    \item \textbf{Fleeting notes}: Ideas that pop up randomly but are not really linked with any particular source.
+    \item \textbf{Literature Notes}: Atomic notes that have been extracted from literature which contain its ideas and techniques.
+    \item \textbf{Fleeting notes}: Ideas that pop up randomly but are not linked with any particular source.
     \item \textbf{Permanent notes}: Reviewed literature notes and fleeting notes which have been promoted to
           \textbf{permanent} ones. These notes maybe linked with other permanent notes to create a web of knowledge.
 \end{enumerate}
@@ -46,7 +45,7 @@ To aid our research management, we made use of the \texttt{Obsidian} \footnote{h
 tagging system, made it easier to keep track of our ideas and ongoing theories, as it is based
 around the philosophy of the \textit{Zettelkasten method}.
 Moreover, it incorporates additional features as seen in the figure  \ref{fig:theory:obsidian-usages},
-such as a canvas or a mind-map. All these features allowed us to streamline and refine thought processes,
+such as a canvas or a mind-map. All these features allowed us to streamline and refine our theories
 throughout the project.
 In addition, to keep version control, we used \texttt{Github} \footnote{https://github.com/}
 as it one of the most well known version control applications in industry.
@@ -76,9 +75,9 @@ back in case something unexpected occurred.
 \section{Ethical Considerations}
 
 Due to the nature to the theoretical nature of the project, there were no ethical consideration
-that were required. All the data and diagrams that were created were either made by the
+that were required. All the data and diagrams that were referenced, were either made by the
 author, redrawn by the author or referenced from another paper. The libraries
-used to build the software were under the MIT licence and no data were collected.
+used to build the software were under the MIT licence and no third-party datasets were collected.
 
 \section{Risk Assessment}
 
@@ -101,13 +100,13 @@ We give our previous risk assessment table in the appendix \ref{sec:app:interim-
     High   & Medium & Software may not be feasible within the remaining time frame. & We focus on the validation and creation of instances.
     The current project is primarily research-based, and therefore we are mainly prioritising the theoretical development aspect. & \checkmark      \\ \hline
     Low    & Medium & Software not identifying a correct solution. & Usage of TDD techniques and property testing to ensure correctness.  Comparison with handmade instances. & \checkmark      \\ \hline
-    Medium & Low    & Difficulty of showing the parsimonious reduction from the  \textit{EndOfLine} to \textit{PureCircuit}. & Find parsimonious reductions from both directions.
+    Medium & High    & Difficulty of showing the parsimonious reduction from the  \textit{EndOfLine} to \textit{PureCircuit}. & Find parsimonious reductions from both directions.
     Reduce the overall reduction goal to a simpler one such as \textit{AntipodalSS} with \textit{HF-AntipodalSS}. &  \checkmark \\ \hline
     High   & High   & Inability to make significant progress on the \textit{SourceOrExcess} problems or the generalised statement. &
     Analyse the counting complexity of \textbf{PPAD}. Find parsimonious reductions from the \textit{SourceOrExcess} problem. & \checkmark \\ \hline
     High   & High   & Incorrect proofs or reductions. &
     Analyse the problem under different constraints.
-    Apply the duck method, where you attempt to explain the solution to a person who is not necessarily an expert. Validate proof with the supervisor or
+    Apply the duck method, where we attempt to explain our ideas to an independent third-party. Validate proof with the supervisor or
     use the tool to investigate sample cases. & -  \\ \hline
     High   & Medium & Develop combinatorial-friendly variants of \textit{PureCircuit}. & Apply robustness on the gate set of \textsc{PureCircuit}.
     Develop new gates or variants are easier to work with or focus
@@ -129,9 +128,9 @@ We give our previous risk assessment table in the appendix \ref{sec:app:interim-
 
 We provide a figure of our final iteration of our Gantt chart in figure \ref{fig:gantt-new}
 and the Gantt chart from our interim report in the appendix \ref{sec:app:interim-report-gantt}.
-Overall there were substantial changes. We split the library development,
-into the \textit{PureCircuit} data-structure development as well as
-the time for the solution finders and enumerators.
+Overall there were substantial changes as we pivoted our
+attention into the completion of the \textit{PureCircuit} tool
+and the development of the necessary algorithms.
 
 Due to complications that arose shortly after the interim report,
 as mentioned in our risk assessment section, we shifted focus
@@ -160,7 +159,7 @@ an ideal scenario, it would have been more valuable for
 us had we prioritised the development of the visualisation tool
 as it would have allowed for faster verification of results.
 Moreover, one of our key results from the interim
-report ended up having a major issues that halted our process.
+report ended up having a major issues that halted our progress.
 
 On the bright side,
 our rigorous testing methodology enabled us to complete the software development without encountering any major issues.

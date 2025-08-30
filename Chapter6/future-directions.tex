@@ -19,21 +19,21 @@ Along similar line, we can also ask the questions as to existence of problems
 exists a parsimonious reduction to its non-hazard-free variant.
 
 
-Even more naturally, one can also ask further questions such as, how does hazard-freeness
-affect \textbf{TFNP} as a whole. We conjecture that one can make
+Even more naturally, one can also ask, how does hazard-freeness
+affect \textbf{TFNP} as a whole? We conjecture that one can make
 similar observations to the \textit{StrongTucker} problem \cite{aisenberg_2DTuckerPPA_2020},
 in order to create similar classes such as \textbf{HF-PPA} as
 it also uses a very similar colouring argument as the \textit{StrongSperner} argument.
-Moreover, we were able to observed how we can use Kleene logic with
+Moreover, we were able to observe how we can use Kleene logic with
 \textbf{PLS} sub-problems like \textit{Tarski}. Naturally,
 can we define the class of problems \textbf{HF-TFNP},
 and would it be equivalent to its non-hazard-free variant? We believe that this shift
 in perspective may also give insights to other areas such as the circuit complexity of \textit{Hazard-Free circuits}.
 
 
-\subsubsection{Parsimonious Topological Representations of \textbf{PPAD} problems }
+\subsubsection{Parsimonious Topological Representations of \textbf{PPAD} problems}
 
-We summarise our conclusion from the section \ref{sec:sc-excess}, by arguing about
+We summarise our conclusion from the section \ref{sec:sc-excess}, by conjecturing
 the existence of a parsimonious reduction from an \textit{nD-Counting-SS} to a
 \textit{Counting-SS} problem as it would demonstrate an important stepping
 stone towards its parsimonious reduction to the \textit{PureCircuit} problem.
@@ -62,7 +62,7 @@ for enumerating solutions.
 The proof for the \textbf{PPAD}-inclusion can be summarised as expressing a \textit{PureCircuit} instance
 as a \textit{Brouwer} function from $[0,1]^n \to [0,1]^n$, where
 each input represents a continuous assignment to the circuit nodes,
-and each output $F_i(x)$ is determined by a continuous function of the gate incident to node $i$ and its neighboring nodes
+and each output $F_i(x)$ is determined by a continuous function of the gate incident to node $i$ and its neighbouring nodes
 \cite{deligkas_PureCircuitTightInapproximability_2024}.
 Given its fixed point $x^\star$ then
 we can denote the following assignment: if $x^\star_i \in \{0,1\}$ then $v_i = x^{\star}_i$, otherwise
@@ -85,7 +85,7 @@ a more intricate combinatorial nature and therefore assist in the resolution of 
 \subsubsection{PureCircuit with ATMs}
 \label{sub-sub-sec:fw:pc-atms}
 
-In our supplementary findings section \ref{sec:chap-3:supp-findings},
+In our supplementary finding section \ref{sec:chap-3:supp-findings},
 we showed how to relate variants of the \textit{Tarski} problem
 with \textit{PureCircuit}. We also know that based on
 \textit{Tarski}'s theorem, we can always find a labelling function
@@ -102,7 +102,7 @@ for the potential relation between \textit{PureCircuit} and ATMs.
 
 Given the algorithms that we proposed for our software, we argue that there are several improvements
 that can be made.
-For all three of the algorithmic methods we mentioned, the first and most important extension
+For all three of the algorithmic methods we mentioned, the most important extension
 is to treat weakly directly connected components individually. Trivially an assignment in one
 weakly connected component should not affect the solution set of the other one.
 We can therefore reduce the search spaces of our problems by finding
@@ -114,12 +114,10 @@ $$
 $$
 Where $G_i$ is the $i$th connected component.
 
-
 We can also optimise the backtracking algorithm even further.
 First one can observe that if our graph was acyclic, then
-the permutation of the nodes with no \textit{in-degree} solutions essentially
-dictate the assignments of the downstream nodes (excluding nodes incident
-to purify gates). With this in mind, we can apply the following sequence
+the permutation of the nodes with no \textit{in-degree} solutions have a significant
+influence to the downstream nodes. With this in mind, we can apply the following sequence
 of steps to make the backtracking algorithm simpler:
 \begin{enumerate}
     \item Identify the strongly connected components (SCCs) of the circuit, using polynomial

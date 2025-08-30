@@ -24,10 +24,10 @@
         {\color[HTML]{333333} \textbf{NAND input}}        & {\color[HTML]{333333} \textbf{Output sets}}                                                   \\ \hline
         $\forall v \in \mathbb{T}: (\cdot, \cdot, v)$     & $(\mathbb{T}_{\geq \neg v},\mathbb{T}_{\geq \neg v}, \{v\} )$                                 \\ \hline
         $\forall v \in \mathbb{T}: (\cdot, v, \cdot)$     & $(\mathbb{T}, \{v\}, \mathbb{T}_{\geq \neg v})$                                               \\ \hline
-        $\forall a,b \in \mathbb{T}: a < b (\cdot, a, b)$ & $(\{\neg b\}, \{a\}, \{b\})$                                                                  \\ \hline
+        $\forall a,b \in \mathbb{T}: a < b \implies (\cdot, a, b)$ & $(\{\neg b\}, \{a\}, \{b\})$                                                                  \\ \hline
         $\forall v \in \mathbb{T}: (\cdot, v, \neg v)$    & $(\mathbb{T}_{\geq v}, \{v\}, \{\neg v\})$                                                    \\ \hline
-        $\forall a,b \in \mathbb{T}:a > b (\cdot, a, b)$  & Invalid combination                                                                           \\ \hline
-        $\forall a,b \in \mathbb{T}:a > b (a, b, \cdot)$  & $(\{a\}, \{b\}, \{\neg \max(a,b) \})$                                                         \\ \hline
+        $\forall a,b \in \mathbb{T}:a > b \implies (\cdot, a, b)$  & Invalid combination                                                                           \\ \hline
+        $\forall a,b \in \mathbb{T}: (a, b, \cdot)$  & $(\{a\}, \{b\}, \{\neg \min(a,b) \})$                                                         \\ \hline
         $\forall a,b,c \in \mathbb{T}:  (a, b, c)$        & $(\{a\}, \{b\}, \{c \})$, only if the triplet $(a,b,c)$ is a correct \textbf{NAND} assignment \\ \hline
     \end{tabular}
     \caption{\textbf{NAND} value propagation rules}

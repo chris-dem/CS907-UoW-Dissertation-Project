@@ -380,15 +380,14 @@ and \textbf{Backtrack Operation}.
 
 
 \paragraph*{Backtrack Initialisation} We initialise two main structures:
-a priority queue $Q$, and a solution map $S$ for each node.
+a min-based priority queue $Q$, and a solution map $S$ for each node.
 $S$ the solution map contains the \textit{KleeneSet} data structure
 which is the set of values a node can take. We assume that all nodes
 can take $\mathbb{T}$ in the beginning.
 
 
 The priority queue will essentially dictate
-which nodes to select and evaluate and we assume that we are
-using a min-based priority queue.
+which nodes to select and evaluate.
 We want to reduce the recursive calls as much as possible and eliminate any partial assignments
 that lead to unsatisfying solutions.
 The queue stores the node references of the value nodes
