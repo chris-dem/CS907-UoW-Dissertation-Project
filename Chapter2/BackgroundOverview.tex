@@ -16,7 +16,7 @@ where we  represent functions or relations as explained
 in definition \ref{def:search-problems}.
 
 
-\begin{definitionbox}{Search Problems}{search-problems}
+\begin{definitionbox}{Search Problems \cite{arora_ComputationalComplexityModern_2009}}{search-problems}
     \textbf{Search problems} can be defined as relations $R \subseteq \mathbb{B}^* \times \mathbb{B}^*$,
     where given $x \in \mathbb{B}^*$, we want to find $y \in \mathbb{B}^*$  such that $xRy$.
 
@@ -43,7 +43,7 @@ deeper connections. We introduce its
 search problem variant known as \textit{Levin Reductions} using the definition
 \ref{def:levin-reductions}.
 
-\begin{definitionbox}{Levin Reductions}{levin-reductions}
+\begin{definitionbox}{Levin Reductions \cite{arora_ComputationalComplexityModern_2009}}{levin-reductions}
     Let $A$ and $B$ be two search problems with relations $R_A \subseteq \{0,1\}^* \times \{0,1\}^*$ and $R_B \subseteq \{0,1\}^* \times \{0,1\}^*$, respectively.
 
     We say that $A$ is \textit{Levin reducible} to $B$, denoted $A \leq_L B$, if there exist polynomial-time computable functions $f: \{0,1\}^* \to \{0,1\}^*$ and $g: \{0,1\}^* \times \{0,1\}^* \to \{0,1\}^*$ such that:
@@ -101,7 +101,7 @@ there must always exist a different one.
 \begin{figure}
     \centering
     \includegraphics[width=0.7\linewidth]{assets/eol-subgraphs.png}
-    \caption{Types of sub-graphs in \textit{EndOfLine}.}
+    \caption[Types of sub-graphs in \textit{EndOfLine}]{Types of sub-graphs in \textit{EndOfLine}. Figure from interim report.}
     \label{fig:eol-subgraphs}
 \end{figure}
 
@@ -302,7 +302,7 @@ of their topology in order to guarantee a solution.
 \paragraph{Sperner Problems}
 Below we will refer to the notion of Sperner problems, which are types of problems that
 are based around \textit{Sperner's Lemma} \cite{yang_SpernerTheory_1999}.
-We are given a triangle 
+We are given a triangle
 that has subdivided into smaller sub-triangles, and we define the index of each point using the following set:
 $$
     \forall n \in \mathbb{N}: \mathcal{T}_n \triangleq \{(x,y,z) \in [n] \mid x + y + z = n\}
@@ -368,7 +368,7 @@ Deligkas et al. \cite{deligkas_PureCircuitTightInapproximability_2024, deligkas_
 $\forall A \subseteq S^d: |A| \geq d+1$ and satisfy the bipolar colouring condition, $\exists D \subseteq A: |D| \leq d$ where $D$ also satisfies
 the colouring condition, which implies that we need at most $d$ separate points to achieve a colouring.
 
-\begin{definitionbox}{\textit{StrongSperner} problem}{strong-sperner}
+\begin{definitionbox}{\textit{StrongSperner} problem \cite{deligkas_PureCircuitTightInapproximability_2024}}{strong-sperner}
     \textbf{Input}: A boolean circuit that computes a bipolar labelling $\lambda: [M]^N \to \{-1, 1\}^N$ \ref{def:bipolar-colouring},
     such that $M \in n^{O(1)}$, which
     satisfies the following boundary conditions for every $i \in [N]$:
@@ -392,7 +392,7 @@ dimensionality with an exponentially large width the problem remains \textbf{PPA
 as defined in \ref{def:nd-strong-sperner}.
 
 
-\begin{definitionbox}{\textit{nD-StrongSperner} problem}{nd-strong-sperner}
+\begin{definitionbox}{\textit{nD-StrongSperner} problem \cite{chen_SettlingComplexityComputing_2009,chen_Complexity2DDiscrete_2009}}{nd-strong-sperner}
     \textbf{Input}: A tuple $(\lambda,0^k)$ such that
     $\lambda : (\mathbb{B}^k)^n \to \{-1, +1\}^n$, and $\lambda$ abides the \textit{boundary conditions}
     of the \textit{StrongSperner} problem.\\
@@ -539,7 +539,7 @@ the cycle counting problem.
 In hindsight, we can observe that functions in $\textbf{\#P}$ express functions of the form
 $\forall w \in \{0,1\}^*: f(w) = |A_w|$, where $A_w$ is a set of verifiers or accepting paths of size
 polynomial to the input.
-Given the above definition, Pak et al. \cite{pak_WhatCombinatorialInterpretation_2022, ikenmeyer_PositivitySymmetricGroup_2024}
+Given the above definition, Pak et al. \cite{pak_WhatCombinatorialInterpretation_2022, ikenmeyer_PositivitySymmetricGroup_2024,ikenmeyer_WhatWhatNot_2022}
 used $\textbf{\#P}$ to decide whether a class of numbers or objects have or do not have a combinatorial interpretation.
 Moreover, they argue that the usage of $\textbf{\#P}$ has several benefits:
 
@@ -573,7 +573,7 @@ An example of a parsimonious reduction can be seen in figure \ref{fig:chap-2:par
 where we relate the difficulty of sudoku solving to a graph colouring problem.
 
 
-\begin{definitionbox}{Parsimonious reductions}{pars-reduction}
+\begin{definitionbox}{Parsimonious reductions \cite{arora_ComputationalComplexityModern_2009}}{pars-reduction}
     Let $L, L'$ be counting problems.
     We say $L$ is parsimoniously reducible to $L'$, if there exists a polynomial computable function $f: \{0,1\}^* \to \{0,1\}^*$
     such that
@@ -634,7 +634,7 @@ aiding in the development of lower bounds for monotone circuits
 \cite{eichelberger_HazardDetectionCombinational_1965, ikenmeyer_ComplexityHazardfreeCircuits_2019,ikenmeyer_KarchmerWigdersonGamesHazardfree_2022,  bund_SmallHazardFreeTransducers_2025}.
 The current section offers a brief summary to relevant notions and concepts in Kleene logic.
 
-\begin{definitionbox}{Kleene value ordering \cite{mukaidono_BternaryLogicFunction_1972}}{kleene-order}
+\begin{definitionbox}{Kleene value ordering \cite{mukaidono_BternaryLogicFunction_1972,ikenmeyer_ComplexityHazardfreeCircuits_2019}}{kleene-order}
     The \textit{instability ordering} or \textit{information ordering} for $\preceq$ is defined as: $\bot \preceq 0,1$. The $n$-dimensional
     extension of the ordering, we say that:
     $$
@@ -686,7 +686,7 @@ An example of hazard values can be seen in figure \ref{fig:hazard-example}.
     {Hazard circuit and hazard-free circuit. Main idea is for $\textit{MUX}(s,x,y)$, $\textit{MUX}(\bot, 1,1)$
         should be $1$ by our hazard definition. We can see that when we replace $s= \bot, x= 1, y =1$ to our circuits,
         one of them presents a hazard.
-        Figure by \cite{ikenmeyer_ComplexityHazardfreeCircuits_2019}.}\label{fig:hazard-example}
+        Figure recreated from \cite{ikenmeyer_ComplexityHazardfreeCircuits_2019}.}\label{fig:hazard-example}
 \end{figure}
 
 \begin{propositionbox}{Natural functions and Circuits \cite{mukaidono_BternaryLogicFunction_1972,ikenmeyer_ComplexityHazardfreeCircuits_2019}}{nat-func-circ}
@@ -856,11 +856,11 @@ up to the root.
     \centering
     \includegraphics[width=0.7\textwidth]{Chapter2/ATM-computation-graph.pdf}
     \caption[Computation tree of an ATM with labellings]{Computation tree of an ATM with labellings.}
-        %  We can observe that we start with an initial
-        % configuration and for each child, we end up in different states and configurations that have
-        % different accepting conditions. In the leafs of our tree, we may have accepting, rejecting
-        % or unknown configurations. What the $\tau$ operator does is propagating
-        % the state from the leafs, all the way up to the root}
+    %  We can observe that we start with an initial
+    % configuration and for each child, we end up in different states and configurations that have
+    % different accepting conditions. In the leafs of our tree, we may have accepting, rejecting
+    % or unknown configurations. What the $\tau$ operator does is propagating
+    % the state from the leafs, all the way up to the root}
     \label{fig:chap-2:atm-comp-tree}
 \end{figure}
 
@@ -884,7 +884,7 @@ this does not seem to be the case.
     \includegraphics[width=0.7\textwidth]{assets/chart-plot_full.png}
     \caption[Total Search Problem Counting Hierarchy]
     {Total Search Problem Counting Hierarchy. Bold lines imply relativising parsimonious reductions. Lines with warning
-    signs imply there is an oracle separation in the inverse direction.}
+        signs imply there is an oracle separation in the inverse direction. Figure by Ikenmeyer et al. \cite{ikenmeyer_WhatWhatNot_2022}}
     \label{fig:chap-2:count-hier-tfnp}
 \end{figure}
 
@@ -913,7 +913,7 @@ $$
 $$
 A reasonable conjecture would also be if one can exploit Kleene-circuit nature of \textit{PureCircuit} to
 create a \textit{Cook-Levin} type equivalent reduction for \textbf{PPAD} problems, denoted as
-$$ 
+$$
     \forall L \in \textbf{PPAD}: \textbf{\#PPAD}(L) \subseteq  \textbf{\#PPAD}(\textit{PureCircuit})
 $$
 If the above statement were indeed true, then it would give us insights as to how counting problems behave in $\textbf{\#PPAD}-1$.
