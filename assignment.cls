@@ -99,3 +99,6 @@
 }
 
 \newcommand{\code}[1]{\texttt{#1}}
+\makeatletter
+\renewcommand*\l@figure{\@dottedtocline{1}{1.5em}{4.0em}} % Increased from 3.0em
+\makeatother

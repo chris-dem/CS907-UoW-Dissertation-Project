@@ -1,5 +1,5 @@
 % !TEX root =  ../Report.tex
-\section{Theoretical Preliminaries and Literature Overview}
+\section{Theoretical Preliminaries and Literature Overview} \label{sec:theo-prelims}
 In the current section, we introduce all the necessary preliminaries
 with respect to search problems and counting complexity theory.
 Moreover, we give an overview of the \textit{PureCircuit} problem, and its connections
@@ -13,7 +13,7 @@ known as decision problems, where given an input, the output is a boolean
 value of whether the specific instance is in the language or not.
 Function problems or search problems are extensions of decision problems,
 where we  represent functions or relations as explained
-in the definitions \ref{def:search-problems}.
+in definition \ref{def:search-problems}.
 
 
 \begin{definitionbox}{Search Problems}{search-problems}
@@ -37,10 +37,10 @@ using the definitions in \ref{def:fnp-tfnp}.
     Lastly $\textbf{TFNP} = \{L \in \textbf{FNP} \mid L \text{ is total}\}$
 \end{definitionbox}
 
-Adding on, in the decision problem space, it is common to relate a problem to
-each other with the usage of reductions
-such as \textit{Kerp reductions}. We introduce its
-search problem variant known as \textit{Levin Reductions}  using the definition in
+Additionally, in the decision problem space, it is common to reduce problems to each other
+with the help of \textit{Kerp reductions}, in order to yield
+deeper connections. We introduce its
+search problem variant known as \textit{Levin Reductions} using the definition
 \ref{def:levin-reductions}.
 
 \begin{definitionbox}{Levin Reductions}{levin-reductions}
@@ -71,8 +71,8 @@ The \textbf{TFNP} hierarchy contains several subclasses (see figure \ref{fig:cha
 \cite{papadimitriou_ComplexityParityArgument_1994,johnson_HowEasyLocal_1988,daskalakis_ContinuousLocalSearch_2011,fearnley_CLSNewProblems_2017}.
 Each of these problems take advantage of a different combinatorial property such as,
 the pigeonhole principle or sinks in DAGs.
-In the current project we are mainly interested
-in \textbf{PPAD}, known as ``Polynomial Parity of Augmented DiGraphs'', created by Papadimitriou \cite{papadimitriou_ComplexityParityArgument_1994}.
+In the current project we are primarily interested
+in \textbf{PPAD}, known as ``Polynomial Parity of Augmented DiGraphs'', as coined by Papadimitriou \cite{papadimitriou_ComplexityParityArgument_1994}.
 We first introduce the \textit{EndOfLine} problem \ref{def:eol-ppad}
 which takes advantage of the combinatorial fact that if there exists an unbalanced node in a directed graph,
 there must always exist a different one.
@@ -101,14 +101,14 @@ there must always exist a different one.
 \begin{figure}
     \centering
     \includegraphics[width=0.7\linewidth]{assets/eol-subgraphs.png}
-    \caption{Types of sub-graphs in \textit{EndOfLine}}
+    \caption{Types of sub-graphs in \textit{EndOfLine}.}
     \label{fig:eol-subgraphs}
 \end{figure}
 
 \vspace{0.2cm}
 
 An illustrative example of an \textit{EndOfLine} instance can be seen in figure \ref{fig:eol-subgraphs}.
-The idea that of the problem is that its solutions will always be at the beginning and the end of some line,
+The key observation is that solutions will always be at the ends of a line,
 hence its name. We also always guarantee a solution since we ensure that the $0^n$ is always a source
 and therefore there must exist a pairing sink.
 From this problem, we define the \textbf{PPAD} complexity class \ref{def:ppad-complexity-class}.
@@ -120,14 +120,14 @@ From this problem, we define the \textbf{PPAD} complexity class \ref{def:ppad-co
 
 \subsubsection{EndOfLine variants and extensions}
 
-We introduce several key variants of the \textit{EndOfLine} that have been created in the past.
+We introduce several key variants of the \textit{EndOfLine} that have been explored in the past.
 We first highlight the
 works by Papadimitriou \cite{papadimitriou_GraphtheoreticLemmataComplexity_1990},
 Beame et al. \cite{beame_RelativeComplexityNP_1998} and
 Alexandros et al. \cite{hollender_ComplexityMultisourceVariants_2018} since they demonstrated that in the more general case of superpolynomial graphs,
 if we bound the in-degree and out-degree of each node to some polynomial of the input size, then the problem remains \textbf{PPAD}.
 We introduce the \textit{SourceOrExcess}$(2,1)$ problem by Ikenmeyer et al. \cite{ikenmeyer_WhatWhatNot_2022}, since it
-lacks a combinatorial interpretation under decrementation (``$-1$''), as we demonstrate further in section \ref{sec:back:count-plus-search}.
+lacks a combinatorial interpretation under decrementation (``$-1$''), as further demonstrated in section \ref{sec:back:count-plus-search}.
 
 \begin{definitionbox}{\textit{SourceOrExcess} problem \cite{ikenmeyer_WhatWhatNot_2022}}{source-or-excess}
     We define as $\textit{SourceOrExcess}(k,1)$ for $k \in \mathbb{N}_{\geq 2}$ as such:
@@ -144,7 +144,7 @@ lacks a combinatorial interpretation under decrementation (``$-1$''), as we demo
 
 In addition to the aforementioned adjustments, researchers were able to give a topological interpretation
 to the \textit{EndOfLine} \ref{def:eol-ppad} problem, by creating embeddings of the graph
-into 2D or 3D spaces as demonstrated by several researchers \cite{chen_Complexity2DDiscrete_2009, hollender_ComplexityMultisourceVariants_2018,daskalakis_ComplexityComputingNash_2006}.
+into 2D or 3D spaces \cite{chen_Complexity2DDiscrete_2009, hollender_ComplexityMultisourceVariants_2018,daskalakis_ComplexityComputingNash_2006}.
 We will mainly focus on the \textit{2D-EOL}
 created by Chen et al. and Hollender et al. \cite{chen_Complexity2DDiscrete_2009,hollender_ComplexityMultisourceVariants_2018}.
 
@@ -160,8 +160,8 @@ created by Chen et al. and Hollender et al. \cite{chen_Complexity2DDiscrete_2009
 \end{definitionbox}
 
 The above description defines a superpolynomial such that an edge $(x,y) \in E$
-if and only if $S(x) = y \wedge P(y) = x$ as well as the closeness constraint $\|x-y\|_1 \leq 1$.
-We refer to this problem in later sections to talk about the topological representations of our graphs.
+if and only if $S(x) = y \wedge P(y) = x$ and $\|x-y\|_1 \leq 1$.
+We refer to this problem in later sections to discuss the topological representations of our graphs.
 
 \paragraph*{Multi-Source variants}
 Lastly we introduce variants of the \textit{EndOfLine} problem
@@ -185,8 +185,8 @@ and were demonstrated to be \textbf{PPAD}-complete.
 \subsubsection{The PureCircuit problem}
 \label{par:pure-circ-def}
 We first start with $\epsilon\textit{-GCircuit}$
-which was first introduced by Chen et al. \cite{deligkas_PureCircuitTightInapproximability_2024,chen_SettlingComplexityComputing_2009}.
-General idea of $\epsilon\textit{-GCircuit}$ is that we have a directed graph  $T= (V,G)$ where
+which was firstly introduced by Chen et al. \cite{deligkas_PureCircuitTightInapproximability_2024,chen_SettlingComplexityComputing_2009}.
+$\epsilon\textit{-GCircuit}$ is defined as a directed graph  $T= (V,G)$ where
 $V$ denote value nodes and $G$ denote gate nodes. Each value node is assigned a value in $[0,1]$
 and the gates can denote the standard set of arithmetic operations $\{+, - ,*\}$ with other
 nodes or some constant, or boolean operators $\{\wedge, \vee, \neg, <, >, =\}$ with other nodes or some constant.
@@ -205,7 +205,7 @@ for which $\epsilon\textit{-GCircuit}$ is \textbf{PPAD}-hard
     {$\epsilon\textit{-GCircuit}$ example.
         A valid assignment would be $(0.2, 0.2, 0.2, 0.2)$
         since each gate will be satisfied up to an $\epsilon$ factor.
-        Image by Chen et al. \cite{chen_SettlingComplexityComputing_2009}}
+        Image provided by Chen et al. \cite{chen_SettlingComplexityComputing_2009}.}
     \label{fig:chap-2:eps-gcirc}
 \end{figure}
 
@@ -249,13 +249,13 @@ and it was shown to be \textbf{PPAD}-complete.
 
 In addition to the gates above, we will make use of the standard set of gates $\{\vee, \wedge, \neg\}$,
 whose behaviour is depicted in the tables \ref{tab:three-val-logic}.
-Moreover, we will make use of the \textsc{Copy} gate which we can define as $\textsc{Copy}(x) = \neg (\neg x)$.
+Moreover, we expand our gate set with the \textsc{Copy} gate which we can define as $\textsc{Copy}(x) = \neg (\neg x)$.
 These gates are well-defined based on the \textsc{NOR} gate as shown by Deligkas et al. \cite{deligkas_PureCircuitTightInapproximability_2024}
 and do not directly affect the complexity of the problem.
 Furthermore, with respect to the \textsc{Purify} gate,
 the original problem states that one of two outputs must contain a pure value.
 We restrict the solution set to the one written in the definition as
-Deligkas et al. \cite{deligkas_PureCircuitTightInapproximability_2024} showed that the only \textsc{Purify} solutions essential
+Deligkas et al. \cite{deligkas_PureCircuitTightInapproximability_2024} proved that the only \textsc{Purify} solutions essential
 for \textbf{PPAD}-completeness are $\{(0,\bot), (\bot,1), (0,1)\}$, and the addition of more solutions does not affect its complexity.
 
 
@@ -289,20 +289,21 @@ for \textbf{PPAD}-completeness are $\{(0,\bot), (\bot,1), (0,1)\}$, and the addi
         \end{tabular}
     }
 
-    \caption{Three-valued logic \cite{kleene_IntroductionMetamathematics_2009}}\label{tab:three-val-logic}
+    \caption{Three-valued logic \cite{kleene_IntroductionMetamathematics_2009}.}\label{tab:three-val-logic}
 \end{table}
 
 
 
 \subsubsection{Topological problems}
 
-This section refers to types of problems which take advantage of some combinatorial property
+This section refers to types of problems that take advantage of some combinatorial property
 of their topology in order to guarantee a solution.
 
 \paragraph{Sperner Problems}
 Below we will refer to the notion of Sperner problems, which are types of problems that
-are based around \textit{Sperner's Lemma} \cite{yang_SpernerTheory_1999}. The idea is as follows, given a triangle %% ADD CITATION
-that has subdivided into smaller sub-triangles, we first define the index of each point using the following set:
+are based around \textit{Sperner's Lemma} \cite{yang_SpernerTheory_1999}.
+We are given a triangle 
+that has subdivided into smaller sub-triangles, and we define the index of each point using the following set:
 $$
     \forall n \in \mathbb{N}: \mathcal{T}_n \triangleq \{(x,y,z) \in [n] \mid x + y + z = n\}
 $$
@@ -315,19 +316,18 @@ $$
     \end{cases}
 $$
 Given a valid colouring $\lambda$, we can always find a small triangle $\tau$ where all 3 colours are assigned
-to one of its vertices. A visual example can be seen in figure \ref{fig:chap-2:sperner-example}.
+to one of its vertices. A visual example is provided in figure \ref{fig:chap-2:sperner-example},
+where we can observe that any colouring that we choose will always result in some panchromatic simplex.
 
 \begin{figure}[h!]
     \centering
     \includegraphics[width=0.7\textwidth]{Chapter2/1729451176N.pdf}
-    \caption[Sperner Colouring Simplex]{A colouring example of a subdivided simplex.
-        As we can observe, no matter how we modify colourings,
-        there will always be a small simplex that contains all colours}
+    \caption[Sperner Colouring Simplex]{A colouring example of a subdivided simplex.}
     \label{fig:chap-2:sperner-example}
 \end{figure}
 This type colouring will be referred to as the \textbf{linear} colouring.
 There are several variants of the problem, where we can either work in a triangle with an exponential amount of subdivisions
-or with polynomial subdivisions but on higher dimensional simplexes. Both of these problems are \textbf{PPAD}-complete
+or with polynomial subdivisions, but on higher dimensional simplexes. Both of these problems are \textbf{PPAD}-complete
 \cite{papadimitriou_ComplexityParityArgument_1994,chen_SettlingComplexityComputing_2009,chen_Complexity2DDiscrete_2009}.
 
 We introduce an alternative variant of the Sperner problems,
@@ -336,9 +336,9 @@ In the traditional problem, we assign $1$ colour to each vertex
 in order to find a panchromatic simplex with $d+1$ colours.
 The \textit{StrongSperner} problem uses \textit{bipolar colouring} in a hypercube space \ref{def:bipolar-colouring}.
 We refer to the figure \ref{fig:chap-2:bisperner-example}
-for a visual interpretation of the colouring. Essentially for each point
+for a visual interpretation of the colouring. For each point
 in some hypercube $[N]^d$, we assign $d$ colours, where for colour $i \in [d]$ we can choose
-either $\{i^+, i^-\}$. The goal is to find a cube where in every dimension there exists at least two points that cover both colours.
+either $\{i^+, i^-\}$. The aim is to find a cube where in every dimension there exists at least two points that cover both colours.
 This has been used in many problems throughout
 literature as seen in the papers \cite{chen_SettlingComplexityComputing_2009, deligkas_PureCircuitTightInapproximability_2024, daskalakis_ComplexityConstrainedMinmax_2021}
 to demonstrate \textbf{PPAD}-hardness of many problems.
@@ -346,7 +346,7 @@ to demonstrate \textbf{PPAD}-hardness of many problems.
 \begin{figure}
     \centering
     \includegraphics[width=0.7\textwidth]{Chapter2/2DBiSperner.png}
-    \caption[\textit{StrongSperner} Interpretation]{Visual interpretation of the \textit{StrongSperner} problem. Figure from paper \cite{daskalakis_ComplexityConstrainedMinMax_2020}}
+    \caption[\textit{StrongSperner} Interpretation]{Visual interpretation of the \textit{StrongSperner} problem. Figure is derived from paper \cite{daskalakis_ComplexityConstrainedMinMax_2020}}
     \label{fig:chap-2:bisperner-example}
 \end{figure}
 
@@ -383,12 +383,10 @@ the colouring condition, which implies that we need at most $d$ separate points 
     \end{itemize}
 \end{definitionbox}
 
-Throughout literature the same variants of the problem or specifications
+Relevant literature defines the same variants of the problem or specifications
 have been defined using the names Sperner or discrete Brouwer \cite{chen_SettlingComplexityComputing_2009, chen_Complexity2DDiscrete_2009, daskalakis_ComplexityComputingNash_2006, deligkas_PureCircuitTightInapproximability_2024}.
 This is very similar to a different type of problem known as \textit{StrongTucker}, which can be thought of as the
 \textbf{PPA} analogue of \textit{StrongSperner} \cite{papadimitriou_ComplexityParityArgument_1994,aisenberg_2DTuckerPPA_2020}.
-The two problems satisfy different boundary conditions
-but due to their similar labelling nature, we will borrow some techniques used in later sections.
 Chen et al. \cite{chen_SettlingComplexityComputing_2009} demonstrated that for a fixed
 dimensionality with an exponentially large width the problem remains \textbf{PPAD}-complete,
 as defined in \ref{def:nd-strong-sperner}.
@@ -405,18 +403,19 @@ as defined in \ref{def:nd-strong-sperner}.
     We assume dimensionality $n \geq 2$.
 \end{definitionbox}
 
-The authors refer to both colouring schemes interchangeably when discussing their reductions,
+Both colouring schemes are interchangeably when discussing their reductions,
 so we can assume that all reductions (not necessarily counting reductions) work similarly for either colouring
 \cite{chen_SettlingComplexityComputing_2009, deligkas_PureCircuitTightInapproximability_2024, daskalakis_ComplexityComputingNash_2006, chen_Complexity2DDiscrete_2009}.
 
-Other than topological colouring, we will also give a small introduction to a tiling problem known as mutilated chessboards. Tiling
-spaces have been used throughout literature \cite{hollender_ComplexityMultisourceVariants_2018,chan_ComputationalComplexityCounting_2024}.
-We will use as reference the \textbf{PPAD}-complete \textit{1-MC} problem by Hollender et al. \cite{hollender_ComplexityMultisourceVariants_2018}. We refer
+Complementary to topological colouring, we will also introduce a tiling problem known as mutilated chessboards.
+We refer
 to the problem introduced by Blank \cite{black1946critical} as follows:
 assume we have a $2n \times 2n$ chessboard. If we are provided with $1 \times 2$ pieces, we can trivially tile the board by filling each row with $n$ horizontal
 pieces. The idea is when we remove the bottom left corner, the board becomes impossible to tile. The argument
-can be thought of as such: each tile piece covers an even square and an odd square, which implies that it has to be the case that one of the squares
-has to remain untiled. An example can be seen in the figure \ref{fig:chap-2:1-mc-example} where we can observe that there will always be an untiled square.
+is provided as follows: each tile piece covers an even square and an odd square, which implies that it has to be the case that one of the squares
+has to remain untiled.
+Hollender et al. \cite{hollender_ComplexityMultisourceVariants_2018} introduced a \textbf{PPAD}-complete variant of the problem, known as \textit{1-MC}.
+An example can be seen in the figure \ref{fig:chap-2:1-mc-example} where we can observe that there will always be an untiled square.
 
 
 
@@ -432,7 +431,7 @@ has to remain untiled. An example can be seen in the figure \ref{fig:chap-2:1-mc
 \begin{figure}[h!]
     \centering
     \includegraphics[width=0.7\textwidth]{Chapter2/1-mc-example.pdf}
-    \caption[1-MC example]{Example on a $8 \times 8$ chessboard with a missing square. As we can observe, there will always be one square we cannot tile }
+    \caption[1-MC example]{Example on a $8 \times 8$ chessboard with a missing square. As we can observe, there will always be one square we cannot tile.}
     \label{fig:chap-2:1-mc-example}
 \end{figure}
 
@@ -512,12 +511,13 @@ in the partial order chain, or points that violate the monotonicity constraint.
 
 \subsection{Counting Complexity and Combinatorial Interpretations}
 
-Search problems as we observed earlier ask what is a valid solution given the current input instance like
-what is a valid colouring of a graph, satisfying assignment to a 3-SAT problem etc. Counting complexity,
-or counting problems take it a step further and usually ask how many valid solutions does a problem have.
+Search problems as previously observed, explore what is a valid solution given the current input instance like
+such as a valid colouring of a graph or a satisfying assignment to a 3-SAT problem. Counting complexity,
+or counting problems extend this notion by asking how many valid solutions does a problem have.
 Valiant formalised this idea with the help of $\textbf{\#P}$ complexity class \ref{def:sharpp-class}, in which
 he demonstrated that even if a problem is polynomially solvable in its decision/search variant, counting can be
-much harder. A much simpler example can be found in the book by Barak et al. \cite{arora_ComputationalComplexityModern_2009}
+much harder \cite{valiant_ComplexityComputingPermanent_1979}.
+A much simpler example can be found in the book by Barak et al. \cite{arora_ComputationalComplexityModern_2009}
 where they provide a reduction from the \textbf{NP}-complete problem of hamiltonian cycles to
 the cycle counting problem.
 
@@ -554,7 +554,7 @@ Moreover, they argue that the usage of $\textbf{\#P}$ has several benefits:
 \end{enumerate}
 
 We introduce the $\#L$ notation to denote the counting version
-of a search problem $L$, more formally use the definition \ref{def:sharp-l-notation}.
+of a search problem $L$, formally denoted in definition \ref{def:sharp-l-notation}.
 Sometimes we use notations $\#L$ or $\#K(L)$ interchangeably to highlight
 that $L$ is in complexity class $K$.
 
@@ -567,9 +567,9 @@ that $L$ is in complexity class $K$.
     Where for relation $R$ we say $R(x) \triangleq \{y \in \{0,1\}^* \mid xRy \}$.
 \end{definitionbox}
 
-Given the above, we introduce the idea of correlating two counting problems with the help of
+Given the above, we introduce the notion of correlating two counting problems with the help of
 \textit{parsimonious reductions} which we define in \ref{def:pars-reduction}.
-An example of how such reduction may look like, can be seen in figure \ref{fig:chap-2:pars-reduction},
+An example of a parsimonious reduction can be seen in figure \ref{fig:chap-2:pars-reduction},
 where we relate the difficulty of sudoku solving to a graph colouring problem.
 
 
@@ -582,19 +582,21 @@ where we relate the difficulty of sudoku solving to a graph colouring problem.
     $$
     We denote the reduction above as $L \subseteq L'$.
 \end{definitionbox}
-%% TODO
+
 \begin{figure}
     \centering
     \includegraphics[width=0.5\textwidth]{Chapter2/parsimonious-reduction-example.pdf}
     \caption[Parsimonious Reduction between Sudoku and graph colouring]
     {Example of reducing a 6x6 sudoku puzzle into a graph colouring problem.
-        Each colouring corresponds to a sudoku solution of the original instance}
+        Each colouring corresponds to a sudoku solution of the original instance.}
     \label{fig:chap-2:pars-reduction}
 \end{figure}
 
 Since counting problems are regarded as functions to natural numbers, that means
-that we can create new counting problems through composition. We denote
-this as $f(L)$ or more formally we say:
+that we can create new counting problems through composition.
+For example, given $h : \{0,1\}^* \to \mathbb{N}$, and $g : \mathbb{N} \to \mathbb{N}$,
+we would like to express $g \circ h$.
+We experess the above notion using definition \ref{def:func-comp-reduction}.
 
 
 \begin{definitionbox}{Function composition in counting problems}{func-comp-reduction}
@@ -606,16 +608,16 @@ this as $f(L)$ or more formally we say:
 \end{definitionbox}
 
 We provide an example of the above notation using a finding from the paper
-by Ikenmeyer et al. \cite{ikenmeyer_WhatWhatNot_2022} where they demonstrate $\textit{\#CircuitSAT} \subseteq ((\textit{\#EndOfLine}) -1) /2$
-where $\textit{CircuitSAT}$ is the circuit variant of \textit{SAT}.
+by Ikenmeyer et al. where they demonstrate $\textit{\#CircuitSAT} \subseteq ((\textit{\#EndOfLine}) -1) /2$
+where $\textit{CircuitSAT}$ is the circuit variant of \textit{SAT} \cite{ikenmeyer_WhatWhatNot_2022}.
 Given instance $C$, using figure \ref{fig:chap-2:pars-eol-csat}, we can see that
 for each satisfying assignment, we are creating a source/sink pair. Excluding
-the sink that is always paired with the $0^n$ sink, it is easy to see that our reduction is parsimonious.
+the sink that is always paired with the $0^n$ sink, we argue the reduction is parsimonious.
 
 \begin{figure}
     \centering
     \includegraphics[width=0.7\textwidth]{Chapter2/eol2circuitsat.pdf}
-    \caption{\textit{\#CircuitSAT} to $((\textit{\#EndOfLine}) -1) /2$}
+    \caption{\textit{\#CircuitSAT} to $((\textit{\#EndOfLine}) -1) /2$.}
     \label{fig:chap-2:pars-eol-csat}
 \end{figure}
 
@@ -666,15 +668,15 @@ Unless otherwise specified, we will assume that all Kleene functions are \textit
 they can be represented by circuits \ref{prop:nat-func-circ}.
 Natural functions essentially indicate that a point with its resolution
 should respect the information order, or more simply if $f(00) =1$ then
-$f(0\bot) \neq 0$ as then it will not preserve monotonicity.
+$f(0\bot) \neq 0$ as it will not preserve monotonicity.
 Moreover, we can think resolutions of a point $x$ as all the values it ``could be''. For example
 $0\bot$ could be either $00$ or $01$.
-Naturally, if $f(00) = f(01) = 1$ then naturally we should also expect that $f(0\bot) = 1$.
+Naturally, if $f(00) = f(01) = 1$ then we should also expect that $f(0\bot) = 1$.
 This yields the concept of hazards on circuits (formal definition \ref{def:hf-def}) where given $x \in \mathbb{T}^n$,
 its resolutions have the same value but the point itself does not.
-Detecting hazards is a concept that is analysed heavily when talking about Kleene logic, and
+Detecting hazards is a concept that is analysed heavily when discussing about Kleene logic, and
 it is an \textbf{NP}-hard problem \cite{ikenmeyer_ComplexityHazardfreeCircuits_2019,bund_SmallHazardFreeTransducers_2025,eichelberger_HazardDetectionCombinational_1965}.
-An example of hazard values can be seen in the figure Ikenmeyer et al. \ref{fig:hazard-example}.
+An example of hazard values can be seen in figure \ref{fig:hazard-example}.
 
 \begin{figure}[h!]
     \centering
@@ -684,7 +686,7 @@ An example of hazard values can be seen in the figure Ikenmeyer et al. \ref{fig:
     {Hazard circuit and hazard-free circuit. Main idea is for $\textit{MUX}(s,x,y)$, $\textit{MUX}(\bot, 1,1)$
         should be $1$ by our hazard definition. We can see that when we replace $s= \bot, x= 1, y =1$ to our circuits,
         one of them presents a hazard.
-        Figure by \cite{ikenmeyer_ComplexityHazardfreeCircuits_2019}}\label{fig:hazard-example}
+        Figure by \cite{ikenmeyer_ComplexityHazardfreeCircuits_2019}.}\label{fig:hazard-example}
 \end{figure}
 
 \begin{propositionbox}{Natural functions and Circuits \cite{mukaidono_BternaryLogicFunction_1972,ikenmeyer_ComplexityHazardfreeCircuits_2019}}{nat-func-circ}
@@ -705,7 +707,7 @@ An example of hazard values can be seen in the figure Ikenmeyer et al. \ref{fig:
 
 We also wish to introduce the following corollary by
 Ikenmeyer et al. \cite{ikenmeyer_ComplexityHazardfreeCircuits_2019} which allows us
-to construct $k$-bit hazard free circuits
+to construct $k$-bit hazard free circuits.
 
 \begin{corollarybox}{K-bit Hazard Construction \cite{ikenmeyer_ComplexityHazardfreeCircuits_2019}}{k-bit-haz}
     Given circuit $C: \mathbb{T}^n \to \mathbb{T}$, one can construct a $k$-bit hazard free circuit of $C$ denoted as $C'$
@@ -720,15 +722,15 @@ to construct $k$-bit hazard free circuits
 
 
 \subsubsection{Kleene logic and Complexity Theory}
-Lastly we want to introduce the notion of \textit{Alternating Turing Machines}, which are meant to represent
+Lastly we want to introduce the notion of \textit{Alternating Turing Machines} (ATMs), which are meant to represent
 a generalisation of non-deterministic Turing machines.
-These have been introduced by Chandra et al. \cite{chandra1981alternation} and the idea is to use universal and existential quantifiers
-to alternate the course of computation. The informal presentation can be thought as follows:
+These have been introduced by Chandra et al. \cite{chandra1981alternation}
+and using universal and existential quantifiers
+to alternate the course of computation. The informal presentation can be considered as follows:
 In a non-deterministic TM, given its current state $q$ or configuration $\mathcal{C}$, we spawn
 $\beta_1, ..., \beta_k$ separate processes. We say that the current state will accept if at least one of the processes
-$\{\beta_i\}_{i \in [k]}$ accepts. Alternating Turing machines introduce additional conditions where
-we can enforce that all subprocesses $\{\beta_i\}_{i \in [k]}$ must accept or accept if we have one
-subprocess that is rejecting.
+$\{\beta_i\}_{i \in [k]}$ accepts. Alternating Turing machines introduce additional conditions
+such as all subprocess must accept.
 We provide a formal definition in \ref{def:alt-tm}.
 
 \begin{definitionbox}{Alternating Turing Machines(ATM) \cite{kozen_TheoryComputation_2006, chandra1981alternation}}{alt-tm}
@@ -741,13 +743,13 @@ We provide a formal definition in \ref{def:alt-tm}.
         \item $k \in \mathbb{N}$: The number of work tapes
         \item $Q$: Finite set of states
         \item $\Sigma$: Finite input alphabet. Moreover, $\star \not\in \Sigma$ denotes the end of the input
-        \item $\Gamma$: Finite work tape alphabet. Moreover $\# \in \Gamma$ to denote blank symbol.
+        \item $\Gamma$: Finite work tape alphabet. Moreover $\# \in \Gamma$ to denote blank symbol
         \item $\delta$ transition relation which is defined as:
               $$
                   \delta \subseteq \Big(Q \times \Gamma^k \times (\Sigma \cup \{\star\}) \Big)\times
                   \Big(Q \times (\Gamma \smallsetminus \{\#\})^k \times \{L, R\}^{k+1} \Big)
               $$
-              Important to observe that for a single state, input symbol and work tape symbols, we can take multiple types of transitions.
+              Important to observe that for a single state, input symbol and work tape symbols, we can take multiple types of transitions
         \item $q_0 \in Q$: Is the initial state
         \item $g : Q \to \{\vee, \wedge, \neg , \textbf{1}, \textbf{0}\}$: Where $g$ denotes the type of state
               and $\mathbf{1}, \mathbf{0}$  denote whether it is accepting or not.
@@ -786,11 +788,11 @@ Where $\lambda$ is a null string.
 \end{definitionbox}
 
 \paragraph{Denoting Accepting or Rejecting computations}
-As mentioned previously, we start from the original configuration. If a process
+As previously mentioned, we begin from the original configuration. If a process
 is in an existential configuration $\mathcal{C}$ and $\beta_1, ..., \beta_m$ are all
 possible successors, then we spawn a process for each configuration and run each one concurrently.
-If at least one process is accepting we report back to the parent and terminate the rest. Same line of reasoning can be done with
-the universal quantifiers. Ideally we would like a labelling function $f$ which is defined as
+If at least one process is accepting we report back to the parent and terminate the rest. Same line of reasoning can be applied with
+the universal quantifiers. The goal is to define a labelling function $f$ such that:
 $$
     f(\mathcal{C}) = \begin{cases}
         \bigwedge_{\mathcal{C} \vdash \beta} f(\beta) & \text{if }\mathcal{C} \text{ is universal}                                        \\
@@ -800,13 +802,12 @@ $$
         \mathbf{0}                                    & \text{if } \mathcal{C} \text{ is rejecting}                                       \\
     \end{cases}
 $$
-
-But some processes may never halt or require a much greater computation than necessary.
+However some processes may never halt or require a much greater computation than necessary.
 We therefore use Kleene logic $\mathbb{T}$ where $\bot$ denotes configurations
 that we do not know if they are accepting or not. The quantifiers
 use the same logic as described in the tables \ref{tab:three-val-logic}.
-We now say that a labelling of configurations is a map $\ell: \mathcal{C}_M \to \{0, \bot ,1\}$.
-We define an operator $\tau$ to be an operator of mappings such that:
+We present the formal labelling function $\ell: \mathcal{C}_M \to \{0, \bot ,1\}$
+and define an operator $\tau$ to be an operator of mappings such that:
 $$
     \tau(\ell)(\mathcal{C}) = \begin{cases}
         \bigwedge_{\mathcal{C} \vdash \beta} \ell(\beta) & \text{if }\mathcal{C} \text{ is universal}                                        \\
@@ -828,9 +829,9 @@ where we define $\tau^m$ as:
     \tau^{m +1}(\ell) & = \tau(\tau^m(\ell))
 \end{align*}
 where $\Omega$ is denoted as the minimal labelling function $\lambda x. \bot$.
-In a way, the above procedure describes is the ``propagation'' process from the leaf nodes up to the root of the tree
+The above procedure describes the ``propagation'' process from the leaf nodes up to the root of the tree
 where the leaf nodes are assigned a label of $\bot$ or accepting.
-Given the above, we can finally give a definition of halting states:
+Given the above, we can formally define a halting state:
 
 \begin{definitionbox}{Halting states\cite{chandra1981alternation}}{alt-halt}
     We say that $M$ halts on $x$ iff $\ell^*(\sigma_M(x)) \in \{0,1\}$ and
@@ -847,35 +848,33 @@ $$
 $$
 Where we can say that $\hat{C}$ is the set of configuration that are reachable within some
 $f(|x|)$ steps or require space of at most $f(|x|)$.
-An example of a computation tree can be observed in the figure \ref{fig:chap-2:atm-comp-tree}.
+An example of a computation tree can be observed in figure \ref{fig:chap-2:atm-comp-tree},
+where we can observe the computation paths and the labelling propagation from the leaf nodes
+up to the root.
 
 \begin{figure}[h!]
     \centering
     \includegraphics[width=0.7\textwidth]{Chapter2/ATM-computation-graph.pdf}
-    \caption[Computation tree of an ATM with labellings]{
-        Computation tree of an ATM with labellings. We can observe that we start with an initial
-        configuration and for each child, we end up in different states and configurations that have
-        different accepting conditions. In the leafs of our tree, we may have accepting, rejecting
-        or unknown configurations. What the $\tau$ operator does is propagating
-        the state from the leafs, all the way up to the root}
+    \caption[Computation tree of an ATM with labellings]{Computation tree of an ATM with labellings.}
+        %  We can observe that we start with an initial
+        % configuration and for each child, we end up in different states and configurations that have
+        % different accepting conditions. In the leafs of our tree, we may have accepting, rejecting
+        % or unknown configurations. What the $\tau$ operator does is propagating
+        % the state from the leafs, all the way up to the root}
     \label{fig:chap-2:atm-comp-tree}
 \end{figure}
-
-
-We can observe that one can encode Kleene logic into the computation of Turing machines. We use
-this framework as one of the main motivations of the project.
 
 \subsection{Bridging Counting Complexity and Search problems}
 \label{sec:back:count-plus-search}
 
-In the paper by, Ikenmeyer et al. \cite{ikenmeyer_WhatWhatNot_2022}, they developed tools to demonstrate how one
+Ikenmeyer et al. \cite{ikenmeyer_WhatWhatNot_2022}, developed tools to demonstrate how one
 can show whether a problem is in \textbf{\#P} or not, with the help of relativising techniques.
-The idea of relativisation is that we can equip our circuits or TMs with calls to
-arbitrary oracles \cite{beame_RelativeComplexityNP_1998}.
-They demonstrated that for several problems in \textbf{TFNP} as seen in figure \ref{fig:chap-2:count-hier-tfnp},
+Relativisation is the technique of equipping circuits or TMs with calls to
+arbitrary oracles languages \cite{beame_RelativeComplexityNP_1998}.
+They demonstrated that for several problems in \textbf{TFNP},
 some can be parsimoniously reduced to each other under all oracles, whereas for some
-directions (the ones with the warning sign) this is not the case.
-From the figure we can observe that for several \textbf{PPAD}, \textbf{CLS} and
+directions (the ones with the warning sign) this is not the case (also known as \textit{oracle separations}).
+From the figure \ref{fig:chap-2:count-hier-tfnp}, we can observe that for several \textbf{PPAD}, \textbf{CLS} and
 \textbf{PPADS} problems one can indeed find parsimonious reductions.
 For other problems, even \textbf{PPAD}-complete such as $\textbf{\#PPAD}(\textit{SourceOrExcess}(k,1)) -1$,
 this does not seem to be the case.
@@ -884,31 +883,40 @@ this does not seem to be the case.
     \centering
     \includegraphics[width=0.7\textwidth]{assets/chart-plot_full.png}
     \caption[Total Search Problem Counting Hierarchy]
-    {Total Search Problem Counting Hierarchy}
+    {Total Search Problem Counting Hierarchy. Bold lines imply relativising parsimonious reductions. Lines with warning
+    signs imply there is an oracle separation in the inverse direction.}
     \label{fig:chap-2:count-hier-tfnp}
 \end{figure}
+
+Relativisation techniques are beyond the scope of the current project.
+All reductions that we prove in the upcoming sections are implicitly relativising.
+For the purposes of this project, we argue that if a problem $A$ presents an
+oracle separation from problem $B$, we interpret that as problem $A$ is ``combinatorially harder''
+than $B$. In our case, oracle separations have been used to argue
+that problems such as $\textbf{\#PPAD}(\textit{SourceOrExcess}(k,1)) -1$ lack a
+combinatorial interpretation due to their separation from $\textbf{\#P}$.
 
 
 \section{Project Question and Objectives}
 
-As mentioned in the previous section, we observed how different \textbf{PPAD} problems can behave differently under decrementation.
+As mentioned in section \ref{sec:back:count-plus-search}, we observed how different \textbf{PPAD} problems can behave differently under decrementation.
 The main motivation comes from the observation of how \textit{Kleene logic} can be used to simulate the computation
 paths of NTMs. We can parallelise this to the boolean problem of \textit{SAT} which
 given by the \textit{Cook-Levin} theorem \cite{cook_ComplexityTheoremprovingProcedures_1971}
 one can convert every \textbf{NP} problem into a \textit{SAT} problem.
-The general idea is to create a boolean expression for each snapshot of the
+The theorem invloves the creation of a boolean expression for each snapshot of the
 Turing Machine such that a satisfying assignment corresponds to an accepting path.
-As corollary the \textit{Cook-Levin} also demonstrates that every \textbf{NP} problem can be parsimoniously reduced to the
+Their theorem also demonstrated that every \textbf{NP} problem can be parsimoniously reduced to the
 \textit{SAT} problem, meaning:
 $$
     \forall L \in \textbf{NP}: \#L \subseteq  \textit{\#SAT}
 $$
 A reasonable conjecture would also be if one can exploit Kleene-circuit nature of \textit{PureCircuit} to
-create a \textit{Cook-Levin} type equivalent reduction for \textbf{PPAD} problems, or more formally:
-$$
+create a \textit{Cook-Levin} type equivalent reduction for \textbf{PPAD} problems, denoted as
+$$ 
     \forall L \in \textbf{PPAD}: \textbf{\#PPAD}(L) \subseteq  \textbf{\#PPAD}(\textit{PureCircuit})
 $$
-If the above statement were indeed true, then it would give us insights as to how counting problems behave in $\textbf{PPAD}-1$.
+If the above statement were indeed true, then it would give us insights as to how counting problems behave in $\textbf{\#PPAD}-1$.
 Unfortunately, there is limited research with respect to the combinatorial
 nature of the problem. We wish to offer a new perspective of \textit{PureCircuit}
 and establish its \textit{parsimonious relations} with other problems.
@@ -922,30 +930,28 @@ To break down our conjecture we offer the following set of objectives:
               \forall k \in \mathbb{N}: \textbf{\#PPAD}(\textit{SourceOrExcess}(k,1)) \subseteq  \textbf{\#PPAD}(\textit{PureCircuit})
           $$
 
-    \item Establish a \textit{Cook-Levin} type theorem for the all \textbf{PPAD} problems or more formally
+    \item Establish a \textit{Cook-Levin} type theorem for the all \textbf{PPAD} problems, formally denoted as:
           $$
               \forall L \in \textbf{PPAD}: \textbf{\#PPAD}(L) \subseteq  \textbf{\#PPAD}(\textit{PureCircuit})
           $$
 \end{enumerate}
 
-The above milestones were created in mind to tackle the main conjecture in incremental steps.
+The above milestones were created to tackle the main conjecture in incremental steps.
 Demonstrating a parsimonious reduction from the \textit{EndOfLine} is an important baseline
-as every \textbf{PPAD} problem reduces to the \textit{EndOfLine} even if it is not parsimoniously.
+as every \textbf{PPAD} problem reduces to the \textit{EndOfLine}, even if it is not parsimonious.
 The second milestone is meant to demonstrate that we can use \textit{PureCircuit} for
 problems with no combinatorial interpretations, as we can see from the figure
 \ref{fig:chap-2:count-hier-tfnp}. Our last objective is the overall
 main conjecture that we are trying to prove.
 
-Our main finding section focuses as to
-how we tackled each problem and the efforts we did. Even though, the project did not
-manage to accomplish any of its intended milestones, we provide several tools, new problems and
-conjectures that may help in their future resolution.
+In chapter \ref{chap:findings}, we explain our methodology and provide several tools, new problems and
+conjectures that  will aid in the future resolution or our objectives.
 To assist with the theory development, we set out to develop a visualisation tool that will be able
 to create and validate instances of the problem. We hope that this
-will aid with the theory development, and therefore we provide the following
+will aid with theory development, and therefore we provide the following
 core set of requirements:
 \begin{enumerate}
-    \item Establish a program that in which the user is able to construct a \textit{PureCircuit} instance.
+    \item Establish a program in which the user is able to construct a \textit{PureCircuit} instance.
           The tool should be capable of verifying instance
           or highlighting unsatisfied nodes.
     \item Develop algorithms to find or at least approximate solutions.

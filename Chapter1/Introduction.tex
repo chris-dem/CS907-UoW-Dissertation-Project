@@ -1,5 +1,6 @@
 % !TEX root =  ../Report.tex
 
+\chapter{Introduction}
 \section{Introduction}
 \label{sec:Introduction}
 
@@ -9,25 +10,25 @@ the notion of counting objects with certain properties. Over time, this notion
 has shifted, especially in the subfield of algebraic combinatorics, where
 there is no clear notion of the object that we are counting,
 and the numbers express something more abstract \cite{pak_WhatCombinatorialInterpretation_2022}.
-Researchers have started asking whether it is possible to ask the inverse question,
-or more informally, can we associate our sequence of numbers to sets of objects?
-\cite{ikenmeyer_WhatWhatNot_2022,pak_WhatCombinatorialInterpretation_2022,ikenmeyer_PositivitySymmetricGroup_2024}
+Researchers have questioned whether it is possible to address the inverse question,
+or more informally, to associate a sequence of numbers to sets of objects
+\cite{ikenmeyer_WhatWhatNot_2022,pak_WhatCombinatorialInterpretation_2022,ikenmeyer_PositivitySymmetricGroup_2024}.
 
 
 To understand this notion, we provide an example from the papers by Ikenmeyer and Pak \cite{pak_WhatCombinatorialInterpretation_2022,ikenmeyer_WhatWhatNot_2022}:
-Assume that $f(G)$ counts the number of 3-colourings of a graph $G$. Now one can
-ask: does the function $h(G) \triangleq f(G)/ 6$ also count something?
-The answer is yes as argued in \cite{pak_WhatCombinatorialInterpretation_2022,ikenmeyer_WhatWhatNot_2022}. The idea is:
+Assume that $f(G)$ counts the number of 3-colourings of a graph $G$. A natural question follows: what does 
+$h(G) \doteq f(G)/ 6$ count?
+As shown in \cite{pak_WhatCombinatorialInterpretation_2022,ikenmeyer_WhatWhatNot_2022},
 for every colouring $\chi$, there are $3!$ additional colourings since
 we can permute the colours we assigned. Therefore, we only need to count
 one of the permutations, or the smallest colouring. We can therefore argue that $h(G)$ 
 counts the smallest possible 3-colourings of a graph $G$.
-We say that this is a ``combinatorial interpretation of $h(G)$''.
+We denote this as a ``combinatorial interpretation of $h(G)$''.
 
-But not all non-negative functions have such a clear interpretation.
-We use an example by Ikenmeyer et al. \cite{ikenmeyer_WhatWhatNot_2022}.
-We recall a combinatorial variant of the \textit{Pigeonhole principle}, where
-given a circuit $C:\{0,1\}^n \to \{0,1\}$, find $x$ such that $C(x) = 0^n$
+However not all non-negative functions have such a clear interpretation.
+We can utilise an example by Ikenmeyer et al. \cite{ikenmeyer_WhatWhatNot_2022},
+where we recall a combinatorial variant of the \textit{Pigeonhole principle},
+given a circuit $C:\{0,1\}^n \to \{0,1\}^n$, find $x$ such that $C(x) = 0^n$
 or distinct $x,y \in \{0,1\}^n$ such that $C(x)=C(y)$ and $C(C(x)) \neq 0$.
 $C$ essentially maps
 $\{0,1\}^n \to \{0,1\}^n \smallsetminus \{0^n\}$.
@@ -37,8 +38,8 @@ or to a point that is a violation. We add the restriction
 of $C(C(x)) \neq 0$ to avoid double counting. We can clearly observe that, if $e(C)$
 counts the number of solutions, under the pigeonhole principle, it must be the case $e(C) \geq 1$ since we either have a violation
 or there exists at least one pair of points that is mapped to the same bin by the pigeonhole principle.
-So now we can ask: does the function $e'(C) \doteq e(C) -1$ also
-have a set of object which we can enumerate over?
+This raises the question: does the function $e'(C) \doteq e(C) -1$
+have a combinatorial interpretation?
 Ikenmeyer et al. \cite{ikenmeyer_WhatWhatNot_2022} demonstrated that
 this problem may not have a combinatorial interpretation.
 This leads to the question of how can we formally represent the meaning
@@ -51,19 +52,19 @@ In fact, being able to find such definitions or interpretations is crucial,
 as it allows us to utilise tools from enumerative combinatorics to understand
 and reveal hidden structures and properties of such functions \cite{pak_WhatCombinatorialInterpretation_2022,ikenmeyer_WhatWhatNot_2022}.
 Moreover, there are several problems or numbers, such as \textit{Kronecker coefficients} \cite{makar_AnalysisKroneckerProduct_1949},
-whose combinatorial interpretation could lead to groundbreaking breakthroughs, such as a step closer to the resolution of the $\textbf{P} \neq \textbf{NP}$
-conjecture \cite{ikenmeyer_WhatWhatNot_2022, ikenmeyer_VanishingKroneckerCoefficients_2017}.
+whose combinatorial interpretation could lead to groundbreaking breakthroughs
+or resolutions of key conjectures such as $\textbf{P} \neq \textbf{NP}$ \cite{ikenmeyer_WhatWhatNot_2022, ikenmeyer_VanishingKroneckerCoefficients_2017}.
 
 
 In our current work, we focus on extending the work done by
 Ikenmeyer et al. \cite{ikenmeyer_WhatWhatNot_2022}, where they focused on the creation of frameworks
 that determine whether $f \in^? \textbf{\#P}$, by looking
-at the subclasses of $\textbf{\#TFNP}-1$ problems, a class of problems in which we can guarantee a solution.
+at the subclasses of $\textbf{\#TFNP}-1$ problems, a class of problems which guarantee a solution.
 More specifically, we look into the \textbf{PPAD} class which
 seems to have several \textit{complete} problems where under decrementation,
 may or may not have a combinatorial interpretation \cite{ikenmeyer_WhatWhatNot_2022}.
 This implies that class \textbf{PPAD} acts as some sort of barrier
-to $\textbf{\#P}$ which motivates a deeper question as to what cause this difference.
+to $\textbf{\#P}$ which raises questions as to its combinatorial nature.
 
 
 To accomplish this task,
@@ -73,13 +74,13 @@ as we hope its \textbf{PPAD}-completeness and circuit-like nature may give us
 useful insights to the counting complexity of $\textbf{\#PPAD}-1$.
 
 
-We will now give an extensive introduction to the literature and the related problems
-and then offer formal and precise objectives that capture our goal.
+We will now give an extensive introduction to the literature and related problems
+and consequently offer formal and precise objectives that capture our goal.
 We will then go over the main results of our theory research with the conjectures and possible
 directions that we uncovered. Moreover, we will give an overview of the visualisation software
 we developed to verify our theoretical results and give an overview of its capabilities and limitations.
-Lastly we will give brief analysis of our project management, the lessons we learnt
-and a conclusion that summarises our project as a whole.
+Lastly we will give brief analysis of our project management, our personal reflections
+and the future directions.
 
 
 % In our work we focus specifically on the complexity class of $\textsc{PPAD}$, under the lens of $\text{PureCircuit}$,
