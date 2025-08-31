@@ -1,4 +1,4 @@
-We built upon the \textit{StrongSperner} reduction that Deligkas et al.  \cite{deligkas_PureCircuitTightInapproximability_2024}
+We built upon the \textit{StrongSperner} reduction that Deligkas et al. \cite{deligkas_PureCircuitTightInapproximability_2024}
 derived by expressing how we can redefine \textit{StrongSperner} instances under \textit{Kleene logic}.
 We subsequently demonstrate how we can use that to relate \textit{PureCircuit} and
 the \textit{EndOfLine} problem with each other as well as highlighting
@@ -6,7 +6,7 @@ the current limitations of these approaches.
 
 \subsubsection{Hazard Free StrongSperner}
 
-First we begin we observe that solutions of \textit{StrongSperner} problems
+First we observe that solutions of \textit{StrongSperner} problems
 revolve around the notion of panchromatic hypercubes. We begin by
 associating points with cubes and vice versa using the definitions
 in \ref{def:ss-anchor}.
@@ -106,7 +106,7 @@ To show the hardness, we claim that
 \end{proof}
 
 To introduce \textit{HF-StrongSperner}, we first focus
-on embed Kleene logic into unary numbers \ref{def:kleene-unary}. We will
+on embedding Kleene logic into unary numbers \ref{def:kleene-unary}. We will
 then demonstrate how to extend this notation to define the full \textit{HF-StrongSperner} problem.
 
 \begin{definitionbox}{Kleene Unary Numbers}{kleene-unary}
@@ -341,8 +341,8 @@ Sperner problem of space $[2^{f(n)}]^d$ where $d = \left\lceil \frac{n}{f(n)} \r
 and   $f(n) \leq n/2$ for large enough $n$,
 is \textbf{PPAD}-complete and parsimonious from the \textit{EndOfLine} problem,
 using \textit{Snake Embedding} technique.
-We begin from the \textit{2D-Sperner} problem
-and repeatedly fold and pad our dimensions until we reach the desired space.
+The technique works by starting from a \textit{2D-Sperner} instance
+and repeatedly fold and pad the dimensions until they reach the desired space.
 
 We would like to use the same method to go from
 \textit{2D-HF-DiscreteSS} to \textit{HF-DiscreteSS}
@@ -421,8 +421,7 @@ figure \ref{fig:chap-2:rleaf-k3}.
 \begin{figure}[h!]
     \centering
     \includegraphics[width=0.5\textwidth]{Chapter2/rleaf-edge-example.pdf}
-    \caption[Edge demonstration Planar Embedding]{Edge between points $i,j$ of the original graph, illustrates that each point comes with a pair of
-        exponentially long lines, which we refer to as the input output lines.}
+    \caption[Edge demonstration Planar Embedding]{Edge between points $i,j$ of the original graph which illustrates that each point comes with a pair of input output lines.}
     \label{fig:chap-2:edge-rleaf}
 \end{figure}
 
@@ -436,10 +435,11 @@ figure \ref{fig:chap-2:rleaf-k3}.
 \end{figure}
 
 \paragraph{Embedding of \textit{EndOfLine}}
-Chen et al. \cite{chen_Complexity2DDiscrete_2009} demonstrated that every planar embedding of an \textit{EndOfLine} graph
-has the following property:
+Chen et al. \cite{chen_Complexity2DDiscrete_2009} demonstrated that we can apply a planar embedding of a \textit{EndOfLine} graph with vertex set $V = \{0,1\}^k$
+such that we get graph $G_{2^k} = (V_{2^k}, E_{2^k})$.
+Moreover they demonstrated the following property:
 $$
-    \forall v \in V_n: \textit{deg}(v) \in \{(0,0), (1,1), (1,0), (0,1), (2,2)\}
+    \forall v \in V_{2^k}: \textit{deg}(v) \in \{(0,0), (1,1), (1,0), (0,1), (2,2)\}
 $$
 Using figure \ref{fig:chap-2:rleaf-eol} as reference, we remove all the edges of nodes with degree of $(2,2)$.
 \begin{figure}[h!]
@@ -637,7 +637,7 @@ We call these coloured instances as \textit{2D-StrongEoL}.
 
 \paragraph{Going from \textit{2D} to higher dimensions}
 
-We now demonstrate our transformation from \textit{2D-StrongEoL} to \\$\textit{AntipodalStrongSperner}$.
+We now demonstrate our transformation from \textit{2D-StrongEoL} to $\textit{AntipodalStrongSperner}$.
     We employ
     a slightly adjusted method than the one proposed by Chen et al. \cite{chen_SettlingComplexityComputing_2009},
     which closely resembles the \textit{Snake Embedding} technique used
@@ -695,7 +695,7 @@ We now demonstrate our transformation from \textit{2D-StrongEoL} to \\$\textit{A
         any solution between  $(\cdot, m^t_i, \cdot), (\cdot, m^t_i+ 1, \cdot)$  will not yield a solution.
         We can repeat the above procedure $u$ times, if we need to pad the dimension by $u$.
 
-        \paragraph{Snake Folding} We will provide a overview of the snake folding operation.
+        \paragraph{Snake Folding} We will provide an overview of the snake folding operation.
         We first give an informal overview of
         the technique based on the figure \ref{fig:chap-3:snake-embedding-visualisation-basic}.
         The $y$-axis denotes the new dimension, denoted as $n_{t+1}$ and the $x$-axis denotes the folded dimension
@@ -787,7 +787,7 @@ We now demonstrate our transformation from \textit{2D-StrongEoL} to \\$\textit{A
             We denote this observation as the effective direction, meaning
             if $(\cdot, j) \to(\cdot, j +1)  \implies (\cdot, p_j, p_x) \to(\cdot, p_j +1, p_x)$,  then we say that the $j$th
             dimension is the effective direction, otherwise the $n_{t+1}$th will
-            be the effective dimension
+            be the effective dimension.
 
 
             WLOG we assume the effective dimension is $j$.
@@ -828,7 +828,7 @@ We now demonstrate our transformation from \textit{2D-StrongEoL} to \\$\textit{A
     \textit{nD-SS} to \textit{PureCircuit}.
     Alternatively one can attempt to reduce \textit{AntipodalStrongSperner} to \textit{HF-AntipodalStrongSperner} or \textit{PureCircuit}
     parsimoniously. We argue that the antipodality property allows us to check for solutions
-    more efficient than trying to find $d+1$ points in some hypercube.
+    more efficiently than trying to find $d+1$ points in some hypercube.
 In hindsight, we argue that if one could construct a Kleene gadget to generate the maximum and minimum
 resolution of a \textit{Kleene unary}, it would allow us to create \textit{PureCircuit} instances
 that take advantage of the antipodal property.

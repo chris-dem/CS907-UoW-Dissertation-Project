@@ -160,7 +160,7 @@ created by Chen et al. \cite{chen_Complexity2DDiscrete_2009} and Hollender et al
     \end{enumerate}
 \end{definitionbox}
 
-The above description defines a superpolynomial such that an edge $(x,y) \in E$
+The above description defines a superpolynomial graph such that an edge $(x,y) \in E$
 if and only if $S(x) = y \wedge P(y) = x$ and $\|x-y\|_1 \leq 1$.
 We refer to this problem in later sections to discuss the topological representations of our graphs.
 
@@ -599,14 +599,14 @@ Since counting problems are regarded as functions to natural numbers, that means
 that we can create new counting problems through composition.
 For example, given $h : \{0,1\}^* \to \mathbb{N}$, and $g : \mathbb{N} \to \mathbb{N}$,
 we would like to express $g \circ h$.
-We experess the above notion using definition \ref{def:func-comp-reduction}.
+We use the definition \ref{def:func-comp-reduction} to represent the aforementioned notion.
 
 
 \begin{definitionbox}{Function composition in counting problems}{func-comp-reduction}
     Given counting problem $L$ and a function $f: \mathbb{N} \to \mathbb{N}$,
     we can define a new counting problem $f(L)$ such that:
     $$
-        \forall w \{0,1\}* \to \mathbb{N}: f(L)(w) = f(L(w))
+        \forall w \in \{0,1\}^* \to \mathbb{N}: f(L)(w) = f(L(w))
     $$
 \end{definitionbox}
 
@@ -683,7 +683,7 @@ An example of hazard values can be seen in figure \ref{fig:hazard-example}.
 
 \begin{figure}[h!]
     \centering
-    \subfloat[Multiplexer with hazard at $(s= \bot, x= \bot,y=\bot)$]{\centering\includegraphics[width=0.3\textwidth]{assets/hazard_circuit.png}}
+    \subfloat[Multiplexer with hazard at $(s= \bot, x= 1,y=1)$]{\centering\includegraphics[width=0.3\textwidth]{assets/hazard_circuit.png}}
     \subfloat[Hazard free multiplexer]{\centering\includegraphics[width=0.3\textwidth]{assets/hazard-free-circuit.png}}
     \caption[Example of hazard and non-hazard-free circuits]
     {Hazard circuit and hazard-free circuit. Main idea is for $\textit{MUX}(s,x,y)$, $\textit{MUX}(\bot, 1,1)$
@@ -729,7 +729,7 @@ Lastly we want to introduce the notion of \textit{Alternating Turing Machines} (
 a generalisation of non-deterministic Turing machines.
 These have been introduced by Chandra et al. \cite{chandra1981alternation}
 and using universal and existential quantifiers
-to alternate the course of computation. The informal presentation can be considered as follows:
+we can alternate the course of computation. The informal presentation can be considered as follows:
 In a non-deterministic TM, given its current state $q$ or configuration $\mathcal{C}$, we spawn
 $\beta_1, ..., \beta_k$ separate processes. We say that the current state will accept if at least one of the processes
 $\{\beta_i\}_{i \in [k]}$ accepts. Alternating Turing machines introduce additional conditions
@@ -746,7 +746,7 @@ We provide a formal definition in \ref{def:alt-tm}.
         \item $k \in \mathbb{N}$: The number of work tapes
         \item $Q$: Finite set of states
         \item $\Sigma$: Finite input alphabet. Moreover, $\star \not\in \Sigma$ denotes the end of the input
-        \item $\Gamma$: Finite work tape alphabet. Moreover $\# \in \Gamma$ to denote blank symbol
+        \item $\Gamma$: Finite work tape alphabet. Moreover, $\# \in \Gamma$ to denote blank symbol
         \item $\delta$ transition relation which is defined as:
               $$
                   \delta \subseteq \Big(Q \times \Gamma^k \times (\Sigma \cup \{\star\}) \Big)\times
@@ -876,7 +876,7 @@ Relativisation is the technique of equipping circuits or TMs with calls to
 arbitrary oracles languages \cite{beame_RelativeComplexityNP_1998}.
 They demonstrated that for several problems in \textbf{TFNP},
 some can be parsimoniously reduced to each other under all oracles, whereas for some
-directions (the ones with the warning sign) this is not the case (also known as \textit{oracle separations}).
+directions this is not the case (also known as \textit{oracle separations}).
 From the figure \ref{fig:chap-2:count-hier-tfnp}, we can observe that for several \textbf{PPAD}, \textbf{CLS} and
 \textbf{PPADS} problems one can indeed find parsimonious reductions.
 For other problems, even \textbf{PPAD}-complete such as $\textbf{\#PPAD}(\textit{SourceOrExcess}(k,1)) -1$,
