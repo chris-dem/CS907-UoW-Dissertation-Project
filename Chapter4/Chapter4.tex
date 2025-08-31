@@ -102,7 +102,7 @@ into the functionalities in the upcoming sections.
 Our application is composed of 5 different states which are summarised in the table \ref{tab:chap-4:app-states}.
 Using the aforementioned states, we are able to add/remove nodes/edges as well as move them around or change their values.
 We added visual indicators so if a gate has an incorrect arity or an incorrect assignment, it will be highlighted.
-Moreover, we attached numbers to our edges so the user we will be able to differentiate between inputs and outputs.
+Moreover, we attached identifiers to our edges so the user we will be able to differentiate between inputs and outputs.
 This is mostly useful for the \textsc{Purify} gate as each output behaves differently.
 In our appendix \ref{app:user-stories}  we attach user stories that explain in greater detail how one can perform the above
 operations.
@@ -135,8 +135,8 @@ to find solutions. We will give a brief explanation on how they work in the upco
 we express our graph as a chromosome of value nodes.
 We then formulate our optimisation function as the number of unsatisfied gates
 given an assignment. The goal of either algorithm
-is to minimise the number of errors. Once an assignment is found,
-we pass the solutions back into our graph and display them.
+is to minimise the number of errors. Once an assignment is found 
+we pass the solution back into our graph and display it.
 
 
 
@@ -380,8 +380,8 @@ and \textbf{Backtrack Operation}.
 
 
 \paragraph*{Backtrack Initialisation} We initialise two main structures:
-a min-based priority queue $Q$, and a solution map $S$ for each node.
-$S$ the solution map contains the \textit{KleeneSet} data structure
+a min-based priority queue $Q$, and a value map $S$ for each node.
+$S$ the value map contains the \textit{KleeneSet} data structure
 which is the set of values a node can take. We assume that all nodes
 can take $\mathbb{T}$ in the beginning.
 
@@ -409,18 +409,18 @@ procedure.
 
 \paragraph*{Unit Propagation operation}
 The algorithm assigns the selected value to a node
-by modifying their solution set and the value set.
+by modifying their solution assignment and the value map.
 Then for each gate that is incident to the node apply the \textit{Set simplification operation}.
 While the top element of the queue
 has one possible solution, extract the solution and repeat the \textit{unit value propagation operation}
-until the queue is empty or the cardinality of the value set at the head of the priority queue
+until the queue is empty or the cardinality of the value map at the head of the priority queue
 is different from $1$. If it's zero then
 current assignment is not valid, and we return false, otherwise we return true.
 
 
 \paragraph*{Set Simplification operation}
 Given a gate, we have a set of possible values for each of our nodes,
-as determined by our value set. We want to reduce the set possible values by following the rules of the gate.
+as determined by our value map. We want to reduce the set possible values by following the rules of the gate.
 For example, assume we have an \textbf{AND} gate.
 If the output value is assigned the value $1$, then we know that the inputs can only take values
 $(1,1)$, and therefore we restrict the values of the input sets to $\{1\}, \{1\}$.
@@ -501,11 +501,11 @@ If a value is not assigned, we denote it as $\cdot$.
 The \textit{backtrack} operation is summarised in 3 key steps.
 If the priority queue is empty then we found a satisfying assignment.
 Otherwise, pick a node from the priority queue. For each value in its set,
-create a copy of the current queue, current solution assignment and value set state
+create a copy of the current queue, current solution assignment and value map state
 and apply the \textit{Unit value propagation} operation. After that create a recursive call
 apply the \textit{backtrack operation} again until the current recursion chain
 terminates with a solution, or it rejects.
-At the root of every execution call, merge the solution assignments in each level and return
+At the root of every execution call, merge the solutions of each level and return
 the sets. The root call will return a set of every possible valid assignment set.
 
 
@@ -513,7 +513,7 @@ the sets. The root call will return a set of every possible valid assignment set
 \label{sec:rt-analysis}
 
 For the running time analysis, we can observe that each time we assign a node,
-the unit propagation operation, restricts the solution set of the value nodes that are incident
+the unit propagation operation restricts the value set of the value nodes that are incident
 by one gate. Even in the worst case scenario where no reduction occurs, we can clearly
 see that each time, our priority queue will select a node and will recurse through each of its possible values,
 creating a call tree with depth of at most $n$. Therefore, we can argue that the running time of the algorithm
