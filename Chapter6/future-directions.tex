@@ -4,7 +4,7 @@
 
 \subsubsection{\textbf{HF-PPAD} in  \textbf{PPAD}}
 
-In our section \ref{sec:pc-plus-eol}, made references to
+In section \ref{sec:pc-plus-eol}, we explained
 how Kleene logic can be incorporated with \textbf{PPAD} problems. For
 the \textit{nD-StrongSperner} problems we observed that \textit{Kleene logic}
 provides a natural extension and is equivalent to its non hazard counterpart.
@@ -19,11 +19,11 @@ Along similar line, we can also ask the questions as to existence of problems
 exists a parsimonious reduction to its non-hazard-free variant.
 
 
-Even more naturally, one can also ask, how does hazard-freeness
+Naturally, one can also ask, how does hazard-freeness
 affect \textbf{TFNP} as a whole? We conjecture that one can make
 similar observations to the \textit{StrongTucker} problem \cite{aisenberg_2DTuckerPPA_2020},
 in order to create similar classes such as \textbf{HF-PPA} as
-it also uses a very similar colouring argument as the \textit{StrongSperner} argument.
+it also uses a very similar colouring protocol to \textit{StrongSperner}.
 Moreover, we were able to observe how we can use Kleene logic with
 \textbf{PLS} sub-problems like \textit{Tarski}. Naturally,
 can we define the class of problems \textbf{HF-TFNP},
@@ -53,13 +53,13 @@ What the above conjecture essentially describes is, given a number of known sour
 maximum number of input/output vertices of graph, can we create some \textit{nD-CountingSS}
 that is parsimonious to its graphical representation? Since we know that the problem \textit{Unbalanced}
 can parsimoniously count every graph variant, can we also reduce \textit{Unbalanced} to a topological
-problem? A reduction like that would be an important milestone for the usage topological \textit{PureCircuit} constructions
+problem? A reduction like that would be an important milestone for the usage of topological \textit{PureCircuit} constructions
 for enumerating solutions.
 
 
 \subsubsection{PureCircuit Gate Extension} 
 
-The proof for the \textbf{PPAD}-inclusion can be summarised as expressing a \textit{PureCircuit} instance
+The proof for the \textbf{PPAD}-inclusion can be summarised by expressing a \textit{PureCircuit} instance
 as a \textit{Brouwer} function from $[0,1]^n \to [0,1]^n$, where
 each input represents a continuous assignment to the circuit nodes,
 and each output $F_i(x)$ is determined by a continuous function of the gate incident to node $i$ and its neighbouring nodes
@@ -116,22 +116,19 @@ Where $G_i$ is the $i$th connected component.
 
 We can also optimise the backtracking algorithm even further.
 First one can observe that if our graph was acyclic, then
-the permutation of the nodes with no \textit{in-degree} solutions have a significant
-influence to the downstream nodes. With this in mind, we can apply the following sequence
-of steps to make the backtracking algorithm simpler:
+the set of the nodes with no \textit{in-degree} solutions have a significant
+influence to the downstream nodes. With this in mind, we can apply any of the 
+extensions to convert our instances into DAGs:
 \begin{enumerate}
+    \item Apply an arbitrary DFS algorithm such that we annotate each node with the length of its DFS path.
     \item Identify the strongly connected components (SCCs) of the circuit, using polynomial
           time algorithms such as Kosaraju's Algorithm \cite{sharir_StrongconnectivityAlgorithmIts_1981} 
-          or Gabow's Algorithm \cite{gabow_PathbasedDepthfirstSearch_2000}. 
-    \item Treating SCCs as an individual node, identify nodes by their distances from
-          base nodes (nodes with no incoming edges)
-    \item Extend the backtracking algorithm so instead of using the start label,
-          use the distance from the base instead. The greater distance a node has from the
-          base, the less impact it has and therefore should be postponed in later stages of the
-          backtracking calls.
+          or Gabow's Algorithm \cite{gabow_PathbasedDepthfirstSearch_2000}, in order
+          to create a directed acyclic hypergraphs. Associate nodes in SCCs
+          with the topological sort of the hypergraphs. 
 \end{enumerate}
 
-We argue that the above heuristic may result in improved average times but of course
+We argue that the above heuristics may result in improved average times but of course
 further research can be done in order to determine more suitable selection heuristics for our priority queue.
 
 
@@ -140,6 +137,5 @@ Finally, we highlight potential improvements to our meta-heuristic algorithms.
 The fitness function could be modified to take advantage of the continuity properties of the \textit{PureCircuit}, 
 and each algorithm can be improved using more sophisticated techniques. 
 More broadly, one could explore additional meta-heuristic approaches 
-beyond those considered here, as shown in \cite{abdel-basset_Chapter10Metaheuristic_2018}, 
-though such extensions lie beyond the scope of the project.
+beyond those considered here, as shown in the survey\cite{abdel-basset_Chapter10Metaheuristic_2018}.
 
