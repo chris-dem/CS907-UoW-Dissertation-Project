@@ -4,7 +4,7 @@
 \label{sec:chap-4}
 In the current section, we give an extensive overview of the
 software tool we developed to help with our theory crafting.
-Core idea is to be able to draw \textit{PureCircuit} gadgets,
+Our main requirements consist of: the ability to construct \textit{PureCircuit} gadgets,
 verify correctness and find solutions. We split
 this chapter giving an overview on the tooling we used,
 the architecture of the software and
@@ -13,8 +13,8 @@ the algorithms we deployed for solutions finding.
 
 \section{Tooling Selection}
 
-\subsection{Rust Programming Language} The development language used is \texttt{Rust} \footnote{https://www.rust-lang.org/}.
-\texttt{Rust} is a systems-level compiled programming language that can achieve high speeds due to
+\subsection{Rust Programming Language}
+\texttt{Rust}\footnote{https://www.rust-lang.org/} is a systems-level compiled programming language that can achieve high speeds due to
 its low-level compilation, while maintaining memory safety. Moreover,
 it offers high level features such as its strong algebraic and trait type system
 which allows us to represent complex states.
@@ -47,7 +47,7 @@ to build upon a software which is prone to changes.
 \subsection{Software Testing methodology}
 The core philosophy of our testing is Test-Driven-Development. This methodology
 was used to develop and validate our critical parts of our code, such as graph validation
-or solution enumeration. Its main idea is to first write the unit tests,
+or solution enumeration. Its main philosophy is to first write the unit tests,
 and then develop the code to resolve them. This allows us for the code to be self-documenting
 as well as ensuring that we are acting within the expected scope.
 We provide a sample of our unit test results in figure \ref{fig:chap-4:test-cases}.
@@ -64,8 +64,8 @@ A full log of our test results will be provided in our supplementary files.
 
 Another testing technique that we heavily took advantage of is \textit{Property-based Testing},
 which we implement using the \texttt{Proptest} library \footnote{https://github.com/proptest-rs/proptest}.
-This idea was inspired by the \texttt{Haskell} library \texttt{QuickCheck} \cite{claessen_QuickCheckLightweightTool_2000},
-where we test the properties of a pure function across a range of inputs. The idea is, the more complex
+This library was inspired by the \texttt{Haskell} library \texttt{QuickCheck} \cite{claessen_QuickCheckLightweightTool_2000},
+where we test the properties of a pure function across a range of inputs. The notion is described as follows, the more complex
 the input of the function, the greater is the input space and therefore harder and cumbersome to check all possible
 combinations or edge-cases. With \texttt{Proptest}, we can stochastically and strategically check whether a property of our function is
 maintained across most inputs, such as a sorted output, or a validating assignment.
@@ -127,7 +127,7 @@ operations.
 \subsection{Solution Selection}
 
 For the solution selection we opted with meta-heuristic algorithms. Since these problems are conventionally hard
-to find solutions especially as the number of nodes increase, we focused on the idea of approximation
+to find solutions especially as the number of nodes increase, we focused on the notion of approximation
 algorithms in order to find mostly satisfying assignments in large graphs or gadgets.
 With the help of the \texttt{genetic\_algorithm}\footnote{https://crates.io/crates/genetic\_algorithm} library,
 we use the \textit{Hill Climbing algorithm} and \textit{Genetic algorithm}  in order
@@ -142,8 +142,8 @@ we pass the solutions back into our graph and display them.
 
 \subsubsection{Hill Climbing Algorithm}
 
-The idea of hill climbing algorithms is to start by some base solution
-and repeatedly improve our assignment. We allow for $2$ strategies, one
+The hill climbing algorithm can be described by starting from some base solution
+and repeatedly improving our assignment. We allow for $2$ strategies, one
 of them strictly always chooses the best neighbour whereas one
 allows for stochastic choice. The above operation is repeated
 until we either find a satisfying assignment or
@@ -262,7 +262,7 @@ Further analysis and deeper comparison of the two algorithms is beyond the scope
 \subsection{Solution Enumeration}
 
 To enumerate through solutions, we employed a traditional backtracking algorithm.
-Our idea is similar to the DPLL algorithm \cite{davis_ComputingProcedureQuantification_1960} used for \textit{SAT} solving,
+Our algorithm is similar to the DPLL algorithm \cite{davis_ComputingProcedureQuantification_1960} used for \textit{SAT} solving,
 where we recursively assign values to our graph. If all the nodes
 have been assigned a value, then we return the current assignment. If at a specific
 node, there are no more values that we can assign then we reject the current solution.
@@ -420,8 +420,7 @@ current assignment is not valid, and we return false, otherwise we return true.
 
 \paragraph*{Set Simplification operation}
 Given a gate, we have a set of possible values for each of our nodes,
-as determined by our value set. The idea is
-that we want to reduce the set possible values by following the rules of the gate.
+as determined by our value set. We want to reduce the set possible values by following the rules of the gate.
 For example, assume we have an \textbf{AND} gate.
 If the output value is assigned the value $1$, then we know that the inputs can only take values
 $(1,1)$, and therefore we restrict the values of the input sets to $\{1\}, \{1\}$.
@@ -525,8 +524,8 @@ As for correctness, the algorithm essentially picks nodes in a certain order and
 value that we believe that will give a satisfying assignment. We only have to look
 at what happens at the \textit{unit propagation} stage. We can observe that in each stage,
 we are essentially limiting the set of solutions to only the ones
-that will give a satisfying assignment. The idea is that we are fast-forwarding the backtracking calls
-by taking advantage of the localised changes of each gate.
+that will give a satisfying assignment. By taking advantage of the localised changes of each gate,
+we are fast-forwarding the backtracking calls.
 Values that we discard are nodes that guaranteed to give unsatisfying assignments, and therefore
 we are not discarding any solutions.
 This implies that our resulting array of assignments contains only valid solutions, and this array
