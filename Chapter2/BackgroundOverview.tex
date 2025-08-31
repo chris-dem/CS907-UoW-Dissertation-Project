@@ -146,7 +146,7 @@ In addition to the aforementioned adjustments, researchers were able to give a t
 to the \textit{EndOfLine} \ref{def:eol-ppad} problem, by creating embeddings of the graph
 into 2D or 3D spaces \cite{chen_Complexity2DDiscrete_2009, hollender_ComplexityMultisourceVariants_2018,daskalakis_ComplexityComputingNash_2006}.
 We will mainly focus on the \textit{2D-EOL}
-created by Chen et al. and Hollender et al. \cite{chen_Complexity2DDiscrete_2009,hollender_ComplexityMultisourceVariants_2018}.
+created by Chen et al. \cite{chen_Complexity2DDiscrete_2009} and Hollender et al. \cite{hollender_ComplexityMultisourceVariants_2018}.
 
 \begin{definitionbox}{\textit{2D-EOL} problem \cite{chen_Complexity2DDiscrete_2009,hollender_ComplexityMultisourceVariants_2018}}{2d-eol}
     \textbf{Input}: Two poly-sized circuits $P,S: \{0,1\}^{2n} \to \{0,1\}^{2n}$ where $P(0^{n}, 0^{n}) = (0^{n},0^{n}) \neq S(0^{n}, 0^{n})$.
@@ -269,8 +269,9 @@ for \textbf{PPAD}-completeness are $\{(0,\bot), (\bot,1), (0,1)\}$, and the addi
             $\bot$       & $\bot$    \\
             1            & 0         \\
         \end{tabular}
-    }
+    } \quad
     \subfloat[\texttt{and} gate]{
+        \centering
         \begin{tabular}{c|ccc}
             \texttt{and} & 0 & $\bot$ & 1      \\
             \hline
@@ -280,6 +281,7 @@ for \textbf{PPAD}-completeness are $\{(0,\bot), (\bot,1), (0,1)\}$, and the addi
         \end{tabular}
     } \quad
     \subfloat[\texttt{or} gate]{
+        \centering
         \begin{tabular}{c|ccc}
             \texttt{or} & 0      & $\bot$ & 1 \\
             \hline
@@ -608,11 +610,11 @@ We experess the above notion using definition \ref{def:func-comp-reduction}.
 \end{definitionbox}
 
 We provide an example of the above notation using a finding from the paper
-by Ikenmeyer et al. where they demonstrate $\textit{\#CircuitSAT} \subseteq ((\textit{\#EndOfLine}) -1) /2$
-where $\textit{CircuitSAT}$ is the circuit variant of \textit{SAT} \cite{ikenmeyer_WhatWhatNot_2022}.
-Given instance $C$, using figure \ref{fig:chap-2:pars-eol-csat}, we can see that
-for each satisfying assignment, we are creating a source/sink pair. Excluding
-the sink that is always paired with the $0^n$ sink, we argue the reduction is parsimonious.
+by Ikenmeyer et al. \cite{ikenmeyer_WhatWhatNot_2022} where they demonstrate $\textit{\#CircuitSAT} \subseteq ((\textit{\#EndOfLine}) -1) /2$
+where $\textit{CircuitSAT}$ is the circuit variant of \textit{SAT}.
+Given instance $C: \{0,1\}^n \to \{0,1\}$, using figure \ref{fig:chap-2:pars-eol-csat}, we create pairs of nodes $(2x+2, 2x+3)$ for all
+$x \in \{0,1\}^n$. If we have a satisfying assignment, we create a source/sink pair. Excluding
+the sink that is always paired with the $0^n$ sink, we observe that the reduction is parsimonious.
 
 \begin{figure}
     \centering

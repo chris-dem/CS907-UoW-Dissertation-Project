@@ -1,13 +1,12 @@
-In this section, we explore on the approaches and findings we uncovered while
+This section explores the approaches and findings uncovered while
 tackling each of our theory objectives. More specifically,
-while we have not achieved a complete proof for each objective,
 we highlight several theorems
-that may assist in their full resolution.
-The core idea that we employed comes from following set of observations:
+that may assist in the full resolution of our objectives.
+We state the following observation:
 when working with \textit{PureCircuit}, one cannot fully work with binary logic, meaning
 there is no trivial method for detecting $\bot$ values and removing them, as made clear by
 Marino's continuity argument \cite{marino_GeneralTheoryMetastable_1981}.
-We therefore make use of topological problems with the idea that resolutions of our input
+We therefore make use of topological problems such that resolutions of our kleene input
 corresponds to some set of nearby points in a space. If all points abide some property
 then we can use that to detect solutions.
 This is an extension of the non-parsimonious reduction used by Deligkas
@@ -23,9 +22,9 @@ list of theorems.
 \end{enumerate}
 The problems mentioned are defined in the section \ref{sec:pc-plus-eol}, where
 we also discuss their implications with respect to the current objective
-and with \textbf{PPAD} as a whole
+and with \textbf{PPAD} as a whole.
 
-Following the same thought process for our second objective, we demonstrated how to reduce \textit{SourceOrExcess}
+Following the same process for our second objective, we demonstrated how to reduce \textit{SourceOrExcess}
 to a topological problem. Specifically in section \ref{sec:sc-excess} we argue the following result
 $$
     \textit{\#SourceOrExcess}(2,1) \subseteq \textit{\#3D-CountingStrongSperner} \text{ \ref{thm:counting-ss-excess}}
@@ -38,8 +37,7 @@ In the third section, we offer a combinatorial extension to the \textbf{PPAD} cl
 regarding directed graphs and the number of known sources. Specifically
 given Hollender et al.'s work \cite{hollender_ComplexityMultisourceVariants_2018}
 on directed graphs with multiple known sources, we make
-on observations as to the combinatorial nature of the problems that can be created
+observations on the combinatorial nature of the problems that can be created
 as well as important problems to analyse for a full \textit{PureCircuit} Cook-Levin type theorem.
-Lastly we provide a supplementary finding with regard to the \textit{PureCircuit} reductions.
-We first demonstrate how we can relate to \textit{Tarski} with \textit{Kleene theory} and
+Lastly we demonstrate how we can relate to \textit{Tarski} with \textit{Kleene theory} and
 subsequently how it can be used for a parsimonious reduction to \textit{PureCircuit}.
