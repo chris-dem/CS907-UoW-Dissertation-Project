@@ -274,7 +274,7 @@ research, we demonstrate a parsimonious reduction from \textit{HF-DiscreteStrong
         \label{fig:chap-3:purification-gadget}
     \end{figure}
 
-    \begin{claimbox}{Purification Claim}{chap-3:pur-claim}
+    \begin{claimbox}{Bit Generator Claim}{chap-3:pur-claim}
         Given the description of the bit generator gadget, we make the following two claims:
         \begin{enumerate}
             \item $b \in \{0,1\}: C_i(b) = b^M$
@@ -508,7 +508,7 @@ $$
 \end{figure}
 If $P$ is a simple path we can decompose $\{ \mathbf{s}_{p}, \mathbf{e}_{p} \} \cup L(P) \cup R(P)$ such that:
 $\mathbf{s}_{p} = \mathcal{F}(\mathbf{u}^1) + \Delta + \Delta^\perp$, where $\Delta = (\mathbf{u^1}- \mathbf{u}^2)$,
-$\mathbf{e}_{p} = \mathcal{F}(\mathbf{u}^1) + \bar{\Delta} + \bar{{\Delta}}^\perp$, where $\bar{\Delta}= (\mathbf{u}^t - \mathbf{u}^{t-1})$
+$\mathbf{e}_{p} = \mathcal{F}(\mathbf{u}^t) + \bar{\Delta} + \bar{{\Delta}}^\perp$, where $\bar{\Delta}= (\mathbf{u}^t - \mathbf{u}^{t-1})$
 and $x^\perp$, denotes the vector perpendicular to $x$. Choice of which perpendicular vector we consider is arbitrary.
 Starting from $\mathbf{s}_{p}$,
 enumerate vertices in $O(P)$ clockwise as $\mathbf{s}_{p},\mathbf{q}^1,\dots,\mathbf{q}^{n_{1}}, \mathbf{e}_{p}, \mathbf{r}^1,\dots,\mathbf{r}^{n_{2}}$ such that:
