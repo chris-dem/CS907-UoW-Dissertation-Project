@@ -1,29 +1,29 @@
-In summary, we expanded upon the combinatorial nature of
+In this paper, we expanded upon the combinatorial nature of
 \textbf{PPAD}, under the lens of topological representations
 and the \textit{PureCircuit} problem.
 First we showed how \textit{Kleene logic} can be embedded
 into \textbf{PPAD} using as a primary example the \textit{StrongSperner}
 problem and how certain problems
 can retain their \textbf{PPAD}-completeness. Moreover, we demonstrated that under hazard-free conditions
-and discreteness, how
+and discreteness,
 one can parsimoniously reduce \textit{HF-DiscreteStrongSperner} to
-\textit{PureCricuit}.  
+\textit{PureCricuit}.
 We were also able to construct a parsimonious reduction
 from the \textit{EndOfLine} problem to  \textit{StrongSperner} instances
-with discrete and antipodal properties. 
+with discrete and antipodal properties.
 Given that, we shortened the gap by demonstrating how the parsimonious reduction
-chain to \textit{PureCircuit} from the \textit{EndOfLine}
+chain from the \textit{EndOfLine} to \textit{PureCircuit}
 depends on the hazard free nature of the \textit{AntipodalStrongSperner}.
 
 
-Extending our work on topological interpretations, we showed
-first hand how graph problems such as the \textit{SourceOrExcess}$(2,1)$ can also
-be encoded topologically and demonstrated how 
+Extending our work on topological interpretations, we demonstrated
+how graph problems such as the \textit{SourceOrExcess}$(2,1)$ can also
+be encoded topologically and demonstrated how
 the dimensionality of the space we encode it, can affect the counting hardness
 of problems. We argued that this finding is significant since
 we found another \textbf{PPAD}-complete problem with no
-clear combinatorial interpretation. More interestingly,
-we conjectured the possibility of a connection between the degrees 
+clear combinatorial interpretation. Furthermore,
+we conjectured the possibility of a connection between the degrees
 of graph and the dimensionality of its topological embedding.
 
 
@@ -37,12 +37,12 @@ important stepping stone to a total \textit{PureCircuit} Cook-Levin theorem,
 due to its overall relation with all the other unbalanced digraph problems.
 
 
-Lastly, we showcased our work on our \textit{PureCircuit} visualisation software.
+Lastly, we showcased our work on the \textit{PureCircuit} visualisation software we developed.
 We demonstrated its core functionalities such as \textit{PureCircuit} editor
 tool with assignment verification. Moreover, we implemented several
 meta-heuristic algorithms for assignment finding assignments in large graphs, such
-as \textit{Hill Climbing} and \textit{Genetic Algorithms}. Most importantly,
-we also implemented a specialised backtracking algorithm which takes advantage
+as \textit{Hill Climbing} and \textit{Genetic Algorithms}.
+We also implemented a specialised backtracking algorithm which takes advantage
 of the structure of the graph. Despite its high worst-case running time,
 we manage to use several greedy methods to cut down breadth and depth of the tree
 making it ideal for verification of small circuits.

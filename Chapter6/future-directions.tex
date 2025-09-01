@@ -4,17 +4,17 @@
 
 \subsubsection{\textbf{HF-PPAD} in  \textbf{PPAD}}
 
-In section \ref{sec:pc-plus-eol}, we explained
+In section \ref{sec:pc-plus-eol}, we expanded on
 how Kleene logic can be incorporated with \textbf{PPAD} problems. For
 the \textit{nD-StrongSperner} problems we observed that \textit{Kleene logic}
 provides a natural extension and is equivalent to its non hazard counterpart.
 For other problems such as \textit{StrongSperner}, we observed that this
 is not clear by current complexity assumptions and indeed proving \textbf{PPAD}-hardness
 would be essential for establishing the counting hardness of \textit{PureCircuit}.
-But one could ask further questions such as, could we define
-complexity classes such as \textbf{HF-PPAD} and could we show that
+However futher questions arise such as could we define
+complexity classes for instance \textbf{HF-PPAD} and could we show that
 $\textbf{HF-PPAD} = \textbf{PPAD}$.
-Along similar line, we can also ask the questions as to existence of problems
+Similarly, we can also question the existence of problems
 \textit{HF-nD-Counting-SS} as previously stated and whether there
 exists a parsimonious reduction to its non-hazard-free variant.
 
@@ -22,23 +22,23 @@ exists a parsimonious reduction to its non-hazard-free variant.
 Naturally, one can also ask, how does hazard-freeness
 affect \textbf{TFNP} as a whole? We conjecture that one can make
 similar observations to the \textit{StrongTucker} problem \cite{aisenberg_2DTuckerPPA_2020},
-in order to create similar classes such as \textbf{HF-PPA} as
-it also uses a very similar colouring protocol to \textit{StrongSperner}.
+in order to create similar classes such as \textbf{HF-PPA}, as
+it also employs a similar colouring protocol to \textit{StrongSperner}.
 Moreover, we were able to observe how we can use Kleene logic with
 \textbf{PLS} sub-problems like \textit{Tarski}. Naturally,
-can we define the class of problems \textbf{HF-TFNP},
-and would it be equivalent to its non-hazard-free variant? We believe that this shift
+one could extend the hazard-freeness property to the entire \textbf{TFNP} class,
+and investigate its relations with the non-hazard variant. We believe that this shift
 in perspective may also give insights to other areas such as the circuit complexity of \textit{Hazard-Free circuits}.
 
 
 \subsubsection{Parsimonious Topological Representations of \textbf{PPAD} problems}
 
-We summarise our conclusion from the section \ref{sec:sc-excess}, by conjecturing
+We summarise our conclusion from section \ref{sec:sc-excess}, by conjecturing
 the existence of a parsimonious reduction from an \textit{nD-Counting-SS} to a
 \textit{Counting-SS} problem as it would demonstrate an important stepping
 stone towards its parsimonious reduction to the \textit{PureCircuit} problem.
-Moreover, given our \textbf{PPAD} hierarchies, we can create the following conjecture
-which combines the graph representations with the topological ones \ref{conj:conj-counting-ss-unb}
+Moreover, given our \textbf{PPAD} hierarchies, we can create the following conjecture  \ref{conj:conj-counting-ss-unb}
+which combines the graph representations with the topological ones.
 
 
 \begin{conjecturebox}{\textit{nD-CountingSS} and \textit{Unbalanced}}{conj-counting-ss-unb}
@@ -49,11 +49,11 @@ which combines the graph representations with the topological ones \ref{conj:con
         \textbf{\#PPAD}(m\textit{D-CountingSS})
     $$
 \end{conjecturebox}
-What the above conjecture essentially describes is, given a number of known sources and the
-maximum number of input/output vertices of graph, can we create some \textit{nD-CountingSS}
-that is parsimonious to its graphical representation? Since we know that the problem \textit{Unbalanced}
-can parsimoniously count every graph variant, can we also reduce \textit{Unbalanced} to a topological
-problem? A reduction like that would be an important milestone for the usage of topological \textit{PureCircuit} constructions
+The above conjecture describes the potential relations between the number of known sources and the
+maximum number of input/output vertices of graph with topological problems
+such as \textit{nD-CountingSS}. Since we know that the problem \textit{Unbalanced}
+can parsimoniously count every graph variant, we conjecture the existence of a topological representation
+of the \textit{Unbalanced} problem. A reduction like that would be an important milestone for the usage of topological \textit{PureCircuit} constructions
 for enumerating solutions.
 
 
@@ -64,8 +64,8 @@ as a \textit{Brouwer} function from $[0,1]^n \to [0,1]^n$, where
 each input represents a continuous assignment to the circuit nodes,
 and each output $F_i(x)$ is determined by a continuous function of the gate incident to node $i$ and its neighbouring nodes
 \cite{deligkas_PureCircuitTightInapproximability_2024}.
-Given its fixed point $x^\star$ then
-we can denote the following assignment: if $x^\star_i \in \{0,1\}$ then $v_i = x^{\star}_i$, otherwise
+Given its fixed point $x^\star$
+we can then denote the following assignment: if $x^\star_i \in \{0,1\}$ then $v_i = x^{\star}_i$, otherwise
 $v_i = \bot$. For example, the \textsc{Purify} gate can be represented as:
 $$
 \textsc{Purify}(v) = \begin{pmatrix}
@@ -77,9 +77,9 @@ Deligkas et al. \cite{deligkas_PureCircuitTightInapproximability_2024}
 showed that as long as our gate set consists of the \textsc{Purify} gate and \textsc{NOR} or \textsc{NAND}
 or any combination of gates that are functionally complete with respect to boolean logic,
 \textit{PureCircuit}  is \textbf{PPAD}-complete.
-It implies that we can extend the gate set of \textit{PureCircuit} to any gate that exhibits
+This implies that we can extend the gate set of \textit{PureCircuit} to any gate that exhibits
 continuity behaviour under $[0,1]$ since we could always use the \textit{Brouwer} problem
-to find a solution. We argue that there may exist gates that may have 
+to find a solution. We argue that there may exist gates that have 
 a more intricate combinatorial nature and therefore assist in the resolution of our conjectures.
 
 \subsubsection{PureCircuit with ATMs}
@@ -90,8 +90,8 @@ we showed how to relate variants of the \textit{Tarski} problem
 with \textit{PureCircuit}. We also know that based on
 \textit{Tarski}'s theorem, we can always find a labelling function
 on ATMs which demonstrates whether our starting configuration is accepting, rejecting or non-halting.
-This interesting relation may provide a pathway towards the full Cook-levin type theorem
-that we seek. But one also has to acknowledge the difficulty of expressing
+This relation may provide a path towards the full Cook-levin type theorem
+that we seek. However, one also has to acknowledge the difficulty of expressing
 operator functions such as $\tau$, as it seeks
 to find the maximal element in the poset of functions of $\mathcal{C} \to \mathbb{T}$,
 whereas our reduction was based on the poset of the information ordering of Kleene logic. We leave this as integral evidence
@@ -102,8 +102,8 @@ for the potential relation between \textit{PureCircuit} and ATMs.
 
 Given the algorithms that we proposed for our software, we argue that there are several improvements
 that can be made.
-For all three of the algorithmic methods we mentioned, the most important extension
-is to treat weakly directly connected components individually. Trivially an assignment in one
+For all three algorithmic methods mentioned, the most prominent extension
+is to treat weakly directly connected components individually. Trivially an assignment in a
 weakly connected component should not affect the solution set of the other one.
 We can therefore reduce the search spaces of our problems by finding
 the solution sets in each graph separately. Moreover, for the
@@ -117,7 +117,7 @@ Where $G_i$ is the $i$th connected component.
 We can also optimise the backtracking algorithm even further.
 First one can observe that if our graph was acyclic, then
 the set of the nodes with no \textit{in-degree} solutions have a significant
-influence to the downstream nodes. With this in mind, we can apply any of the 
+influence to the downstream nodes. Consequently, we can apply any of the 
 extensions to convert our instances into DAGs:
 \begin{enumerate}
     \item Apply an arbitrary DFS algorithm such that we annotate each node with the length of its DFS path.
@@ -128,12 +128,10 @@ extensions to convert our instances into DAGs:
           with the topological sort of the hypergraphs. 
 \end{enumerate}
 
-We argue that the above heuristics may result in improved average times but of course
-further research can be done in order to determine more suitable selection heuristics for our priority queue.
+We argue that the above heuristics may result in improved average times, but
+further research is required in order to determine more suitable selection heuristics for our priority queue.
 
-
-
-Finally, we highlight potential improvements to our meta-heuristic algorithms. 
+Lastly, we highlight potential improvements to our meta-heuristic algorithms. 
 The fitness function could be modified to take advantage of the continuity properties of the \textit{PureCircuit}, 
 and each algorithm can be improved using more sophisticated techniques. 
 More broadly, one could explore additional meta-heuristic approaches 
