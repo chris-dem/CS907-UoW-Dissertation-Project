@@ -308,7 +308,7 @@ are based around \textit{Sperner's Lemma} \cite{yang_SpernerTheory_1999}.
 We are given a triangle
 that has subdivided into smaller sub-triangles, and we define the index of each point using the following set:
 $$
-    \forall n \in \mathbb{N}: \mathcal{T}_n \triangleq \{(x,y,z) \in [n] \mid x + y + z = n\}
+    \forall n \in \mathbb{N}: \mathcal{T}_n \triangleq \{(x,y,z) \in [n]^3 \mid x + y + z = n\}
 $$
 We say $\lambda : \mathcal{T}_n \to [3]$ is a valid colouring if and only if it satisfies the following conditions:
 $$
@@ -386,8 +386,8 @@ the colouring condition, which implies that we need at most $d$ separate points 
     \end{itemize}
 \end{definitionbox}
 
-Relevant literature defines the same variants of the problem or specifications
-have been defined using the names Sperner or discrete Brouwer \cite{chen_SettlingComplexityComputing_2009, chen_Complexity2DDiscrete_2009, daskalakis_ComplexityComputingNash_2006, deligkas_PureCircuitTightInapproximability_2024}.
+Relevant literature defines the similar variants of the problem using names such as Sperner or discrete Brouwer 
+\cite{chen_SettlingComplexityComputing_2009, chen_Complexity2DDiscrete_2009, daskalakis_ComplexityComputingNash_2006, deligkas_PureCircuitTightInapproximability_2024}.
 This is very similar to a different type of problem known as \textit{StrongTucker}, which can be thought of as the
 \textbf{PPA} analogue of \textit{StrongSperner} \cite{papadimitriou_ComplexityParityArgument_1994,aisenberg_2DTuckerPPA_2020}.
 Chen et al. \cite{chen_SettlingComplexityComputing_2009} demonstrated that for a fixed
@@ -406,7 +406,7 @@ as defined in \ref{def:nd-strong-sperner}.
     We assume dimensionality $n \geq 2$.
 \end{definitionbox}
 
-Both colouring schemes are interchangeably when discussing their reductions,
+Both colouring schemes are used interchangeably when discussing their reductions,
 so we can assume that all reductions (not necessarily counting reductions) work similarly for either colouring
 \cite{chen_SettlingComplexityComputing_2009, deligkas_PureCircuitTightInapproximability_2024, daskalakis_ComplexityComputingNash_2006, chen_Complexity2DDiscrete_2009}.
 
@@ -548,7 +548,7 @@ Moreover, they argue that the usage of $\textbf{\#P}$ has several benefits:
 
 \begin{enumerate}
     \item By polynomially bounding objects, we avoid cases such as: $f(w) = |\{1, \hdots, f(w)\}|$. In other words, we create a set
-          of combinatorial objects.
+          of combinatorial objects of bounded size.
     \item We can work with $f(\cdot)$  even if its direct computation is hard. For example, counting
           the number of cycles in a graph is believed to be an \textbf{NP}-complete problem but verifying
           individual cycles is trivial.
@@ -651,7 +651,7 @@ The current section offers a brief summary to relevant notions and concepts in K
 
 
 \begin{definitionbox}{Kleene Resolutions \cite{mukaidono_BternaryLogicFunction_1972, ikenmeyer_ComplexityHazardfreeCircuits_2019}}{kleene-res}
-    Given $x \in \mathbb{T}^n$, we define the \textit{resolutions} of $x$, using the following notation:
+    Given $x \in \mathbb{T}^n$, we define the \textit{resolutions} of $x$ using the following notation:
     $$
         \scn{Res}(x) \triangleq \big\{ y \in \mathbb{B}^n \mid x \preceq y  \big\}
     $$
@@ -907,7 +907,7 @@ The main motivation comes from the observation of how \textit{Kleene logic} can 
 paths of NTMs. We can parallelise this to the boolean problem of \textit{SAT} which
 given by the \textit{Cook-Levin} theorem \cite{cook_ComplexityTheoremprovingProcedures_1971}
 one can convert every \textbf{NP} problem into a \textit{SAT} problem.
-The theorem invloves the creation of a boolean expression for each snapshot of the
+The theorem involves the creation of a boolean expression for each snapshot of the
 Turing Machine such that a satisfying assignment corresponds to an accepting path.
 Their theorem also demonstrated that every \textbf{NP} problem can be parsimoniously reduced to the
 \textit{SAT} problem, meaning:
@@ -915,7 +915,8 @@ $$
     \forall L \in \textbf{NP}: \#L \subseteq  \textit{\#SAT}
 $$
 A reasonable conjecture would also be if one can exploit Kleene-circuit nature of \textit{PureCircuit} to
-create a \textit{Cook-Levin} type equivalent reduction for \textbf{PPAD} problems, denoted as
+create a \textit{Cook-Levin} type reduction for \textbf{PPAD} problems as we could potentially
+encode the computation of ATMs using \textit{PureCircuit}. We formally denote this as:
 $$
     \forall L \in \textbf{PPAD}: \textbf{\#PPAD}(L) \subseteq  \textbf{\#PPAD}(\textit{PureCircuit})
 $$
@@ -923,7 +924,7 @@ If the above statement were indeed true, then it would give us insights as to ho
 Unfortunately, there is limited research with respect to the combinatorial
 nature of the problem. We wish to offer a new perspective of \textit{PureCircuit}
 and establish its \textit{parsimonious relations} with other problems.
-To break down our conjecture we offer the following set of objectives:
+To break down our conjecture we offer the following set of objectives
 
 \begin{enumerate}
     \item Establish a chain of parsimonious reductions from the \textit{EndOfLine} to the \textit{PureCircuit} problem.

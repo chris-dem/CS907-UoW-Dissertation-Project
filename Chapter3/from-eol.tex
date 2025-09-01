@@ -356,13 +356,14 @@ This implies the best we can hope is the following space:
 $$
     f(n) = \log_2(n)^k \implies M = n^k, d = \frac{n}{log(n)^k}
 $$
-However that would imply that the size of our circuit is $\Omega\left(2^{n/(log(n))^k}\right)$.
+However that would imply that the size of our circuit is $O\left(2^{n/(log(n))^k}\right)$,
+since our circuit would have to be $d$-bit hazard-free.
 We propose a chain of parsimonious reductions from the \textit{EndOfLine}
 to \textit{AntipodalStrongSperner}. We emphasise that this method will not be hazard-free,
 but we hope that the antipodal properties of the resulting problem may enable for a full reduction in the future
 since by corollary \ref{cor:antipodal-ss-pc}, we know that its hazard-free variant can be parsimoniously reduced to \textit{PureCircuit}.
-We begin with a formal description of the planar embedding technique by Chen et al. \cite{chen_Complexity2DDiscrete_2009} in order to reduce to
-\textit{2D-EoL} instances.
+We begin with a formal description of the planar embedding technique by Chen et al. \cite{chen_Complexity2DDiscrete_2009} in order to reduce to \textit{EndOfLine}
+to \textit{2D-EoL} instances.
 
 \paragraph{Planar Graph Embedding}\label{par:chap-2:planar-graph-embedding}
 We define the graph embedding of a graph $G = (V,E)$ as $G_n = (V_n, E_n)$ where $|V| = n$ and $V_n$ is defined as:
@@ -455,7 +456,7 @@ $$
     \forall v\in V_n: \textit{deg}(v) \in \{(1,0), (0,0), (0,1), (1,1)\}
 $$
 
-The key insight is that we get a \textit{2D-EOL} instance where the number of sources or sinks is preserved.
+The key insight is that we get a \textit{2D-EOL} instance where the number of sources or sinks is preserved
 and therefore the reduction is parsimonious and polynomial.
 
 
@@ -489,6 +490,7 @@ By using $\mathcal{F}$, every $P_{i}$ is mapped to a set $I(P_{i}) \subset B_{2^
     P = \mathbf{u}^1,\dots,\mathbf{u}^t \text{, if P is a cycle } \mathbf{u}^1 = \mathbf{u}^t \\
     I(P) \triangleq \bigcup_{i \in [t-1]} E(\mathcal{F}(\mathbf{u}^i)\mathcal{F}(\mathbf{u}^{i +1}))
 \end{gather*}
+The intuition is to shield our lines with specific colours such that only the ends of lines have panchromatic solutions.
 This method of shielding, is commonly used when dealing with \textit{Line reductions}, as seen in
 \cite{chen_Complexity2DDiscrete_2009,deligkas_ConstantInapproximabilityPPA_2022,aisenberg_2DTuckerPPA_2020,chen_SettlingComplexityComputing_2009,daskalakis_ComplexityComputingNash_2006}.
 We embed our lines and cycles in a grid such that, points that are not on a line have a negative charge $-$.
@@ -624,11 +626,11 @@ the mappings with the colourings, can be illustrated as in figure \ref{fig:chap-
 % $$
 
 
-To show the second part of our lemma, we can observe that:
+To show the second part of our lemma, using figure
+\ref{fig:chap-3:eol-sperner-colouring} for reference, we can observe that:
 All nodes that are not boundary and not in $\bigcup_{i \in [m]}I(P_{i}) \cup L(P_{i}) \cup R(P_{i})$ are coloured $-$.
-We will use figure \ref{fig:chap-3:eol-sperner-colouring} for reference.
 We can observe that all squares on the left or the right of the line
-erdo not result in solutions as they contain only labels $\{\pm, +\}$ and $\{\mp, +\}$
+do not result in solutions as they contain only labels $\{\pm, +\}$ and $\{\mp, +\}$
 respectively, as seen in figure \ref{fig:chap-3:eol-sperner-colouring}.
 One can observe that the square that contains $\textbf{s}_{P_{i}}$ or  $\textbf{e}_{P_{i}}$
 and a point of the line will be panchromatic as well as discrete and antipodal.
@@ -822,7 +824,7 @@ We now demonstrate our transformation from \textit{2D-StrongEoL} to $\textit{Ant
     \end{proof}
 
     This is the closest that we manage to bring the reduction chain across \textit{EndOfLine} and \textit{PureCircuit}.
-    We can observe two interesting directions: if one can create a bit generator
+    We can observe three interesting directions: if one can create a bit generator
     for Kleene binary numbers as presented previously, then we can use a similar construction to
     the proof we did in \ref{thm:hf-discrete-to-pure} for a full parsimonious reduction between
     \textit{nD-SS} to \textit{PureCircuit}.
@@ -831,5 +833,6 @@ We now demonstrate our transformation from \textit{2D-StrongEoL} to $\textit{Ant
     more efficiently than trying to find $d+1$ points in some hypercube.
 In hindsight, we argue that if one could construct a Kleene gadget to generate the maximum and minimum
 resolution of a \textit{Kleene unary}, it would allow us to create \textit{PureCircuit} instances
-that take advantage of the antipodal property.
+that take advantage of the antipodal property, and possibly construct a topological
+reduction similar to the one in theorem \ref{thm:hf-discrete-to-pure}.
 

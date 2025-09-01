@@ -79,14 +79,21 @@ for every node in its path, besides $(3,12i)$, its degrees can only
 ever be one of the 4 cases outlined. Similarly, for the
 other node with LSB $0$, its main path stays the same except if its incident
 to a double sink, where we add 3 additional edges.
-For all edges, we know that the height of the path $E(\mathbf{p}^2,\mathbf{p}^3)$ can only
-be at height greater or equal to $6$, and therefore no path other than the
+For all $E_{ij}$, we know that the height of the path $E(\mathbf{p}^2,\mathbf{p}^3)$ is greater or equal to $6$, and therefore no path other than the
 two incoming edges will ever intersect $(3,12i)$. The above paths denote the set $E^1_n$.
 
 We follow the same construction for the $E^2_n$ and apply the same removal transformation.
 The resulting graph is the same as in the traditional \textit{2D-EoL} problem but with the addition of double sinks, and we call this \textit{2D-SourceOrExcess}$(2,1)$.
+We provide figure \ref{fig:chap-3:2d-sc-excess-ex} for reference.
 Additionally, we can observe that \textit{2D-SourceOrExcess}$(2,1)$ is parsimonious to the \textit{SourceOrExcess}$(2,1)$ problem as
 sources and sinks are preserved.
+
+\begin{figure}[h!]
+    \centering
+    \includegraphics[width=0.7\textwidth]{Chapter3/2d-sc-or-execss.pdf}
+    \caption[\textit{2D-SourceOrExcess}$(2,1)$ example]{\textit{2D-SourceOrExcess}$(2,1)$ example. Figure not drawn to scale}
+    \label{fig:chap-3:2d-sc-excess-ex}
+\end{figure}
 
 
 \paragraph{Topological Difficulty}
